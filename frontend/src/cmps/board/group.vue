@@ -17,6 +17,8 @@ export default {
   },
   methods: {
     openTask(task) {
+      task = JSON.parse(JSON.stringify(task));
+      task.group = {id:this.group.id, title:this.group.title};
       this.$store.commit({ type: "setCurrTask", task });
       this.$router.push(`/board/${this.boardId}/${task.id}`);
     },

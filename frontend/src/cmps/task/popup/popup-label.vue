@@ -1,12 +1,16 @@
 <template>
   <pop-up>
-      <h3 slot="header">Labels</h3>
+    <h3 slot="header">Labels</h3>
     <div slot="main">
-      <input type="search" @input="searchLabel">
+      <form @submit.prevent=""></form>
+      <input type="search" @input="searchLabel" />
       <ul class="clean-list">
-          <li v-for="label in 5" :key="label.id">
-              <div><span>V</span></div><button>🖋</button>
-          </li>
+        <li v-for="label in labels" :key="label.id" class="flex align-center label-preview">
+          <div :style="{ 'background-color': label.color }" class="label-color">
+            <!-- <h4 class="labelTitle">{{ label.title }}</h4> -->
+          </div>
+            <button>🖋</button>
+        </li>
       </ul>
     </div>
   </pop-up>
@@ -14,11 +18,24 @@
 <script>
 import popUp from "@/cmps/pop-up.vue";
 export default {
+  methods: {
+    searchLabel() {
+      console.log("FINISH ME!!! (search label)");
+    },
+  },
+  computed: {
+    labels() {
+      return this.$store.getters.currBoard.labels;
+    },
+  },
   components: {
     popUp,
   },
 };
 </script>
 
-<style>
-</style>
+
+
+            // "id": "l101",
+            // "title": "Done",
+            // "color": "#61bd4f"

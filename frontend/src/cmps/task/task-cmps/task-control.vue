@@ -28,7 +28,7 @@
 <script>
 import popupMember from "@/cmps/task/popup/popup-member";
 import popupChecklist from '../popup/popup-checklist.vue';
-import popupLabel from "@/cmps/task/popup/popup-member";
+import popupLabel from "@/cmps/task/popup/popup-label";
 
 export default {
   data() {
