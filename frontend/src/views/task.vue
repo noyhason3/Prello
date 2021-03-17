@@ -4,7 +4,7 @@
     <!-- <task-cover /> -->
     <task-title />
     <div class="task-info">
-      <member-list/>
+      <member-list />
       <!-- <task-label /> -->
       <!-- <task-duedate /> -->
     </div>
@@ -24,19 +24,19 @@ import memberList from "../cmps/member-list.vue";
 
 export default {
   computed: {
-      taskId(){
-        return this.$route.parmas.taskId
-      },
-      task(){
-          // return this.$store.getters.task;
-      } 
+    taskId() {
+      return this.$route.parmas.taskId;
+    },
+    task() {
+      return this.$store.getters.task;
+    },
   },
-    components: { 
+  components: {
     taskControls,
     taskTitle,
     memberList,
-    taskDescription
-    },
+    taskDescription,
+  },
 };
 </script>
 

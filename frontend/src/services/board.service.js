@@ -1,17 +1,17 @@
-export default{
+export default {
     getDemoBoard,
     getTaskById
 }
 
-function getTaskById(id){
-    gBoard.groups.find
+function getTaskById(id) {
+    // gBoard.groups.find
 }
 
-function getDemoBoard(){
+function getDemoBoard() {
     return gBoard;
 }
 
-const gBoard={
+const gBoard = {
     "_id": "b101",
     "title": "Robot dev proj",
     "createdAt": 1589983468418,
