@@ -4,11 +4,17 @@
     <div slot="main">
       <input type="search" @input="searchLabel" />
       <ul class="clean-list">
-        <li v-for="label in boardLabels" :key="label.id" class="flex align-center label-preview">
-          <div :style="{ 'background-color': label.color }" class="label-color">
-            <button @click="toggleSelectLabel(label.id)" class="btn label">{{ label.title }}</button>
+        <li
+          v-for="label in boardLabels"
+          :key="label.id"
+          class="flex align-center label-preview"
+        >
+          <div :style="{ 'background-color': label.color }" :class="{'label-in-use':isUsed(label.id)}" class="label-color">
+            <button @click="toggleSelectLabel(label.id)" class="btn label">
+              {{ label.title }}
+            </button>
           </div>
-            <button>🖋</button>
+          <button>🖋</button>
         </li>
       </ul>
     </div>
@@ -18,36 +24,51 @@
 <script>
 import popUp from "@/cmps/pop-up.vue";
 export default {
-    data(){
-        return{
-            labels: this.$store.getters.currBoard.labels,
-            }
-    },
+  data() {
+    return {
+      labels: this.$store.getters.currBoard.labels,
+      boardLabels:null
+    };
+  },
+  created(){
+      this.boardLabels = loadBoardLabels()
+  },
   methods: {
     searchLabel() {
       console.log("FINISH ME!!! (search label)");
     },
-    toggleSelectLabel(labelId){
-        // console.log('curr task labels',this.$store.getters.currTask.labelIds);
-        if(this.taskLabelsEdit.includes(labelId)){ 
-            labelIdx = this.taskLabels.findIndex(label => label.id === labelId)
-            this.taskLabelsEdit.splice(labelIdx, 1)
-            // console.log(this.taskLabelsEdit);
-            return
-            }
-        this.taskLabelsEdit.push(labelId)
-        this.$emit({type:'add-task-labels', labels:this.taskLabelsEdit})
-        // console.log(this.taskLabelsEdit)
-    }
+    toggleSelectLabel(labelId) {
+      if (this.taskLabelsEdit.includes(labelId)) {
+        const labelIdx = this.taskLabelsEdit.findIndex(
+          (label) => label.id === labelId
+        );
+        this.taskLabelsEdit.splice(labelIdx, 1);
+      } else this.taskLabelsEdit.push(labelId);
+      this.$emit("add-task-labels", { labels: this.taskLabelsEdit });
+    },
+    isUsed(labelId){
+        console.log('hi im function ');
+        const labelIdx = this.taskLabelsEdit.findIndex(({id}) => id === labelId)
+        // console.log('labelIdx',labelIdx>=0);
+        return labelIdx >=0;
+    },
+    loadBoardLabels() {
+      boardLabels = this.$store.getters.currBoard.labels;
+      if (!boardLabels) return [];
+      return boardLabels;
+    },
   },
   computed: {
-    boardLabels() {
-      return this.$store.getters.currBoard.labels;
+    // boardLabels() {
+    //   const boardLabels = this.$store.getters.currBoard.labels;
+    //   if (!boardLabels) return [];
+    //   return boardLabels;
+    // },
+    taskLabelsEdit() {
+      const taskLabels = this.$store.getters.currTask.labelIds;
+      if (!taskLabels) return [];
+      return [...taskLabels];
     },
-    taskLabelsEdit(){
-        console.log(this.$store.getters.currTask.labelIds);
-        return [...this.$store.getters.currTask.labelIds]
-    }
   },
   components: {
     popUp,

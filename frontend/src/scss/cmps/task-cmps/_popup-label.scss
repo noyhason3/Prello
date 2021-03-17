@@ -10,8 +10,10 @@
         background-color: transparent;
         color:black;
         width: 100%;
+        height: 100%;
+        margin:0;
     }
-    // .label-color{
-    //     flex-grow:1;
-    // }
+    &.label-in-use{
+        color:grey;
+    }
 }

@@ -75,7 +75,7 @@ export default {
     addTaskLabels(labels){
       console.log('labels:', labels)
       this.task.labels = labels;
-      this.saveTask(task)
+      this.saveTask(this.task)
     },
     saveTask(task){
       this.$store.commit({type:'saveTask', task})
