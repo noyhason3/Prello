@@ -16,7 +16,7 @@
       @setDescription="setDescription"
     />
     <!-- <task-attachment /> -->
-    <!-- <task-checklist /> -->
+    <task-checklist />
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
