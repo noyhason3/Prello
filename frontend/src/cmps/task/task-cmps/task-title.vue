@@ -18,7 +18,6 @@ export default {
   },
   methods: {
     onInput(ev) {
-      console.log(ev.target.innerText);
       this.$emit("setTitle", ev.target.innerText);
     },
   },
