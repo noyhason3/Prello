@@ -73,6 +73,7 @@ export default {
       this.saveTask(task)
     },
     addTaskLabels(labels){
+      console.log('labels:', labels)
       this.task.labels = labels;
       this.saveTask(task)
     },

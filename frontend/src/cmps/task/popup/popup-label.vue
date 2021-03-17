@@ -14,6 +14,7 @@
     </div>
   </pop-up>
 </template>
+
 <script>
 import popUp from "@/cmps/pop-up.vue";
 export default {
@@ -31,12 +32,12 @@ export default {
         if(this.taskLabelsEdit.includes(labelId)){ 
             labelIdx = this.taskLabels.findIndex(label => label.id === labelId)
             this.taskLabelsEdit.splice(labelIdx, 1)
-            console.log(this.taskLabelsEdit);
+            // console.log(this.taskLabelsEdit);
             return
             }
         this.taskLabelsEdit.push(labelId)
         this.$emit({type:'add-task-labels', labels:this.taskLabelsEdit})
-        console.log(this.taskLabelsEdit)
+        // console.log(this.taskLabelsEdit)
     }
   },
   computed: {
@@ -44,6 +45,7 @@ export default {
       return this.$store.getters.currBoard.labels;
     },
     taskLabelsEdit(){
+        console.log(this.$store.getters.currTask.labelIds);
         return [...this.$store.getters.currTask.labelIds]
     }
   },
@@ -52,6 +54,3 @@ export default {
   },
 };
 </script>
-
-
-
