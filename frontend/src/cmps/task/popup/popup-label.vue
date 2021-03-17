@@ -3,14 +3,14 @@
     <h3 slot="header">Labels</h3>
     <div slot="main">
       <input type="search" @input="searchLabel" />
-      <ul class="clean-list">
+      <ul v-if="boardLabels" class="clean-list">
         <li
           v-for="label in boardLabels"
           :key="label.id"
           class="flex align-center label-preview"
         >
-          <div :style="{ 'background-color': label.color }" :class="{'label-in-use':isUsed(label.id)}" class="label-color">
-            <button @click="toggleSelectLabel(label.id)" class="btn label">
+          <div   class="label-color">
+            <button @click="toggleSelectLabel(label.id)" :style="{ 'background-color': label.color }" :class="{'label-in-use':isUsed(label.id)}" class="btn label">
               {{ label.title }}
             </button>
           </div>
@@ -31,40 +31,39 @@ export default {
     };
   },
   created(){
-      this.boardLabels = loadBoardLabels()
+      this.boardLabels = this.loadBoardLabels()
   },
   methods: {
     searchLabel() {
       console.log("FINISH ME!!! (search label)");
     },
     toggleSelectLabel(labelId) {
-      if (this.taskLabelsEdit.includes(labelId)) {
-        const labelIdx = this.taskLabelsEdit.findIndex(
+      if (this.taskLabelIdEdit.includes(labelId)) {
+        const labelIdx = this.taskLabelIdEdit.findIndex(
           (label) => label.id === labelId
         );
-        this.taskLabelsEdit.splice(labelIdx, 1);
-      } else this.taskLabelsEdit.push(labelId);
-      this.$emit("add-task-labels", { labels: this.taskLabelsEdit });
+        this.taskLabelIdEdit.splice(labelIdx, 1);
+      } else this.taskLabelIdEdit.push(labelId);
+      this.$emit("add-task-labels", { labels: this.taskLabelIdEdit });
+      this.loadBoardLabels()
     },
     isUsed(labelId){
-        console.log('hi im function ');
-        const labelIdx = this.taskLabelsEdit.findIndex(({id}) => id === labelId)
-        // console.log('labelIdx',labelIdx>=0);
-        return labelIdx >=0;
+        const label = this.taskLabelIdEdit.find(id => {
+            return id === labelId
+        })
+        return !!label;
     },
     loadBoardLabels() {
-      boardLabels = this.$store.getters.currBoard.labels;
-      if (!boardLabels) return [];
-      return boardLabels;
+      return this.boardLabels = this.$store.getters.currBoard.labels;
     },
   },
   computed: {
-    // boardLabels() {
+    // getBoardLabels() {
     //   const boardLabels = this.$store.getters.currBoard.labels;
     //   if (!boardLabels) return [];
     //   return boardLabels;
     // },
-    taskLabelsEdit() {
+    taskLabelIdEdit() {
       const taskLabels = this.$store.getters.currTask.labelIds;
       if (!taskLabels) return [];
       return [...taskLabels];

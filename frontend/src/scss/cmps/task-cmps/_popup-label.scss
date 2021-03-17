@@ -1,19 +1,28 @@
-.label-preview{
+.label-preview {
     // display: block;
     // width: 100%;
     // height: 20px;
-    .label-color{
+
+    & button:hover {
+        filter: brightness(90%);
+    }
+
+    .label-color {
         width: 100%;
         height: 30px;
     }
-    .btn.label{
+
+    .btn.label {
         background-color: transparent;
-        color:black;
+        color: black;
         width: 100%;
         height: 100%;
-        margin:0;
+        margin: 0;
     }
-    &.label-in-use{
-        color:grey;
+
+    .label-in-use::after {
+        content: "✔";
     }
+
+
 }
