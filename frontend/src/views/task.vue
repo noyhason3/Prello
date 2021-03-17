@@ -38,6 +38,9 @@ export default {
     task() {
       return this.$store.getters.currTask || {};
     },
+    board() {
+      return this.$store.getters.currBoard;
+    },
   },
   methods: {
     setTitle(title) {
@@ -63,9 +66,9 @@ export default {
       task.labels = labels;
       console.log(this.task.labels);
     },
-    setChecklist(checklist){
-      task.checklists.push(checklist)
-    }
+    setChecklist(checklist) {
+      task.checklists.push(checklist);
+    },
   },
   components: {
     taskControl,
