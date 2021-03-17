@@ -1,12 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <main-header />
+    <router-view class="page-container" />
   </div>
 </template>
+
+<script>
+import mainHeader from "@/cmps/main-header";
+
+export default {
+  data() {
+    return {};
+  },
+  components: {
+    mainHeader,
+  },
+};
+</script>
+
 
 <style lang="scss">
 #app {
