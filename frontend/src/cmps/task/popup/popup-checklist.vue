@@ -4,6 +4,7 @@
     <div slot="main">
       <h3>Title</h3>
       <input type="text" name="title" id="title" />
+      <button @click="addChecklist">Add</button>
       <!-- <h3>Copy Items From...</h3>
       <input type="text" name="" id="" /> -->
     </div>
@@ -14,12 +15,12 @@
 import popUp from "@/cmps/pop-up";
 export default {
   data() {
-    return {
-
-    };
+    return {};
   },
   methods: {
-
+    addChecklist() {
+        
+    },
   },
   components: { popUp },
 };
