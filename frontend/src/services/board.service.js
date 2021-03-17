@@ -57,7 +57,51 @@ const gBoard = {
                 },
                 {
                     "id": "c102",
-                    "title": "Add Samples"
+                    "title": "Add Samples",
+                    "checklists": [
+                        {
+                            "id": "PRBYH",
+                            "title": "Sprint 4",
+                            "todos": [
+                                {
+                                    "id": "34fsc",
+                                    "txt": "Vuex",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "3sdfrc",
+                                    "txt": "Scss",
+                                    "isDone": false
+                                },
+                                {
+                                    "id": "3dffsc",
+                                    "txt": "Backend",
+                                    "isDone": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "PRBYH",
+                            "title": "Sprint 3",
+                            "todos": [
+                                {
+                                    "id": "34hgjc",
+                                    "txt": "Vue",
+                                    "isDone": false
+                                },
+                                {
+                                    "id": "3hvsc",
+                                    "txt": "Css",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "3bhjc",
+                                    "txt": "Frontend",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
                 }
             ],
             "style": {}

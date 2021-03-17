@@ -17,7 +17,9 @@
             <label for="todo.id"> {{todo.txt}} </label><br />
           </li>
         </ul>
-
+        <input type="text" name="todoTxt" id="todoTxt" v-model="todo.txt">
+        <!-- <button>Add Item</button> -->
+        <button @click="addTodo">Add</button>
       </li>
     </ul>
   </section>
@@ -28,6 +30,23 @@ export default {
   props: {
     task: Object,
   },
+  data(){
+      return {
+          todo:{
+              txt:'',
+              isDone: false
+          }
+      }
+  },
+  methods:{
+      addTodo(){
+          this.$emit('save-todo', {...this.todo})
+        //   this.todo = {
+        //       txt:'',
+        //       isDone: false
+        //   }
+      }
+  }
 };
 </script>
 
