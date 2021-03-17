@@ -5,10 +5,9 @@
       <form @submit.prevent=""></form>
       <input type="search" @input="searchLabel" />
       <ul class="clean-list">
-        <li v-for="label in labels" :key="label.id" class="flex label-preview" 
-        >
-          <div :style="{ 'background-color': label.color }">
-            <h4 class="labelTitle">{{ label.title }}</h4>
+        <li v-for="label in labels" :key="label.id" class="flex align-center label-preview">
+          <div :style="{ 'background-color': label.color }" class="label-color">
+            <!-- <h4 class="labelTitle">{{ label.title }}</h4> -->
           </div>
             <button>🖋</button>
         </li>
@@ -21,7 +20,7 @@ import popUp from "@/cmps/pop-up.vue";
 export default {
   methods: {
     searchLabel() {
-      console.log("FINISH ME!!! (searcch label)");
+      console.log("FINISH ME!!! (search label)");
     },
   },
   computed: {
