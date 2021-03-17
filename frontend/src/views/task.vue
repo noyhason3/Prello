@@ -16,7 +16,7 @@
       @setDescription="setDescription"
     />
     <!-- <task-attachment /> -->
-    <task-checklist @setChecklist="setChecklist" />
+    <task-checklist :task="task" @setChecklist="setChecklist" />
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
@@ -63,8 +63,8 @@ export default {
       task.labels.push(...labels);
       console.log(this.task.labels);
     },
-    setChecklist(){
-
+    setChecklist(checklist){
+      task.checklists.push(checklist)
     }
   },
   components: {
