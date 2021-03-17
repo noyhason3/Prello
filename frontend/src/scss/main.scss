@@ -1,21 +1,21 @@
 // Setup
-// @import "setup/variables";
-// @import "setup/functions";
+@import "setup/variables";
+@import "setup/functions";
 @import "setup/mixins";
-// @import "setup/typography";
+@import "setup/typography";
 
-// // Basics
+// Basics
 @import "basics/helpers";
-// // @import "basics/layout";
-// @import "basics/base";
-// @import "basics/links";
-// @import "basics/forms";
+@import "basics/layout";
+@import "basics/base";
+@import "basics/links";
+@import "basics/forms";
 
 
 
 
 // Components
-// @import "cmps/app-header";
+@import "cmps/main-header";
 @import "cmps/group";
 @import "cmps/task-preview";
 @import "cmps/task-cmps/task-title";
@@ -25,5 +25,6 @@
 @import "views/home";
 @import "views/board-list";
 @import "views/task";
+@import "views/board";
 
 

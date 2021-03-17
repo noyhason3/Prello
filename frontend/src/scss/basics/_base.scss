@@ -3,34 +3,20 @@
 }
 
 html {
-    color: $main-color;
+    color: $clr1;
 }
 
 body {
-    overflow:hidden;
     margin: 0;
     height:100vh;
     width:100vw;
     // background-size: 180px;
     // background-attachment: fixed;
-    color: darken($main-color,50);
     font-family: 'Open-sans',sans-serif;
+    color: darken($clr1,40);
+    background: $clr5;
+}
 
-    background: $main-color;
-}
-.body{
-    &::before{
-        z-index: -1;
-        content:"";
-        position:absolute;
-        top:0; left:0; right:0; bottom:0;
-        height:100%;
-        background-image:url('~@/assets/seamless-geometric-pattern.svg');
-        background-repeat: repeat;
-        background-size: 250px;
-        filter: invert(.7) sepia(1) saturate(3) hue-rotate(193deg);
-    }
-}
 
 h1, h2, h3, h4, h5, h6 {
     font-family:Merriweather,serif;
@@ -48,15 +34,13 @@ p {
     font-size:rem(16px)
 }
 
-a{
-    color:$highlight-color;
-    text-decoration: none;
-    font-style: italic;
-    font-weight: bold;
-}
-a:visited{
-    color:darken($secondary-color,5);
-}
-img {
-    width: 100%;
-}
+// a{
+//     color:$clr3;
+//     text-decoration: none;
+// }
+// a:visited{
+//     color:darken($clr2,5);
+// }
+// img {
+//     width: 100%;
+// }
