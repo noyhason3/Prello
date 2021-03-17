@@ -1,9 +1,11 @@
 <template>
   <section class="task">
+    <!-- <pre>{{ task }}</pre> -->
     <task-control />
     <!-- <task-cover /> -->
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
     <div class="task-info">
+      <member-list :members="taskMembers" />
       <member-list />
       <!-- <task-label /> -->
       <!-- <task-duedate /> -->
@@ -28,14 +30,17 @@ export default {
       return this.$route.parmas.taskId;
     },
     task() {
-      return this.$store.getters.currTask;
+      return this.$store.getters.currTask || {};
+    },
+    taskMembers() {
+      return this.task.members || [];
     },
   },
-  methods:{
-    setTitle(title){
+  methods: {
+    setTitle(title) {
       this.task.title = title;
       console.log(this.task);
-    }
+    },
   },
   components: {
     taskControl,

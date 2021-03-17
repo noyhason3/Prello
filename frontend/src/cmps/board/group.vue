@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     openTask(task) {
-      this.$store.commit({type:'setCurrTask', task})
+      this.$store.commit({ type: "setCurrTask", task });
       this.$router.push(`/board/${this.boardId}/${task.id}`);
     },
   },
