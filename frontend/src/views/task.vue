@@ -16,7 +16,7 @@
       @setDescription="setDescription"
     />
     <!-- <task-attachment /> -->
-    <task-checklist :task="task" />
+    <task-checklist :task="task" @save-todo="saveTodo"/>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
@@ -69,13 +69,18 @@ export default {
       console.log(task);
       if (!task.checklists) task.checklists = [];
       task.checklists.push(checklist);
-      
       this.saveTask(task)
     },
     addTaskLabels(labels){
       console.log('labels:', labels)
       this.task.labels = labels;
       this.saveTask(this.task)
+    },
+    saveTodo(){
+      const task = this.task
+      if (!task.checklists) task.checklists = [];
+      task.checklists.push(checklist);
+      this.saveTask(task)
     },
     saveTask(task){
       this.$store.commit({type:'saveTask', task})
