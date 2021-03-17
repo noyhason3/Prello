@@ -3,7 +3,7 @@
     <!-- SUGGESTED                       ******TODO********
       <button>Join</button> -->
 
-    <button @click="toggle('member')">Members</button>
+    <button @click="toggle('Member')">Members</button>
     <popup-member
       v-if="memberOpen"
       @close-popup="memberOpen = false"
@@ -13,7 +13,7 @@
         }
       "
     ></popup-member>
-    <button>Labels</button>
+    <button v-if="isLabelOpen" @click="toggle('Label')">Labels</button>
     <!-- <button>Checklist</button> -->
     <!-- <button>Due date</button> -->
     <!-- <button>Attachement</button> -->
@@ -26,7 +26,8 @@ import popupMember from "@/cmps/task/popup/popup-member";
 export default {
   data() {
     return {
-      memberOpen: false,
+      isMemberOpen: false,
+      isLabelOpen:false,
     };
   },
   methods: {
