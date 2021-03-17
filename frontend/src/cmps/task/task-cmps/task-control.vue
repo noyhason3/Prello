@@ -3,14 +3,18 @@
     <!-- SUGGESTED                       ******TODO********
       <button>Join</button> -->
 
-    <button @click="togglePopup('member')">Members</button>
+    <button @click="togglePopup('Member')">Members</button>
     <popup-member
-      v-if="memberOpen"
-      @close-popup="memberOpen = false"
+      v-if="isMemberOpen"
+      @close-popup="isMemberOpen = false"
       @assign-member="assignMember"
     ></popup-member>
-    <!-- <button>Labels</button> -->
-    <button @click="togglePopup('checklist')">Checklist</button>
+
+    <button @click="togglePopup('Label')">Labels</button>
+    <popup-label v-if="isLabelOpen"> </popup-label>
+
+
+    <button @click="togglePopup('Checklist')">Checklist</button>
     <!-- <button>Due date</button> -->
     <!-- <button>Attachement</button> -->
     <!-- <button>Cover</button> -->
@@ -19,24 +23,28 @@
 
 <script>
 import popupMember from "@/cmps/task/popup/popup-member";
+import popupLabel from "@/cmps/task/popup/popup-member";
 export default {
   data() {
     return {
-      memberOpen: false,
-      ischecklistOpen: false
+      isMemberOpen: false,
+      isLabelOpen: false,
+      isChecklistOpen: false
     };
   },
   methods: {
     togglePopup(str) {
       //this.$emit(`toggle-${str}`);
-      var dataStr = `${str}Open`;
+      var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
     },
     assignMember(member) {
       this.$emit("assign-member", member);
     },
   },
-  components: { popupMember },
+  components: { 
+    popupMember,
+    popupLabel },
 };
 </script>
 
