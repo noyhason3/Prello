@@ -12,7 +12,7 @@
     @include for-narrow-layout {
         grid-template-columns: 
         minmax(2rem, 1fr)
-        minmax(auto, $break-narrow)
+        // minmax(auto, $break-narrow)
         minmax(2rem, 1fr)
         ;     
     }

@@ -1,27 +1,55 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import home from '../views/home.vue';
+import about from '../views/about.vue';
+import loginSignup from '../views/login-signup.vue';
+import dashboard from '../views/dashboard.vue';
+import boardList from '../views/board-list.vue';
+import board from '../views/board.vue';
+import task from '../views/task.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'home',
+    component: home,
+  },
+  {
+    path: '/login',
+    name: 'login-signup',
+    component: loginSignup,
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: dashboard,
+  },
+  {
+    path: '/board',
+    name: 'board-list',
+    component: boardList,
+  },
+  {
+    path: '/board/:boardId',
+    name: 'board',
+    component: board,
+    // children: {
+    //   path: ':taskId',
+    //   name: 'task',
+    //   component: task
+    // },
   },
   {
     path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
-]
+    name: 'about',
+    component: about,
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

@@ -1,7 +1,5 @@
 <template>
-  <section class="task-preview">
-    
-  </section>
+  
 </template>
 
 <script>
