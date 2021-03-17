@@ -12,7 +12,7 @@
     </div>
     <task-description :currTaskDescription="task.description" :task="task" @setDescription="setDescription"/>
     <!-- <task-attachment /> -->
-    <!-- <task-checklist /> -->
+    <task-checklist />
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>

@@ -3,7 +3,7 @@
     <!-- SUGGESTED                       ******TODO********
       <button>Join</button> -->
 
-    <button @click="toggle('member')">Members</button>
+    <button @click="togglePopup('member')">Members</button>
     <popup-member
       v-if="memberOpen"
       @close-popup="memberOpen = false"
@@ -14,7 +14,7 @@
       "
     ></popup-member>
     <!-- <button>Labels</button> -->
-    <!-- <button>Checklist</button> -->
+    <button @click="togglePopup('checklist')">Checklist</button>
     <!-- <button>Due date</button> -->
     <!-- <button>Attachement</button> -->
     <!-- <button>Cover</button> -->
@@ -27,10 +27,11 @@ export default {
   data() {
     return {
       memberOpen: false,
+      ischecklistOpen: false
     };
   },
   methods: {
-    toggle(str) {
+    togglePopup(str) {
       //this.$emit(`toggle-${str}`);
       var dataStr = `${str}Open`;
       this[dataStr] = !this[dataStr];
