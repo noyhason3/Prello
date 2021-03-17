@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     addChecklist() {
-        
+        this.$emit('setChecklist')
     },
   },
   components: { popUp },
