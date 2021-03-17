@@ -3,7 +3,7 @@
     <!-- SUGGESTED                       ******TODO********
       <button>Join</button> -->
 
-    <button @click="toggle('member')">Members</button>
+    <button @click="togglePopup('member')">Members</button>
     <popup-member
       v-if="memberOpen"
       @close-popup="memberOpen = false"
