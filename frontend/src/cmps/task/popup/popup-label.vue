@@ -1,21 +1,24 @@
 <template>
   <pop-up>
-      <div slot="main">
-          <h2>I'm labels :)</h2>
-      </div>
+      <h3 slot="header">Labels</h3>
+    <div slot="main">
+      <input type="search" @input="searchLabel">
+      <ul class="clean-list">
+          <li v-for="label in 5" :key="label.id">
+              <div><span>V</span></div><button>🖋</button>
+          </li>
+      </ul>
+    </div>
   </pop-up>
 </template>
-
 <script>
-import popUp from '@/cmps/task/tas-cmps/pop-up.vue'
+import popUp from "@/cmps/pop-up.vue";
 export default {
-
-components:{
-    popUp
-}
-}
+  components: {
+    popUp,
+  },
+};
 </script>
 
 <style>
-
 </style>

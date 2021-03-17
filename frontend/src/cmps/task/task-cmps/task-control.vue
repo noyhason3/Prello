@@ -23,7 +23,7 @@
 
 <script>
 import popupMember from "@/cmps/task/popup/popup-member";
-import popupLabel from "@/cmps/task/popup/popup-member";
+import popupLabel from "@/cmps/task/popup/popup-label";
 export default {
   data() {
     return {
