@@ -26,7 +26,7 @@ export default {
     };
   },
   methods: {
-    toggle(str) {
+    togglePopup(str) {
       //this.$emit(`toggle-${str}`);
       var dataStr = `${str}Open`;
       this[dataStr] = !this[dataStr];
