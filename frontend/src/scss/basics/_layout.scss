@@ -12,7 +12,7 @@
     @include for-narrow-layout {
         grid-template-columns: 
         minmax(2rem, 1fr)
-        // minmax(auto, $break-narrow)
+        minmax(auto, $mobile-breakpoint)
         minmax(2rem, 1fr)
         ;     
     }
@@ -20,7 +20,7 @@
     @include for-normal-layout {
         grid-template-columns: 
         minmax(2rem, 1fr)
-        minmax(auto, $break-normal)
+        minmax(auto, $narrow-breakpoint)
         minmax(2rem, 1fr)
         ;     
     }
@@ -28,7 +28,7 @@
     @include for-wide-layout {
         grid-template-columns: 
         minmax(2rem, 1fr)
-        minmax(auto, $break-wide)
+        minmax(auto, $normal-breakpoint)
         minmax(2rem, 1fr)
         ;     
     }
@@ -41,12 +41,10 @@
     align-items: center;
     flex-flow: column;
     text-align:center;
-    overflow-y: auto;
-    overflow-x: hidden;
-    .body{
-        overflow-y: auto;
+    .page-container{
         flex-grow:1;
         width:100%;
+        // overflow: auto;
         .page-content{
             margin:0 auto;
             min-height: 100%;
@@ -67,9 +65,10 @@
             }
         }
     }
-    .main-header{
+    .main-header-content{
         @include for-narrow-layout{
             width: calc(100vw - 50px);
+            margin:0 auto;
         }
         @include for-normal-layout{
             width: calc(100vw - 250px);

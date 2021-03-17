@@ -1,0 +1,19 @@
+.main-header{
+    background-color: $clr4;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    a{
+        text-decoration:none;
+    }
+    a.router-link-exact-active {
+        color: $clr1;
+    }
+    nav a:not(:first-child) {
+        border-top: 1px solid $clr1;
+        padding: 0 5px;
+        margin: 10px;
+    }
+}
