@@ -17,8 +17,10 @@
     ></popup-checklist>
 
     <button @click="togglePopup('Label')">Labels</button>
-    <popup-label v-if="isLabelOpen"
-    @add-task-labels="addTaskLabels"> </popup-label>
+    <popup-label
+     v-if="isLabelOpen" 
+     @add-task-labels="addTaskLabels">
+    </popup-label>
 
     <!-- <button>Due date</button> -->
     <!-- <button>Attachement</button> -->
@@ -28,7 +30,7 @@
 
 <script>
 import popupMember from "@/cmps/task/popup/popup-member";
-import popupChecklist from "../popup/popup-checklist.vue";
+import popupChecklist from "@/cmps/task/popup/popup-checklist.vue";
 import popupLabel from "@/cmps/task/popup/popup-label";
 
 export default {
@@ -51,9 +53,9 @@ export default {
     setChecklist(checklist) {
       this.$emit("set-checklist", checklist);
     },
-    addTaskLabels(labels){
-      this.$emit('add-task-labels', labels)
-    }
+    addTaskLabels(labels) {
+      // this.$emit("add-task-labels", labels);
+    },
   },
   components: {
     popupMember,
