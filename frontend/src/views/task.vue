@@ -1,7 +1,7 @@
 <template>
   <section class="task">
     <!-- <pre>{{ task }}</pre> -->
-    <task-control @assign-member="assignMember" />
+    <task-control @assign-member="assignMember" @set-checklist="saveChecklist"/>
     <!-- <task-cover /> -->
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
     <div v-if="task" class="task-info">
@@ -16,7 +16,7 @@
       @setDescription="setDescription"
     />
     <!-- <task-attachment /> -->
-    <task-checklist :task="task" @setChecklist="setChecklist" />
+    <task-checklist :task="task" />
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
@@ -37,9 +37,6 @@ export default {
     },
     task() {
       return this.$store.getters.currTask || {};
-    },
-    board() {
-      return this.$store.getters.currBoard;
     },
   },
   methods: {
@@ -66,8 +63,12 @@ export default {
       task.labels = labels;
       console.log(this.task.labels);
     },
-    setChecklist(checklist) {
+    saveChecklist(checklist) {
+      console.log('hi');
+      const task = this.task
+      if (!task.checklists) task.checklists = [];
       task.checklists.push(checklist);
+      this.$store.commit({type:'saveTask', task})
     },
   },
   components: {

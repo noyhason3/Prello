@@ -28,7 +28,7 @@ export const boardStore = {
       const board = JSON.parse(JSON.stringify(state.board));
       const group = board.groups.find((group) => group.id === task.group.id);
       const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
-      group.splice(taskIdx, 1, task);
+      group.tasks.splice(taskIdx, 1, task);
     },
     // setBoardList(state, {boards}){
     //     state.boards = boards;

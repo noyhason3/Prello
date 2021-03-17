@@ -13,7 +13,7 @@
     <button @click="togglePopup('Checklist')">Checklist</button>
     <popup-checklist
       v-if="isChecklistOpen"
-      @setChecklist="setChecklist"
+      @add-checklist="setChecklist"
     ></popup-checklist>
 
     <button @click="togglePopup('Label')">Labels</button>
