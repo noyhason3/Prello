@@ -1,7 +1,7 @@
 <template>
   <div class="member-list" v-if="members && members.length">
     <!-- <pre>{{ members }}</pre> -->
-    <div class="member-img" v-for="member in members" :key="member._id">
+    <div class="member-img" v-for="member in members" :key="member.id">
       <img
         v-if="member.imgUrl"
         :src="member.imgUrl"

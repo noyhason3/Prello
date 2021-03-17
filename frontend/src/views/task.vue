@@ -4,10 +4,10 @@
     <task-control @assign-member="assignMember" />
     <!-- <task-cover /> -->
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
-    <div class="task-info">
-      <member-list :members="taskMembers" />
+    <div v-if="task" class="task-info">
+      <member-list :members="task.members" />
       <member-list />
-      <task-label :taskLabels="task.labels" @setTaskLabels="setTaskLabels"/>
+      <task-label :taskLabels="task.labels" @setTaskLabels="setTaskLabels" />
       <!-- <task-duedate /> -->
     </div>
     <task-description
@@ -36,9 +36,6 @@ export default {
     },
     task() {
       return this.$store.getters.currTask || {};
-    },
-    taskMembers() {
-      return this.task.members || [];
     },
   },
   methods: {
