@@ -6,7 +6,7 @@
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
     <div v-if="task" class="task-info">
       <member-list :members="task.members" />
-      <member-list />
+
       <task-label :taskLabels="task.labels" @setTaskLabels="setTaskLabels" />
       <!-- <task-duedate /> -->
     </div>
