@@ -7,11 +7,7 @@
     <popup-member
       v-if="memberOpen"
       @close-popup="memberOpen = false"
-      @assign-member="
-        (member) => {
-          $emit('assign-member', member);
-        }
-      "
+      @assign-member="assignMember"
     ></popup-member>
     <!-- <button>Labels</button> -->
     <!-- <button>Checklist</button> -->
@@ -34,6 +30,9 @@ export default {
       //this.$emit(`toggle-${str}`);
       var dataStr = `${str}Open`;
       this[dataStr] = !this[dataStr];
+    },
+    assignMember(member) {
+      this.$emit("assign-member", member);
     },
   },
   components: { popupMember },

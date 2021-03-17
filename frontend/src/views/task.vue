@@ -4,13 +4,17 @@
     <task-control @assign-member="assignMember" />
     <!-- <task-cover /> -->
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
-    <div class="task-info">
-      <member-list :members="taskMembers" />
+    <div v-if="task" class="task-info">
+      <member-list :members="task.members" />
       <member-list />
       <!-- <task-label /> -->
       <!-- <task-duedate /> -->
     </div>
-    <task-description :currTaskDescription="task.description" :task="task" @setDescription="setDescription"/>
+    <task-description
+      :currTaskDescription="task.description"
+      :task="task"
+      @setDescription="setDescription"
+    />
     <!-- <task-attachment /> -->
     <!-- <task-checklist /> -->
     <!-- <task-comment /> -->
@@ -32,17 +36,14 @@ export default {
     task() {
       return this.$store.getters.currTask || {};
     },
-    taskMembers() {
-      return this.task.members || [];
-    },
   },
   methods: {
     setTitle(title) {
       this.task.title = title;
     },
-    setDescription(description){
-     this.task.description = description;
-      console.log('task',this.task);
+    setDescription(description) {
+      this.task.description = description;
+      console.log("task", this.task);
     },
     assignMember(member) {
       var task = JSON.parse(JSON.stringify(this.task));
