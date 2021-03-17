@@ -8,7 +8,7 @@
       <!-- <task-label /> -->
       <!-- <task-duedate /> -->
     </div>
-    <task-description />
+    <task-description :taskDescription="task.description" :task="task"/>
     <!-- <task-attachment /> -->
     <!-- <task-checklist /> -->
     <!-- <task-comment /> -->
@@ -35,7 +35,6 @@ export default {
     setTitle(title){
       this.task.title = title;
       console.log(this.task);
-
     }
   },
   components: {
