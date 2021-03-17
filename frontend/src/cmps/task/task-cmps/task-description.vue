@@ -20,9 +20,6 @@ export default {
       taskDescription:this.currTaskDescription
     };
   },
-  created() {
-    console.log("task dsescription:", this.taskDescription);
-  },
   methods: {
     editDescription() {
       this.isEditDescription = true;
