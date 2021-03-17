@@ -2,9 +2,9 @@
   <section class="task-checklist">
     <ul>
       <li v-for="checklist in task.checklists" :key="checklist.id" class="clean-list">
-        <checklist-header
+        <header
           >✅ {{ checklist.title }} <button>Delete</button>
-        </checklist-header>
+        </header>
 
       </li>
     </ul>
