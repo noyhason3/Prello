@@ -16,6 +16,7 @@ export default {
     board() {
       return this.$store.getters.currBoard;
     },
+    groups() {},
   },
   components: { group },
 };

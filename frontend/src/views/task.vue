@@ -43,10 +43,15 @@ export default {
     },
     assignMember(member) {
       var task = JSON.parse(JSON.stringify(this.task));
-      console.log("🚀 ~ file: task.vue ~ line 46 ~ assignMember ~ task", task);
       if (!task.members) task.members = [];
+      if (
+        task.members.some((assignedMember) => assignedMember._id === member._id)
+      ) {
+        // throw new Error('User already assigned to task')
+        console.log("User already assigned to task");
+        return;
+      }
       task.members.push(member);
-      console.log("🚀 ~ file: task.vue ~ line 49 ~ assignMember ~ task", task);
       this.$store.commit({ type: "setCurrTask", task });
     },
   },
