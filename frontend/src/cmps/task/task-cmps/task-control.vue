@@ -9,12 +9,16 @@
       @close-popup="isMemberOpen = false"
       @assign-member="assignMember"
     ></popup-member>
+    <!-- <button>Labels</button> -->
+    <button @click="togglePopup('Checklist')">Checklist</button>
+        <popup-checklist
+      v-if="isChecklistOpen"
+    ></popup-checklist>
 
     <button @click="togglePopup('Label')">Labels</button>
     <popup-label v-if="isLabelOpen"> </popup-label>
 
 
-    <button @click="togglePopup('Checklist')">Checklist</button>
     <!-- <button>Due date</button> -->
     <!-- <button>Attachement</button> -->
     <!-- <button>Cover</button> -->
@@ -23,7 +27,9 @@
 
 <script>
 import popupMember from "@/cmps/task/popup/popup-member";
-import popupLabel from "@/cmps/task/popup/popup-label";
+import popupChecklist from '../popup/popup-checklist.vue';
+import popupLabel from "@/cmps/task/popup/popup-member";
+
 export default {
   data() {
     return {
@@ -44,9 +50,11 @@ export default {
   },
   components: { 
     popupMember,
+    popupChecklist,
     popupLabel },
 };
 </script>
 
-<style>
+<styl
+    PopupCheckliste>
 </style>
