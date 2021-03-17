@@ -22,6 +22,21 @@ const gBoard = {
             "id": "l101",
             "title": "Done",
             "color": "#61bd4f"
+        },
+        {
+            "id": "l102",
+            "title": "",
+            "color": "#9B6969"
+        },
+        {
+            "id": "l103",
+            "title": "",
+            "color": "#7FFaD4"
+        },
+        {
+            "id": "l104",
+            "title": "On hold",
+            "color": "#f66f6f"
         }
     ],
     "members": [

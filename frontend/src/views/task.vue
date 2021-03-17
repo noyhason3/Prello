@@ -60,7 +60,7 @@ export default {
       this.$store.commit({ type: "setCurrTask", task });
     },
     setTaskLabels(labels) {
-      task.labels.push(...labels);
+      task.labels = labels;
       console.log(this.task.labels);
     },
     setChecklist(){
