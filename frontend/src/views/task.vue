@@ -1,5 +1,5 @@
 <template>
-  <section v-if="task" class="task">
+  <section  class="task">
     <task-control />
     <!-- <task-cover /> -->
     <task-title />
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import taskControls from "../cmps/task/task-cmps/task-control.vue";
+import taskControl from "../cmps/task/task-cmps/task-control.vue";
 import taskTitle from "../cmps/task/task-cmps/task-title.vue";
 import taskDescription from "../cmps/task/task-cmps/task-description.vue";
 import memberList from "../cmps/member-list.vue";
@@ -28,11 +28,11 @@ export default {
         return this.$route.parmas.taskId
       },
       task(){
-          // return this.$store.getters.task;
+          return this.$store.getters.task;
       } 
   },
     components: { 
-    taskControls,
+    taskControl,
     taskTitle,
     memberList,
     taskDescription
