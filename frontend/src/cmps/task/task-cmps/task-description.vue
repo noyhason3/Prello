@@ -1,11 +1,11 @@
 <template>
   <section class="task-description">
-    <form v-if="isEditDescription" @submit.prevent="setDescription">
-      <textarea v-model="taskDescription"></textarea>
+    <form v-if="taskDescriptionEdit" @submit.prevent="setDescription">
+      <textarea v-model="taskDescriptionEdit"></textarea>
       <button>save</button>
       <button type="button" @click="closeDescription">X</button>
     </form>
-    <p v-else @click="editDescription">{{ taskDescription }}</p>
+    <p v-else @click="editDescription">{{ taskDescriptionPreview }}</p>
   </section>
 </template>
 
@@ -18,19 +18,22 @@ export default {
   data() {
     return {
       isEditDescription: false,
-      taskDescription: this.currTaskDescription,
+      taskDescriptionPreview: this.currTaskDescription,
+      taskDescriptionEdit: null,
     };
   },
   methods: {
     editDescription() {
-      this.isEditDescription = true;
+      this.taskDescriptionEdit = this.taskDescriptionPreview;
+      // this.isEditDescription = true;
     },
     setDescription() {
-      this.$emit("setDescription", this.taskDescription);
-      closeDescription();
+      this.taskDescriptionPreview = this.taskDescriptionEdit;
+      this.$emit("setDescription", this.taskDescriptionPreview);
+      this.closeDescription();
     },
     closeDescription() {
-      this.isEditDescription = false;
+      this.taskDescriptionEdit = null;
     },
   },
 };

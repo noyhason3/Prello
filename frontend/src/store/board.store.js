@@ -18,7 +18,7 @@ export const boardStore = {
             state.board = board;
         },
         setCurrTask(state, { task }) {
-            console.log("🚀 ~ file: board.store.js ~ line 21 ~ setCurrTask ~ task", task)
+            // console.log("🚀 ~ file: board.store.js ~ line 21 ~ setCurrTask ~ task", task)
             state.task = task;
         },
         // setBoardList(state, {boards}){

@@ -4,10 +4,12 @@
     // height: 20px;
     .label-color{
         width: 100%;
-        height: 20px;
+        height: 30px;
     }
     button, .labelTitle{
         display: inline-block;
+        background-color: transparent;
+        color:black;
     }
     // .label-color{
     //     flex-grow:1;

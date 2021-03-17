@@ -2,12 +2,11 @@
   <pop-up>
     <h3 slot="header">Labels</h3>
     <div slot="main">
-      <form @submit.prevent=""></form>
       <input type="search" @input="searchLabel" />
       <ul class="clean-list">
         <li v-for="label in labels" :key="label.id" class="flex align-center label-preview">
           <div :style="{ 'background-color': label.color }" class="label-color">
-            <!-- <h4 class="labelTitle">{{ label.title }}</h4> -->
+            <button class="btn label">{{ label.title }}</button>
           </div>
             <button>🖋</button>
         </li>
