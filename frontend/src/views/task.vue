@@ -1,10 +1,10 @@
 <template>
-  <section  class="task">
+  <section class="task">
     <task-control />
     <!-- <task-cover /> -->
-    <task-title />
+    <task-title :taskTitle="task.title" @setTitle="setTitle" />
     <div class="task-info">
-      <member-list/>
+      <member-list />
       <!-- <task-label /> -->
       <!-- <task-duedate /> -->
     </div>
@@ -24,19 +24,26 @@ import memberList from "../cmps/member-list.vue";
 
 export default {
   computed: {
-      taskId(){
-        return this.$route.parmas.taskId
-      },
-      task(){
-          return this.$store.getters.task;
-      } 
+    taskId() {
+      return this.$route.parmas.taskId;
+    },
+    task() {
+      return this.$store.getters.currTask;
+    },
   },
-    components: { 
+  methods:{
+    setTitle(title){
+      this.task.title = title;
+      console.log(this.task);
+
+    }
+  },
+  components: {
     taskControl,
     taskTitle,
     memberList,
-    taskDescription
-    },
+    taskDescription,
+  },
 };
 </script>
 
