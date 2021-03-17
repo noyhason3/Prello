@@ -1,5 +1,5 @@
 <template>
-  <section class="task">
+  <section class="task" v-if="task">
     <!-- <pre>{{ task }}</pre> -->
     <task-control @assign-member="assignMember" @set-checklist="saveChecklist"/>
     <!-- <task-cover /> -->
@@ -36,7 +36,7 @@ export default {
       return this.$route.parmas.taskId;
     },
     task() {
-      return this.$store.getters.currTask || {};
+      return this.$store.getters.currTask;
     },
   },
   methods: {
@@ -64,10 +64,11 @@ export default {
       console.log(this.task.labels);
     },
     saveChecklist(checklist) {
-      console.log('hi');
       const task = this.task
+      console.log(task);
       if (!task.checklists) task.checklists = [];
       task.checklists.push(checklist);
+      
       this.$store.commit({type:'saveTask', task})
     },
   },
