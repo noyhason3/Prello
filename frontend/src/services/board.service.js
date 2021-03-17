@@ -1,11 +1,11 @@
 export default{
     getDemoBoard,
-    getTaskById
+    // getTaskById
 }
 
-function getTaskById(id){
-    gBoard.groups.find
-}
+// function getTaskById(id){
+//     gBoard.groups.find
+// }
 
 function getDemoBoard(){
     return gBoard;

@@ -1,5 +1,5 @@
 <template>
-  <section v-if="task" class="task">
+  <section  class="task">
     <task-control />
     <!-- <task-cover /> -->
     <task-title />
@@ -28,7 +28,7 @@ export default {
         return this.$route.parmas.taskId
       },
       task(){
-          // return this.$store.getters.task;
+          return this.$store.getters.task;
       } 
   },
     components: { 

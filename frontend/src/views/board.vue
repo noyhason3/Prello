@@ -14,7 +14,7 @@ import group from "../cmps/board/group.vue";
 export default {
   computed: {
     board() {
-      // return this.$store.getters.currBoard;
+      return this.$store.getters.currBoard;
     },
   },
   components: { group },
