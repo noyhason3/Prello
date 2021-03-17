@@ -12,7 +12,9 @@
 
     <button @click="togglePopup('Label')">Labels</button>
     <popup-label v-if="isLabelOpen"> </popup-label>
-    <!-- <button>Checklist</button> -->
+
+
+    <button @click="togglePopup('Checklist')">Checklist</button>
     <!-- <button>Due date</button> -->
     <!-- <button>Attachement</button> -->
     <!-- <button>Cover</button> -->
@@ -27,6 +29,7 @@ export default {
     return {
       isMemberOpen: false,
       isLabelOpen: false,
+      isChecklistOpen: false
     };
   },
   methods: {
