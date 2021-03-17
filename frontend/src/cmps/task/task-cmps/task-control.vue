@@ -11,6 +11,10 @@
     ></popup-member>
     <!-- <button>Labels</button> -->
     <button @click="togglePopup('checklist')">Checklist</button>
+        <popup-checklist
+      v-if="checklistOpen"
+      @close-popup="checklistOpen = false"
+    ></popup-checklist>
     <!-- <button>Due date</button> -->
     <!-- <button>Attachement</button> -->
     <!-- <button>Cover</button> -->
@@ -19,11 +23,12 @@
 
 <script>
 import popupMember from "@/cmps/task/popup/popup-member";
+import popupChecklist from '../popup/popup-checklist.vue';
 export default {
   data() {
     return {
       memberOpen: false,
-      ischecklistOpen: false
+      checklistOpen: false
     };
   },
   methods: {
@@ -36,9 +41,10 @@ export default {
       this.$emit("assign-member", member);
     },
   },
-  components: { popupMember },
+  components: { popupMember, popupChecklist  },
 };
 </script>
 
-<style>
+<styl
+    PopupCheckliste>
 </style>
