@@ -1,5 +1,9 @@
 <template>
-  <main-nav />
+  <header class="main-header">
+    <div class="main-header-content">
+      <main-nav />
+    </div>
+  </header>
 </template>
 
 <script>
