@@ -1,7 +1,7 @@
 <template>
   <section class="task">
     <!-- <pre>{{ task }}</pre> -->
-    <task-control />
+    <task-control @assign-member="assignMember" />
     <!-- <task-cover /> -->
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
     <div class="task-info">
@@ -40,6 +40,14 @@ export default {
     setTitle(title) {
       this.task.title = title;
       console.log(this.task);
+    },
+    assignMember(member) {
+      var task = JSON.parse(JSON.stringify(this.task));
+      console.log("🚀 ~ file: task.vue ~ line 46 ~ assignMember ~ task", task);
+      if (!task.members) task.members = [];
+      task.members.push(member);
+      console.log("🚀 ~ file: task.vue ~ line 49 ~ assignMember ~ task", task);
+      this.$store.commit({ type: "setCurrTask", task });
     },
   },
   components: {
