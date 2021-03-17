@@ -11,17 +11,17 @@
 <script>
 export default {
   props: {
-    taskDescription: String,
+    currTaskDescription: String,
     task: Object,
   },
   data() {
     return {
       isEditDescription: false,
+      taskDescription:this.currTaskDescription
     };
   },
   created() {
     console.log("task dsescription:", this.taskDescription);
-    console.log("task:", this.task);
   },
   methods: {
     editDescription() {

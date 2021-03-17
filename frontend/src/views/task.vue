@@ -10,7 +10,7 @@
       <!-- <task-label /> -->
       <!-- <task-duedate /> -->
     </div>
-    <task-description :taskDescription="task.description" :task="task"/>
+    <task-description :currTaskDescription="task.description" :task="task" @setDescription="setDescription"/>
     <!-- <task-attachment /> -->
     <!-- <task-checklist /> -->
     <!-- <task-comment /> -->
@@ -39,7 +39,10 @@ export default {
   methods: {
     setTitle(title) {
       this.task.title = title;
-      console.log(this.task);
+    },
+    setDescription(description){
+     this.task.description = description;
+      console.log('task',this.task);
     },
     assignMember(member) {
       var task = JSON.parse(JSON.stringify(this.task));
