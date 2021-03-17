@@ -2,7 +2,7 @@
   <section class="board">
     <ul>
       <li v-for="group in board.groups" :key="group.id">
-        <group :group="group" :boardId="board._id"/>
+        <group :group="group" :boardId="board._id" />
       </li>
     </ul>
     <router-view />

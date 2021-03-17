@@ -1,17 +1,13 @@
-export default{
+export default {
     getDemoBoard,
-    // getTaskById
 }
 
-// function getTaskById(id){
-//     gBoard.groups.find
-// }
 
-function getDemoBoard(){
+function getDemoBoard() {
     return gBoard;
 }
 
-const gBoard={
+const gBoard = {
     "_id": "b101",
     "title": "Robot dev proj",
     "createdAt": 1589983468418,
@@ -32,7 +28,7 @@ const gBoard={
         {
             "_id": "u101",
             "fullname": "Tal Tarablus",
-            "imgUrl": "https://www.google.com"
+            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
         }
     ],
     "groups": [
