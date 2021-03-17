@@ -6,7 +6,7 @@
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
     <div v-if="task" class="task-info">
       <member-list :members="task.members" />
-      <member-list />
+
       <task-label :taskLabels="task.labels" @setTaskLabels="setTaskLabels" />
       <!-- <task-duedate /> -->
     </div>
@@ -16,7 +16,7 @@
       @setDescription="setDescription"
     />
     <!-- <task-attachment /> -->
-    <task-checklist />
+    <task-checklist @addChecklist="setChecklist" />
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
@@ -27,6 +27,7 @@ import taskControl from "../cmps/task/task-cmps/task-control.vue";
 import taskTitle from "../cmps/task/task-cmps/task-title.vue";
 import taskDescription from "../cmps/task/task-cmps/task-description.vue";
 import memberList from "../cmps/member-list.vue";
+import taskChecklist from "../cmps/task/task-cmps/task-checklist.vue";
 import taskLabel from "../cmps/task/task-cmps/task-label.vue";
 
 export default {
@@ -62,11 +63,15 @@ export default {
       task.labels.push(...labels);
       console.log(this.task.labels);
     },
+    setChecklist(){
+      
+    }
   },
   components: {
     taskControl,
     taskTitle,
     memberList,
+    taskChecklist,
     taskDescription,
     taskLabel,
   },
