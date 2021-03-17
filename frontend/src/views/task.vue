@@ -7,7 +7,7 @@
     <div v-if="task" class="task-info">
       <member-list :members="task.members" />
       <member-list />
-      <!-- <task-label /> -->
+      <task-label :taskLabels="task.labels" @setTaskLabels="setTaskLabels" />
       <!-- <task-duedate /> -->
     </div>
     <task-description
@@ -27,6 +27,7 @@ import taskControl from "../cmps/task/task-cmps/task-control.vue";
 import taskTitle from "../cmps/task/task-cmps/task-title.vue";
 import taskDescription from "../cmps/task/task-cmps/task-description.vue";
 import memberList from "../cmps/member-list.vue";
+import taskLabel from "../cmps/task/task-cmps/task-label.vue";
 
 export default {
   computed: {
@@ -43,7 +44,6 @@ export default {
     },
     setDescription(description) {
       this.task.description = description;
-      console.log("task", this.task);
     },
     assignMember(member) {
       var task = JSON.parse(JSON.stringify(this.task));
@@ -58,12 +58,17 @@ export default {
       task.members.push(member);
       this.$store.commit({ type: "setCurrTask", task });
     },
+    setTaskLabels(labels) {
+      task.labels.push(...labels);
+      console.log(this.task.labels);
+    },
   },
   components: {
     taskControl,
     taskTitle,
     memberList,
     taskDescription,
+    taskLabel,
   },
 };
 </script>

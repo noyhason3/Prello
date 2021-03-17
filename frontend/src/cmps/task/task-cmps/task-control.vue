@@ -9,7 +9,7 @@
       @close-popup="memberOpen = false"
       @assign-member="assignMember"
     ></popup-member>
-    <!-- <button>Labels</button> -->
+    <button>Labels</button>
     <!-- <button>Checklist</button> -->
     <!-- <button>Due date</button> -->
     <!-- <button>Attachement</button> -->
