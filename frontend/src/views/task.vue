@@ -1,7 +1,7 @@
 <template>
   <section class="task" v-if="task">
     <!-- <pre>{{ task }}</pre> -->
-    <task-control @assign-member="assignMember" @set-checklist="saveChecklist"/>
+    <task-control @assign-member="assignMember" @set-checklist="saveChecklist" @add-task-labels="addTaskLabels"/>
     <!-- <task-cover /> -->
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
     <div v-if="task" class="task-info">
@@ -36,7 +36,7 @@ export default {
       return this.$route.parmas.taskId;
     },
     task() {
-      return this.$store.getters.currTask;
+      return this.$store.getters.currTask;//Should we copy the task here? not inside methods.
     },
   },
   methods: {
@@ -58,6 +58,7 @@ export default {
       }
       task.members.push(member);
       this.$store.commit({ type: "setCurrTask", task });
+      // this.saveTask(task)//Todo: can we exchange these two?
     },
     setTaskLabels(labels) {
       task.labels = labels;
@@ -69,8 +70,15 @@ export default {
       if (!task.checklists) task.checklists = [];
       task.checklists.push(checklist);
       
-      this.$store.commit({type:'saveTask', task})
+      this.saveTask(task)
     },
+    addTaskLabels(labels){
+      this.task.labels = labels;
+      this.saveTask(task)
+    },
+    saveTask(task){
+      this.$store.commit({type:'saveTask', task})
+    }
   },
   components: {
     taskControl,

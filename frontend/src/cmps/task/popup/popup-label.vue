@@ -28,22 +28,22 @@ export default {
     },
     toggleSelectLabel(labelId){
         // console.log('curr task labels',this.$store.getters.currTask.labelIds);
-        if(this.taskLabelsToEdit.includes(labelId)){ 
+        if(this.taskLabelsEdit.includes(labelId)){ 
             labelIdx = this.taskLabels.findIndex(label => label.id === labelId)
-            this.taskLabelsToEdit.splice(labelIdx, 1)
-            console.log(this.taskLabelsToEdit);
+            this.taskLabelsEdit.splice(labelIdx, 1)
+            console.log(this.taskLabelsEdit);
             return
             }
-        this.taskLabelsToEdit.push(labelId)
-        this.$emit({type:'add-labels-to-task', labels:this.taskLabelsToEdit})
-        console.log(this.taskLabelsToEdit)
+        this.taskLabelsEdit.push(labelId)
+        this.$emit({type:'add-task-labels', labels:this.taskLabelsEdit})
+        console.log(this.taskLabelsEdit)
     }
   },
   computed: {
     boardLabels() {
       return this.$store.getters.currBoard.labels;
     },
-    taskLabelsToEdit(){
+    taskLabelsEdit(){
         return [...this.$store.getters.currTask.labelIds]
     }
   },
