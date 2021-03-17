@@ -3,13 +3,15 @@
     <!-- SUGGESTED                       ******TODO********
       <button>Join</button> -->
 
-    <button @click="toggle('Member')">Members</button>
+    <button @click="togglePopup('Member')">Members</button>
     <popup-member
-      v-if="memberOpen"
-      @close-popup="memberOpen = false"
+      v-if="isMemberOpen"
+      @close-popup="isMemberOpen = false"
       @assign-member="assignMember"
     ></popup-member>
-    <button v-if="isLabelOpen" @click="toggle('Label')">Labels</button>
+
+    <button @click="togglePopup('Label')">Labels</button>
+    <popup-label v-if="isLabelOpen"> </popup-label>
     <!-- <button>Checklist</button> -->
     <!-- <button>Due date</button> -->
     <!-- <button>Attachement</button> -->
@@ -19,24 +21,27 @@
 
 <script>
 import popupMember from "@/cmps/task/popup/popup-member";
+import popupLabel from "@/cmps/task/popup/popup-member";
 export default {
   data() {
     return {
       isMemberOpen: false,
-      isLabelOpen:false,
+      isLabelOpen: false,
     };
   },
   methods: {
     togglePopup(str) {
       //this.$emit(`toggle-${str}`);
-      var dataStr = `${str}Open`;
+      var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
     },
     assignMember(member) {
       this.$emit("assign-member", member);
     },
   },
-  components: { popupMember },
+  components: { 
+    popupMember,
+    popupLabel },
 };
 </script>
 

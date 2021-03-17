@@ -1,6 +1,8 @@
 <template>
   <pop-up>
-      
+      <div slot="main">
+          <h2>I'm labels :)</h2>
+      </div>
   </pop-up>
 </template>
 
