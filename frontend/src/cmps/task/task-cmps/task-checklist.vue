@@ -5,7 +5,7 @@
         <header
           >✅ {{ checklist.title }} <button>Delete</button>
         </header>
-
+        <input type="text" />
       </li>
     </ul>
   </section>
