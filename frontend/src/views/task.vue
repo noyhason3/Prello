@@ -3,9 +3,10 @@
     <!-- <pre>{{ task }}</pre> -->
     <task-control />
     <!-- <task-cover /> -->
-    <task-title />
+    <task-title :taskTitle="task.title" @setTitle="setTitle" />
     <div class="task-info">
       <member-list :members="taskMembers" />
+      <member-list />
       <!-- <task-label /> -->
       <!-- <task-duedate /> -->
     </div>
@@ -33,6 +34,12 @@ export default {
     },
     taskMembers() {
       return this.task.members || [];
+    },
+  },
+  methods: {
+    setTitle(title) {
+      this.task.title = title;
+      console.log(this.task);
     },
   },
   components: {

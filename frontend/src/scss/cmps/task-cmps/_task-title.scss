@@ -1,0 +1,15 @@
+.task-title {
+    width: 100%;
+    height: 100px;
+    background-color: pink;
+    div {
+     display: flex;
+   }
+   button {
+       text-decoration: underline;
+       background-color: transparent;
+       border: none;
+       outline: none;
+       cursor: pointer;
+   }
+  }
