@@ -16,7 +16,7 @@
       @setDescription="setDescription"
     />
     <!-- <task-attachment /> -->
-    <task-checklist @addChecklist="setChecklist" />
+    <task-checklist :task="task" @setChecklist="setChecklist" />
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
@@ -37,6 +37,9 @@ export default {
     },
     task() {
       return this.$store.getters.currTask || {};
+    },
+    board() {
+      return this.$store.getters.currBoard;
     },
   },
   methods: {
@@ -63,9 +66,9 @@ export default {
       task.labels = labels;
       console.log(this.task.labels);
     },
-    setChecklist(){
-      
-    }
+    setChecklist(checklist) {
+      task.checklists.push(checklist);
+    },
   },
   components: {
     taskControl,

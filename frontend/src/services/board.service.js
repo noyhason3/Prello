@@ -107,7 +107,7 @@ const gBoard = {
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
                     ],
-                    "labelIds": ["101"],
+                    "labelIds": ["101", "102"],
                     "createdAt": 1590999730348,
                     "dueDate": 16156215211,
                     "byMember": {

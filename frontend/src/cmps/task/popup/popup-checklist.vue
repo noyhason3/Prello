@@ -3,7 +3,7 @@
     <h2 slot="header">Add Checklist</h2>
     <div slot="main">
       <h3>Title</h3>
-      <input type="text" name="title" id="title" />
+      <input type="text" name="title" id="title" v-model="checklist.title" />
       <button @click="addChecklist">Add</button>
       <!-- <h3>Copy Items From...</h3>
       <input type="text" name="" id="" /> -->
@@ -15,11 +15,15 @@
 import popUp from "@/cmps/pop-up";
 export default {
   data() {
-    return {};
+    return {
+        checklist:{
+            title:''
+        }
+    };
   },
   methods: {
     addChecklist() {
-        
+        this.$emit('setChecklist', {...this.checklist})
     },
   },
   components: { popUp },
