@@ -1,22 +1,29 @@
 <template>
   <section class="group">
-      <task-preview @click.native="openTask(11)"/>
+    <ul>
+      <li v-for="task in group.tasks" :key="task.id">
+        <task-preview :task="task" @click.native="openTask(task)" />
+      </li>
+    </ul>
   </section>
 </template>
 
 <script>
-import taskPreview from '../task/task-preview.vue'
+import taskPreview from "../task/task-preview.vue";
 export default {
-  methods:{
-      openTask(id){
-          this.$router.push('/board/101/'+id)
-      }
+  props: {
+    group: Object,
+    boardId: String,
+  },
+  methods: {
+    openTask(task) {
+      this.$store.commit({type:'setCurrTask', task})
+      this.$router.push(`/board/${boardId}/${task.id}`);
+    },
   },
   components: { taskPreview },
-
-}
+};
 </script>
 
 <style>
-
 </style>

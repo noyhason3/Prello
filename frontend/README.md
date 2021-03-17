@@ -1,4 +1,4 @@
-# tralala
+# prello
 
 ## Project setup
 ```

@@ -1,18 +1,25 @@
 <template>
   <section class="board">
-      <group/> 
-      <router-view />
+    <ul>
+      <li v-for="group in board.groups" :key="group.id">
+        <group :group="group" :boardId="board._id"/>
+      </li>
+    </ul>
+    <router-view />
   </section>
 </template>
 
 <script>
-import group from '../cmps/board/group.vue'
+import group from "../cmps/board/group.vue";
 export default {
+  computed: {
+    board() {
+      // return this.$store.getters.currBoard;
+    },
+  },
   components: { group },
-
-}
+};
 </script>
 
 <style>
-
 </style>
