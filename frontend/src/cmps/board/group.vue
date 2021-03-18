@@ -1,5 +1,7 @@
 <template>
   <section class="group">
+    <div class="header">{{ group.title }}</div>
+
     <ul class="clean-list">
       <li v-for="task in group.tasks" :key="task.id">
         <task-preview :task="task" @click.native="openTask(task)" />
@@ -9,13 +11,15 @@
       <button v-if="!isAddNewTask" @click="isAddNewTask = true">
         Add a new task
       </button>
-      <editable-text
-        v-else
-        v-model="newTask.title"
-        :type="'title'"
-        @close-textarea="isAddNewTask = false"
-        @input="addTask"
-      />
+
+      <div class="footer" v-else>
+        <editable-text
+          v-model="newTask.title"
+          :type="'title'"
+          @close-textarea="isAddNewTask = false"
+          @input="addTask"
+        />
+      </div>
     </ul>
   </section>
 </template>

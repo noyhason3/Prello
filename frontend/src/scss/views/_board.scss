@@ -1,7 +1,24 @@
 .board{
     display:flex;
+    flex-direction: column;
     flex-grow: 1;
-    ul{
+
+    .board-header{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        &>*{
+            margin: 10px;
+            padding: 10px;
+            // background-color: $clr3;
+            // color: $clr1;
+            border-radius: 6px;
+            border: 2px solid $clr3;
+        }
+    }
+
+    .group-list{
         display: flex;
         height:100%;
         &>*{

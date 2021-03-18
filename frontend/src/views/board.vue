@@ -1,16 +1,23 @@
 <template>
   <section class="board">
-    <ul class="clean-list">
-      <li v-for="group in board.groups" :key="group.id">
-        <group :group="group" :boardId="board._id" />
-      </li>
-    </ul>
+    <board-header :board="board" />
+
+    <div class="main-container">
+      <ul class="group-list clean-list">
+        <li v-for="group in board.groups" :key="group.id">
+          <group :group="group" :boardId="board._id" />
+        </li>
+      </ul>
+    </div>
     <router-view />
   </section>
 </template>
 
+
 <script>
+import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
+
 export default {
   computed: {
     board() {
@@ -18,7 +25,7 @@ export default {
     },
     groups() {},
   },
-  components: { group },
+  components: { boardHeader, group },
 };
 </script>
 
