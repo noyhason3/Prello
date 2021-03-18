@@ -92,7 +92,7 @@ export default {
       this.closeLabelEdit();
     },
     removeBoardLabel(id) {
-      this.store.commit({ type: "removeBoardLabel", id });
+      this.$store.commit({ type: "removeBoardLabel", id });
     },
   },
   computed: {
