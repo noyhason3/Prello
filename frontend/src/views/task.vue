@@ -74,7 +74,7 @@ export default {
     addTaskLabels(labels){
       console.log('labels:', labels)
       this.task.labels = labels;
-      this.saveTask(task)
+      this.saveTask(this.task)
     },
     saveTodo(todo){
       // const task = this.task

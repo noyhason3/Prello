@@ -54,7 +54,7 @@ export default {
       this.$emit("set-checklist", checklist);
     },
     addTaskLabels(labels) {
-      // this.$emit("add-task-labels", labels);
+      this.$emit("add-task-labels", labels);
     },
   },
   components: {
