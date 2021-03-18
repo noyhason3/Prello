@@ -15,6 +15,7 @@
         class="group-list"
         filter=".task-preview"
         draggable=".group-wrapper"
+        handle=".clean-list"
       >
         <li v-for="group in board.groups" :key="group.id" class="group-wrapper">
           <group :group="group" :boardId="board._id" />
