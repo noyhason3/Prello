@@ -18,7 +18,9 @@
       />
       <!-- <task-duedate /> -->
     </div>
+
     <editable-text v-model="task.description" />
+
     <!-- :currTaskDescription="task.description"
       :task="task"
       @setDescription="setDescription" -->
