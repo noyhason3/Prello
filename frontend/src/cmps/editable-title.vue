@@ -4,10 +4,7 @@
     <pre>{{ value }}</pre>
     <div>
       <h2 contenteditable="true" @blur="onInput">{{ value }}</h2>
-      <div class="list-name">
-        <h4 contenteditable="true">In list</h4>
-        <button>LIST NAME</button>
-      </div>
+
     </div>
   </section>
 </template>

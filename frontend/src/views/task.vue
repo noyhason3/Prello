@@ -14,6 +14,9 @@
     />
     <!-- <task-cover /> -->
     <task-title v-model="task.title" />
+
+        <h4 contenteditable="true">In list: {{this.task.group.name}}</h4>
+
     <!-- :taskTitle="task.title"  @setTitle="setTitle" -->
     <div v-if="task" class="task-info">
       <member-list :members="task.members" />
