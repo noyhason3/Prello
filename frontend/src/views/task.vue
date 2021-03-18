@@ -15,7 +15,7 @@
     <!-- <task-cover /> -->
     <task-title v-model="task.title" />
 
-        <h4 contenteditable="true">In list: {{this.task.group.name}}</h4>
+        <h4 contenteditable="true">In list: {{this.task.group.title}}</h4>
 
     <!-- :taskTitle="task.title"  @setTitle="setTitle" -->
     <div v-if="task" class="task-info">
@@ -47,9 +47,9 @@
 
 <script>
 import taskControl from "../cmps/task/task-cmps/task-control.vue";
-import taskTitle from "../cmps/editable-title.vue";
+import taskTitle from "../cmps/common/editable-title.vue";
 import editableText from "../cmps/task/task-cmps/editable-text.vue";
-import memberList from "../cmps/member-list.vue";
+import memberList from "../cmps/common/member-list.vue";
 import taskChecklist from "../cmps/task/task-cmps/task-checklist.vue";
 import taskLabel from "../cmps/task/task-cmps/task-label.vue";
 import popupLabel from "@/cmps/task/popup/popup-label";

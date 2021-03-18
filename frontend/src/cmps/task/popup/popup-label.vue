@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import popUp from "@/cmps/pop-up.vue";
+import popUp from "@/cmps/common/pop-up.vue";
 import popupLabelEdit from "@/cmps/task/popup/popup-label-edit.vue";
 export default {
   data() {

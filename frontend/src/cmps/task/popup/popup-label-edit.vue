@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import popUp from "@/cmps/pop-up.vue";
+import popUp from "@/cmps/common/pop-up.vue";
 export default {
   props: {
     label: Object,

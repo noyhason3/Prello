@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import mainNav from "@/cmps/main-nav";
+import mainNav from "@/cmps/common/main-nav";
 
 export default {
   data() {

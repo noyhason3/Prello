@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import mainHeader from "@/cmps/main-header";
+import mainHeader from "@/cmps/common/main-header";
 
 export default {
   data() {

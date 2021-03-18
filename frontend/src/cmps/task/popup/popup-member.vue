@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import popUp from "@/cmps/pop-up";
+import popUp from "@/cmps/common/pop-up";
 export default {
   data() {
     return {
