@@ -1,40 +1,49 @@
 <template>
-  <section>
+  <ul class="clean-list group" style="overflow-x: auto">
     <button @click="removeGroup">X</button>
-
-    <ul class="clean-list group" style="overflow-x: auto">
-      <div class="header">{{ group.title }}</div>
-      <li v-for="task in group.tasks" :key="task.id">
+    <div class="header">{{ group.title }}</div>
+    <draggable
+      v-model="group.tasks"
+      group="tasks"
+      @start="drag = true"
+      @end="drag = false"
+    >
+      <div
+        v-for="task in group.tasks"
+        :key="task.id"
+        class="group-tasks-wrapper"
+      >
         <task-preview
           :task="task"
           @click.native="openTask(task)"
           @remove-task="removeTask"
-        />
-      </li>
-      <!-- <pre>{{ this.group }}</pre> -->
-      <!-- <pre>{{ this.newTask }}</pre> -->
-      <button v-if="!isAddNewTask" @click="isAddNewTask = true">
-        Add a new task
-      </button>
-      <editable-text
-        v-else
-        v-model="newTask.title"
-        :type="'title'"
-        :elementType="'card'"
-        @close-textarea="isAddNewTask = false"
-        @input="addTask"
-      />
-    </ul>
-  </section>
+        ></task-preview>
+      </div>
+    </draggable>
+    <!-- <pre>{{ this.group }}</pre> -->
+    <!-- <pre>{{ this.newTask }}</pre> -->
+    <button v-if="!isAddNewTask" @click="isAddNewTask = true">
+      Add a new task
+    </button>
+    <editable-text
+      v-else
+      v-model="newTask.title"
+      :type="'title'"
+      @close-textarea="isAddNewTask = false"
+      @input="addTask"
+    />
+  </ul>
 </template>
 
 <script>
+import draggable from "vuedraggable";
 import boardService from "@/services/board.service.js";
 import taskPreview from "../task/task-preview.vue";
 import editableText from "../task/task-cmps/editable-text.vue";
+
 export default {
   props: {
-    group: Object, 
+    group: Object,
     boardId: String,
   },
   data() {
@@ -69,11 +78,11 @@ export default {
     saveGroup(group) {
       this.$store.commit({ type: "saveGroup", group });
     },
-    removeGroup(){
-      this.$store.commit({ type: "removeGroup", groupId:this.group.id });
-    }
+    removeGroup() {
+      this.$store.commit({ type: "removeGroup", groupId: this.group.id });
+    },
   },
-  components: { taskPreview, editableText },
+  components: { taskPreview, editableText, draggable },
 };
 </script>
 

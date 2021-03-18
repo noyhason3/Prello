@@ -9,7 +9,7 @@
         </li>
       </ul>
     </div>
-    <button>Show Menu</button>
+    <div>Show Menu</div>
   </section>
 </template>
 <script>

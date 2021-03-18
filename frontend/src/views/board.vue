@@ -2,7 +2,7 @@
   <section class="board">
     <board-header :board="board" />
     <ul class="clean-list main">
-      <li v-for="group in board.groups" :key="group.id">
+      <li v-for="group in board.groups" :key="group.id" class="group-wrapper">
         <group :group="group" :boardId="board._id" />
       </li>
     </ul>
@@ -36,7 +36,7 @@ export default {
       newGroup: boardService.getEmptyGroup(),
     };
   },
-  methods:{
+  methods: {
     addGroup() {
       this.newGroup.board = { id: this.board.id };
       this.$store.commit({ type: "saveGroup", group: this.newGroup });
