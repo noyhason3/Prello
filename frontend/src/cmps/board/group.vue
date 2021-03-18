@@ -5,8 +5,14 @@
     <draggable
       v-model="group.tasks"
       group="tasks"
-      @start="drag = true"
+      @start="startDrag"
       @end="drag = false"
+      animation="150"
+      emptyInsertThreshold="50"
+      ghost-class="ghost"
+      chosen-class="chosen"
+      drag-class="drag"
+      draggable=".group-tasks-wrapper"
     >
       <div
         v-for="task in group.tasks"
@@ -50,6 +56,7 @@ export default {
     return {
       newTask: boardService.getEmptyTask(),
       isAddNewTask: false,
+      ghostRect: null,
     };
   },
   methods: {
@@ -80,6 +87,15 @@ export default {
     },
     removeGroup() {
       this.$store.commit({ type: "removeGroup", groupId: this.group.id });
+    },
+    onDrag(evt) {
+      console.log("🚀 ~ file: group.vue ~ line 88 ~ onDrag ~ evt", evt);
+      const dragRect = evt.draggedRect;
+    },
+    startDrag(ev, drag) {
+      const rect = ev.item.getBoundingClientRect();
+      this.ghostRect = ev.item.getBoundingClientRect();
+      drag = true;
     },
   },
   components: { taskPreview, editableText, draggable },
