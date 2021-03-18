@@ -1,5 +1,5 @@
 <template>
-  <ul class="clean-list group" style="overflow-x: auto">
+  <ul class="clean-list group">
     <li v-for="task in group.tasks" :key="task.id">
       <task-preview :task="task" @click.native="openTask(task)" />
     </li>

@@ -1,13 +1,17 @@
 .board{
     display:flex;
     flex-grow: 1;
-    overflow: hidden;
+    overflow:hidden;
+    overflow-x: auto;
     ul{
         display: flex;
         flex-grow: 1;
-        &>*{
+        li{
             overflow-y: auto;
-            margin:5px;
+        }
+        .group{
+            margin-block:5px;
+            margin-inline:8px;
             //display: flex;
         }
     }
