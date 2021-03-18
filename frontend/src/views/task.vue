@@ -7,7 +7,7 @@
     <div v-if="task" class="task-info">
       <member-list :members="task.members" />
 
-      <task-label :taskLabels="task.labels" @setTaskLabels="setTaskLabels" />
+      <task-label :taskLabelIds="task.labelIds" @setTaskLabels="setTaskLabels" />
       <!-- <task-duedate /> -->
     </div>
     <task-description
