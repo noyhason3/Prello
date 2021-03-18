@@ -5,13 +5,15 @@
         <task-preview :task="task" @click.native="openTask(task)" />
       </li>
       <!-- <pre>{{ this.newTask }}</pre> -->
-      <button v-if="!isAddNewCard" @click="isAddNewCard = true">
-        Add a new card
+      <button v-if="!isAddNewTask" @click="isAddNewTask = true">
+        Add a new task
       </button>
       <editable-text
         v-else
         v-model="newTask.title"
-        @close-textare="this.isAddNewCard = false"
+        :type="'title'"
+        @close-textare="this.isAddNewTask = false"
+        @input="addTask"
       />
     </ul>
   </section>
@@ -29,7 +31,7 @@ export default {
   data() {
     return {
       newTask: boardService.getEmptyTask(),
-      isAddNewCard: false,
+      isAddNewTask: false,
     };
   },
   methods: {
@@ -38,6 +40,12 @@ export default {
       task.group = { id: this.group.id, title: this.group.title };
       this.$store.commit({ type: "setCurrTask", task });
       this.$router.push(`/board/${this.boardId}/${task.id}`);
+    },
+    addTask() {
+      this.newTask.group = { id: this.group.id };
+      this.$store.commit({ type: "saveTask", task: this.newTask });
+      console.log("this.newTask", this.newTask);
+      console.log("this.group", this.group);
     },
   },
   components: { taskPreview, editableText },

@@ -1,6 +1,8 @@
+import utilService from "./util.service";
+
 export default {
     getDemoBoard,
-    getEmptyTask
+    getEmptyTask,
 }
 
 
@@ -191,6 +193,7 @@ function getEmptyTask() {
     return {
         title: '',
         description: '',
+        id: utilService.makeId()
     }
 }
 
@@ -202,7 +205,7 @@ function getEmptyTask() {
 
 // }
 
-// function saveTask() {
+// function saveTask(task) {
 
 // }
 

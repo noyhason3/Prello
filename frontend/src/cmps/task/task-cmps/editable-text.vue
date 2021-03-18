@@ -7,7 +7,7 @@
     </form>
     <template v-else>
       <p v-if="value" @click="editDescription">{{ value }}</p>
-      <p v-else @click="editDescription">Enter a title for this card...</p>
+      <p v-else @click="editDescription">Enter a {{ type }} for this card...</p>
     </template>
   </section>
 </template>
@@ -17,6 +17,7 @@ export default {
   props: {
     // currTaskDescription: String,
     // task: Object,
+    type: "",
     value: String,
   },
   data() {
@@ -39,7 +40,6 @@ export default {
       // this.$emit("setText", this.taskDescriptionPreview);
       // this.closeTextarea();
 
-      //if (this.value) this.$emit("setText", this.value);
       const val = this.$refs.input.value;
       this.$emit("input", val);
       this.closeTextarea();

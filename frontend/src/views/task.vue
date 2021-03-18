@@ -19,7 +19,7 @@
       <!-- <task-duedate /> -->
     </div>
 
-    <editable-text v-model="task.description" />
+    <editable-text v-model="task.description" :type="'description'" />
 
     <!-- :currTaskDescription="task.description"
       :task="task"
