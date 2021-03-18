@@ -72,8 +72,9 @@ export default {
     },
     saveChecklist(checklist) {
       const task = this.task;
-      console.log(task);
+      console.log(task.checklists);
       if (!task.checklists) task.checklists = [];
+      console.log(task.checklists);
       task.checklists.push(checklist);
       this.saveTask(task);
     },
@@ -88,6 +89,9 @@ export default {
       // const idx = task.checklists.todos.findIndex(({id})=>id===todo.id)
       // task.checklists.todos.push(todo);
       // this.saveTask(task)
+    },
+    saveTask(task) {
+      this.$store.commit({ type: "saveTask", task });
     },
   },
   components: {
