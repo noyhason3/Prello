@@ -1,10 +1,32 @@
-.task-preview{
+.task-preview {
     min-height: 150px;
+<<<<<<< HEAD
     // width: 90%;
     margin:10px auto;
+=======
+    width: 90%;
+    margin: 10px auto;
+>>>>>>> 497e3580cf804a70d1ee896dd3407282917d6de6
     background-color: $clr1;
-    cursor:pointer;
+    cursor: pointer;
     border-radius: 5px;
     box-shadow: 0px 2px 0px #0000002e;
-
+    padding:5px;
+    .btn.close{
+        margin:0
+    }
+    .label-preview {
+        > *:not(:last-child){
+            margin-inline-end:5px;
+        }
+    }
+    .preview-label {
+        width: 40px;
+        height: 10px;
+        border-radius: 5px;
+        font-size:1em;
+        &.enlarged-label{
+            height: 20px;
+        }
+    }
 }
