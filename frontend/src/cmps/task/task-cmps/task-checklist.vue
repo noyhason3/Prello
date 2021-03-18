@@ -18,7 +18,13 @@
               <label :for="todo.id"> {{ todo.txt }} </label><br />
             </li>
           </ul>
-          <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt" />
+          <!-- <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt" /> -->
+          <editable-text
+      v-model="todo.txt"
+      :type="'todo'"
+      @close-textarea="isAddNewTask = false"
+      @input="addTask"
+    />
         </form>
         <!-- <button>Add Item</button> -->
         <button @click="addTodo">Add</button>

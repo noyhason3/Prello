@@ -8,7 +8,7 @@
         @start="drag = true"
         @end="drag = false"
         animation="150"
-        emptyInsertThreshold="50"
+        :empty-insert-threshold="100"
         ghost-class="ghost"
         chosen-class="chosen"
         drag-class="drag"
@@ -21,18 +21,21 @@
           <group :group="group" :boardId="board._id" />
         </li>
       </draggable>
+
+      <div class="add-new-group">
+        <button v-if="!isAddNewGroup" @click="isAddNewGroup = true">
+          Add a new group
+        </button>
+        <editable-text
+          v-else
+          v-model="newGroup.title"
+          :type="'title'"
+          :elementType="'group'"
+          @close-textarea="isAddNewGroup = false"
+          @input="addGroup"
+        />
+      </div>
     </ul>
-    <button v-if="!isAddNewGroup" @click="isAddNewGroup = true">
-      Add a new group
-    </button>
-    <editable-text
-      v-else
-      v-model="newGroup.title"
-      :type="'title'"
-      :elementType="'group'"
-      @close-textarea="isAddNewGroup = false"
-      @input="addGroup"
-    />
     <router-view />
   </section>
 </template>
