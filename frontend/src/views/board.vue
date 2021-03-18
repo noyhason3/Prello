@@ -2,9 +2,25 @@
   <section class="board">
     <board-header :board="board" />
     <ul class="clean-list main">
-      <li v-for="group in board.groups" :key="group.id" class="group-wrapper">
-        <group :group="group" :boardId="board._id" />
-      </li>
+      <draggable
+        v-model="board.groups"
+        group="group"
+        @start="drag = true"
+        @end="drag = false"
+        animation="150"
+        emptyInsertThreshold="50"
+        ghost-class="ghost"
+        chosen-class="chosen"
+        drag-class="drag"
+        class="group-list"
+        filter=".task-preview"
+        draggable=".group-wrapper"
+        handle=".clean-list"
+      >
+        <li v-for="group in board.groups" :key="group.id" class="group-wrapper">
+          <group :group="group" :boardId="board._id" />
+        </li>
+      </draggable>
     </ul>
     <button v-if="!isAddNewGroup" @click="isAddNewGroup = true">
       Add a new group
@@ -27,6 +43,8 @@ import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
 import boardService from "../services/board.service";
 import editableText from "@/cmps/task/task-cmps/editable-text.vue";
+
+import draggable from "vuedraggable";
 
 export default {
   data() {
@@ -53,6 +71,7 @@ export default {
     boardHeader,
     group,
     editableText,
+    draggable,
   },
 };
 </script>
