@@ -1,11 +1,8 @@
 <template>
   <section class="board" ref="board">
     <ul class="clean-list" ref="list">
-      <li
-        v-for="group in board.groups"
-        :key="group.id"
-        :style="`max-height:${maxHeight};`"
-      >
+      <li v-for="group in board.groups" :key="group.id">
+        <!-- :style="`max-height:${maxHeight};`" -->
         <group :group="group" :boardId="board._id" />
       </li>
     </ul>

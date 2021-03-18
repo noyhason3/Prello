@@ -1,10 +1,12 @@
 .board{
     display:flex;
     flex-grow: 1;
+    overflow: hidden;
     ul{
         display: flex;
-        height:100%;
+        flex-grow: 1;
         &>*{
+            overflow-y: auto;
             margin:5px;
             //display: flex;
         }
