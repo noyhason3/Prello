@@ -13,7 +13,7 @@
         v-else
         v-model="newTask.title"
         :type="'title'"
-        @close-textare="this.isAddNewTask = false"
+        @close-textarea="isAddNewTask = false"
         @input="addTask"
       />
     </ul>

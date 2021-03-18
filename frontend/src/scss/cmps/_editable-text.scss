@@ -1,0 +1,14 @@
+.editable-text{
+    form {
+        & > *{
+            margin:0 auto;
+        }
+        & > *:not(:last-child){
+            margin-block-end: 3px;
+        }
+
+        textarea{
+            resize: vertical;
+        }
+    }
+}
