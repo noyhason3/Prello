@@ -91,7 +91,6 @@ export default {
       this.saveTask(task);
     },
     saveTodo(checklist) {
-      console.log(todo);
       const idx = task.checklists.findIndex(({ id }) => id === checklist.id);
       task.checklists.splice(idx, 1, checklist);
       this.saveTask(this.task);
