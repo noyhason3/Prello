@@ -1,14 +1,14 @@
 <template>
-  <ul class="clean-list flex label-preview">
+  <ul @click="toggleEnlargeLabels" class="clean-list flex label-preview">
     <li
       v-for="label in taskLabels"
       :key="label.id"
       :style="{ 'background-color': label.color }"
       class="preview-label"
       :class="{ 'enlarged-label': isEnlarged }"
-      @click="toggleEnlargeLabels"
+      
     >
-      {{ label.title }}
+      <span v-if="isEnlarged">{{ label.title }}</span>
     </li>
   </ul>
 </template>
@@ -24,7 +24,8 @@ export default {
     };
   },
   methods: {
-    toggleEnlargeLabels() {
+    toggleEnlargeLabels(ev) {
+      ev.stopPropagation();
       this.isEnlarged = !this.isEnlarged;
     },
   },
@@ -33,8 +34,8 @@ export default {
       return this.$store.getters.currBoard.labels;
     },
     taskLabels() {
-        console.log(this.taskLabelIds);
-        if(!this.taskLabelIds) return []
+      console.log(this.taskLabelIds);
+      if (!this.taskLabelIds) return [];
       const labels = this.boardLabels.filter((label) =>
         this.taskLabelIds.includes(label.id)
       );

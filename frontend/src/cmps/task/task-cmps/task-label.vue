@@ -1,5 +1,5 @@
 <template>
-  <ul class="clean-list flex label-preview">
+  <ul class="clean-list flex task-label">
     <li
       v-for="label in taskLabels"
       :key="label.id"

@@ -14,7 +14,7 @@
 
     <!-- </div> -->
     <ul class="clean-list ">
-      <li v-for="(initials, idx) in memebersInitials" :key="'inits' + idx" class="flex center member-initials">
+      <li v-for="(initials, idx) in memebersInitials" :key="'inits' + idx" class="flex center member-initials" :style="">
         <a class="flex center">{{ initials }}</a>
       </li>
     </ul>
