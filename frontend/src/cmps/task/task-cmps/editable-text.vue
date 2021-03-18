@@ -1,12 +1,9 @@
 <template>
   <section class="editable-text">
     <form v-if="isEditing" @submit.prevent="setText">
-      <textarea
-        :value="value"
-        @input="$emit('input', $event.target.value)"
-      ></textarea>
+      <textarea ref="input" :value="value"></textarea>
       <button>save</button>
-      <button type="button" @click="closeTextarea">X</button>
+      <button type="button" @click.prevent="closeTextarea">X</button>
     </form>
     <template v-else>
       <p v-if="value" @click="editDescription">{{ value }}</p>
@@ -41,7 +38,11 @@ export default {
       // this.taskDescriptionPreview = this.taskDescriptionEdit;
       // this.$emit("setText", this.taskDescriptionPreview);
       // this.closeTextarea();
-      if (this.value) this.$emit("setText", this.value);
+
+      //if (this.value) this.$emit("setText", this.value);
+      const val = this.$refs.input.value;
+      this.$emit("input", val);
+      this.closeTextarea();
     },
     closeTextarea() {
       //this.taskDescriptionEdit = null;
