@@ -30,7 +30,7 @@
             <button @click="openLabelEdit('Change', label)">🖋</button>
           </li>
         </ul>
-        <button>Create a new lael</button>
+        <button @click="openLabelEdit('Create')">Create a new lael</button>
       </div>
     </pop-up>
     <popup-label-edit
@@ -50,7 +50,7 @@ import popupLabelEdit from "@/cmps/task/popup/popup-label-edit.vue";
 export default {
   data() {
     return {
-      labels: this.$store.getters.currBoard.labels,
+      // labels: this.$store.getters.currBoard.labels,
       isPopupEdit: false,
       action: "",
       selectedLabel: null,
@@ -86,13 +86,18 @@ export default {
       this.$emit("toggle-popup", "Label");
     },
     saveLabel(label) {
-      const { color, title } = label;
-      this.selectedLabel.color = color;
-      this.selectedLabel.title = title;
+      if (this.selectedLabel) {
+        const { color, title } = label;
+        this.selectedLabel.color = color;
+        this.selectedLabel.title = title;
+      } else this.boardLabels.push(label);
+      this.$store.commit({ type: "saveBoardLabels", labels:this.boardLabels });
       this.closeLabelEdit();
     },
     removeBoardLabel(id) {
-      this.$store.commit({ type: "removeBoardLabel", id });
+      const labelIdx = this.boardLabels.findIndex((label) => label.id === id);
+      if (labelIdx >= 0) this.boardLabels.splice(labelIdx, 1);
+      this.$store.commit({ type: "saveBoardLabels", labels:this.boardLabels });
     },
   },
   computed: {

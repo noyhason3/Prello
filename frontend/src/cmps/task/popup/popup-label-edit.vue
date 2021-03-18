@@ -13,12 +13,12 @@
             v-for="(color, idx) in colors"
             :key="'c' + idx"
             class="label-color"
-            :class="{ 'is-selected': color.selected }"
           >
             <button
-              @click="setLabelColor(color)"
+              @click="setLabelColor(color.color)"
               :style="{ 'background-color': color.color }"
               class="btn label-color"
+              :class="{ 'is-selected': color.selected }"
             ></button>
           </li>
         </ul>
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       colors: [
-        { color: "#0079BF", selected: true },
+        { color: "#0079BF", selected: false },
         { color: "#F2D600", selected: false },
         { color: "#51E898", selected: false },
         { color: "#EB5A46", selected: false },
@@ -62,16 +62,23 @@ export default {
   created() {
     this.labelToEdit = { ...this.label } || {
       id: null,
-      color: this.colors[0],
+      color: this.colors[0].color,
       title: "",
     };
+    if(this.label) this.setSelectedColor(this.label.color)
   },
   methods: {
     closeLabelEdit() {
       this.$emit("closeLabelEdit");
     },
-    setLabelColor(color) {
-      this.labelToEdit.color = color.color;
+    setLabelColor(selectedColor) {
+    this.setSelectedColor(selectedColor)
+      this.labelToEdit.color = selectedColor;
+    },
+    setSelectedColor(selectedColor) {
+      this.colors.forEach(
+        (color) => (color.selected = color.color === selectedColor)
+      );
     },
     saveLabel() {
       console.log(this.labelToEdit);

@@ -1,5 +1,6 @@
 <template>
   <section class="board">
+    <board-header :board="board" />
     <ul class="clean-list">
       <li v-for="group in board.groups" :key="group.id">
         <group :group="group" :boardId="board._id" />
@@ -9,8 +10,11 @@
   </section>
 </template>
 
+
 <script>
+import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
+
 export default {
   data() {
     return {
@@ -22,7 +26,7 @@ export default {
       return this.$store.getters.currBoard;
     },
   },
-  components: { group },
+  components: { boardHeader, group },
 };
 </script>
 

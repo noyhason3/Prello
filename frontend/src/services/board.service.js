@@ -24,22 +24,22 @@ const gBoard = {
         {
             "id": "l101",
             "title": "Done",
-            "color": "#61bd4f"
+            "color": "#0079BF"
         },
         {
             "id": "l102",
             "title": "",
-            "color": "#9B6969"
+            "color": "#F2D600"
         },
         {
             "id": "l103",
             "title": "",
-            "color": "#7FFaD4"
+            "color": "#51E898"
         },
         {
             "id": "l104",
             "title": "On hold",
-            "color": "#f66f6f"
+            "color": "#EB5A46"
         }
     ],
     "members": [
@@ -171,7 +171,143 @@ const gBoard = {
                 }
             ],
             "style": {}
-        }
+        },
+        {
+            "id": "RURY",
+            "title": "Group 1",
+            "tasks": [
+                {
+                    "id": "DGY",
+                    "title": "Replace logo",
+                    "checklists": []
+                },
+                {
+                    "id": "RTY",
+                    "title": "Add Samples",
+                    "checklists": []
+                    
+                }
+            ],
+            "style": {}
+        },  {
+            "id": "DGHG",
+            "title": "Group 1",
+            "tasks": [
+                {
+                    "id": "THDG",
+                    "title": "Replace logo",
+                    "checklists": []
+                },
+                {
+                    "id": "DFHJ",
+                    "title": "Add Samples",
+                    "checklists": [
+                        {
+                            "id": "MGFH",
+                            "title": "Sprint 4",
+                            "todos": [
+                                {
+                                    "id": "SGHT",
+                                    "txt": "Vuex",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "DHHR",
+                                    "txt": "Scss",
+                                    "isDone": false
+                                },
+                                {
+                                    "id": "JKGB",
+                                    "txt": "Backend",
+                                    "isDone": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "SRYSB",
+                            "title": "Sprint 3",
+                            "todos": [
+                                {
+                                    "id": "DHDN",
+                                    "txt": "Vue",
+                                    "isDone": false
+                                },
+                                {
+                                    "id": "DHGN",
+                                    "txt": "Css",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "JGFD",
+                                    "txt": "Frontend",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                }
+            ],
+            "style": {}
+        },  {
+            "id": "FJD",
+            "title": "Group 1",
+            "tasks": [
+                {
+                    "id": "GHHF",
+                    "title": "Replace logo",
+                    "checklists": []
+                },
+                {
+                    "id": "G4HF",
+                    "title": "Add Samples",
+                    "checklists": [
+                        {
+                            "id": "T5TJH",
+                            "title": "Sprint 4",
+                            "todos": [
+                                {
+                                    "id": "5T5GT",
+                                    "txt": "Vuex",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "RTSD",
+                                    "txt": "Scss",
+                                    "isDone": false
+                                },
+                                {
+                                    "id": "LJK",
+                                    "txt": "Backend",
+                                    "isDone": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": "PFGD",
+                            "title": "Sprint 3",
+                            "todos": [
+                                {
+                                    "id": "DGH",
+                                    "txt": "Vue",
+                                    "isDone": false
+                                },
+                                {
+                                    "id": "FHG",
+                                    "txt": "Css",
+                                    "isDone": true
+                                },
+                                {
+                                    "id": "SDF",
+                                    "txt": "Frontend",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                }
+            ],
+            "style": {}
+        },
     ],
     "activities": [
         {

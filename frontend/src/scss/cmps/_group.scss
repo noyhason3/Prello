@@ -1,8 +1,19 @@
 .group{
-    width: 400px;
+    width: 300px;
     min-height: 400px;
-    background-color: aquamarine;
-    display: flex;
-    flex-flow: column;
-    margin:0 auto;
+    background-color: #EBECF0;
+    border-radius: 4px;
+
+    .header{
+        
+    }
+
+    &>*{
+        width: 80%;
+        margin:0 auto;
+    }
+    ul{
+        display: flex;
+        flex-flow: column;
+    }
 }
