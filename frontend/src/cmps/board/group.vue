@@ -2,7 +2,7 @@
   <ul class="clean-list group" style="overflow-x: auto">
     <div class="header">{{ group.title }}</div>
     <li v-for="task in group.tasks" :key="task.id">
-      <task-preview :task="task" @click.native="openTask(task)" />
+      <task-preview :task="task" @click.native="openTask(task)" @remove-task="removeTask"/>
     </li>
     <!-- <pre>{{ this.group }}</pre> -->
     <!-- <pre>{{ this.newTask }}</pre> -->
@@ -49,6 +49,17 @@ export default {
       console.log("Group component - line 49 - this.newTask", this.newTask);
       console.log("Group component - line 50 - this.group", this.group);
     },
+    removeTask(taskId){
+      const group = JSON.parse(JSON.stringify(this.group))
+      const taskIdx = group.tasks.findIndex(task => task.id === taskId);
+      console.log('taskIdx:', taskIdx)
+      if(taskIdx<0) return;
+      group.tasks.splice(taskIdx, 1);
+      this.saveGroup(group)
+    },
+    saveGroup(group){
+      this.$store.commit({type:'saveGroup', group})
+    }
   },
   components: { taskPreview, editableText },
 };
