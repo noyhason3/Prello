@@ -14,9 +14,11 @@
       @toggle-popup="togglePopup"
     />
     <!-- <task-cover /> -->
+    <div class="task-main">
+
     <task-title v-model="task.title" />
 
-        <h4 contenteditable="true">In list: {{this.task.group.title}}</h4>
+        <h6 contenteditable="true">In list: {{this.task.group.title}}</h6>
 
     <!-- :taskTitle="task.title"  @setTitle="setTitle" -->
     <div v-if="task" class="task-info">
@@ -30,17 +32,20 @@
       <!-- <task-duedate /> -->
     </div>
 
+<h4>Description</h4>
     <editable-text v-model="task.description" :type="'description'" />
 
     <!-- :currTaskDescription="task.description"
       :task="task"
       @setDescription="setDescription" -->
     <!-- <task-attachment /> -->
+    <h4>Checklist</h4>
     <ul class="clean-list flex column">
       <li v-for="checklist in task.checklists" :key="checklist.id">
         <task-checklist :checklist="checklist" @save-todo="saveTodo" />
       </li>
     </ul>
+  </div>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
