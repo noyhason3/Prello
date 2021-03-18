@@ -1,10 +1,11 @@
 <template>
-  <ul class="label-preview" @click="openLabelPopup">
+  <ul class="label-preview">
     <li
       v-for="label in taskLabels"
       :key="label.id"
       :style="{ 'background-color': label.color }"
       class="label-color"
+       @click="openLabelPopup"
     >
       {{ label.title }}
     </li>
@@ -18,7 +19,7 @@ export default {
   },
   methods:{
     openLabelPopup(){
-      
+      this.$emit('openLabelPopup')
     }
   },
   computed: {
