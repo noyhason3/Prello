@@ -9,8 +9,13 @@
           :key="label.id"
           class="flex align-center label-preview"
         >
-          <div   class="label-color">
-            <button @click="toggleSelectLabel(label.id)" :style="{ 'background-color': label.color }" :class="{'label-in-use':isUsed(label.id)}" class="btn label">
+          <div class="label-color">
+            <button
+              @click="toggleSelectLabel(label.id)"
+              :style="{ 'background-color': label.color }"
+              :class="{ 'label-in-use': isUsed(label.id) }"
+              class="btn label"
+            >
               {{ label.title }}
             </button>
           </div>
@@ -27,11 +32,11 @@ export default {
   data() {
     return {
       labels: this.$store.getters.currBoard.labels,
-      boardLabels:null
+      boardLabels: null,
     };
   },
-  created(){
-      this.boardLabels = this.loadBoardLabels()
+  created() {
+    this.boardLabels = this.loadBoardLabels();
   },
   methods: {
     searchLabel() {
@@ -45,16 +50,16 @@ export default {
         this.taskLabelIdEdit.splice(labelIdx, 1);
       } else this.taskLabelIdEdit.push(labelId);
       this.$emit("add-task-labels", { labels: this.taskLabelIdEdit });
-      this.loadBoardLabels()
+      this.loadBoardLabels();
     },
-    isUsed(labelId){
-        const label = this.taskLabelIdEdit.find(id => {
-            return id === labelId
-        })
-        return !!label;
+    isUsed(labelId) {
+      const label = this.taskLabelIdEdit.find((id) => {
+        return id === labelId;
+      });
+      return !!label;
     },
     loadBoardLabels() {
-      return this.boardLabels = this.$store.getters.currBoard.labels;
+      return (this.boardLabels = this.$store.getters.currBoard.labels);
     },
   },
   computed: {

@@ -1,22 +1,29 @@
 <template>
   <section class="task" v-if="task">
     <!-- <pre>{{ task }}</pre> -->
-    <task-control @assign-member="assignMember" @set-checklist="saveChecklist" @add-task-labels="addTaskLabels"/>
+    <task-control
+      @assign-member="assignMember"
+      @set-checklist="saveChecklist"
+      @add-task-labels="addTaskLabels"
+    />
     <!-- <task-cover /> -->
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
     <div v-if="task" class="task-info">
       <member-list :members="task.members" />
 
-      <task-label :taskLabels="task.labels" @setTaskLabels="setTaskLabels" />
+      <task-label
+        :taskLabelIds="task.labelIds"
+        @setTaskLabels="setTaskLabels"
+      />
       <!-- <task-duedate /> -->
     </div>
-    <task-description
+    <editable-text
       :currTaskDescription="task.description"
       :task="task"
       @setDescription="setDescription"
     />
     <!-- <task-attachment /> -->
-    <task-checklist :task="task" @save-todo="saveTodo"/>
+    <task-checklist :task="task" @save-todo="saveTodo" />
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
@@ -24,8 +31,8 @@
 
 <script>
 import taskControl from "../cmps/task/task-cmps/task-control.vue";
-import taskTitle from "../cmps/task/task-cmps/task-title.vue";
-import taskDescription from "../cmps/task/task-cmps/task-description.vue";
+import taskTitle from "../cmps/editable-title.vue";
+import editableText from "../cmps/task/task-cmps/editable-text.vue";
 import memberList from "../cmps/member-list.vue";
 import taskChecklist from "../cmps/task/task-cmps/task-checklist.vue";
 import taskLabel from "../cmps/task/task-cmps/task-label.vue";
@@ -36,7 +43,7 @@ export default {
       return this.$route.parmas.taskId;
     },
     task() {
-      return this.$store.getters.currTask;//Should we copy the task here? not inside methods.
+      return this.$store.getters.currTask; //Should we copy the task here? not inside methods.
     },
   },
   methods: {
@@ -57,43 +64,42 @@ export default {
         return;
       }
       task.members.push(member);
-      this.$store.commit({ type: "setCurrTask", task });
-      // this.saveTask(task)//Todo: can we exchange these two?
+      this.saveTask(task);
     },
     setTaskLabels(labels) {
       task.labels = labels;
       console.log(this.task.labels);
     },
     saveChecklist(checklist) {
-      const task = this.task
+      const task = this.task;
       console.log(task.checklists);
       if (!task.checklists) task.checklists = [];
       console.log(task.checklists);
       task.checklists.push(checklist);
-      this.saveTask(task)
+      this.saveTask(task);
     },
-    addTaskLabels(labels){
-      console.log('labels:', labels)
+    addTaskLabels(labels) {
+      console.log("labels:", labels);
       this.task.labels = labels;
-      this.saveTask(this.task)
+      this.saveTask(this.task);
     },
-    saveTodo(todo){
+    saveTodo(todo) {
       // const task = this.task
       // if (!task.checklists.todos) task.checklists.todos = [];
       // const idx = task.checklists.todos.findIndex(({id})=>id===todo.id)
       // task.checklists.todos.push(todo);
       // this.saveTask(task)
     },
-    saveTask(task){
-      this.$store.commit({type:'saveTask', task})
-    }
+    saveTask(task) {
+      this.$store.commit({ type: "saveTask", task });
+    },
   },
   components: {
     taskControl,
     taskTitle,
     memberList,
     taskChecklist,
-    taskDescription,
+    editableText,
     taskLabel,
   },
 };

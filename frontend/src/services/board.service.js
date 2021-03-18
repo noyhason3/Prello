@@ -1,5 +1,6 @@
 export default {
     getDemoBoard,
+
 }
 
 
@@ -151,7 +152,7 @@ const gBoard = {
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
                     ],
-                    "labelIds": ["101", "102"],
+                    "labelIds": ["l101", "l102"],
                     "createdAt": 1590999730348,
                     "dueDate": 16156215211,
                     "byMember": {
@@ -185,3 +186,26 @@ const gBoard = {
         }
     ]
 }
+
+function getEmptyTask() {
+    return {
+        title: '',
+        description: '',
+    }
+}
+
+// function createTask({ type, content }) {
+
+// }
+
+// function getTask(id) {
+
+// }
+
+// function saveTask() {
+
+// }
+
+// function deleteTask() {
+
+// }
