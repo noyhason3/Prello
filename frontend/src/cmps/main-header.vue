@@ -1,8 +1,6 @@
 <template>
   <header class="main-header">
-    <div class="main-header-content">
-      <main-nav />
-    </div>
+    <main-nav />
   </header>
 </template>
 
