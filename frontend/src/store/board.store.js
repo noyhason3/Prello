@@ -31,14 +31,13 @@ export const boardStore = {
                 console.log('Updating task', task);
                 const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
                 group.tasks.splice(taskIdx, 1, task);
-                this.commit({ type: 'setBoard', board });
             } else {
                 //add
                 console.log('Adding task', task);
                 task.id = utilService.makeId();
                 group.tasks.push(task);
-                this.commit({ type: 'setBoard', board });
             }
+            this.commit({ type: 'setBoard', board });
 
             //console.log('Board store ~ save task ~ line 34 ~ Board', board);
             //console.log("board store ~ line 37 ~ saveTask ~ task", task)
@@ -51,9 +50,12 @@ export const boardStore = {
         saveGroup(state, { group }) {
             const board = JSON.parse(JSON.stringify(state.board));
             const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
-            if (groupIdx < 0) {
+            if (group.id) {
+                board.groups.splice(groupIdx, 1, group);
+            } else {
+                group.id = utilService.makeId();
                 board.groups.push(group);
-            } else board.groups.splice(groupIdx, 1, group);
+            }
             this.commit({ type: 'setBoard', board });
         },
         removeGroup(state, { groupId }) {
