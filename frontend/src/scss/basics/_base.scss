@@ -16,6 +16,12 @@ body {
     font-family: 'Open-sans',sans-serif;
     color: darken($clr1,40);
     background: $clr5;
+    #app{
+        display:flex;
+        flex-flow:column;
+        width:100%;
+        height:100%;
+    }
 }
 
 
