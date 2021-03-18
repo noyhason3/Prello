@@ -4,7 +4,7 @@
     <task-control
       @assign-member="assignMember"
       @set-checklist="saveChecklist"
-      @add-task-labels="addTaskLabels"
+      @set-task-labels="setTaskLabels"
     />
     <!-- <task-cover /> -->
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
@@ -13,7 +13,7 @@
 
       <task-label
         :taskLabelIds="task.labelIds"
-        @setTaskLabels="setTaskLabels"
+        @set-task-labels="setTaskLabels"
       />
       <!-- <task-duedate /> -->
     </div>
@@ -66,10 +66,10 @@ export default {
       task.members.push(member);
       this.saveTask(task);
     },
-    setTaskLabels(labels) {
-      task.labels = labels;
-      console.log(this.task.labels);
-    },
+    // setTaskLabels(labels) {
+    //   task.labels = labels;
+    //   console.log(this.task.labels);
+    // },
     saveChecklist(checklist) {
       const task = this.task;
       console.log(task.checklists);
@@ -78,9 +78,9 @@ export default {
       task.checklists.push(checklist);
       this.saveTask(task);
     },
-    addTaskLabels(labels) {
+    setTaskLabels(labelIds) {
       // console.log("labels:", labels);
-      this.task.labels = labels;
+      this.task.labelIds = labelIds;
       this.saveTask(this.task);
     },
     saveTodo(todo) {

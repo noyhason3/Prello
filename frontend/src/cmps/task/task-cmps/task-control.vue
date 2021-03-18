@@ -19,7 +19,7 @@
     <button @click="togglePopup('Label')">Labels</button>
     <popup-label
      v-if="isLabelOpen" 
-     @add-task-labels="addTaskLabels">
+     @set-task-labels="setTaskLabels">
     </popup-label>
 
     <!-- <button>Due date</button> -->
@@ -53,8 +53,8 @@ export default {
     setChecklist(checklist) {
       this.$emit("set-checklist", checklist);
     },
-    addTaskLabels(labels) {
-      this.$emit("add-task-labels", labels);
+    setTaskLabels(labels) {
+      this.$emit("set-task-labels", labels);
     },
   },
   components: {

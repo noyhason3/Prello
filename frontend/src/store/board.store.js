@@ -26,7 +26,7 @@ export const boardStore = {
     },
     saveTask(state, { task }) {
       const board = JSON.parse(JSON.stringify(state.board));
-      console.log(board);
+      // console.log(board);
       const group = board.groups.find((group) => group.id === task.group.id);
       const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
       group.tasks.splice(taskIdx, 1, task);

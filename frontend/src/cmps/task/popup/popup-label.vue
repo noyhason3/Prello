@@ -49,7 +49,7 @@ export default {
         );
         this.taskLabelIdEdit.splice(labelIdx, 1);
       } else this.taskLabelIdEdit.push(labelId);
-      this.$emit("add-task-labels", { labels: this.taskLabelIdEdit });
+      this.$emit("set-task-labels", { labelIds: this.taskLabelIdEdit });
       this.loadBoardLabels();
     },
     isUsed(labelId) {
@@ -70,6 +70,7 @@ export default {
     // },
     taskLabelIdEdit() {
       const taskLabels = this.$store.getters.currTask.labelIds;
+      console.log('taskLabels:', taskLabels)
       if (!taskLabels) return [];
       return [...taskLabels];
     },
