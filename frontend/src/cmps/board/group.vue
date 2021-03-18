@@ -1,9 +1,26 @@
 <template>
   <ul class="clean-list group" style="overflow-x: auto">
     <div class="header">{{ group.title }}</div>
-    <li v-for="task in group.tasks" :key="task.id">
-      <task-preview :task="task" @click.native="openTask(task)" />
-    </li>
+    <!-- <li v-for="task in group.tasks" :key="task.id">
+        <task-preview :task="task" @click.native="openTask(task)" />
+      </li> -->
+    <draggable
+      v-model="group.tasks"
+      group="tasks"
+      @start="drag = true"
+      @end="drag = false"
+    >
+      <div
+        v-for="task in group.tasks"
+        :key="task.id"
+        class="group-tasks-wrapper"
+      >
+        <task-preview
+          :task="task"
+          @click.native="openTask(task)"
+        ></task-preview>
+      </div>
+    </draggable>
     <!-- <pre>{{ this.group }}</pre> -->
     <!-- <pre>{{ this.newTask }}</pre> -->
     <button v-if="!isAddNewTask" @click="isAddNewTask = true">
@@ -20,9 +37,11 @@
 </template>
 
 <script>
+import draggable from "vuedraggable";
 import boardService from "@/services/board.service.js";
 import taskPreview from "../task/task-preview.vue";
 import editableText from "../task/task-cmps/editable-text.vue";
+
 export default {
   props: {
     group: Object,
@@ -50,7 +69,7 @@ export default {
       console.log("Group component - line 50 - this.group", this.group);
     },
   },
-  components: { taskPreview, editableText },
+  components: { taskPreview, editableText, draggable },
 };
 </script>
 

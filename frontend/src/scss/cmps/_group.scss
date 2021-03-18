@@ -1,10 +1,18 @@
+.group-wrapper{
+    max-height:100%;
+    
+}
 .group{
     width: 300px;
     min-height: 400px;
     background-color: #EBECF0;
     border-radius: 4px;
-    overflow-y: auto;
-    height:100%;
+    max-height:100%;
+    margin-inline-end: 5px;
+    .group-tasks-wrapper{
+        flex-grow: 1;
+        overflow: auto;
+    }
     &>*{
         width: 80%;
         margin:0 auto;
