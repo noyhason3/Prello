@@ -1,5 +1,6 @@
 export default {
     getDemoBoard,
+
 }
 
 
@@ -185,3 +186,26 @@ const gBoard = {
         }
     ]
 }
+
+function getEmptyTask() {
+    return {
+        title: '',
+        description: '',
+    }
+}
+
+// function createTask({ type, content }) {
+
+// }
+
+// function getTask(id) {
+
+// }
+
+// function saveTask() {
+
+// }
+
+// function deleteTask() {
+
+// }

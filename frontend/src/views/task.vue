@@ -11,10 +11,13 @@
     <div v-if="task" class="task-info">
       <member-list :members="task.members" />
 
-      <task-label :taskLabelIds="task.labelIds" @setTaskLabels="setTaskLabels" />
+      <task-label
+        :taskLabelIds="task.labelIds"
+        @setTaskLabels="setTaskLabels"
+      />
       <!-- <task-duedate /> -->
     </div>
-    <task-description
+    <editable-text
       :currTaskDescription="task.description"
       :task="task"
       @setDescription="setDescription"
@@ -28,8 +31,8 @@
 
 <script>
 import taskControl from "../cmps/task/task-cmps/task-control.vue";
-import taskTitle from "../cmps/task/task-cmps/task-title.vue";
-import taskDescription from "../cmps/task/task-cmps/task-description.vue";
+import taskTitle from "../cmps/editable-title.vue";
+import editableText from "../cmps/task/task-cmps/editable-text.vue";
 import memberList from "../cmps/member-list.vue";
 import taskChecklist from "../cmps/task/task-cmps/task-checklist.vue";
 import taskLabel from "../cmps/task/task-cmps/task-label.vue";
@@ -92,7 +95,7 @@ export default {
     taskTitle,
     memberList,
     taskChecklist,
-    taskDescription,
+    editableText,
     taskLabel,
   },
 };

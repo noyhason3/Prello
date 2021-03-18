@@ -10,6 +10,7 @@
 
 <script>
 import taskPreview from "../task/task-preview.vue";
+import editableText from "@/task/editable-text.vue";
 export default {
   props: {
     group: Object,
@@ -18,12 +19,12 @@ export default {
   methods: {
     openTask(task) {
       task = JSON.parse(JSON.stringify(task));
-      task.group = {id:this.group.id, title:this.group.title};
+      task.group = { id: this.group.id, title: this.group.title };
       this.$store.commit({ type: "setCurrTask", task });
       this.$router.push(`/board/${this.boardId}/${task.id}`);
     },
   },
-  components: { taskPreview },
+  components: { taskPreview, editableText },
 };
 </script>
 
