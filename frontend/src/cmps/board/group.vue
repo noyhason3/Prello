@@ -1,23 +1,21 @@
 <template>
-  <section class="group">
-    <ul class="clean-list">
-      <li v-for="task in group.tasks" :key="task.id">
-        <task-preview :task="task" @click.native="openTask(task)" />
-      </li>
-      <!-- <pre>{{ this.group }}</pre> -->
-      <!-- <pre>{{ this.newTask }}</pre> -->
-      <button v-if="!isAddNewTask" @click="isAddNewTask = true">
-        Add a new task
-      </button>
-      <editable-text
-        v-else
-        v-model="newTask.title"
-        :type="'title'"
-        @close-textarea="isAddNewTask = false"
-        @input="addTask"
-      />
-    </ul>
-  </section>
+  <ul class="clean-list group" style="overflow-x: auto">
+    <li v-for="task in group.tasks" :key="task.id">
+      <task-preview :task="task" @click.native="openTask(task)" />
+    </li>
+    <!-- <pre>{{ this.group }}</pre> -->
+    <!-- <pre>{{ this.newTask }}</pre> -->
+    <button v-if="!isAddNewTask" @click="isAddNewTask = true">
+      Add a new task
+    </button>
+    <editable-text
+      v-else
+      v-model="newTask.title"
+      :type="'title'"
+      @close-textarea="isAddNewTask = false"
+      @input="addTask"
+    />
+  </ul>
 </template>
 
 <script>
