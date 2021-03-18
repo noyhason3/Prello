@@ -1,10 +1,6 @@
 <template>
-<<<<<<< HEAD
-  <ul class="clean-list group">
-=======
   <ul class="clean-list group" style="overflow-x: auto">
     <div class="header">{{ group.title }}</div>
->>>>>>> 1be9eb64043a07589553b48228c9c5602d167976
     <li v-for="task in group.tasks" :key="task.id">
       <task-preview :task="task" @click.native="openTask(task)" />
     </li>
