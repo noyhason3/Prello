@@ -5,12 +5,13 @@
         <task-preview :task="task" @click.native="openTask(task)" />
       </li>
     </ul>
+    <editable-text></editable-text>
   </section>
 </template>
 
 <script>
 import taskPreview from "../task/task-preview.vue";
-import editableText from "@/task/editable-text.vue";
+import editableText from "../task/task-cmps/editable-text.vue";
 export default {
   props: {
     group: Object,
