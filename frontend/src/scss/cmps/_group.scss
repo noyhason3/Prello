@@ -1,5 +1,13 @@
 .group{
     width: 400px;
-    height: 800px;
+    min-height: 400px;
     background-color: aquamarine;
+    &>*{
+        width: 80%;
+        margin:0 auto;
+    }
+    ul{
+        display: flex;
+        flex-flow: column;
+    }
 }

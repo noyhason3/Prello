@@ -1,6 +1,6 @@
 <template>
   <section class="board">
-    <ul>
+    <ul class="clean-list">
       <li v-for="group in board.groups" :key="group.id">
         <group :group="group" :boardId="board._id" />
       </li>

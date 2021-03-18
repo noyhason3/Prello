@@ -1,7 +1,7 @@
 <template>
-  <div id="app" class="main-layout-flex">
-    <main-header />
-    <router-view class="page-container" />
+  <div id="app">
+    <main-header class="main-layout" />
+    <router-view />
   </div>
 </template>
 
