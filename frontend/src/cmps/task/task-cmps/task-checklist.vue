@@ -2,7 +2,7 @@
   <section class="task-checklist">
     <ul>
       <li
-        v-for="checklist in task.checklists"
+        v-for="checklist in checklists"
         :key="checklist.id"
         class="clean-list"
       >
@@ -11,16 +11,15 @@
         </div>
         <div class="progress-bar"></div>
 
-      <form >
-        <ul class="todos clean-list">
-          <li v-for="todo in checklist.todos" :key="todo.id">
-            <input type="checkbox" :id="todo.id" :name="todo.id" />
-            <label :for="todo.id"> {{todo.txt}} </label><br />
-        
-          </li>
-        </ul>
-        <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt">
-      </form>
+        <form>
+          <ul class="todos clean-list">
+            <li v-for="todo in checklist.todos" :key="todo.id">
+              <input type="checkbox" :id="todo.id" :name="todo.id" />
+              <label :for="todo.id"> {{ todo.txt }} </label><br />
+            </li>
+          </ul>
+          <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt" />
+        </form>
         <!-- <button>Add Item</button> -->
         <button @click="addTodo">Add</button>
       </li>
@@ -31,25 +30,26 @@
 <script>
 export default {
   props: {
-    task: Object,
+    // task: Object,
+    checklists: Array,
   },
-  data(){
-      return {
-          todo:{
-              txt:'',
-              isDone: false
-          }
-      }
+  data() {
+    return {
+      todo: {
+        txt: "",
+        isDone: false,
+      },
+    };
   },
-  methods:{
-      addTodo(){
-          this.$emit('save-todo', {...this.todo})
-        //   this.todo = {
-        //       txt:'',
-        //       isDone: false
-        //   }
-      }
-  }
+  methods: {
+    addTodo() {
+      this.$emit("save-todo", { ...this.todo });
+      //   this.todo = {
+      //       txt:'',
+      //       isDone: false
+      //   }
+    },
+  },
 };
 </script>
 

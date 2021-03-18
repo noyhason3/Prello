@@ -23,7 +23,7 @@
       :task="task"
       @setDescription="setDescription" -->
     <!-- <task-attachment /> -->
-    <task-checklist :task="task" @save-todo="saveTodo" />
+    <task-checklist :checklists="task.checklists" @save-todo="saveTodo" />
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
@@ -83,6 +83,7 @@ export default {
     },
     saveTodo(todo) {
       console.log(todo);
+      // task.checklists.find(({id})=> id === )
       // const task = this.task
       // if (!task.checklists.todos) task.checklists.todos = [];
       // const idx = task.checklists.todos.findIndex(({id})=>id===todo.id)
