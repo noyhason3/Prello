@@ -2,11 +2,11 @@
   position: fixed;
 
 //   TODO : FIX TOP AND LEFT IN PX -----------------
-  //top: 113px;
-  //left: 630px;
-//   ------------------------------------------
+  top: 113px;
+  left: 630px;
+//------------------------------------------
   //translate: transform(-50%);
-  right:0.5vw;
+  right:50%;
   transform:translateX(-50%);
   width: 500px;
   display: flex;
