@@ -1,10 +1,13 @@
 <template>
   <section class="task" v-if="task">
     <!-- <pre>{{ task }}</pre> -->
+    <popup-label v-if="isLabelOpen" @set-task-labels="setTaskLabels">
+    </popup-label>
     <task-control
       @assign-member="assignMember"
       @set-checklist="saveChecklist"
       @set-task-labels="setTaskLabels"
+      @toggle-popup="togglePopup"
     />
     <!-- <task-cover /> -->
     <task-title v-model="task.title" />
@@ -32,6 +35,8 @@
     </ul>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
+
+    
   </section>
 </template>
 
@@ -42,8 +47,15 @@ import editableText from "../cmps/task/task-cmps/editable-text.vue";
 import memberList from "../cmps/member-list.vue";
 import taskChecklist from "../cmps/task/task-cmps/task-checklist.vue";
 import taskLabel from "../cmps/task/task-cmps/task-label.vue";
+import popupLabel from "@/cmps/task/popup/popup-label";
+
 
 export default {
+  data() {
+    return {
+      isLabelOpen: false,
+    };
+  },
   computed: {
     taskId() {
       return this.$route.parmas.taskId;
@@ -98,6 +110,11 @@ export default {
     saveTask(task) {
       this.$store.commit({ type: "saveTask", task });
     },
+    togglePopup(str) {
+      var dataStr = `is${str}Open`;
+      this[dataStr] = !this[dataStr];
+      console.log(this.isLabelOpen);
+    },
   },
   components: {
     taskControl,
@@ -106,6 +123,7 @@ export default {
     taskChecklist,
     editableText,
     taskLabel,
+    popupLabel,
   },
 };
 </script>

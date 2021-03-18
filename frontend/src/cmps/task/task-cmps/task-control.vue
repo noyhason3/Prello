@@ -16,11 +16,7 @@
       @add-checklist="setChecklist"
     ></popup-checklist>
 
-    <button @click="togglePopup('Label')">Labels</button>
-    <popup-label
-     v-if="isLabelOpen" 
-     @set-task-labels="setTaskLabels">
-    </popup-label>
+    <button @click="toggleGeneralPopup('Label')">Labels</button>
 
     <!-- <button>Due date</button> -->
     <!-- <button>Attachement</button> -->
@@ -31,7 +27,6 @@
 <script>
 import popupMember from "@/cmps/task/popup/popup-member";
 import popupChecklist from "@/cmps/task/popup/popup-checklist.vue";
-import popupLabel from "@/cmps/task/popup/popup-label";
 
 export default {
   data() {
@@ -47,6 +42,9 @@ export default {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
     },
+    toggleGeneralPopup(str){
+      this.$emit('toggle-popup', str)
+    },
     assignMember(member) {
       this.$emit("assign-member", member);
     },
@@ -60,7 +58,6 @@ export default {
   components: {
     popupMember,
     popupChecklist,
-    popupLabel,
   },
 };
 </script>

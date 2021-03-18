@@ -21,4 +21,9 @@ export default {
 </script>
 
 <style>
+ .pop-up{
+   position:fixed;
+ }
+
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <ul class="label-preview">
+  <ul class="label-preview" @click="openLabelPopup">
     <li
       v-for="label in taskLabels"
       :key="label.id"
@@ -15,6 +15,11 @@
 export default {
   props: {
     taskLabelIds: Array,
+  },
+  methods:{
+    openLabelPopup(){
+      
+    }
   },
   computed: {
     boardLabels() {
