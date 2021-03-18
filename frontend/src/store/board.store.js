@@ -44,7 +44,7 @@ export const boardStore = {
             //console.log("board store ~ line 37 ~ saveTask ~ task", task)
         },
         removeBoardLabel(state, {id}) {
-          const board = state.board
+          const board = JSON.parse(JSON.stringify(state.board)
             const labelIdx = board.labels.findIndex(label => label.id === id);
             if(labelIdx >=0) board.labels.splice(labelIdx, 1);
             this.commit({type:'setBoard', board })
