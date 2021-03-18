@@ -28,4 +28,7 @@
 .label-color{
     height: 50px;
     width: 100px;
+    &.is-selected::before{
+        content: "✔";
+    }
 }
