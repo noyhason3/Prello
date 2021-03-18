@@ -1,11 +1,8 @@
 .main-header{
     background-color: $clr4;
-    .main-header-content{
-        padding: 10px;
-        grid-column: 2;
-        display: flex;
-        justify-content: space-between;
-    }
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
     a{
         text-decoration:none;
     }
