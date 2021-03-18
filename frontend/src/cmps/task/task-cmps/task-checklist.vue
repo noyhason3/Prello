@@ -1,11 +1,11 @@
 <template>
   <section class="task-checklist">
-    <ul>
+    <!-- <ul>
       <li
         v-for="checklist in checklists"
         :key="checklist.id"
         class="clean-list"
-      >
+      > -->
         <div class="header">
           ✅ {{ checklist.title }} <button>Delete</button>
         </div>
@@ -22,16 +22,15 @@
         </form>
         <!-- <button>Add Item</button> -->
         <button @click="addTodo">Add</button>
-      </li>
-    </ul>
+      <!-- </li>
+    </ul> -->
   </section>
 </template>
 
 <script>
 export default {
   props: {
-    // task: Object,
-    checklists: Array,
+    checklist: Object,
   },
   data() {
     return {
@@ -43,15 +42,14 @@ export default {
   },
   methods: {
     addTodo() {
-      this.$emit("save-todo", { ...this.todo });
-      //   this.todo = {
-      //       txt:'',
-      //       isDone: false
-      //   }
+      if (!this.checklist.todos) this.checklist.todos = [];
+      this.checklist.todos.push({...this.todo})
+      this.$emit("save-todo", { ...this.checklist });
+        this.todo = {
+            txt:'',
+            isDone: false
+        }
     },
   },
 };
 </script>
-
-<style>
-</style>

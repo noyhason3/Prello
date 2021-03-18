@@ -56,7 +56,8 @@ const gBoard = {
             "tasks": [
                 {
                     "id": "c101",
-                    "title": "Replace logo"
+                    "title": "Replace logo",
+                    "checklists": []
                 },
                 {
                     "id": "c102",
@@ -115,7 +116,8 @@ const gBoard = {
             "tasks": [
                 {
                     "id": "c103",
-                    "title": "Do that"
+                    "title": "Do that",
+                    "checklists": []
                 },
                 {
                     "id": "c104",

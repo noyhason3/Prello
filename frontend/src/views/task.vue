@@ -25,7 +25,11 @@
       :task="task"
       @setDescription="setDescription" -->
     <!-- <task-attachment /> -->
-    <task-checklist :checklists="task.checklists" @save-todo="saveTodo" />
+    <ul>
+      <li v-for="checklist in task.checklists" :key="checklist.id">
+        <task-checklist :checklist="checklist" @save-todo="saveTodo" />
+      </li>
+    </ul>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
@@ -72,25 +76,24 @@ export default {
     //   task.labels = labels;
     //   console.log(this.task.labels);
     // },
-    saveChecklist(checklist) {
-      const task = this.task;
-      if (!task.checklists) task.checklists = [];
-      task.checklists.push(checklist);
-      this.saveTask(task);
-    },
-    setTaskLabels({labelIds}) {
+    setTaskLabels({ labelIds }) {
       // console.log("labelIds in task:", labelIds);
       this.task.labelIds = labelIds;
       this.saveTask(this.task);
     },
-    saveTodo(todo) {
+
+    // TODO - MAYBE WE CAN MERGE THESE TWO TO ONE FUNCTION??
+    saveChecklist(checklist) {
+      const task = this.task;
+      if (!task.checklists.todos) task.checklists = [];
+      task.checklists.push(checklist);
+      this.saveTask(task);
+    },
+    saveTodo(checklist) {
       console.log(todo);
-      // task.checklists.find(({id})=> id === )
-      // const task = this.task
-      // if (!task.checklists.todos) task.checklists.todos = [];
-      // const idx = task.checklists.todos.findIndex(({id})=>id===todo.id)
-      // task.checklists.todos.push(todo);
-      // this.saveTask(task)
+      const idx = task.checklists.findIndex(({ id }) => id === checklist.id);
+      task.checklists.splice(idx, 1, checklist);
+      this.saveTask(this.task);
     },
     saveTask(task) {
       this.$store.commit({ type: "saveTask", task });
