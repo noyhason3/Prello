@@ -1,75 +1,92 @@
 <template>
-  <pop-up>
-    <h3 slot="header">Labels</h3>
-    <div slot="main">
-      <input
-        type="search"
-        @input="searchLabel"
-        placeholder="Search labels..."
-      />
-      <ul v-if="boardLabels" class="clean-list">
-        <li
-          v-for="label in boardLabels"
-          :key="label.id"
-          class="flex align-center label-preview"
-        >
-          <div class="label-color">
+  <section>
+    <pop-up v-if="!isDelete">
+      <div slot="header" class="flex space-between">
+        <h3>{{ action }} label</h3>
+        <button @click="closeLabelEdit">X</button>
+      </div>
+      <div slot="main">
+        <label>Name</label>
+        <input type="text" v-model="labelToEdit.title" />
+        <ul class="clean-list">
+          <li
+            v-for="(color, idx) in colors"
+            :key="'c' + idx"
+            class="label-color"
+            :class="{ 'is-selected': color.selected }"
+          >
             <button
-              @click="toggleSelectLabel(label.id)"
-              :style="{ 'background-color': label.color }"
-              :class="{ 'label-in-use': isUsed(label.id) }"
-              class="btn label"
-            >
-              {{ label.title }}
-            </button>
-          </div>
-          <button>🖋</button>
-        </li>
-      </ul>
-      <button>Create a new lael</button>
-    </div>
-  </pop-up>
+              @click="setLabelColor(color)"
+              :style="{ 'background-color': color.color }"
+              class="btn label-color"
+            ></button>
+          </li>
+        </ul>
+        <button @click="saveLabel">Save</button>
+        <button @click="toggleIsDelete">Delete</button>
+      </div>
+    </pop-up>
+    <pop-up v-else>
+      <h3 slot="header">Delete Label?</h3>
+      <div slot="main">
+        <p>
+          Do you really want to remove this label for good? It will be removed
+          from all cards.
+        </p>
+        <button @click="removeBoardLabel">Delete</button>
+      </div>
+    </pop-up>
+  </section>
 </template>
 
 <script>
 import popUp from "@/cmps/pop-up.vue";
 export default {
+  props: {
+    label: Object,
+    action: String,
+  },
   data() {
     return {
-    //   labels: this.$store.getters.currBoard.labels,
+      colors: [
+        { color: "#0079BF", selected: true },
+        { color: "#F2D600", selected: false },
+        { color: "#51E898", selected: false },
+        { color: "#EB5A46", selected: false },
+        { color: "#344563", selected: false },
+      ],
+      labelToEdit: null,
+      isDelete: false,
+    };
+  },
+  created() {
+    this.labelToEdit = { ...this.label } || {
+      id: null,
+      color: this.colors[0],
+      title: "",
     };
   },
   methods: {
-    searchLabel() {
-    //   console.log("FINISH ME!!! (search label)");
+    closeLabelEdit() {
+      this.$emit("closeLabelEdit");
     },
-    toggleSelectLabel(labelId) {
-    //   if (this.taskLabelIdEdit.includes(labelId)) {
-    //     const labelIdx = this.taskLabelIdEdit.findIndex((id) => id === labelId);
-    //     this.taskLabelIdEdit.splice(labelIdx, 1);
-    //   } else this.taskLabelIdEdit.push(labelId);
-    //   this.$emit("set-task-labels", { labelIds: this.taskLabelIdEdit });
-    //   this.$forceUpdate();
+    setLabelColor(color) {
+      this.labelToEdit.color = color.color;
     },
-    isUsed(labelId) {
-    //   const label = this.taskLabelIdEdit.find((id) => {
-    //     return id === labelId;
-    //   });
-    //   return !!label;
+    saveLabel() {
+      console.log(this.labelToEdit);
+      this.$emit("save-label", this.labelToEdit);
     },
-  },
-  computed: {
-    boardLabels() {
-    //   const boardLabels = this.$store.getters.currBoard.labels;
-    //   if (!boardLabels) return [];
-    //   return boardLabels;
+    toggleIsDelete() {
+      this.isDelete = !this.isDelete;
     },
-    taskLabelIdEdit() {
-    //   const taskLabels = this.$store.getters.currTask.labelIds;
-    //   if (!taskLabels) return [];
-    //   return [...taskLabels];
+    removeBoardLabel() {
+      this.toggleIsDelete();
+      this.$emit("remove-board-label", this.labelToEdit.id);
+      this.closeLabelEdit();
     },
   },
+  computed: {},
   components: {
     popUp,
   },

@@ -18,12 +18,20 @@
         }
     }
 
-    .group-list{
+    .main{
         display: flex;
-        height:100%;
+    }
+
+    .group-list{
+    overflow: hidden;
+    ul{
+        display: flex;
+        flex-grow: 1;
         &>*{
+            overflow-y: auto;
             margin:5px;
             //display: flex;
         }
     }
+}
 }
