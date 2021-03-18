@@ -52,12 +52,12 @@
 </template>
 
 <script>
-import taskControl from "../cmps/task/task-cmps/task-control.vue";
-import taskTitle from "../cmps/common/editable-title.vue";
-import editableText from "../cmps/task/task-cmps/editable-text.vue";
-import memberList from "../cmps/common/member-list.vue";
-import taskChecklist from "../cmps/task/task-cmps/task-checklist.vue";
-import taskLabel from "../cmps/task/task-cmps/task-label.vue";
+import taskControl from "@/cmps/task/task-cmps/task-control.vue";
+import taskTitle from "@/cmps/common/editable-title.vue";
+import editableText from "@/cmps/task/task-cmps/editable-text.vue";
+import memberList from "@/cmps/common/member-list.vue";
+import taskChecklist from "@/cmps/task/task-cmps/task-checklist.vue";
+import taskLabel from "@/cmps/task/task-cmps/task-label.vue";
 import popupLabel from "@/cmps/task/popup/popup-label";
 
 export default {
