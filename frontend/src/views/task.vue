@@ -1,7 +1,11 @@
 <template>
   <section class="task" v-if="task">
     <!-- <pre>{{ task }}</pre> -->
-    <task-control @assign-member="assignMember" @set-checklist="saveChecklist" @add-task-labels="addTaskLabels"/>
+    <task-control
+      @assign-member="assignMember"
+      @set-checklist="saveChecklist"
+      @add-task-labels="addTaskLabels"
+    />
     <!-- <task-cover /> -->
     <task-title :taskTitle="task.title" @setTitle="setTitle" />
     <div v-if="task" class="task-info">
@@ -16,7 +20,7 @@
       @setDescription="setDescription"
     />
     <!-- <task-attachment /> -->
-    <task-checklist :task="task" @save-todo="saveTodo"/>
+    <task-checklist :task="task" @save-todo="saveTodo" />
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
@@ -36,7 +40,7 @@ export default {
       return this.$route.parmas.taskId;
     },
     task() {
-      return this.$store.getters.currTask;//Should we copy the task here? not inside methods.
+      return this.$store.getters.currTask; //Should we copy the task here? not inside methods.
     },
   },
   methods: {
@@ -57,35 +61,31 @@ export default {
         return;
       }
       task.members.push(member);
-      this.$store.commit({ type: "setCurrTask", task });
-      // this.saveTask(task)//Todo: can we exchange these two?
+      this.saveTask(task);
     },
     setTaskLabels(labels) {
       task.labels = labels;
       console.log(this.task.labels);
     },
     saveChecklist(checklist) {
-      const task = this.task
+      const task = this.task;
       console.log(task);
       if (!task.checklists) task.checklists = [];
       task.checklists.push(checklist);
-      this.saveTask(task)
+      this.saveTask(task);
     },
-    addTaskLabels(labels){
-      console.log('labels:', labels)
+    addTaskLabels(labels) {
+      console.log("labels:", labels);
       this.task.labels = labels;
-      this.saveTask(this.task)
+      this.saveTask(this.task);
     },
-    saveTodo(todo){
+    saveTodo(todo) {
       // const task = this.task
       // if (!task.checklists.todos) task.checklists.todos = [];
       // const idx = task.checklists.todos.findIndex(({id})=>id===todo.id)
       // task.checklists.todos.push(todo);
       // this.saveTask(task)
     },
-    saveTask(task){
-      this.$store.commit({type:'saveTask', task})
-    }
   },
   components: {
     taskControl,
