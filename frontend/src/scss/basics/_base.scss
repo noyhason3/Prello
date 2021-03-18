@@ -5,16 +5,13 @@
 html {
     // color: $clr1;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgba(0, 0, 0, 0.787);
 }
 
 body {
     margin: 0;
     overflow:hidden;
-    // background-size: 180px;
-    // background-attachment: fixed;
-    font-family: 'Open-sans',sans-serif;
-    // color: darken($clr1,40);
-    // background: $clr5;
+
     #app{
         display:flex;
         flex-flow:column;
