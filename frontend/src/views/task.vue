@@ -83,6 +83,7 @@ export default {
     },
 
     // TODO - MAYBE WE CAN MERGE THESE TWO TO ONE FUNCTION??
+
     saveChecklist(checklist) {
       const task = this.task;
       if (!task.checklists.todos) task.checklists = [];
