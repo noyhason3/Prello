@@ -31,23 +31,23 @@ export const boardStore = {
                 console.log('Updating task', task);
                 const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
                 group.tasks.splice(taskIdx, 1, task);
-                this.commit({type:'setBoard', board })
+                this.commit({ type: 'setBoard', board });
             } else {
                 //add
                 console.log('Adding task', task);
                 task.id = utilService.makeId();
                 group.tasks.push(task);
-                this.commit({type:'setBoard', board })
+                this.commit({ type: 'setBoard', board });
             }
 
             //console.log('Board store ~ save task ~ line 34 ~ Board', board);
             //console.log("board store ~ line 37 ~ saveTask ~ task", task)
         },
-        removeBoardLabel(state, {id}) {
-          const board = JSON.parse(JSON.stringify(state.board))
-            const labelIdx = board.labels.findIndex(label => label.id === id);
-            if(labelIdx >=0) board.labels.splice(labelIdx, 1);
-            this.commit({type:'setBoard', board })
+        removeBoardLabel(state, { id }) {
+            const board = JSON.parse(JSON.stringify(state.board));
+            const labelIdx = board.labels.findIndex((label) => label.id === id);
+            if (labelIdx >= 0) board.labels.splice(labelIdx, 1);
+            this.commit({ type: 'setBoard', board });
         },
         // setBoardList(state, {boards}){
         //     state.boards = boards;
