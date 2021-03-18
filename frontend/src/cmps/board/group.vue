@@ -4,18 +4,33 @@
       <li v-for="task in group.tasks" :key="task.id">
         <task-preview :task="task" @click.native="openTask(task)" />
       </li>
+      <!-- <pre>{{ this.newTask }}</pre> -->
+      <button v-if="!isAddNewCard" @click="isAddNewCard = true">
+        Add a new card
+      </button>
+      <editable-text
+        v-else
+        v-model="newTask.title"
+        @close-textare="this.isAddNewCard = false"
+      />
     </ul>
-    <editable-text></editable-text>
   </section>
 </template>
 
 <script>
+import boardService from "@/services/board.service.js";
 import taskPreview from "../task/task-preview.vue";
 import editableText from "../task/task-cmps/editable-text.vue";
 export default {
   props: {
     group: Object,
     boardId: String,
+  },
+  data() {
+    return {
+      newTask: boardService.getEmptyTask(),
+      isAddNewCard: false,
+    };
   },
   methods: {
     openTask(task) {

@@ -24,7 +24,6 @@ export default {
       const labels = this.boardLabels.filter((label) =>
         this.taskLabelIds.includes(label.id)
       );
-      console.log("labels", labels);
       return labels;
     },
   },

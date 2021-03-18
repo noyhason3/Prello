@@ -53,8 +53,8 @@ export default {
     setChecklist(checklist) {
       this.$emit("set-checklist", checklist);
     },
-    setTaskLabels(labels) {
-      this.$emit("set-task-labels", labels);
+    setTaskLabels(labelIds) {
+      this.$emit("set-task-labels", labelIds);
     },
   },
   components: {

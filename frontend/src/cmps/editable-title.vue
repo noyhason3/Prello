@@ -1,8 +1,9 @@
 <template>
-  <section v-if="taskTitle" class="task-title">
+  <section v-if="value" class="task-title">
     <h3>💬</h3>
+    <pre>{{ value }}</pre>
     <div>
-      <h2 contenteditable="true" @blur="onInput">{{ taskTitle }}</h2>
+      <h2 contenteditable="true" @blur="onInput">{{ value }}</h2>
       <div class="list-name">
         <h4 contenteditable="true">In list</h4>
         <button>LIST NAME</button>
@@ -14,11 +15,12 @@
 <script>
 export default {
   props: {
-    taskTitle: String,
+    //taskTitle: String,
+    value: String,
   },
   methods: {
     onInput(ev) {
-      this.$emit("setTitle", ev.target.innerText);
+      this.$emit("input", ev.target.innerText);
     },
   },
 };
