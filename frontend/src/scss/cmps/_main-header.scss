@@ -1,16 +1,17 @@
 .main-header{
-    background-color: $clr4;
+    background-color: $clr1;
     padding: 10px;
     display: flex;
     justify-content: space-between;
+    box-shadow: 2px -2px 6px 0px #00000085;
     a{
         text-decoration:none;
     }
     a.router-link-exact-active {
-        color: $clr1;
+        // color: $clr5;
     }
     nav a:not(:first-child) {
-        border-top: 1px solid $clr1;
+        // border-top: 1px solid $clr4;
         padding: 0 5px;
         margin: 10px;
     }

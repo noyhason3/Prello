@@ -1,6 +1,7 @@
 <template>
   <section class="board" ref="board">
-    <ul class="clean-list" ref="list">
+    <board-header :board="board" />
+    <ul class="main clean-list" ref="list">
       <li v-for="group in board.groups" :key="group.id">
         <!-- :style="`max-height:${maxHeight};`" -->
         <group :group="group" :boardId="board._id" />
@@ -10,8 +11,11 @@
   </section>
 </template>
 
+
 <script>
+import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
+
 export default {
   data() {
     return {
@@ -27,7 +31,7 @@ export default {
   mounted() {
     this.maxHeight = this.$refs.list.clientHeight + "px";
   },
-  components: { group },
+  components: { boardHeader, group },
 };
 </script>
 
