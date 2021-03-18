@@ -193,7 +193,6 @@ function getEmptyTask() {
     return {
         title: '',
         description: '',
-        id: utilService.makeId()
     }
 }
 

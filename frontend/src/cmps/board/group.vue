@@ -4,6 +4,7 @@
       <li v-for="task in group.tasks" :key="task.id">
         <task-preview :task="task" @click.native="openTask(task)" />
       </li>
+      <!-- <pre>{{ this.group }}</pre> -->
       <!-- <pre>{{ this.newTask }}</pre> -->
       <button v-if="!isAddNewTask" @click="isAddNewTask = true">
         Add a new task
@@ -44,8 +45,10 @@ export default {
     addTask() {
       this.newTask.group = { id: this.group.id };
       this.$store.commit({ type: "saveTask", task: this.newTask });
-      console.log("this.newTask", this.newTask);
-      console.log("this.group", this.group);
+      this.newTask = boardService.getEmptyTask();
+      this.isAddNewTask = false;
+      console.log("Group component - line 49 - this.newTask", this.newTask);
+      console.log("Group component - line 50 - this.group", this.group);
     },
   },
   components: { taskPreview, editableText },
