@@ -1,5 +1,5 @@
 <template>
-  <section class="task-controls">
+  <section class="task-control">
     <!-- SUGGESTED                       ******TODO********
       <button>Join</button> -->
 
