@@ -7,7 +7,7 @@
     </form>
     <template v-else>
       <p v-if="value" @click="editDescription">{{ value }}</p>
-      <p v-else @click="editDescription">Enter a {{ type }} for this card...</p>
+      <p v-else @click="editDescription">Enter a {{ type }} for this {{elementType}}...</p>
     </template>
   </section>
 </template>
@@ -19,6 +19,7 @@ export default {
     // task: Object,
     type: "",
     value: String,
+    elementType:String
   },
   data() {
     return {

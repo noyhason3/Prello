@@ -3,12 +3,30 @@ import utilService from "./util.service";
 export default {
     getDemoBoard,
     getEmptyTask,
+    getEmptyGroup
 }
 
 
 function getDemoBoard() {
     return gBoard;
 }
+
+function getEmptyTask() {
+    return {
+        title: '',
+        description: '',
+    }
+}
+
+function getEmptyGroup(){
+    return{
+        "title": "",
+        "tasks": [ 
+        ],
+        "style": {}
+    }
+}
+
 
 const gBoard = {
     "_id": "b101",
@@ -248,7 +266,8 @@ const gBoard = {
                 }
             ],
             "style": {}
-        },  {
+        },  
+        {
             "id": "FJD",
             "title": "Group 1",
             "tasks": [
@@ -327,12 +346,6 @@ const gBoard = {
     ]
 }
 
-function getEmptyTask() {
-    return {
-        title: '',
-        description: '',
-    }
-}
 
 // function createTask({ type, content }) {
 

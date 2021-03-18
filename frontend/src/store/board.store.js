@@ -43,9 +43,25 @@ export const boardStore = {
             //console.log('Board store ~ save task ~ line 34 ~ Board', board);
             //console.log("board store ~ line 37 ~ saveTask ~ task", task)
         },
-        saveBoardLabels(state, { labels}) {
+        saveBoardLabels(state, { labels }) {
             const board = JSON.parse(JSON.stringify(state.board));
-            board.labels = labels
+            board.labels = labels;
+            this.commit({ type: 'setBoard', board });
+        },
+        saveGroup(state, { group }) {
+            const board = JSON.parse(JSON.stringify(state.board));
+            const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
+            if (groupIdx < 0) {
+                board.groups.push(group);
+            } else board.groups.splice(groupIdx, 1, group);
+            this.commit({ type: 'setBoard', board });
+        },
+        removeGroup(state, { groupId }) {
+            const board = JSON.parse(JSON.stringify(state.board));
+            const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
+            console.log('groupIdx:', groupIdx);
+            if (groupIdx < 0) return;
+            board.groups.splice(groupIdx, 1);
             this.commit({ type: 'setBoard', board });
         },
         // setBoardList(state, {boards}){

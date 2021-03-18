@@ -6,6 +6,17 @@
         <group :group="group" :boardId="board._id" />
       </li>
     </ul>
+    <button v-if="!isAddNewGroup" @click="isAddNewGroup = true">
+      Add a new group
+    </button>
+    <editable-text
+      v-else
+      v-model="newGroup.title"
+      :type="'title'"
+      :elementType="'group'"
+      @close-textarea="isAddNewGroup = false"
+      @input="addGroup"
+    />
     <router-view />
   </section>
 </template>
@@ -14,25 +25,35 @@
 <script>
 import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
+import boardService from "../services/board.service";
+import editableText from "@/cmps/task/task-cmps/editable-text.vue";
 
 export default {
+  data() {
+    return {
+      maxHeight: "0px",
+      isAddNewGroup: false,
+      newGroup: boardService.getEmptyGroup(),
+    };
+  },
+  methods: {
+    addGroup() {
+      this.newGroup.board = { id: this.board.id };
+      this.$store.commit({ type: "saveGroup", group: this.newGroup });
+      this.newGroup = boardService.getEmptyGroup();
+      this.isAddNewGroup = false;
+    },
+  },
   computed: {
     board() {
       return this.$store.getters.currBoard;
     },
   },
-  methods: {
-    added({ items, droptarget, owner }) {
-      console.log("added", items, "to", droptarget, "from", owner);
-    },
-    removed({ items, droptarget, owner }) {
-      console.log("removed", items, "to", droptarget, "from", owner);
-    },
-    reordered({ items, droptarget, owner }) {
-      console.log("reordered", items, "to", droptarget, "from", owner);
-    },
+  components: {
+    boardHeader,
+    group,
+    editableText,
   },
-  components: { boardHeader, group },
 };
 </script>
 
