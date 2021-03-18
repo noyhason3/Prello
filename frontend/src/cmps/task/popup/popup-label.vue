@@ -1,42 +1,59 @@
 <template>
-  <pop-up>
-    <h3 slot="header">Labels</h3>
-    <div slot="main">
-      <input
-        type="search"
-        @input="searchLabel"
-        placeholder="Search labels..."
-      />
-      <ul v-if="boardLabels" class="clean-list">
-        <li
-          v-for="label in boardLabels"
-          :key="label.id"
-          class="flex align-center label-preview"
-        >
-          <div class="label-color">
-            <button
-              @click="toggleSelectLabel(label.id)"
-              :style="{ 'background-color': label.color }"
-              :class="{ 'label-in-use': isUsed(label.id) }"
-              class="btn label"
-            >
-              {{ label.title }}
-            </button>
-          </div>
-          <button>🖋</button>
-        </li>
-      </ul>
-      <button>Create a new lael</button>
-    </div>
-  </pop-up>
+  <section>
+    <pop-up v-if="!isPopupEdit">
+      <div slot="header" class="flex space-between">
+        <h3>Labels</h3>
+        <button @click="togglePopupLabel()">X</button>
+      </div>
+      <div slot="main">
+        <input
+          type="search"
+          @input="searchLabel"
+          placeholder="Search labels..."
+        />
+        <ul v-if="boardLabels" class="clean-list">
+          <li
+            v-for="label in boardLabels"
+            :key="label.id"
+            class="flex align-center label-preview"
+          >
+            <div class="label-color">
+              <button
+                @click="toggleSelectLabel(label.id)"
+                :style="{ 'background-color': label.color }"
+                :class="{ 'label-in-use': isUsed(label.id) }"
+                class="btn label"
+              >
+                {{ label.title }}
+              </button>
+            </div>
+            <button @click="openLabelEdit('Change', label)">🖋</button>
+          </li>
+        </ul>
+        <button>Create a new lael</button>
+      </div>
+    </pop-up>
+    <popup-label-edit
+      v-else
+      :action="action"
+      :label="selectedLabel"
+      @save-label="saveLabel"
+      @closeLabelEdit="closeLabelEdit"
+      @remove-board-label="removeBoardLabel"
+    />
+  </section>
 </template>
 
 <script>
 import popUp from "@/cmps/pop-up.vue";
+import popupLabelEdit from "@/cmps/task/popup/popup-label-edit.vue";
 export default {
   data() {
     return {
       labels: this.$store.getters.currBoard.labels,
+      isPopupEdit: false,
+      action: "",
+      selectedLabel: null,
     };
   },
   methods: {
@@ -57,6 +74,26 @@ export default {
       });
       return !!label;
     },
+    openLabelEdit(editAction, label) {
+      this.selectedLabel = label;
+      this.action = editAction;
+      this.isPopupEdit = true;
+    },
+    closeLabelEdit() {
+      this.isPopupEdit = !this.isPopupEdit;
+    },
+    togglePopupLabel() {
+      this.$emit("toggle-popup", "Label");
+    },
+    saveLabel(label) {
+      const { color, title } = label;
+      this.selectedLabel.color = color;
+      this.selectedLabel.title = title;
+      this.closeLabelEdit();
+    },
+    removeBoardLabel(id) {
+      this.$store.commit({ type: "removeBoardLabel", id });
+    },
   },
   computed: {
     boardLabels() {
@@ -72,6 +109,7 @@ export default {
   },
   components: {
     popUp,
+    popupLabelEdit,
   },
 };
 </script>

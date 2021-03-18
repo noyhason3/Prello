@@ -1,7 +1,10 @@
 <template>
   <section class="task" v-if="task">
     <!-- <pre>{{ task }}</pre> -->
-    <popup-label v-if="isLabelOpen" @set-task-labels="setTaskLabels">
+    <popup-label v-if="isLabelOpen" 
+    @set-task-labels="setTaskLabels" 
+    @toggle-popup="togglePopup"
+    >
     </popup-label>
     <task-control
       @assign-member="assignMember"
@@ -18,6 +21,7 @@
       <task-label
         :taskLabelIds="task.labelIds"
         @set-task-labels="setTaskLabels"
+        @openLabelPopup="openLabelPopup"
       />
       <!-- <task-duedate /> -->
     </div>
@@ -35,8 +39,6 @@
     </ul>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
-
-    
   </section>
 </template>
 
@@ -48,7 +50,6 @@ import memberList from "../cmps/member-list.vue";
 import taskChecklist from "../cmps/task/task-cmps/task-checklist.vue";
 import taskLabel from "../cmps/task/task-cmps/task-label.vue";
 import popupLabel from "@/cmps/task/popup/popup-label";
-
 
 export default {
   data() {
@@ -84,12 +85,7 @@ export default {
       task.members.push(member);
       this.saveTask(task);
     },
-    // setTaskLabels(labels) {
-    //   task.labels = labels;
-    //   console.log(this.task.labels);
-    // },
     setTaskLabels({ labelIds }) {
-      // console.log("labelIds in task:", labelIds);
       this.task.labelIds = labelIds;
       this.saveTask(this.task);
     },
@@ -116,6 +112,9 @@ export default {
       this[dataStr] = !this[dataStr];
       console.log(this.isLabelOpen);
     },
+    openLabelPopup(){
+      this.isLabelOpen = true;
+    }
   },
   components: {
     taskControl,
