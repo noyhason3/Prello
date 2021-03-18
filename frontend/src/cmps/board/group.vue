@@ -1,22 +1,31 @@
 <template>
-  <ul class="clean-list group" style="overflow-x: auto">
-    <div class="header">{{ group.title }}</div>
-    <li v-for="task in group.tasks" :key="task.id">
-      <task-preview :task="task" @click.native="openTask(task)" @remove-task="removeTask"/>
-    </li>
-    <!-- <pre>{{ this.group }}</pre> -->
-    <!-- <pre>{{ this.newTask }}</pre> -->
-    <button v-if="!isAddNewTask" @click="isAddNewTask = true">
-      Add a new task
-    </button>
-    <editable-text
-      v-else
-      v-model="newTask.title"
-      :type="'title'"
-      @close-textarea="isAddNewTask = false"
-      @input="addTask"
-    />
-  </ul>
+  <section>
+    <button @click="removeGroup">X</button>
+
+    <ul class="clean-list group" style="overflow-x: auto">
+      <div class="header">{{ group.title }}</div>
+      <li v-for="task in group.tasks" :key="task.id">
+        <task-preview
+          :task="task"
+          @click.native="openTask(task)"
+          @remove-task="removeTask"
+        />
+      </li>
+      <!-- <pre>{{ this.group }}</pre> -->
+      <!-- <pre>{{ this.newTask }}</pre> -->
+      <button v-if="!isAddNewTask" @click="isAddNewTask = true">
+        Add a new task
+      </button>
+      <editable-text
+        v-else
+        v-model="newTask.title"
+        :type="'title'"
+        :elementType="'card'"
+        @close-textarea="isAddNewTask = false"
+        @input="addTask"
+      />
+    </ul>
+  </section>
 </template>
 
 <script>
@@ -25,7 +34,7 @@ import taskPreview from "../task/task-preview.vue";
 import editableText from "../task/task-cmps/editable-text.vue";
 export default {
   props: {
-    group: Object,
+    group: Object, 
     boardId: String,
   },
   data() {
@@ -49,16 +58,19 @@ export default {
       console.log("Group component - line 49 - this.newTask", this.newTask);
       console.log("Group component - line 50 - this.group", this.group);
     },
-    removeTask(taskId){
-      const group = JSON.parse(JSON.stringify(this.group))
-      const taskIdx = group.tasks.findIndex(task => task.id === taskId);
-      console.log('taskIdx:', taskIdx)
-      if(taskIdx<0) return;
+    removeTask(taskId) {
+      const group = JSON.parse(JSON.stringify(this.group));
+      const taskIdx = group.tasks.findIndex((task) => task.id === taskId);
+      console.log("taskIdx:", taskIdx);
+      if (taskIdx < 0) return;
       group.tasks.splice(taskIdx, 1);
-      this.saveGroup(group)
+      this.saveGroup(group);
     },
-    saveGroup(group){
-      this.$store.commit({type:'saveGroup', group})
+    saveGroup(group) {
+      this.$store.commit({ type: "saveGroup", group });
+    },
+    removeGroup(){
+      this.$store.commit({ type: "removeGroup", groupId:this.group.id });
     }
   },
   components: { taskPreview, editableText },
