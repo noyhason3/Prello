@@ -1,6 +1,6 @@
 <template>
   <section class="group">
-    <ul>
+    <ul class="clean-list">
       <li v-for="task in group.tasks" :key="task.id">
         <task-preview :task="task" @click.native="openTask(task)" />
       </li>

@@ -1,5 +1,9 @@
 .group{
     width: 400px;
-    height: 800px;
+    min-height: 400px;
     background-color: aquamarine;
+    ul{
+        display: flex;
+        flex-flow: column;
+    }
 }
