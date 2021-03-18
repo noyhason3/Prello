@@ -25,7 +25,6 @@ export default {
   methods: {
     editDescription() {
       this.taskDescriptionEdit = this.taskDescriptionPreview;
-      // this.isEditDescription = true;
     },
     setDescription() {
       this.taskDescriptionPreview = this.taskDescriptionEdit;
