@@ -15,43 +15,64 @@
     />
     <!-- <task-cover /> -->
     <div class="task-main">
+      <task-title v-model="task.title" />
 
-    <task-title v-model="task.title" />
+      <h6 contenteditable="true">In list: {{ this.task.group.title }}</h6>
 
-        <h6 contenteditable="true">In list: {{this.task.group.title}}</h6>
+      <!-- :taskTitle="task.title"  @setTitle="setTitle" -->
+      <div v-if="task" class="task-info">
+        <member-list :members="task.members" />
 
-    <!-- :taskTitle="task.title"  @setTitle="setTitle" -->
-    <div v-if="task" class="task-info">
-      <member-list :members="task.members" />
+        <task-label
+          :taskLabelIds="task.labelIds"
+          @set-task-labels="setTaskLabels"
+          @openLabelPopup="openLabelPopup"
+        />
+        <!-- <task-duedate /> -->
+      </div>
 
-      <task-label
-        :taskLabelIds="task.labelIds"
-        @set-task-labels="setTaskLabels"
-        @openLabelPopup="openLabelPopup"
-      />
-      <!-- <task-duedate /> -->
-    </div>
+      <h4>Description</h4>
+      <editable-text v-model="task.description" :type="'description'" />
 
-<h4>Description</h4>
-    <editable-text v-model="task.description" :type="'description'" />
-
-    <!-- :currTaskDescription="task.description"
+      <!-- :currTaskDescription="task.description"
       :task="task"
       @setDescription="setDescription" -->
-    <!-- <task-attachment /> -->
-    <h4>Checklist</h4>
-    <ul class="clean-list flex column">
-      <li v-for="checklist in task.checklists" :key="checklist.id">
-        <task-checklist :checklist="checklist" @save-todo="saveTodo" />
-      </li>
-    </ul>
-  </div>
+      <!-- <task-attachment /> -->
+
+        <ul class="clean-list">
+      <draggable
+        v-model="task.checklists"
+        group="checklists"
+        @start="startDrag"
+        @end="drag = false"
+        animation="150"
+        emptyInsertThreshold="50"
+        ghost-class="ghost"
+        chosen-class="chosen"
+        drag-class="drag"
+        draggable=".checklist-container"
+      >
+          <li
+            v-for="checklist in task.checklists"
+            :key="checklist.id"
+            class="checklist-container"
+          >
+            <task-checklist
+              :checklist="checklist"
+              @save-todo="saveTodo"
+              @delete-checklist="deleteChecklist"
+            />
+          </li>
+      </draggable>
+        </ul>
+    </div>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
   </section>
 </template>
 
 <script>
+import draggable from "vuedraggable";
 import taskControl from "../cmps/task/task-cmps/task-control.vue";
 import taskTitle from "../cmps/common/editable-title.vue";
 import editableText from "../cmps/task/task-cmps/editable-text.vue";
@@ -64,6 +85,7 @@ export default {
   data() {
     return {
       isLabelOpen: false,
+      ghostRect: null,
     };
   },
   computed: {
@@ -107,9 +129,18 @@ export default {
       task.checklists.push(checklist);
       this.saveTask(task);
     },
+    deleteChecklist(checklistId) {
+      const idx = this.task.checklists.findIndex(
+        ({ id }) => id === checklistId
+      );
+      this.task.checklists.splice(idx, 1);
+      this.saveTask(this.task);
+    },
     saveTodo(checklist) {
-      const idx = task.checklists.findIndex(({ id }) => id === checklist.id);
-      task.checklists.splice(idx, 1, checklist);
+      const idx = this.task.checklists.findIndex(
+        ({ id }) => id === checklist.id
+      );
+      this.task.checklists.splice(idx, 1, checklist);
       this.saveTask(this.task);
     },
     saveTask(task) {
@@ -123,8 +154,18 @@ export default {
     openLabelPopup() {
       this.isLabelOpen = true;
     },
+    onDrag(evt) {
+      console.log("🚀 ~ file: group.vue ~ line 88 ~ onDrag ~ evt", evt);
+      const dragRect = evt.draggedRect;
+    },
+    startDrag(ev, drag) {
+      const rect = ev.item.getBoundingClientRect();
+      this.ghostRect = ev.item.getBoundingClientRect();
+      drag = true;
+    },
   },
   components: {
+    draggable,
     taskControl,
     taskTitle,
     memberList,
