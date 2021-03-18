@@ -7,7 +7,8 @@
       @add-task-labels="addTaskLabels"
     />
     <!-- <task-cover /> -->
-    <task-title :taskTitle="task.title" @setTitle="setTitle" />
+    <task-title v-model="task.title" />
+    <!-- :taskTitle="task.title"  @setTitle="setTitle" -->
     <div v-if="task" class="task-info">
       <member-list :members="task.members" />
 
@@ -17,11 +18,10 @@
       />
       <!-- <task-duedate /> -->
     </div>
-    <editable-text
-      :currTaskDescription="task.description"
+    <editable-text v-model="task.description" />
+    <!-- :currTaskDescription="task.description"
       :task="task"
-      @setDescription="setDescription"
-    />
+      @setDescription="setDescription" -->
     <!-- <task-attachment /> -->
     <task-checklist :task="task" @save-todo="saveTodo" />
     <!-- <task-comment /> -->
