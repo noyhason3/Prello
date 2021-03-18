@@ -79,15 +79,12 @@ export default {
       this.task.labels = labels;
       this.saveTask(this.task);
     },
-    saveTodo() {
-      const task = this.task;
-      if (!task.checklists) task.checklists = [];
-      task.checklists.push(checklist);
-      this.saveTask(task);
-    },
-    saveTask(task) {
-      this.$store.commit({ type: "saveTask", task });
-      this.$store.commit({ type: "setCurrTask", task: task });
+    saveTodo(todo) {
+      // const task = this.task
+      // if (!task.checklists.todos) task.checklists.todos = [];
+      // const idx = task.checklists.todos.findIndex(({id})=>id===todo.id)
+      // task.checklists.todos.push(todo);
+      // this.saveTask(task)
     },
   },
   components: {
