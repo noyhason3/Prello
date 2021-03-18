@@ -1,6 +1,6 @@
 <template>
   <section class="group">
-    <ul>
+    <ul class="clean-list">
       <li v-for="task in group.tasks" :key="task.id">
         <task-preview :task="task" @click.native="openTask(task)" />
       </li>
@@ -13,7 +13,7 @@
         v-else
         v-model="newTask.title"
         :type="'title'"
-        @close-textare="this.isAddNewTask = false"
+        @close-textarea="isAddNewTask = false"
         @input="addTask"
       />
     </ul>

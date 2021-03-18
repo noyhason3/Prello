@@ -1,10 +1,11 @@
 .main-header{
     background-color: $clr4;
-    width: 100%;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-
+    .main-header-content{
+        padding: 10px;
+        grid-column: 2;
+        display: flex;
+        justify-content: space-between;
+    }
     a{
         text-decoration:none;
     }
