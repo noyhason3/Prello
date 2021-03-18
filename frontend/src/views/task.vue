@@ -68,10 +68,7 @@ export default {
       task.members.push(member);
       this.saveTask(task);
     },
-    // setTaskLabels(labels) {
-    //   task.labels = labels;
-    //   console.log(this.task.labels);
-    // },
+
     saveChecklist(checklist) {
       const task = this.task;
       console.log(task.checklists);

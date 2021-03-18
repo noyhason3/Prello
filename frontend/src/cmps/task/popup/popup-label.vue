@@ -2,7 +2,11 @@
   <pop-up>
     <h3 slot="header">Labels</h3>
     <div slot="main">
-      <input type="search" @input="searchLabel" placeholder="Search labels..."/>
+      <input
+        type="search"
+        @input="searchLabel"
+        placeholder="Search labels..."
+      />
       <ul v-if="boardLabels" class="clean-list">
         <li
           v-for="label in boardLabels"
@@ -22,6 +26,7 @@
           <button>🖋</button>
         </li>
       </ul>
+      <button>Create a new lael</button>
     </div>
   </pop-up>
 </template>
@@ -32,11 +37,7 @@ export default {
   data() {
     return {
       labels: this.$store.getters.currBoard.labels,
-      boardLabels: null,
     };
-  },
-  created() {
-    this.boardLabels = this.loadBoardLabels();
   },
   methods: {
     searchLabel() {
@@ -44,13 +45,11 @@ export default {
     },
     toggleSelectLabel(labelId) {
       if (this.taskLabelIdEdit.includes(labelId)) {
-        const labelIdx = this.taskLabelIdEdit.findIndex(
-          id => id === labelId
-        );
+        const labelIdx = this.taskLabelIdEdit.findIndex((id) => id === labelId);
         this.taskLabelIdEdit.splice(labelIdx, 1);
       } else this.taskLabelIdEdit.push(labelId);
       this.$emit("set-task-labels", { labelIds: this.taskLabelIdEdit });
-      this.loadBoardLabels();
+      this.$forceUpdate();
     },
     isUsed(labelId) {
       const label = this.taskLabelIdEdit.find((id) => {
@@ -58,16 +57,13 @@ export default {
       });
       return !!label;
     },
-    loadBoardLabels() {
-      return (this.boardLabels = this.$store.getters.currBoard.labels);
-    },
   },
   computed: {
-    // getBoardLabels() {
-    //   const boardLabels = this.$store.getters.currBoard.labels;
-    //   if (!boardLabels) return [];
-    //   return boardLabels;
-    // },
+    boardLabels() {
+      const boardLabels = this.$store.getters.currBoard.labels;
+      if (!boardLabels) return [];
+      return boardLabels;
+    },
     taskLabelIdEdit() {
       const taskLabels = this.$store.getters.currTask.labelIds;
       if (!taskLabels) return [];
