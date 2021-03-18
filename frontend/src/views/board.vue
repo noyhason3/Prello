@@ -1,7 +1,7 @@
 <template>
   <section class="board">
     <board-header :board="board" />
-    <ul class="clean-list">
+    <ul class="clean-list main">
       <li v-for="group in board.groups" :key="group.id">
         <group :group="group" :boardId="board._id" />
       </li>
