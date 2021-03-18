@@ -72,9 +72,7 @@ export default {
     },
     saveChecklist(checklist) {
       const task = this.task;
-      console.log(task.checklists);
       if (!task.checklists) task.checklists = [];
-      console.log(task.checklists);
       task.checklists.push(checklist);
       this.saveTask(task);
     },
@@ -84,6 +82,7 @@ export default {
       this.saveTask(this.task);
     },
     saveTodo(todo) {
+      console.log(todo);
       // const task = this.task
       // if (!task.checklists.todos) task.checklists.todos = [];
       // const idx = task.checklists.todos.findIndex(({id})=>id===todo.id)

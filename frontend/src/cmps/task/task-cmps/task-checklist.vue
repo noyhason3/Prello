@@ -19,8 +19,8 @@
         
           </li>
         </ul>
+        <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt">
       </form>
-        <input type="text" name="todoTxt" id="" v-model="todo.txt">
         <!-- <button>Add Item</button> -->
         <button @click="addTodo">Add</button>
       </li>
