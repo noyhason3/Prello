@@ -1,17 +1,21 @@
-.group-wrapper{
+.group-container{
     max-height:100%;
     
 }
-.group{
+.group-container{
+    // min-height: 400px;
     width: 300px;
-    min-height: 400px;
-    background-color: #EBECF0;
     border-radius: 4px;
     max-height:100%;
     margin-inline-end: 5px;
     .group-tasks-wrapper{
         flex-grow: 1;
         overflow: auto;
+    }
+    .group{
+        background-color: #EBECF0;
+        width: 100%;
+        padding: 10px;
     }
     &>*{
         width: 80%;
