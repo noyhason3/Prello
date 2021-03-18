@@ -1,4 +1,5 @@
 import boardService from '../services/board.service.js';
+import utilService from '../services/util.service.js';
 export const boardStore = {
   state: {
     board: boardService.getDemoBoard(),
@@ -28,12 +29,19 @@ export const boardStore = {
       const board = JSON.parse(JSON.stringify(state.board));
       // console.log(board);
       const group = board.groups.find((group) => group.id === task.group.id);
-      const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
-      group.tasks.splice(taskIdx, 1, task);
-      state.board = board
+      if (task.id) {//update
+        console.log('Updating task', task)
+        const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
+        group.tasks.splice(taskIdx, 1, task);
+        state.board = board
+      } else {//add
+        console.log('Adding task', task)
+        task.id = utilService.makeId()
+        group.tasks.push(task)
+        state.board = board
+      }
       //console.log('Board store ~ save task ~ line 34 ~ Board', board);
       //console.log("board store ~ line 37 ~ saveTask ~ task", task)
-      return task
     },
     // setBoardList(state, {boards}){
     //     state.boards = boards;
