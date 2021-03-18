@@ -1,14 +1,14 @@
 <template>
-  <section class="task-description">
-    <form v-if="isEditing" @submit.prevent="setDescription">
-      <textarea
-        :value="value"
-        @input="$emit('input', $event.target.value)"
-      ></textarea>
+  <section class="editable-text">
+    <form v-if="isEditing" @submit.prevent="setText">
+      <textarea ref="input" :value="value"></textarea>
       <button>save</button>
-      <button type="button" @click="closeDescription">X</button>
+      <button type="button" @click.prevent="closeTextarea">X</button>
     </form>
-    <p v-else @click="editDescription">{{ value }}</p>
+    <template v-else>
+      <p v-if="value" @click="editDescription">{{ value }}</p>
+      <p v-else @click="editDescription">Enter a {{ type }} for this card...</p>
+    </template>
   </section>
 </template>
 
@@ -17,6 +17,7 @@ export default {
   props: {
     // currTaskDescription: String,
     // task: Object,
+    type: "",
     value: String,
   },
   data() {
@@ -34,15 +35,19 @@ export default {
 
       this.isEditing = true;
     },
-    setDescription() {
+    setText() {
       // this.taskDescriptionPreview = this.taskDescriptionEdit;
-      // this.$emit("setDescription", this.taskDescriptionPreview);
-      // this.closeDescription();
-      this.$emit("setDescription", this.value);
+      // this.$emit("setText", this.taskDescriptionPreview);
+      // this.closeTextarea();
+
+      const val = this.$refs.input.value;
+      this.$emit("input", val);
+      this.closeTextarea();
     },
-    closeDescription() {
+    closeTextarea() {
       //this.taskDescriptionEdit = null;
       this.isEditing = false;
+      this.$emit("close-textarea");
     },
   },
 };

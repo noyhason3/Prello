@@ -2,7 +2,7 @@
   <pop-up>
     <h3 slot="header">Labels</h3>
     <div slot="main">
-      <input type="search" @input="searchLabel" />
+      <input type="search" @input="searchLabel" placeholder="Search labels..."/>
       <ul v-if="boardLabels" class="clean-list">
         <li
           v-for="label in boardLabels"
@@ -45,11 +45,11 @@ export default {
     toggleSelectLabel(labelId) {
       if (this.taskLabelIdEdit.includes(labelId)) {
         const labelIdx = this.taskLabelIdEdit.findIndex(
-          (label) => label.id === labelId
+          id => id === labelId
         );
         this.taskLabelIdEdit.splice(labelIdx, 1);
       } else this.taskLabelIdEdit.push(labelId);
-      this.$emit("add-task-labels", { labels: this.taskLabelIdEdit });
+      this.$emit("set-task-labels", { labelIds: this.taskLabelIdEdit });
       this.loadBoardLabels();
     },
     isUsed(labelId) {
