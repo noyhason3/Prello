@@ -27,6 +27,7 @@ export default {
       return this.$store.getters.currBoard.labels;
     },
     taskLabels() {
+      if(!this.taskLabelIds) return;
       const labels = this.boardLabels.filter((label) =>
         this.taskLabelIds.includes(label.id)
       );

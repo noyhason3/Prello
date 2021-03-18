@@ -65,7 +65,17 @@ const gBoard = {
             "_id": "u101",
             "fullname": "Tal Tarablus",
             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
-        }
+        },
+        {
+            "_id": "u102",
+            "fullname": "Noam Ben Yosef",
+            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        },
+        {
+            "_id": "u103",
+            "fullname": "Gabi Amsalem",
+            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        },
     ],
     "groups": [
         {
@@ -75,7 +85,22 @@ const gBoard = {
                 {
                     "id": "c101",
                     "title": "Replace logo",
-                    "checklists": []
+                    "checklists": [],
+                    "members": [
+                        {
+                            "_id": "u101",
+                            "username": "Efi",
+                            "fullname": "Efrat Kaminski",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+
+                        {
+                            "_id": "u101",
+                            "username": "Dov",
+                            "fullname": "Dov Menashe",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        }
+                    ],
                 },
                 {
                     "id": "c102",
@@ -172,6 +197,18 @@ const gBoard = {
                             "username": "Tal",
                             "fullname": "Tal Tarablus",
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        {
+                            "_id": "u103",
+                            "username": "Gabi",
+                            "fullname": "Gabi Amsalem",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        {
+                            "_id": "u101",
+                            "username": "Benny",
+                            "fullname": "Biniamin Shemi",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
                     ],
                     "labelIds": ["l101", "l102"],
@@ -262,6 +299,26 @@ const gBoard = {
                                 }
                             ]
                         }
+                    ],
+                    "members": [
+                        {
+                            "_id": "u101",
+                            "username": "Keshet",
+                            "fullname": "Keshet Sheshet",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        {
+                            "_id": "u103",
+                            "username": "Goni",
+                            "fullname": "Anna Avraham",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        {
+                            "_id": "u103",
+                            "username": "Gabi",
+                            "fullname": "Gabi Amsalem",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
                     ],
                 }
             ],
