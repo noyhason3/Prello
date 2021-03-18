@@ -66,8 +66,9 @@ export default {
     },
     saveChecklist(checklist) {
       const task = this.task
-      console.log(task);
+      console.log(task.checklists);
       if (!task.checklists) task.checklists = [];
+      console.log(task.checklists);
       task.checklists.push(checklist);
       this.saveTask(task)
     },

@@ -31,7 +31,6 @@ export const boardStore = {
       const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
       group.tasks.splice(taskIdx, 1, task);
       state.board = board
-      console.log(board);
     },
     // setBoardList(state, {boards}){
     //     state.boards = boards;
