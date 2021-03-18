@@ -1,9 +1,10 @@
 <template>
   <section class="task" v-if="task">
     <!-- <pre>{{ task }}</pre> -->
-    <popup-label v-if="isLabelOpen" 
-    @set-task-labels="setTaskLabels" 
-    @toggle-popup="togglePopup"
+    <popup-label
+      v-if="isLabelOpen"
+      @set-task-labels="setTaskLabels"
+      @toggle-popup="togglePopup"
     >
     </popup-label>
     <task-control
@@ -35,7 +36,7 @@
       :task="task"
       @setDescription="setDescription" -->
     <!-- <task-attachment /> -->
-    <ul>
+    <ul class="clean-list flex column">
       <li v-for="checklist in task.checklists" :key="checklist.id">
         <task-checklist :checklist="checklist" @save-todo="saveTodo" />
       </li>
@@ -114,9 +115,9 @@ export default {
       this[dataStr] = !this[dataStr];
       console.log(this.isLabelOpen);
     },
-    openLabelPopup(){
+    openLabelPopup() {
       this.isLabelOpen = true;
-    }
+    },
   },
   components: {
     taskControl,

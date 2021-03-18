@@ -2,6 +2,8 @@
     display:flex;
     flex-direction: column;
     flex-grow: 1;
+    overflow:hidden;
+    overflow-x: auto;
 
     .board-header{
         display: flex;
@@ -27,11 +29,14 @@
     ul{
         display: flex;
         flex-grow: 1;
-        &>*{
+        li{
             overflow-y: auto;
-            margin:5px;
+        }
+        .group{
+            margin-block:5px;
+            margin-inline:8px;
             //display: flex;
         }
+        }
     }
-}
-}
+} 

@@ -1,9 +1,8 @@
 <template>
-  <section class="board" ref="board">
+  <section class="board">
     <board-header :board="board" />
-    <ul class="main clean-list" ref="list">
+    <ul class="clean-list">
       <li v-for="group in board.groups" :key="group.id">
-        <!-- :style="`max-height:${maxHeight};`" -->
         <group :group="group" :boardId="board._id" />
       </li>
     </ul>
@@ -26,10 +25,6 @@ export default {
     board() {
       return this.$store.getters.currBoard;
     },
-    groups() {},
-  },
-  mounted() {
-    this.maxHeight = this.$refs.list.clientHeight + "px";
   },
   components: { boardHeader, group },
 };
