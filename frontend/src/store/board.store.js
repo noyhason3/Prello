@@ -51,9 +51,17 @@ export const boardStore = {
         saveGroup(state, { group }) {
             const board = JSON.parse(JSON.stringify(state.board));
             const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
-            console.log('groupIdx:', groupIdx)
+            if (groupIdx < 0) {
+                board.groups.push(group);
+            } else board.groups.splice(groupIdx, 1, group);
+            this.commit({ type: 'setBoard', board });
+        },
+        removeGroup(state, { groupId }) {
+            const board = JSON.parse(JSON.stringify(state.board));
+            const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
+            console.log('groupIdx:', groupIdx);
             if (groupIdx < 0) return;
-            board.groups.splice(groupIdx, 1, group);
+            board.groups.splice(groupIdx, 1);
             this.commit({ type: 'setBoard', board });
         },
         // setBoardList(state, {boards}){
