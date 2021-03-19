@@ -1,5 +1,5 @@
 <template>
-  <div class="pop-up">
+  <div class="popup">
     <header>
       <slot name="header"></slot>
     </header>
@@ -19,11 +19,3 @@ export default {
     }
 };
 </script>
-
-<style>
- .pop-up{
-   position:fixed;
- }
-
-
-</style>

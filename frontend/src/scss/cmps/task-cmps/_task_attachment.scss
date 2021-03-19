@@ -1,6 +1,27 @@
-.task-attachment{
-    .btn.attachment-action {
-        background-color: transparent;
-        text-decoration: underline;
+.task-attachment-container {
+    .task-attachment {
+        display: flex;
+        height: 100px;
+        
+    }
+      
+    .attachment-img {
+        width: 150px;
+        object-fit: contain;
+        background-color: $clr1;
+    }
+    .attachment-info{
+        h5{
+            margin-bottom:0.3em;        
+        }
+        p{
+            margin-bottom:0.3em;  
+        }
+        .btn.attachment-action {
+            background-color: transparent;
+            text-decoration: underline;
+            margin:0; 
+        }
+        
     }
 }

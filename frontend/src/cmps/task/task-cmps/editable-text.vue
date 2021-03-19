@@ -17,6 +17,7 @@ export default {
   props: {
     // currTaskDescription: String,
     // task: Object,
+    isEditFirst:Boolean,
     type: "",
     value: String,
     elementType:String
@@ -28,6 +29,10 @@ export default {
       // taskDescriptionEdit: null,
       isEditing: false,
     };
+  },
+  created(){
+    console.log();
+    if(this.isEditFirst) this.isEditing = this.isEditFirst
   },
   methods: {
     editDescription() {
