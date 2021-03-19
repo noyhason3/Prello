@@ -57,7 +57,7 @@ export const boardStore = {
         },
         getGroup(state, { taskId }) {
             const group = state.board.groups.find(({ tasks }) => {
-                return tasks.some(({ id }) => id === taskId);
+                return tasks.some(({ id }) => id === state.task.id);
             });
             console.log('group:', group);
             return group
