@@ -14,8 +14,8 @@
         />
         <div class="attachment-info">
           <h5>{{ attachment.title }}</h5>
-          <p>{{ (attachment.createdAt) }}</p>
-          <button class="btn attachment-action">Comment</button>
+          <p>{{ date(attachment.createdAt) }}</p>
+          <!-- <button class="btn attachment-action">Comment</button> -->
           <button
             @click="removeAttachment(attachment.id)"
             class="btn attachment-action"
@@ -23,22 +23,27 @@
             Delete
           </button>
           <button
-          @click="editAttachment(attachment)"
-          class="btn attachment-action">Edit</button>
+            @click="editAttachment(attachment)"
+            class="btn attachment-action"
+          >
+            Edit
+          </button>
           <button class="btn attachment-action">🚃 Make cover</button>
         </div>
       </li>
     </ul>
-    <popup v-if="selectedAttachment" >
+    <popup v-if="selectedAttachment">
       <div slot="header">
         <h3>Edit attachment</h3>
       </div>
       <div slot="main">
-          <h4>Link name</h4>
-          <editable-text 
-          :isEditFirst="true" 
+        <h4>Link name</h4>
+        <editable-text
+          :isEditFirst="true"
           v-model="selectedAttachment.title"
-          @input="updateAttachment"/>
+          @input="updateAttachment"
+          @close-textarea="closeEdit"
+        />
       </div>
     </popup>
     <!-- TODO: use mmoments library for the when was created-->
@@ -46,8 +51,7 @@
 </template>
 
 <script>
-import moment from 'moment';
-moment().format();
+import moment from "moment";
 import popup from "@/cmps/common/pop-up.vue";
 import editableText from "@/cmps/task/task-cmps/editable-text.vue";
 
@@ -55,10 +59,10 @@ export default {
   props: {
     attachments: Array,
   },
-  data(){
-      return{
-          selectedAttachment:null,
-      }
+  data() {
+    return {
+      selectedAttachment: null,
+    };
   },
   methods: {
     removeAttachment(attachmentId) {
@@ -68,17 +72,23 @@ export default {
       this.attachmentsToEdit.splice(attachmentIdx, 1);
       this.$emit("save-attachments", this.attachmentsToEdit);
     },
-    editAttachment(attachment){
-        this.selectedAttachment = {...attachment}
+    editAttachment(attachment) {
+      this.selectedAttachment = { ...attachment };
     },
-    updateAttachment(){
-         const attachmentIdx = this.attachmentsToEdit.findIndex(
+    updateAttachment() {
+      const attachmentIdx = this.attachmentsToEdit.findIndex(
         ({ id }) => id === this.selectedAttachment.id
       );
       this.attachmentsToEdit.splice(attachmentIdx, 1, this.selectedAttachment);
       this.$emit("save-attachments", this.attachmentsToEdit);
+      this.closeEdit();
+    },
+    closeEdit() {
       this.selectedAttachment = null;
-    }
+    },
+    date(timeStamp) {
+      return moment(timeStamp).fromNow();
+    },
   },
   computed: {
     attachmentsToEdit() {
@@ -87,7 +97,7 @@ export default {
   },
   components: {
     popup,
-    editableText
+    editableText,
   },
 };
 </script>

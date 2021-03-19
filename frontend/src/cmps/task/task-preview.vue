@@ -9,11 +9,8 @@
       <h2 class="task-title">{{ task.title }}</h2>
       <div
         class="btn task-edit"
-        @mouseover="isControlOpen = true"
-        @mouseleave="isControlOpen = false"
       >
         <span>🖊</span>
-        <task-control v-if="isControlOpen" class="task-control" />
       </div>
     </div>
     <div v-if="taskChecklists">
@@ -31,17 +28,12 @@
 <script>
 import memberList from "@/cmps/common/member-list.vue";
 import taskLabelPreview from "@/cmps/task/task-cmps/task-label-preview.vue";
-import taskControl from "@/cmps/task/task-cmps/task-control.vue";
 
 export default {
   props: {
     task: Object,
   },
-  data() {
-    return {
-      isControlOpen: false,
-    };
-  },
+
   methods: {
     removeTask(ev) {
       ev.stopPropagation();
@@ -90,7 +82,6 @@ export default {
   components: {
     taskLabelPreview,
     memberList,
-    taskControl,
   },
 };
 </script>

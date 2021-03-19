@@ -4,7 +4,8 @@
     @drop.prevent="handleFile"
     :class="{ 'file-drag': isDragOver }"
   >
-    <h3 v-if="isDragOver" class="msg drop-file">Drop files to upload</h3>
+    <h3 v-if="isDragOver&&!isLoading" class="msg drop-file">Drop files to upload</h3>
+        <img v-if="isLoading" class="loader" src="https://lh3.googleusercontent.com/proxy/xNRAsz9LprHZ9Swqv6a-dNPSGrh_-Yx8aHcJmyzbkyvS2opSTtRZSkiegngjsJyWeuIkYL2fhNVd6uKpOlS1q8UQqiv3CZuthg9jGG3ztTloB_OGNbFtbSC7MSHhd7Ll=s0-d">
   </section>
 </template>
 
@@ -14,10 +15,10 @@ import utilService from '@/services/util.service.js'
 export default {
   props: {
     isDragOver: Boolean,
+    attachments:Array,
   },
   data() {
     return {
-      attachments: [],
       isLoading: false,
       newAttachment: {
         id: null,
@@ -39,6 +40,7 @@ export default {
       try {
         this.isLoading = true;
         const res = await uploadImg(file);
+        console.log('res:', res)
         this.isLoading = false;
         this.saveAttachment(res);
       } catch (err) {
@@ -49,11 +51,12 @@ export default {
     },
     saveAttachment(res) {
       this.newAttachment.id = utilService.makeId();
-      this.newAttachment.title = res.original_filename;
+      this.newAttachment.title = `${res.original_filename}.${res.format}`;
       this.newAttachment.url = res.url
       this.newAttachment.createdAt =  Date.now()
-      this.attachments.push(this.newAttachment);
-      this.$emit("save-attachments", this.attachments);
+      const attachmentsToEdit = [...this.attachments]
+      attachmentsToEdit.push(this.newAttachment);
+      this.$emit("save-attachments", attachmentsToEdit);
     },
   },
 };

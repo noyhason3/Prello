@@ -32,7 +32,11 @@
       </div>
 
       <h4>Description</h4>
-      <editable-text v-model="task.description" :type="'description'" />
+      <editable-text
+        v-model="task.description"
+        :type="'description'"
+        @input="setDescription"
+      />
 
       <task-attachment
         :attachments="attachments"
@@ -41,6 +45,7 @@
       <file-drag-uploader
         v-if="isDragOver"
         :isDragOver="isDragOver"
+        :attachments="attachments"
         @save-attachments="saveAttachments"
         @not-drag-over="notDragOver"
         class="drag-uploader"
