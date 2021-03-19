@@ -9,8 +9,11 @@
       <h2 class="task-title">{{ task.title }}</h2>
       <div
         class="btn task-edit"
+        @mouseover="isControlOpen = true"
+        @mouseleave="isControlOpen = false"
       >
         <span>🖊</span>
+        <task-control v-if="isControlOpen" class="task-control" />
       </div>
     </div>
     <div v-if="taskChecklists">
@@ -34,6 +37,11 @@ export default {
   props: {
     task: Object,
   },
+  data() {
+    return {
+      isControlOpen: false,
+    };
+  },
   methods: {
     removeTask(ev) {
       ev.stopPropagation();
@@ -49,24 +57,23 @@ export default {
       return this.task.description;
     },
     isTaskAttachment() {
-      return;
+      return false;
       // return this.task.attachment?.length;
     },
 
     isTaskDuedate() {
-      return;
+      return false;
       //return this.task.duedate;
     },
     taskMemebers() {
-      if (!this.task.members?.length) return;
+      if (!this.task.members?.length) return false;
       return this.task.members;
     },
     taskLabelIds() {
-      if (!this.task.labelIds?.length) return;
+      if (!this.task.labelIds?.length) return false;
       return this.task.labelIds;
     },
     taskChecklists() {
-      if(!this.task.checklists) return;
       const todosTotals = this.task.checklists.reduce(
         (acc, checklist) => {
           acc.complete += checklist.todos.filter((todo) => todo.isDone).length;

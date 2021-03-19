@@ -397,7 +397,8 @@ export default {
     getEmptyTask,
     getEmptyGroup,
     query,
-    saveTask
+    saveTask,
+    removeTask
 }
 
 if (!localStorage.getItem(DB_KEY)) loadDemoBoard()
@@ -411,12 +412,6 @@ async function query(id) {
     return board
 }
 
-async function addTask({ boardId, task }) {
-}
-
-async function updateTask({ boardId, task }) {
-
-}
 
 async function saveTask({ boardId, task }) {
     const board = gBoards.find(savedBoard => savedBoard._id === boardId)
@@ -435,6 +430,15 @@ async function saveTask({ boardId, task }) {
     }
     storageService.put(DB_KEY, board)
     return Promise.resolve({ boardAns: board, taskAns: task })
+}
+
+async function removeTask({ boardId, task }) {
+    console.log("🚀 ~ file: board.service.js ~ line 436 ~ removeTask ~ task", task)
+    //const group = JSON.parse(JSON.stringify(this.group));
+    const taskIdx = group.tasks.findIndex((task) => task.id === taskId);
+    console.log("taskIdx:", taskIdx);
+    if (taskIdx < 0) return;
+    group.tasks.splice(taskIdx, 1);
 }
 
 function getEmptyTask() {
