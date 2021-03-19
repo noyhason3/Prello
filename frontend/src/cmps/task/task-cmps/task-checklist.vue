@@ -77,18 +77,18 @@ export default {
   },
   computed:{
     progressPercentage(){
-      // if (!this.task.checklists) return;
-      // const todosTotals = this.task.checklists.reduce(
-      //   (acc, checklist) => {
-      //     acc.complete += checklist.todos.filter((todo) => todo.isDone).length;
-      //     acc.total += checklist.todos.length;
+      if (!this.task.checklists) return;
+      const todosTotals = this.checklist.reduce(
+        (acc, checklist) => {
+          acc.complete += checklist.todos.filter((todo) => todo.isDone).length;
+          acc.total += checklist.todos.length;
 
-      //     return acc;
-      //   },
-      //   { total: 0, complete: 0 }
-      // );
-      // if (!todosTotals.total) return;
-      // return todosTotals.complete/todosTotals.total;
+          return acc;
+        },
+        { total: 0, complete: 0 }
+      );
+      if (!todosTotals.total) return;
+      return todosTotals.complete/todosTotals.total;
     },
   },
   methods: {
