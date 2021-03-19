@@ -98,6 +98,7 @@ export default {
       isLabelOpen: false,
       // ghostRect: null,
       isDragOver: false,
+      drag:false
     };
   },
   computed: {
@@ -187,6 +188,7 @@ export default {
       this.saveTask(this.task);
     },
     dragOver(ev) {
+      if(this.drag) return;
       this.isDragOver = true;
     },
     notDragOver() {
