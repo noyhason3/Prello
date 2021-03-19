@@ -3,7 +3,7 @@
     <h4>Attachments</h4>
     <ul>
       <li v-for="attachment in attachmentsToEdit" :key="attachment.id">
-        <img :src="attachment" alt="" />
+        <img :src="attachment.url" alt="" />
         <h5>Attachment title</h5>
         <p>Added yesterday</p>
         <button class="btn attachment-action">Comment</button>
@@ -12,11 +12,13 @@
         <button class="btn attachment-action">🚃 Make cover</button>
       </li>
     </ul>
+    <popup/>
     <!-- TODO: use mmoments library for the when was created-->
   </section>
 </template>
 
 <script>
+import popup from '@/cmps/common/pop-up.vue'
 export default {
   props: {
     attachments: Array,
@@ -32,6 +34,9 @@ export default {
       attachmentsToEdit(){
           return([...this.attachments])
       }
+  },
+  components:{
+      popup
   }
 };
 </script>

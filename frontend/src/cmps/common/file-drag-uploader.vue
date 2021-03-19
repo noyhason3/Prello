@@ -10,6 +10,7 @@
 
 <script>
 import { uploadImg } from "@/services/img-upload.service.js";
+import utilService from '@/services/util.service.js'
 export default {
   props: {
     isDragOver: Boolean,
@@ -18,6 +19,12 @@ export default {
     return {
       attachments: [],
       isLoading: false,
+      newAttachment: {
+        id: null,
+        title: null,
+        url:null,
+        createdAt:null,
+      },
     };
   },
   methods: {
@@ -33,18 +40,21 @@ export default {
         this.isLoading = true;
         const res = await uploadImg(file);
         this.isLoading = false;
-        this.saveAttachment(res.url)
-        console.log('res:', res)
+        this.saveAttachment(res);
       } catch (err) {
-        console.log('Couldn\'t load image');
+        console.log("Couldn't load image");
       } finally {
         this.$emit("not-drag-over");
       }
     },
-    saveAttachment(url){
-        this.attachments.push(url);
-        this.$emit("save-attachments", this.attachments);
-    }
+    saveAttachment(res) {
+      this.newAttachment.id = utilService.makeId();
+      this.newAttachment.title = res.original_filename;
+      this.newAttachment.url = res.url
+      this.newAttachment.createdAt =  Date.now()
+      this.attachments.push(this.newAttachment);
+      this.$emit("save-attachments", this.attachments);
+    },
   },
 };
 </script>

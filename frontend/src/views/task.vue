@@ -173,19 +173,20 @@ export default {
     openLabelPopup() {
       this.isLabelOpen = true;
     },
-    addAttachment(attachment) {
-      this.task.attachments.push(attachment);
-      this.saveTask(this.task);
-    },
+    // addAttachment(attachment) {
+    //   this.task.attachments.push(attachment);
+    //   this.saveTask(this.task);
+    // },
     saveAttachments(attachments) {
       this.task.attachments = attachments;
+      console.log(attachments);
       this.saveTask(this.task);
     },
-    removeAttachment(attachmentId) {
-      const attachmentIdx = this.task.attachments.findIndex(({id}) => attachmentId===id)
-      this.task.attachments.splice(attachmentIdx,1);
-      this.saveTask(this.task);
-    },
+    // removeAttachment(attachmentId) {
+    //   const attachmentIdx = this.task.attachments.findIndex(({id}) => attachmentId===id)
+    //   this.task.attachments.splice(attachmentIdx,1);
+    //   this.saveTask(this.task);
+    // },
     dragOver(ev) {
       if(this.drag) return;
       this.isDragOver = true;

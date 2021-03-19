@@ -77,19 +77,19 @@ const DEMO_BOARD = {
                     attachments: [
                         {
                             id: 'a101',
-                            name: 'Logo inspiration',
+                            title: 'Logo inspiration',
                             url: 'https://trimitiy.com/assets/images/logo/new-logo-white.png',
                             createdAt: '1616155239874',
                         },
                         {
                             id: 'a102',
-                            name: 'another logo option',
+                            title: 'another logo option',
                             url: 'https://printfiam.com/wp-content/uploads/2020/02/contant-logo.png',
                             createdAt: '16161455239874',
                         },
                         {
                             id: 'a103',
-                            name: 'smile!',
+                            title: 'smile!',
                             url:
                                 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gnome-face-smile-big.svg/1024px-Gnome-face-smile-big.svg.png',
                             createdAt: '1616152734274',
@@ -445,7 +445,7 @@ async function saveTask({ boardId, task }) {
         group.tasks.push(task);
     }
     storageService.put(DB_KEY, board)
-    return Promise.resolve({ bboard, task })
+    return Promise.resolve({ board, task })
 }
 
 async function removeTask({ boardId, task }) {
