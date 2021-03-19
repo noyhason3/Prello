@@ -5,12 +5,24 @@
     <!-- If cover image- show image, if cover color set section background-color-->
 
     <task-label-preview v-if="taskLabelIds" :taskLabelIds="taskLabelIds" />
-    <h2 class="task-title">{{ task.title }}</h2>
-    <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
-    <!-- <div v-if="isTaskAttachment">📎{{attachmentCount}}</div> -->
-    <!-- <member-list :members="task.members"/> -->
-    <div class="flex space-evenly center">
+    <div class="flex">
+      <h2 class="task-title">{{ task.title }}</h2>
+      <div
+        class="btn task-edit"
+        @mouseover="isControlOpen = true"
+        @mouseleave="isControlOpen = false"
+      >
+        <span>🖊</span>
+        <task-control v-if="isControlOpen" class="task-control" />
+      </div>
+    </div>
+    <div v-if="taskChecklists">
+      ☑ {{ taskChecklists.complete }}/{{ taskChecklists.total }}
+    </div>
+    <div class="task-info-preview">
+      <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
       <div v-if="isTaskDescription">📄</div>
+      <!-- <div v-if="isTaskAttachment">📎{{attachmentCount}}</div> -->
       <member-list v-if="taskMemebers" :members="taskMemebers" />
     </div>
   </section>
@@ -19,10 +31,16 @@
 <script>
 import memberList from "@/cmps/common/member-list.vue";
 import taskLabelPreview from "@/cmps/task/task-cmps/task-label-preview.vue";
+import taskControl from "@/cmps/task/task-cmps/task-control.vue";
 
 export default {
   props: {
     task: Object,
+  },
+  data() {
+    return {
+      isControlOpen: false,
+    };
   },
   methods: {
     removeTask(ev) {
@@ -55,10 +73,24 @@ export default {
       if (!this.task.labelIds?.length) return false;
       return this.task.labelIds;
     },
+    taskChecklists() {
+      const todosTotals = this.task.checklists.reduce(
+        (acc, checklist) => {
+          acc.complete += checklist.todos.filter((todo) => todo.isDone).length;
+          acc.total += checklist.todos.length;
+
+          return acc;
+        },
+        { total: 0, complete: 0 }
+      );
+      if (!todosTotals.total) return;
+      return todosTotals;
+    },
   },
   components: {
     taskLabelPreview,
     memberList,
+    taskControl,
   },
 };
 </script>

@@ -14,10 +14,14 @@
         drag-class="drag"
         class="group-list"
         filter=".task-preview"
-        draggable=".group-wrapper"
+        draggable=".group-container"
         handle=".clean-list"
       >
-        <li v-for="group in board.groups" :key="group.id" class="group-wrapper">
+        <li
+          v-for="group in board.groups"
+          :key="group.id"
+          class="group-container"
+        >
           <group :group="group" :boardId="board._id" />
         </li>
       </draggable>
