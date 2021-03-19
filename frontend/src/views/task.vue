@@ -1,10 +1,5 @@
 <template>
-  <section
-    class="task"
-    v-if="task"
-    @dragover.prevent="dragOver"
-  >
-
+  <section class="task" v-if="task" @dragover.prevent="dragOver">
     <button @click="closeTask" class="btn close">X</button>
     <!-- <pre>{{ task }}</pre> -->
     <popup-label
@@ -37,7 +32,11 @@
       </div>
 
       <h4>Description</h4>
-      <editable-text v-model="task.description" :type="'description'" @input="setDescription"/>
+      <editable-text
+        v-model="task.description"
+        :type="'description'"
+        @input="setDescription"
+      />
 
       <task-attachment :attachments="attachments" />
       <file-drag-uploader
@@ -48,32 +47,32 @@
         class="drag-uploader"
       />
 
-      <ul class="clean-list">
-        <draggable
-          v-model="task.checklists"
-          group="checklists"
-          @start="drag = true"
-          @end="drag = false"
-          animation="150"
-          empty-insert-threshold="50"
-          ghost-class="ghost"
-          chosen-class="chosen"
-          drag-class="drag"
-          draggable=".checklist-container"
+      <draggable
+        v-model="task.checklists"
+        group="checklists"
+        @start="drag = true"
+        @end="drag = false"
+        animation="150"
+        empty-insert-threshold="50"
+        ghost-class="ghost"
+        chosen-class="chosen"
+        drag-class="drag"
+        draggable=".checklist-container"
+        tag="ul"
+        class="clean-list"
+      >
+        <li
+          v-for="checklist in task.checklists"
+          :key="checklist.id"
+          class="checklist-container"
         >
-          <li
-            v-for="checklist in task.checklists"
-            :key="checklist.id"
-            class="checklist-container"
-          >
-            <task-checklist
-              :checklist="checklist"
-              @save-todo="saveTodo"
-              @delete-checklist="deleteChecklist"
-            />
-          </li>
-        </draggable>
-      </ul>
+          <task-checklist
+            :checklist="checklist"
+            @save-todo="saveTodo"
+            @delete-checklist="deleteChecklist"
+          />
+        </li>
+      </draggable>
     </div>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
@@ -119,7 +118,6 @@ export default {
     // },
     setDescription() {
       this.saveTask(this.task);
-
     },
     assignMember(member) {
       var task = this.task;
@@ -164,9 +162,9 @@ export default {
     saveTask(task) {
       this.$store.commit({ type: "saveTask", task });
     },
-    closeTask(){
-      const boardId =  this.$route.params.boardId;
-      this.$router.push('/board/'+boardId)
+    closeTask() {
+      const boardId = this.$route.params.boardId;
+      this.$router.push("/board/" + boardId);
     },
     togglePopup(str) {
       var dataStr = `is${str}Open`;
@@ -180,12 +178,12 @@ export default {
       this.task.attachments.push(attachment);
       this.saveTask(this.task);
     },
-     dragOver(ev) {
+    dragOver(ev) {
       this.isDragOver = true;
     },
-    notDragOver(){
-       this.isDragOver = false;
-    }
+    notDragOver() {
+      this.isDragOver = false;
+    },
   },
   components: {
     draggable,

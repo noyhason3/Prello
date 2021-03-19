@@ -1,30 +1,37 @@
 <template>
   <section class="board">
     <board-header :board="board" />
-    <ul class="clean-list main">
+    <draggable
+      v-model="board.groups"
+      group="group"
+      @start="drag = true"
+      @end="drag = false"
+      animation="150"
+      :empty-insert-threshold="100"
+      ghost-class="ghost"
+      chosen-class="chosen"
+      drag-class="drag"
+      filter=".task-preview"
+      draggable=".group-container"
+      class="clean-list main"
+      tag="ul"
+    >
+      <!-- <li v-for="group in board.groups" :key="group.id" class="group-container"> -->
       <draggable
-        v-model="board.groups"
-        group="group"
+        v-for="group in board.groups"
+        :key="group.id"
+        v-model="group.tasks"
+        group="tasks"
         @start="drag = true"
         @end="drag = false"
-        animation="150"
         :empty-insert-threshold="100"
-        ghost-class="ghost"
-        chosen-class="chosen"
-        drag-class="drag"
-        class="group-list"
-        filter=".task-preview"
-        draggable=".group-container"
-        handle=".clean-list"
+        draggable=".group-tasks-preview"
+        class="clean-list group-container"
+        tag="li"
       >
-        <li
-          v-for="group in board.groups"
-          :key="group.id"
-          class="group-container"
-        >
-          <group :group="group" :boardId="board._id" />
-        </li>
+        <group :group="group" :boardId="board._id" />
       </draggable>
+      <!-- </li> -->
 
       <div class="add-new-group">
         <button v-if="!isAddNewGroup" @click="isAddNewGroup = true">
@@ -39,7 +46,7 @@
           @input="addGroup"
         />
       </div>
-    </ul>
+    </draggable>
     <router-view />
   </section>
 </template>

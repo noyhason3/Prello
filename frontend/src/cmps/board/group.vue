@@ -1,31 +1,33 @@
 <template>
-  <ul class="clean-list group" style="overflow-x: auto">
+  <li class="group">
     <button @click="removeGroup">X</button>
     <div class="header">{{ group.title }}</div>
+    <!-- <ul class="clean-list"> -->
     <draggable
+      v-for="task in group.tasks"
+      :key="task.id"
       v-model="group.tasks"
       group="tasks"
-      @start="startDrag"
+      @start="drag = true"
       @end="drag = false"
       :empty-insert-threshold="100"
-      ghost-class="ghost"
-      chosen-class="chosen"
-      drag-class="drag"
-      draggable=".group-tasks-wrapper"
-      class="draggable"
+      draggable=".task-preview"
+      class="clean-list group-tasks-wrapper"
+      tag="ul"
     >
-      <div
+      <!-- <li
         v-for="task in group.tasks"
         :key="task.id"
         class="group-tasks-wrapper"
-      >
-        <task-preview
-          :task="task"
-          @click.native="openTask(task)"
-          @remove-task="removeTask"
-        ></task-preview>
-      </div>
+      > -->
+      <task-preview
+        :task="task"
+        @click.native="openTask(task)"
+        @remove-task="removeTask"
+      ></task-preview>
+      <!-- </li> -->
     </draggable>
+    <!-- </ul> -->
     <!-- <pre>{{ this.group }}</pre> -->
     <!-- <pre>{{ this.newTask }}</pre> -->
     <button v-if="!isAddNewTask" @click="isAddNewTask = true">
@@ -38,7 +40,7 @@
       @close-textarea="isAddNewTask = false"
       @input="addTask"
     />
-  </ul>
+  </li>
 </template>
 
 <script>
