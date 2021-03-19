@@ -20,6 +20,7 @@
 
       <!-- <h6>In list: {{ this.task.group.title }}</h6> -->
 
+      <!-- :taskTitle="task.title"  @setTitle="setTitle" -->
       <div v-if="task" class="task-info">
         <member-list :members="task.members" />
 
@@ -32,11 +33,7 @@
       </div>
 
       <h4>Description</h4>
-      <editable-text
-        v-model="task.description"
-        :type="'description'"
-        @input="setDescription"
-      />
+      <editable-text v-model="task.description" :type="'description'" />
 
       <task-attachment
         :attachments="attachments"
@@ -50,32 +47,32 @@
         class="drag-uploader"
       />
 
-      <draggable
-        v-model="task.checklists"
-        group="checklists"
-        @start="drag = true"
-        @end="drag = false"
-        animation="150"
-        empty-insert-threshold="50"
-        ghost-class="ghost"
-        chosen-class="chosen"
-        drag-class="drag"
-        draggable=".checklist-container"
-        tag="ul"
-        class="clean-list"
-      >
-        <li
-          v-for="checklist in task.checklists"
-          :key="checklist.id"
-          class="checklist-container"
+      <ul class="clean-list">
+        <draggable
+          v-model="task.checklists"
+          group="checklists"
+          @start="drag = true"
+          @end="drag = false"
+          animation="150"
+          emptyInsertThreshold="50"
+          ghost-class="ghost"
+          chosen-class="chosen"
+          drag-class="drag"
+          draggable=".checklist-container"
         >
-          <task-checklist
-            :checklist="checklist"
-            @save-todo="saveTodo"
-            @delete-checklist="deleteChecklist"
-          />
-        </li>
-      </draggable>
+          <li
+            v-for="checklist in task.checklists"
+            :key="checklist.id"
+            class="checklist-container"
+          >
+            <task-checklist
+              :checklist="checklist"
+              @save-todo="saveTodo"
+              @delete-checklist="deleteChecklist"
+            />
+          </li>
+        </draggable>
+      </ul>
     </div>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
@@ -99,52 +96,50 @@ export default {
   data() {
     return {
       isLabelOpen: false,
-      // ghostRect: null,
       isDragOver: false,
       drag: false,
-      task: null,
+      // task: null,
     };
   },
-  async created() {
-    this.loadTask();
-  },
+  // async created() {
+  //   this.loadTask();
+  // },
   computed: {
     // taskId() {
     //   return this.$router.parmas.taskId;
     // },
-    // task() {
-    //   return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
-    // },
-    id() {
-      return this.$route.params.taskId;
-    },
-    boardId() {
-      return this.$route.params.boardId;
+    task() {
+      return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
     },
     attachments() {
       return this.task.attachments;
     },
+    // id() {
+    //   return this.$route.params.taskId;
+    // },
+    // boardId() {
+    //   return this.$route.params.boardId;
+    // },
   },
-
   methods: {
     // setTitle(title) {
     //   this.task.title = title;
     // },
-    async loadTask() {
-      this.task = await boardService.getTask({
-        board: this.$store.getters.currBoard,
-        taskId: this.id,
-      });
-      console.log(
-        "file: task.vue - line 138 - loadTask - this.task",
-        this.task
-      );
-    },
+    // async loadTask() {
+    //   this.task = await boardService.getTask({
+    //     board: this.$store.getters.currBoard,
+    //     taskId: this.id,
+    //   });
+    //   console.log(
+    //     "file: task.vue - line 138 - loadTask - this.task",
+    //     this.task
+    //   );
+    // },
     setDescription() {
       this.saveTask(this.task);
     },
     assignMember(member) {
-      var task = this.task;
+      var task = JSON.parse(JSON.stringify(this.task));
       if (!task.members) task.members = [];
       if (
         task.members.some((assignedMember) => assignedMember._id === member._id)
@@ -165,6 +160,7 @@ export default {
 
     saveChecklist(checklist) {
       const task = this.task;
+      // if (!task.checklists.todos) task.checklists = [];
       task.checklists.push(checklist);
       this.saveTask(task);
     },
@@ -193,39 +189,29 @@ export default {
     togglePopup(str) {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
+      console.log(this.isLabelOpen);
     },
     openLabelPopup() {
       this.isLabelOpen = true;
     },
-    // addAttachment(attachment) {
-    //   this.task.attachments.push(attachment);
-    //   this.saveTask(this.task);
-    // },
     saveAttachments(attachments) {
       this.task.attachments = attachments;
       console.log(attachments);
       this.saveTask(this.task);
     },
-    // removeAttachment(attachmentId) {
-    //   const attachmentIdx = this.task.attachments.findIndex(({id}) => attachmentId===id)
-    //   this.task.attachments.splice(attachmentIdx,1);
-    //   this.saveTask(this.task);
-    // },
     dragOver(ev) {
       if (this.drag) return;
       this.isDragOver = true;
-      // this.drag = false;
     },
     notDragOver() {
       this.isDragOver = false;
-      // this.drag = false;
     },
   },
-  watch: {
-    id() {
-      this.loadTask();
-    },
-  },
+  // watch: {
+  //   id() {
+  //     this.loadTask();
+  //   },
+  // },
   components: {
     draggable,
     taskControl,
@@ -237,6 +223,7 @@ export default {
     popupLabel,
     taskAttachment,
     fileDragUploader,
+    boardService,
   },
 };
 </script>

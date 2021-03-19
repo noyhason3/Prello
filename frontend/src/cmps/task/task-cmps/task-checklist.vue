@@ -1,7 +1,10 @@
 <template>
   <section class="task-checklist">
     <div class="header">
-      ✅  <h4 v-if="!isEditTitleOpen"  @click="openEditTitle">{{checklist.title}}</h4>
+      ✅
+      <h4 v-if="!isEditTitleOpen" @click="openEditTitle">
+        {{ checklist.title }}
+      </h4>
       <editable-text
         v-else
         v-model="checklistTitle"
@@ -12,12 +15,19 @@
       />
       <button @click="deleteChecklist">Delete</button>
     </div>
-      <progress id="file" value="32" max="100">  </progress> 
- 
+    <progress id="file" :value="progressPercentage" max="100"></progress>
+
     <form>
       <ul class="todos clean-list">
         <li v-for="todo in checklist.todos" :key="todo.id">
-          <input type="checkbox" :id="todo.id" :ref="todo.id" :name="todo.id" @click="toggleChecked(todo.id)" />
+          <input
+            type="checkbox"
+            :id="todo.id"
+            :ref="todo.id"
+            :name="todo.id"
+            @click="toggleChecked(todo)"
+            :checked="todo.isDone"
+          />
           <label :for="todo.id" v-if="!isEditTodoOpen" @click="openEditTodo">
             {{ todo.txt }}
           </label>
@@ -55,7 +65,7 @@ export default {
   },
   data() {
     return {
-      checklistTitle:'',
+      checklistTitle: "",
       todo: {
         txt: "",
         isDone: false,
@@ -64,6 +74,22 @@ export default {
       isAddTodoOpen: false,
       isEditTodoOpen: false,
     };
+  },
+  computed:{
+    progressPercentage(){
+      // if (!this.task.checklists) return;
+      // const todosTotals = this.task.checklists.reduce(
+      //   (acc, checklist) => {
+      //     acc.complete += checklist.todos.filter((todo) => todo.isDone).length;
+      //     acc.total += checklist.todos.length;
+
+      //     return acc;
+      //   },
+      //   { total: 0, complete: 0 }
+      // );
+      // if (!todosTotals.total) return;
+      // return todosTotals.complete/todosTotals.total;
+    },
   },
   methods: {
     openAddTodo() {
@@ -76,14 +102,14 @@ export default {
       this.isEditTitleOpen = true;
     },
     editTitle() {
-      this.checklist.title = this.checklistTitle
-      this.saveChecklist()
+      this.checklist.title = this.checklistTitle;
+      this.saveChecklist();
       //  this.$emit("save-todo", { ...this.checklist });
     },
     addTodo() {
       if (!this.checklist.todos) this.checklist.todos = [];
       this.checklist.todos.push({ ...this.todo });
-      this.saveChecklist()
+      this.saveChecklist();
       // this.$emit("save-todo", { ...this.checklist });
       this.todo = {
         txt: "",
@@ -93,22 +119,24 @@ export default {
     editTodo(todo) {
       const idx = this.checklist.todos.findIndex(({ id }) => id === todo.id);
       this.checklist.todos.splice(idx, 1, todo);
-      this.saveChecklist()
+      this.saveChecklist();
       // this.$emit("save-todo", { ...this.checklist });
     },
-    toggleChecked(todoId){
-      const checkBox = document.getElementById(todoId);
+    toggleChecked(todo) {
+      const checkBox = document.getElementById(todo.id);
       // const checkBox = this.$refs[todoId]
       console.log(checkBox);
-      checkBox.checked = !checkBox.checked
+      if (checkBox.checked) todo.isDone = true;
+      else todo.isDone = false;
 
+      this.saveChecklist();
     },
-    deleteChecklist(){
+    deleteChecklist() {
       this.$emit("delete-checklist", this.checklist.id);
     },
-    saveChecklist(){
-       this.$emit("save-todo", { ...this.checklist });
-    }
+    saveChecklist() {
+      this.$emit("save-todo", { ...this.checklist });
+    },
   },
   components: {
     editableText,
