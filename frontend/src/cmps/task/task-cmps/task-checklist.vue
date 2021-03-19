@@ -12,12 +12,12 @@
       />
       <button @click="deleteChecklist">Delete</button>
     </div>
-      <progress id="file" value="32" max="100">  </progress> 92%
+      <progress id="file" value="32" max="100">  </progress> 
  
     <form>
       <ul class="todos clean-list">
         <li v-for="todo in checklist.todos" :key="todo.id">
-          <input type="checkbox" :id="todo.id" :name="todo.id" />
+          <input type="checkbox" :id="todo.id" :ref="todo.id" :name="todo.id" @click="toggleChecked(todo.id)" />
           <label :for="todo.id" v-if="!isEditTodoOpen" @click="openEditTodo">
             {{ todo.txt }}
           </label>
@@ -79,7 +79,6 @@ export default {
       this.checklist.title = this.checklistTitle
       this.saveChecklist()
       //  this.$emit("save-todo", { ...this.checklist });
-
     },
     addTodo() {
       if (!this.checklist.todos) this.checklist.todos = [];
@@ -96,6 +95,13 @@ export default {
       this.checklist.todos.splice(idx, 1, todo);
       this.saveChecklist()
       // this.$emit("save-todo", { ...this.checklist });
+    },
+    toggleChecked(todoId){
+      const checkBox = document.getElementById(todoId);
+      // const checkBox = this.$refs[todoId]
+      console.log(checkBox);
+      checkBox.checked = !checkBox.checked
+
     },
     deleteChecklist(){
       this.$emit("delete-checklist", this.checklist.id);
