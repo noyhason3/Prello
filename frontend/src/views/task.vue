@@ -44,32 +44,32 @@
         class="drag-uploader"
       />
 
-      <ul class="clean-list">
-        <draggable
-          v-model="task.checklists"
-          group="checklists"
-          @start="drag = true"
-          @end="drag = false"
-          animation="150"
-          empty-insert-threshold="50"
-          ghost-class="ghost"
-          chosen-class="chosen"
-          drag-class="drag"
-          draggable=".checklist-container"
+      <draggable
+        v-model="task.checklists"
+        group="checklists"
+        @start="drag = true"
+        @end="drag = false"
+        animation="150"
+        empty-insert-threshold="50"
+        ghost-class="ghost"
+        chosen-class="chosen"
+        drag-class="drag"
+        draggable=".checklist-container"
+        tag="ul"
+        class="clean-list"
+      >
+        <li
+          v-for="checklist in task.checklists"
+          :key="checklist.id"
+          class="checklist-container"
         >
-          <li
-            v-for="checklist in task.checklists"
-            :key="checklist.id"
-            class="checklist-container"
-          >
-            <task-checklist
-              :checklist="checklist"
-              @save-todo="saveTodo"
-              @delete-checklist="deleteChecklist"
-            />
-          </li>
-        </draggable>
-      </ul>
+          <task-checklist
+            :checklist="checklist"
+            @save-todo="saveTodo"
+            @delete-checklist="deleteChecklist"
+          />
+        </li>
+      </draggable>
     </div>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
@@ -106,9 +106,6 @@ export default {
     //   console.log('loading attachments');
     //   return this.task.attachments
     // }
-  },
-  created() {
-    this.attachments = this.task.attachments;
   },
   methods: {
     setTitle(title) {

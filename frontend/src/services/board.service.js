@@ -18,6 +18,7 @@ function getEmptyTask() {
     }
 }
 
+
 function getEmptyGroup() {
     return {
         "title": "",
