@@ -18,7 +18,7 @@
     <div class="task-main">
       <task-title v-model="task.title" />
 
-      <h6>In list: {{ this.task.group.title }}</h6>
+      <!-- <h6>In list: {{ this.task.group.title }}</h6> -->
 
       <div v-if="task" class="task-info">
         <member-list :members="task.members" />
@@ -190,11 +190,11 @@ export default {
     dragOver(ev) {
       if(this.drag) return;
       this.isDragOver = true;
-      this.drag = false;
+      // this.drag = false;
     },
     notDragOver() {
       this.isDragOver = false;
-      this.drag = false;
+      // this.drag = false;
     },
   },
   components: {

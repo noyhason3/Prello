@@ -34,6 +34,7 @@ export default {
         const res = await uploadImg(file);
         this.isLoading = false;
         this.saveAttachment(res.url)
+        console.log('res:', res)
       } catch (err) {
         console.log('Couldn\'t load image');
       } finally {
