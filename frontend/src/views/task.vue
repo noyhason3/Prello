@@ -18,7 +18,7 @@
     <div class="task-main">
       <task-title v-model="task.title" />
 
-      <h6 contenteditable="true">In list: {{ this.task.group.title }}</h6>
+      <h6>In list: {{ this.task.group.title }}</h6>
 
       <div v-if="task" class="task-info">
         <member-list :members="task.members" />
@@ -38,7 +38,8 @@
         @input="setDescription"
       />
 
-      <task-attachment :attachments="attachments" />
+      <task-attachment :attachments="attachments" 
+      @save-attachments="saveAttachments"/>
       <file-drag-uploader
         v-if="isDragOver"
         :isDragOver="isDragOver"
@@ -107,7 +108,6 @@ export default {
       return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
     },
     attachments() {
-      console.log("loading attachments");
       return this.task.attachments;
     },
   },
@@ -169,13 +169,21 @@ export default {
     togglePopup(str) {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
-      console.log(this.isLabelOpen);
     },
     openLabelPopup() {
       this.isLabelOpen = true;
     },
-    saveAttachments(attachment) {
+    addAttachment(attachment) {
       this.task.attachments.push(attachment);
+      this.saveTask(this.task);
+    },
+    saveAttachments(attachments) {
+      this.task.attachments = attachments;
+      this.saveTask(this.task);
+    },
+    removeAttachment(attachmentId) {
+      const attachmentIdx = this.task.attachments.findIndex(({id}) => attachmentId===id)
+      this.task.attachments.splice(attachmentIdx,1);
       this.saveTask(this.task);
     },
     dragOver(ev) {
