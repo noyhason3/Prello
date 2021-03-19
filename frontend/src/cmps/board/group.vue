@@ -11,7 +11,8 @@
       group="tasks"
       @start="drag = true"
       @end="drag = false"
-      :empty-insert-threshold="100"
+      :move="updateBoard"
+      empty-insert-threshold="5"
       draggable=".task-preview"
       class="clean-list group-tasks-wrapper"
       tag="ul"
@@ -71,7 +72,11 @@ export default {
     },
     addTask() {
       // this.newTask.group = { id: this.group.id, title: this.group.title };
-      this.$store.commit({ type: "saveTask", task: this.newTask });
+      this.$store.commit({
+        type: "saveTask",
+        groupId: this.group.id,
+        task: this.newTask,
+      });
       this.newTask = boardService.getEmptyTask();
       this.isAddNewTask = false;
       console.log("Group component - line 49 - this.newTask", this.newTask);
@@ -86,7 +91,7 @@ export default {
       // const task = { id: taskId, inGroup: this.group.id };//TODO:fchange funcction
       const ans = await boardService.removeTask({
         boardId: this.boardId,
-        task,
+        taskId,
       });
       this.saveGroup(ans.group);
     },
@@ -96,14 +101,24 @@ export default {
     removeGroup() {
       this.$store.commit({ type: "removeGroup", groupId: this.group.id });
     },
-    onDrag(evt) {
-      console.log("🚀 ~ file: group.vue ~ line 88 ~ onDrag ~ evt", evt);
-      const dragRect = evt.draggedRect;
-    },
-    startDrag(ev, drag) {
-      const rect = ev.item.getBoundingClientRect();
-      this.ghostRect = ev.item.getBoundingClientRect();
-      drag = true;
+    // onDrag(evt) {
+    //   console.log("🚀 ~ file: group.vue ~ line 88 ~ onDrag ~ evt", evt);
+    //   const dragRect = evt.draggedRect;
+    // },
+    // startDrag(ev, drag) {
+    //   const rect = ev.item.getBoundingClientRect();
+    //   this.ghostRect = ev.item.getBoundingClientRect();
+    //   drag = true;
+    // },
+    updateBoard(ev) {
+      const { draggedContext, relatedContext } = ev;
+      if (
+        draggedContext.element.id ===
+        relatedContext.list[draggedContext.index]?.id
+      ) {
+        //console.log("Moving to same container");
+        return false;
+      }
     },
   },
   components: { taskPreview, editableText, draggable },

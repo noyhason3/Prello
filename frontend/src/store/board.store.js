@@ -22,8 +22,8 @@ export const boardStore = {
             console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
             state.task = task;
         },
-        async saveTask(state, { task }) {
-            const ans = await boardService.saveTask({ boardId: state.board._id, task })
+        async saveTask(state, { groupId, task }) {
+            const ans = await boardService.saveTask({ boardId: state.board._id, groupId, task })
             //if (state.task && ans.task.id === state.task.id) this.commit({ type: 'setCurrTask', task: ans.task })
             this.commit({ type: 'setBoard', board: ans.board });
         },
@@ -42,7 +42,7 @@ export const boardStore = {
             //     board.groups.push(group);
             // }
 
-            const board = await boardService.saveGroup(group)
+            const board = await boardService.saveGroup({ boardId: state.board._id, group })
             this.commit({ type: 'setBoard', board });
         },
         async removeGroup(state, { groupId }) {

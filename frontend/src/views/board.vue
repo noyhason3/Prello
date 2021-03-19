@@ -24,8 +24,9 @@
         group="tasks"
         @start="drag = true"
         @end="drag = false"
-        empty-insert-threshold="500"
-        draggable=".group-tasks-preview"
+        @move="console.log('moving')"
+        empty-insert-threshold="5000"
+        draggable=".task-preview"
         class="clean-list group-container"
         tag="li"
       >

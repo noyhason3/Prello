@@ -90,7 +90,7 @@ const DEMO_BOARD = {
                         {
                             id: 'a103',
                             title: 'smile!',
-                            url:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gnome-face-smile-big.svg/1024px-Gnome-face-smile-big.svg.png',
+                            url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gnome-face-smile-big.svg/1024px-Gnome-face-smile-big.svg.png',
                             createdAt: '1616152734274',
                         },
                     ],
@@ -437,12 +437,10 @@ async function getTask({ board, taskId }) {
     else return Promise.reject()
 }
 
-async function saveTask({ boardId, task }) {
-    const miniGroup = task.group
-    delete task.group
-    console.log("file: board.service.js - line 453 - saveTask - task", task)
+async function saveTask({ boardId, groupId, task }) {
     const board = gBoards.find(savedBoard => savedBoard._id === boardId)
-    const group = board.groups.find((group) => group.id === miniGroup.id);
+    if (groupId) var group = board.groups.find(savedGroup => savedGroup.id === groupId)
+    else group = board.groups.find(savedGroup => savedGroup.tasks.some(savedTask => savedTask.id === task.id))
     if (task.id) {
         //update
         console.log('Updating task', task);
@@ -455,15 +453,13 @@ async function saveTask({ boardId, task }) {
         group.tasks.push(task);
     }
     storageService.put(DB_KEY, board)
-    const taskCopy = { ...task, group: miniGroup }
-    return Promise.resolve({ board, task: taskCopy })
+    return Promise.resolve({ board, task })
 }
 
-async function removeTask({ boardId, task }) {
-    const { id, inGroup } = task
+async function removeTask({ boardId, taskId }) {
     const board = gBoards.find(savedBoard => savedBoard._id === boardId)
-    const group = board.groups.find(savedGroup => savedGroup.id === inGroup)
-    const taskIdx = group.tasks.findIndex((savedTask) => savedTask.id === id);
+    const group = board.groups.find(savedGroup => savedGroup.tasks.some(savedTask => savedTask.id === taskId))
+    const taskIdx = group.tasks.findIndex((savedTask) => savedTask.id === taskId);
     if (taskIdx < 0) return;
     group.tasks.splice(taskIdx, 1);
     saveBoard(board)
@@ -474,12 +470,24 @@ function getEmptyTask() {
     return {
         title: '',
         description: '',
+        //REMEMBER TO DELETE
+        attachments: [],
+        checklists: []
     }
 }
 
-async function saveGroup(group) {
-    const boardId = group.board.id
-    delete group.board
+async function getGroup({ board, taskId }) {
+    console.log("file: board.service.js - line 483 - getGroup - taskId", taskId)
+    //const board = gBoards.find(savedBoard => savedBoard._id === boardId)
+    console.log("file: board.service.js - line 484 - getGroup - board", board)
+    const group = board.groups.find(({ tasks }) => {
+        return tasks.some(({ id }) => id === taskId);
+    });
+    console.log('group:', group);
+    return group
+}
+
+async function saveGroup({ boardId, group }) {
     const board = gBoards.find(savedBoard => savedBoard._id === boardId)
     if (group.id) {//update
         console.log('Updating group', group);
