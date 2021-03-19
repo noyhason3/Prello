@@ -9,8 +9,11 @@
       <h2 class="task-title">{{ task.title }}</h2>
       <div
         class="btn task-edit"
+        @mouseover="isControlOpen = true"
+        @mouseleave="isControlOpen = false"
       >
         <span>🖊</span>
+        <task-control v-if="isControlOpen" class="task-control" />
       </div>
     </div>
     <div v-if="taskChecklists">
@@ -19,7 +22,7 @@
     <div class="task-info-preview">
       <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
       <div v-if="isTaskDescription">📄</div>
-      <div v-if="attachmentCount">📎{{attachmentCount}}</div>
+      <div v-if="attachmentCount">📎{{ attachmentCount }}</div>
       <member-list v-if="taskMemebers" :members="taskMemebers" />
     </div>
   </section>
@@ -33,6 +36,11 @@ import taskControl from "@/cmps/task/task-cmps/task-control.vue";
 export default {
   props: {
     task: Object,
+  },
+  data() {
+    return {
+      isControlOpen: false,
+    };
   },
   methods: {
     removeTask(ev) {
@@ -53,19 +61,19 @@ export default {
     },
 
     isTaskDuedate() {
-      return;
+      return false;
       //return this.task.duedate;
     },
     taskMemebers() {
-      if (!this.task.members?.length) return;
+      if (!this.task.members?.length) return false;
       return this.task.members;
     },
     taskLabelIds() {
-      if (!this.task.labelIds?.length) return;
+      if (!this.task.labelIds?.length) return false;
       return this.task.labelIds;
     },
     taskChecklists() {
-      if(!this.task.checklists) return;
+      if (!this.task.checklists) return;
       const todosTotals = this.task.checklists.reduce(
         (acc, checklist) => {
           acc.complete += checklist.todos.filter((todo) => todo.isDone).length;

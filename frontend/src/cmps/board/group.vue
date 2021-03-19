@@ -83,7 +83,8 @@ export default {
       console.log("taskIdx:", taskIdx);
       if (taskIdx < 0) return;
       group.tasks.splice(taskIdx, 1);
-      this.saveGroup(group);
+      // boardService.removeTask({ boardId: this.boardId, taskId });
+      // this.saveGroup(group);
     },
     saveGroup(group) {
       this.$store.commit({ type: "saveGroup", group });
