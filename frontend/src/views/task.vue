@@ -1,5 +1,6 @@
 <template>
   <section class="task" v-if="task">
+    <button @click="closeTask()" class="btn close">X</button>
     <!-- <pre>{{ task }}</pre> -->
     <popup-label
       v-if="isLabelOpen"
@@ -163,6 +164,10 @@ export default {
       this.ghostRect = ev.item.getBoundingClientRect();
       drag = true;
     },
+    closeTask(){
+      const boardId = this.$route.params.boardId;
+      this.$router.push('/board/'+boardId)
+    }
   },
   components: {
     draggable,
