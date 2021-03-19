@@ -33,7 +33,7 @@ export default {
         this.isLoading = true;
         const res = await uploadImg(file);
         this.isLoading = false;
-        saveAttachment(res.url)
+        this.saveAttachment(res.url)
       } catch (err) {
         console.log('Couldn\'t load image');
       } finally {
@@ -41,7 +41,7 @@ export default {
       }
     },
     saveAttachment(url){
-this.attachments.push(res.url);
+        this.attachments.push(url);
         this.$emit("save-attachments", this.attachments);
     }
   },
