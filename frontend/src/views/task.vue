@@ -18,7 +18,7 @@
     <div class="task-main">
       <task-title v-model="task.title" />
 
-      <h6>In list: {{ this.task.group.title }}</h6>
+      <!-- <h6>In list: {{ this.task.group.title }}</h6> -->
 
       <div v-if="task" class="task-info">
         <member-list :members="task.members" />
