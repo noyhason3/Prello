@@ -400,7 +400,7 @@ export default {
     saveTask
 }
 
-loadDemoBoard()
+if (!localStorage.getItem(DB_KEY)) loadDemoBoard()
 
 
 async function query(id) {
@@ -433,6 +433,7 @@ async function saveTask({ boardId, task }) {
         task.id = utilService.makeId();
         group.tasks.push(task);
     }
+    storageService.put(DB_KEY, board)
     return Promise.resolve({ boardAns: board, taskAns: task })
 }
 

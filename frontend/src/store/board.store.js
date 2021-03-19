@@ -22,26 +22,26 @@ export const boardStore = {
             state.task = task;
         },
         async saveTask(state, { task }) {
-            const board = JSON.parse(JSON.stringify(state.board));
-            console.log("🚀 ~ file: board.store.js ~ line 26 ~ saveTask ~ board", board)
-            const group = board.groups.find((group) => group.id === task.group.id);
-            if (task.id) {
-                //update
-                console.log('Updating task', task);
-                const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
-                group.tasks.splice(taskIdx, 1, task);
-            } else {
-                //add
-                console.log('Adding task', task);
-                task.id = utilService.makeId();
-                group.tasks.push(task);
-            }
-            if (task.id === state.task?.id) this.commit({ type: 'setCurrTask', task })
-            // const { boardAns, taskAns } = await boardService.saveTask({ boardId: state.board._id, task })
-            // console.log("🚀 ~ file: board.store.js ~ line 40 ~ saveTask ~ boardAns, taskAns", boardAns, taskAns)
-            // if (taskAns.id === state.task.id) this.commit({ type: 'setCurrTask', task })
+            // const board = JSON.parse(JSON.stringify(state.board));
+            // console.log("🚀 ~ file: board.store.js ~ line 26 ~ saveTask ~ board", board)
+            // const group = board.groups.find((group) => group.id === task.group.id);
+            // if (task.id) {
+            //     //update
+            //     console.log('Updating task', task);
+            //     const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
+            //     group.tasks.splice(taskIdx, 1, task);
+            // } else {
+            //     //add
+            //     console.log('Adding task', task);
+            //     task.id = utilService.makeId();
+            //     group.tasks.push(task);
+            // }
+            // if (task.id === state.task?.id) this.commit({ type: 'setCurrTask', task })
 
-            this.commit({ type: 'setBoard', board });
+            const { boardAns, taskAns } = await boardService.saveTask({ boardId: state.board._id, task })
+            console.log("🚀 ~ file: board.store.js ~ line 40 ~ saveTask ~ boardAns, taskAns", boardAns, taskAns)
+            if (state.task && taskAns.id === state.task.id) this.commit({ type: 'setCurrTask', task: tasnAns })
+            this.commit({ type: 'setBoard', board: boardAns });
 
             //console.log('Board store ~ save task ~ line 34 ~ Board', board);
             //console.log("board store ~ line 37 ~ saveTask ~ task", task)
