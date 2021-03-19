@@ -24,8 +24,8 @@
         <draggable
           v-model="checklist.todos"
           group="todos"
-          @start="drag = true"
-          @end="drag = false"
+          @start="setDrag(true)"
+          @end="setDrag(false)"
           animation="150"
           emptyInsertThreshold="50"
           ghost-class="ghost"
@@ -92,7 +92,7 @@ export default {
       isAddTodoOpen: false,
       isEditTodoOpen: false,
       isDragOver: false,
-      drag: false,
+      dragTodo: false,
     };
   },
   computed: {
@@ -151,9 +151,9 @@ export default {
     saveChecklist() {
       this.$emit("save-todo", { ...this.checklist });
     },
-    dragOver(ev) {
-      if (this.drag) return;
-      this.isDragOver = true;
+    setDrag(isDrag){
+      this.dragTodo = isDrag
+      this.$emit('toggle-drag', isDrag)
     },
   },
   components: {

@@ -75,6 +75,7 @@
               :checklist="checklist"
               @save-todo="saveTodo"
               @delete-checklist="deleteChecklist"
+              @toggle-drag="toggleDrag"
             />
           </li>
         </draggable>
@@ -216,6 +217,9 @@ export default {
     },
     notDragOver() {
       this.isDragOver = false;
+    },
+    toggleDrag(isDrag) {
+      this.drag = isDrag;
     },
   },
   // watch: {
