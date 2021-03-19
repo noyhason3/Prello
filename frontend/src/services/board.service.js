@@ -1,38 +1,15 @@
-import utilService from './util.service';
+import utilService from "./util.service";
+import storageService from './async-storage-service.js'
 
-export default {
-    getDemoBoard,
-    getEmptyTask,
-    getEmptyGroup,
-};
-
-function getDemoBoard() {
-    return gBoard;
-}
-
-function getEmptyTask() {
-    return {
-        title: '',
-        description: '',
-    };
-}
-
-function getEmptyGroup() {
-    return {
-        title: '',
-        tasks: [],
-        style: {},
-    };
-}
-
-const gBoard = {
-    _id: 'b101',
-    title: 'Robot dev proj',
-    createdAt: 1589983468418,
-    createdBy: {
-        _id: 'u101',
-        fullname: 'Abi Abambi',
-        imgUrl: 'http://some-img',
+const DB_KEY = 'boards_db'
+const DEMO_BOARD = {
+    "_id": "b101",
+    "title": "Robot dev proj",
+    "createdAt": 1589983468418,
+    "createdBy": {
+        "_id": "u101",
+        "fullname": "Abi Abambi",
+        "imgUrl": "http://some-img"
     },
     style: {},
     labels: [
@@ -421,6 +398,7 @@ const gBoard = {
                 fullname: 'Abi Abambi',
                 imgUrl: 'http://some-img',
             },
+<<<<<<< HEAD
             task: {
                 id: 'c101',
                 title: 'Replace Logo',
@@ -428,6 +406,86 @@ const gBoard = {
         },
     ],
 };
+=======
+            "task": {
+                "id": "c101",
+                "title": "Replace Logo"
+            }
+        }
+    ]
+}
+
+var gBoards = []
+
+export default {
+    loadDemoBoard,
+    getEmptyTask,
+    getEmptyGroup,
+    query,
+    saveTask
+}
+
+if (!localStorage.getItem(DB_KEY)) loadDemoBoard()
+
+
+async function query(id) {
+    const boards = await storageService.query(DB_KEY)
+    gBoards = boards
+    if (!id) return gBoards
+    const board = boards.find(savedBoard => savedBoard._id === id)
+    return board
+}
+
+async function addTask({ boardId, task }) {
+}
+
+async function updateTask({ boardId, task }) {
+
+}
+
+async function saveTask({ boardId, task }) {
+    const board = gBoards.find(savedBoard => savedBoard._id === boardId)
+    const group = board.groups.find((group) => group.id === task.group.id);
+    delete task.group
+    if (task.id) {
+        //update
+        console.log('Updating task', task);
+        const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
+        group.tasks.splice(taskIdx, 1, task);
+    } else {
+        //add
+        console.log('Adding task', task);
+        task.id = utilService.makeId();
+        group.tasks.push(task);
+    }
+    storageService.put(DB_KEY, board)
+    return Promise.resolve({ boardAns: board, taskAns: task })
+}
+
+function getEmptyTask() {
+    return {
+        title: '',
+        description: '',
+    }
+}
+
+
+function getEmptyGroup() {
+    return {
+        "title": "",
+        "tasks": [
+        ],
+        "style": {}
+    }
+}
+
+function loadDemoBoard() {
+    localStorage.setItem(DB_KEY, JSON.stringify([DEMO_BOARD]))
+}
+
+
+
+>>>>>>> 814842f6075526959c242ee7740f998c6d12a017
 
 // function createTask({ type, content }) {
 
