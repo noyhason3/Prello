@@ -22,9 +22,9 @@ export const boardStore = {
             state.task = task;
         },
         async saveTask(state, { task }) {
-            const { boardAns, taskAns } = await boardService.saveTask({ boardId: state.board._id, task })
-            if (state.task && taskAns.id === state.task.id) this.commit({ type: 'setCurrTask', task: tasnAns })
-            this.commit({ type: 'setBoard', board: boardAns });
+            const ans = await boardService.saveTask({ boardId: state.board._id, task })
+            if (state.task && ans.task.id === state.task.id) this.commit({ type: 'setCurrTask', task: ans.task })
+            this.commit({ type: 'setBoard', board: ans.board });
         },
         saveBoardLabels(state, { labels }) {
             const board = JSON.parse(JSON.stringify(state.board));

@@ -77,15 +77,18 @@ export default {
       console.log("Group component - line 49 - this.newTask", this.newTask);
       console.log("Group component - line 50 - this.group", this.group);
     },
-    removeTask(taskId) {
-      const group = JSON.parse(JSON.stringify(this.group));
+    async removeTask(taskId) {
+      //var group = JSON.parse(JSON.stringify(this.group));
       // const taskIdx = group.tasks.findIndex((task) => task.id === taskId);
       // console.log("taskIdx:", taskIdx);
       // if (taskIdx < 0) return;
       // group.tasks.splice(taskIdx, 1);
-      const task = { id: taskId, inGroup: group };
-      boardService.removeTask({ boardId: this.boardId, task });
-      this.saveGroup(group);
+      const task = { id: taskId, inGroup: this.group.id };
+      const ans = await boardService.removeTask({
+        boardId: this.boardId,
+        task,
+      });
+      this.saveGroup(ans.group);
     },
     saveGroup(group) {
       this.$store.commit({ type: "saveGroup", group });
