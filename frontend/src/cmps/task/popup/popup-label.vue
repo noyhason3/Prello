@@ -2,7 +2,7 @@
   <section>
     <pop-up v-if="!isPopupEdit">
       <div slot="header" class="flex space-between">
-        <h3>Labels</h3>
+        <h2>Labels</h2>
         <button @click="togglePopupLabel()">X</button>
       </div>
       <div slot="main">

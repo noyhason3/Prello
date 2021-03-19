@@ -13,6 +13,8 @@
       @set-checklist="saveChecklist"
       @set-task-labels="setTaskLabels"
       @toggle-popup="togglePopup"
+      @save-attachments="saveAttachments"
+      :attachments="attachments"
     />
     <!-- <task-cover /> -->
     <div class="task-main">
@@ -73,6 +75,7 @@
               :checklist="checklist"
               @save-todo="saveTodo"
               @delete-checklist="deleteChecklist"
+              @toggle-drag="toggleDrag"
             />
           </li>
         </draggable>
@@ -217,6 +220,9 @@ export default {
     },
     notDragOver() {
       this.isDragOver = false;
+    },
+    toggleDrag(isDrag) {
+      this.drag = isDrag;
     },
   },
   // watch: {

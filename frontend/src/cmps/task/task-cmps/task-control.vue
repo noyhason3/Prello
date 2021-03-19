@@ -19,7 +19,13 @@
     <button @click="toggleGeneralPopup('Label')">Labels</button>
 
     <!-- <button>Due date</button> -->
-    <button @click="toggleGeneralPopup('Attachment')">Attachement</button>
+    <button @click="togglePopup('Attachment')">Attachement</button>
+    <popup-attachment
+      v-if="isAttachmentOpen"
+      @save-attachments="saveAttachments"
+      @toggle-popup="togglePopup"
+      :attachments="attachments"
+    />
     <!-- <button>Cover</button> -->
   </section>
 </template>
@@ -27,14 +33,18 @@
 <script>
 import popupMember from "@/cmps/task/popup/popup-member";
 import popupChecklist from "@/cmps/task/popup/popup-checklist.vue";
+import popupAttachment from "@/cmps/task/popup/popup-attachment.vue";
 
 export default {
+  props: {
+    attachments: Array,
+  },
   data() {
     return {
       isMemberOpen: false,
       isLabelOpen: false,
       isChecklistOpen: false,
-      isAttachmentOpen:false
+      isAttachmentOpen: false,
     };
   },
   methods: {
@@ -43,8 +53,8 @@ export default {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
     },
-    toggleGeneralPopup(str){
-      this.$emit('toggle-popup', str)
+    toggleGeneralPopup(str) {
+      this.$emit("toggle-popup", str);
     },
     assignMember(member) {
       this.$emit("assign-member", member);
@@ -55,10 +65,15 @@ export default {
     setTaskLabels(labelIds) {
       this.$emit("set-task-labels", labelIds);
     },
+    saveAttachments(attachments) {
+      this.$emit("save-attachments", attachments);
+      this.togglePopup("Attachment");
+    },
   },
   components: {
     popupMember,
     popupChecklist,
+    popupAttachment,
   },
 };
 </script>

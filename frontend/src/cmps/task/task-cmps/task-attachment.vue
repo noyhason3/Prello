@@ -28,7 +28,8 @@
           >
             Edit
           </button>
-          <button class="btn attachment-action">🚃 Make cover</button>
+          <!-- <button class="btn attachment-action">🚃 Make cover</button> TODO
+          <button class="btn attachment-action">🚃 Remove cover</button> -->
         </div>
       </li>
     </ul>
