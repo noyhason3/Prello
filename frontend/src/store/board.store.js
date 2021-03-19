@@ -4,7 +4,7 @@ export const boardStore = {
     state: {
         board: null,
         boardList: null,
-        task: null,
+        //task: null,
     },
     getters: {
         currBoard(state) {
@@ -18,14 +18,13 @@ export const boardStore = {
         setBoard(state, { board }) {
             state.board = board;
         },
-        setCurrTask(state, { task }) {
-            console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
-            state.task = task;
-        },
+        // setCurrTask(state, { task }) {
+        //     console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
+        //     state.task = task;
+        // },
         async saveTask(state, { task }) {
             const ans = await boardService.saveTask({ boardId: state.board._id, task })
-            console.log("🚀 ~ file: board.store.js ~ line 26 ~ saveTask ~ ans", ans.task)
-            if (state.task && ans.task.id === state.task.id) this.commit({ type: 'setCurrTask', task: ans.task })
+            //if (state.task && ans.task.id === state.task.id) this.commit({ type: 'setCurrTask', task: ans.task })
             this.commit({ type: 'setBoard', board: ans.board });
         },
         saveBoardLabels(state, { labels }) {

@@ -413,6 +413,7 @@ export default {
     getEmptyTask,
     getEmptyGroup,
     query,
+    getTask,
     saveTask,
     removeTask,
     saveGroup,
@@ -430,6 +431,12 @@ async function query(id) {
     return board
 }
 
+async function getTask({ board, taskId }) {
+    const group = board.groups.find(group => group.tasks.some(task => task.id === taskId))
+    const task = group.tasks.find(task => task.id === taskId)
+    if (task) return Promise.resolve(task)
+    else return Promise.reject()
+}
 
 async function saveTask({ boardId, task }) {
     const miniGroup = task.group
