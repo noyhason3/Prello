@@ -42,6 +42,8 @@
           v-else
           v-model="newGroup.title"
           :type="'title'"
+      :isEditFirst="true"
+
           :elementType="'group'"
           @close-textarea="isAddNewGroup = false"
           @input="addGroup"
@@ -76,6 +78,7 @@ export default {
   },
   methods: {
     addGroup() {
+      if(!this.newGroup.title)return;
       this.newGroup.board = { id: this.board._id };
       this.$store.commit({ type: "saveGroup", group: this.newGroup });
       this.newGroup = boardService.getEmptyGroup();

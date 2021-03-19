@@ -45,6 +45,7 @@
       <file-drag-uploader
         v-if="isDragOver"
         :isDragOver="isDragOver"
+        :attachments="attachments"
         @save-attachments="saveAttachments"
         @not-drag-over="notDragOver"
         class="drag-uploader"

@@ -39,6 +39,8 @@
       v-else
       v-model="newTask.title"
       :type="'title'"
+      :elementType="'task'"
+      :isEditFirst="true"
       @close-textarea="isAddNewTask = false"
       @input="addTask"
     />
@@ -71,6 +73,7 @@ export default {
       this.$router.push(`/board/${this.boardId}/${task.id}`);
     },
     addTask() {
+      if(!this.newTask.title)return;
       // this.newTask.group = { id: this.group.id, title: this.group.title };
       this.$store.commit({
         type: "saveTask",

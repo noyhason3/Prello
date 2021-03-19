@@ -1,13 +1,15 @@
 <template>
   <section class="editable-text">
     <form v-if="isEditing" @submit.prevent="setText">
-      <textarea ref="input" :value="value"></textarea>
+      <textarea ref="input" :value="value" :placeholder="placeholder"></textarea>
       <button>save</button>
       <button type="button" @click.prevent="closeTextarea">X</button>
     </form>
     <template v-else>
       <p v-if="value" @click="editDescription">{{ value }}</p>
-      <p v-else @click="editDescription">Enter a {{ type }} for this {{elementType}}...</p>
+      <p v-else @click="editDescription">
+        Enter a {{ type }} for this {{ elementType }}...
+      </p>
     </template>
   </section>
 </template>
@@ -17,10 +19,10 @@ export default {
   props: {
     // currTaskDescription: String,
     // task: Object,
-    isEditFirst:Boolean,
+    isEditFirst: Boolean,
     type: "",
     value: String,
-    elementType:String
+    elementType: String,
   },
   data() {
     return {
@@ -30,9 +32,9 @@ export default {
       isEditing: false,
     };
   },
-  created(){
+  created() {
     console.log();
-    if(this.isEditFirst) this.isEditing = this.isEditFirst
+    if (this.isEditFirst) this.isEditing = this.isEditFirst;
   },
   methods: {
     editDescription() {
@@ -55,6 +57,14 @@ export default {
       this.isEditing = false;
       this.$emit("close-textarea");
     },
+  },
+  computed:{
+    placeholder(){
+      return `Enter a ${ this.type } for this ${ this.elementType }..`
+    }
+  },
+  mounted() {
+    if (this.$refs?.input) this.$refs.input.focus();
   },
 };
 </script>

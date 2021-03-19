@@ -4,7 +4,9 @@
         height: 100px;
         
     }
-      
+    &.loader{
+        background-color: transparent;
+    }  
     .attachment-img {
         width: 150px;
         object-fit: contain;
