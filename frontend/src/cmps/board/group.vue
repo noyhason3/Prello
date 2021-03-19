@@ -79,12 +79,13 @@ export default {
     },
     removeTask(taskId) {
       const group = JSON.parse(JSON.stringify(this.group));
-      const taskIdx = group.tasks.findIndex((task) => task.id === taskId);
-      console.log("taskIdx:", taskIdx);
-      if (taskIdx < 0) return;
-      group.tasks.splice(taskIdx, 1);
-      // boardService.removeTask({ boardId: this.boardId, taskId });
-      // this.saveGroup(group);
+      // const taskIdx = group.tasks.findIndex((task) => task.id === taskId);
+      // console.log("taskIdx:", taskIdx);
+      // if (taskIdx < 0) return;
+      // group.tasks.splice(taskIdx, 1);
+      const task = { id: taskId, inGroup: group };
+      boardService.removeTask({ boardId: this.boardId, task });
+      this.saveGroup(group);
     },
     saveGroup(group) {
       this.$store.commit({ type: "saveGroup", group });
