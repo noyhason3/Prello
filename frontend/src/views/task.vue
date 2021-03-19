@@ -1,6 +1,7 @@
 <template>
-  <section class="task" v-if="task">
-    <!-- <pre>{{ task }}</pre> -->
+  <section class="task" v-if="task" @dragover.prevent="dragOver">
+    <button @click="closeTask" class="btn close">X</button>
+    <!-- <pre>{{ task.attachments }}</pre> -->
     <popup-label
       v-if="isLabelOpen"
       @set-task-labels="setTaskLabels"
@@ -17,7 +18,7 @@
     <div class="task-main">
       <task-title v-model="task.title" />
 
-      <h6 contenteditable="true">In list: {{ this.task.group.title }}</h6>
+      <!-- <h6>In list: {{ this.task.group.title }}</h6> -->
 
       <!-- :taskTitle="task.title"  @setTitle="setTitle" -->
       <div v-if="task" class="task-info">
@@ -34,10 +35,17 @@
       <h4>Description</h4>
       <editable-text v-model="task.description" :type="'description'" />
 
-      <!-- :currTaskDescription="task.description"
-      :task="task"
-      @setDescription="setDescription" -->
-      <!-- <task-attachment /> -->
+      <task-attachment
+        :attachments="attachments"
+        @save-attachments="saveAttachments"
+      />
+      <file-drag-uploader
+        v-if="isDragOver"
+        :isDragOver="isDragOver"
+        @save-attachments="saveAttachments"
+        @not-drag-over="notDragOver"
+        class="drag-uploader"
+      />
 
         <ul class="clean-list">
       <draggable
@@ -85,7 +93,8 @@ export default {
   data() {
     return {
       isLabelOpen: false,
-      ghostRect: null,
+      isDragOver: false,
+      drag: false,
     };
   },
   computed: {
@@ -154,14 +163,24 @@ export default {
     openLabelPopup() {
       this.isLabelOpen = true;
     },
-    onDrag(evt) {
-      console.log("🚀 ~ file: group.vue ~ line 88 ~ onDrag ~ evt", evt);
-      const dragRect = evt.draggedRect;
+    addAttachment(attachment) {
+      this.task.attachments.push(attachment);
+      this.saveTask(this.task);
     },
-    startDrag(ev, drag) {
-      const rect = ev.item.getBoundingClientRect();
-      this.ghostRect = ev.item.getBoundingClientRect();
-      drag = true;
+    saveAttachments(attachments) {
+      this.task.attachments = attachments;
+      this.saveTask(this.task);
+    },
+    removeAttachment(attachmentId) {
+      const attachmentIdx = this.task.attachments.findIndex(
+        ({ id }) => attachmentId === id
+      );
+      this.task.attachments.splice(attachmentIdx, 1);
+      this.saveTask(this.task);
+    },
+    dragOver(ev) {
+      if (this.drag) return;
+      this.isDragOver = true;
     },
   },
   components: {

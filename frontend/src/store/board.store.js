@@ -19,10 +19,12 @@ export const boardStore = {
             state.board = board;
         },
         setCurrTask(state, { task }) {
+            console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
             state.task = task;
         },
         async saveTask(state, { task }) {
             const ans = await boardService.saveTask({ boardId: state.board._id, task })
+            console.log("🚀 ~ file: board.store.js ~ line 26 ~ saveTask ~ ans", ans.task)
             if (state.task && ans.task.id === state.task.id) this.commit({ type: 'setCurrTask', task: ans.task })
             this.commit({ type: 'setBoard', board: ans.board });
         },
@@ -31,15 +33,16 @@ export const boardStore = {
             board.labels = labels;
             this.commit({ type: 'setBoard', board });
         },
-        saveGroup(state, { group }) {
-            const board = JSON.parse(JSON.stringify(state.board));
-            const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
-            if (group.id) {
-                board.groups.splice(groupIdx, 1, group);
-            } else {
-                group.id = utilService.makeId();
-                board.groups.push(group);
-            }
+        async saveGroup(state, { group }) {
+            // const board = JSON.parse(JSON.stringify(state.board));
+            // const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
+            // if (group.id) {
+            //     board.groups.splice(groupIdx, 1, group);
+            // } else {
+            //     group.id = utilService.makeId();
+            //     board.groups.push(group);
+            // }
+
             this.commit({ type: 'setBoard', board });
         },
         removeGroup(state, { groupId }) {

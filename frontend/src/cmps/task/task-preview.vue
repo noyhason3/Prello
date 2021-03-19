@@ -76,6 +76,10 @@ export default {
       if (!this.task.checklists) return;
       const todosTotals = this.task.checklists.reduce(
         (acc, checklist) => {
+          console.log(
+            "🚀 ~ file: task-preview.vue ~ line 79 ~ taskChecklists ~ this.task.checklists",
+            this.task.checklists
+          );
           acc.complete += checklist.todos.filter((todo) => todo.isDone).length;
           acc.total += checklist.todos.length;
 
