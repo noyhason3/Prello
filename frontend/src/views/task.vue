@@ -32,7 +32,11 @@
       </div>
 
       <h4>Description</h4>
-      <editable-text v-model="task.description" :type="'description'" />
+      <editable-text
+        v-model="task.description"
+        :type="'description'"
+        @input="setDescription"
+      />
 
       <task-attachment
         :attachments="attachments"
