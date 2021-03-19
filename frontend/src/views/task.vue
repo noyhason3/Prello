@@ -113,8 +113,16 @@ export default {
     //   console.log("group", group);
     //   return group;
     // },
-    group(taskId ) {
+    group(taskId) {
       const group = this.$store.getters.currBoard.groups.find(({ tasks }) => {
+        console.log(
+          "file: task.vue - line 121 - group - tasks.some(({ id }) => id === taskId)",
+          tasks.some((task) => {
+            console.log(task);
+            console.log(taskId);
+            task.id === taskId;
+          })
+        );
         return tasks.some(({ id }) => id === taskId);
       });
       console.log("group:", group);
