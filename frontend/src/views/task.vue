@@ -94,7 +94,7 @@ export default {
       isLabelOpen: false,
       ghostRect: null,
       isDragOver: false,
-      attachments:null
+      // attachments:null
     };
   },
   computed: {
@@ -104,10 +104,10 @@ export default {
     task() {
       return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
     },
-    // attachments(){
-    //   console.log('loading attachments');
-    //   return this.task.attachments
-    // }
+    attachments(){
+      console.log('loading attachments');
+      return this.task.attachments
+    }
   },
   created(){
     this.attachments = this.task.attachments;
@@ -120,7 +120,7 @@ export default {
       this.task.description = description;
     },
     assignMember(member) {
-      var task = JSON.parse(JSON.stringify(this.task));
+      var task = this.task;
       if (!task.members) task.members = [];
       if (
         task.members.some((assignedMember) => assignedMember._id === member._id)
@@ -190,9 +190,9 @@ export default {
     },
     saveAttachments(attachment) {
       this.task.attachments.push(attachment)
-      this.attachments = this.task.attachments;
-      console.log('task atts',this.task.attachments);
       this.saveTask(this.task);
+      // this.attachments = this.task.attachments;
+      console.log('task atts',this.task.attachments);
     },
   },
   components: {
