@@ -4,7 +4,7 @@ export const boardStore = {
     state: {
         board: null,
         boardList: null,
-        task: null,
+        //task: null,
     },
     getters: {
         currBoard(state) {
@@ -18,14 +18,13 @@ export const boardStore = {
         setBoard(state, { board }) {
             state.board = board;
         },
-        setCurrTask(state, { task }) {
-            console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
-            state.task = task;
-        },
+        // setCurrTask(state, { task }) {
+        //     console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
+        //     state.task = task;
+        // },
         async saveTask(state, { task }) {
             const ans = await boardService.saveTask({ boardId: state.board._id, task })
-            console.log("🚀 ~ file: board.store.js ~ line 26 ~ saveTask ~ ans", ans.task)
-            if (state.task && ans.task.id === state.task.id) this.commit({ type: 'setCurrTask', task: ans.task })
+            //if (state.task && ans.task.id === state.task.id) this.commit({ type: 'setCurrTask', task: ans.task })
             this.commit({ type: 'setBoard', board: ans.board });
         },
         saveBoardLabels(state, { labels }) {
@@ -43,14 +42,17 @@ export const boardStore = {
             //     board.groups.push(group);
             // }
 
+            const board = await boardService.saveGroup(group)
             this.commit({ type: 'setBoard', board });
         },
-        removeGroup(state, { groupId }) {
-            const board = JSON.parse(JSON.stringify(state.board));
-            const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
-            console.log('groupIdx:', groupIdx);
-            if (groupIdx < 0) return;
-            board.groups.splice(groupIdx, 1);
+        async removeGroup(state, { groupId }) {
+            // const board = JSON.parse(JSON.stringify(state.board));
+            // const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
+            // console.log('groupIdx:', groupIdx);
+            // if (groupIdx < 0) return;
+            // board.groups.splice(groupIdx, 1);
+
+            const board = await boardService.removeGroup({ groupId, boardId: state.board._id })
             this.commit({ type: 'setBoard', board });
         },
         // setBoardList(state, {boards}){

@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     addGroup() {
-      this.newGroup.board = { id: this.board.id };
+      this.newGroup.board = { id: this.board._id };
       this.$store.commit({ type: "saveGroup", group: this.newGroup });
       this.newGroup = boardService.getEmptyGroup();
       this.isAddNewGroup = false;
