@@ -22,7 +22,7 @@
     <div class="task-info-preview">
       <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
       <div v-if="isTaskDescription">📄</div>
-      <!-- <div v-if="isTaskAttachment">📎{{attachmentCount}}</div> -->
+      <div v-if="attachmentCount">📎{{ attachmentCount }}</div>
       <member-list v-if="taskMemebers" :members="taskMemebers" />
     </div>
   </section>
@@ -56,9 +56,8 @@ export default {
     isTaskDescription() {
       return this.task.description;
     },
-    isTaskAttachment() {
-      return false;
-      // return this.task.attachment?.length;
+    attachmentCount() {
+      return this.task.attachment?.length;
     },
 
     isTaskDuedate() {
@@ -74,6 +73,7 @@ export default {
       return this.task.labelIds;
     },
     taskChecklists() {
+      if (!this.task.checklists) return;
       const todosTotals = this.task.checklists.reduce(
         (acc, checklist) => {
           acc.complete += checklist.todos.filter((todo) => todo.isDone).length;
