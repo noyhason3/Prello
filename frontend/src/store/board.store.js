@@ -2,7 +2,7 @@ import boardService from '../services/board.service.js';
 import utilService from '../services/util.service.js';
 export const boardStore = {
     state: {
-        board: boardService.getDemoBoard(),
+        board: null,
         boardList: null,
         task: null,
     },
@@ -21,9 +21,9 @@ export const boardStore = {
         setCurrTask(state, { task }) {
             state.task = task;
         },
-        saveTask(state, { task }) {
+        async saveTask(state, { task }) {
             const board = JSON.parse(JSON.stringify(state.board));
-            // console.log(board);
+            console.log("🚀 ~ file: board.store.js ~ line 26 ~ saveTask ~ board", board)
             const group = board.groups.find((group) => group.id === task.group.id);
             if (task.id) {
                 //update
@@ -36,7 +36,11 @@ export const boardStore = {
                 task.id = utilService.makeId();
                 group.tasks.push(task);
             }
-            if (task.id === state.task.id) this.commit({ type: 'setCurrTask', task })
+            if (task.id === state.task?.id) this.commit({ type: 'setCurrTask', task })
+            // const { boardAns, taskAns } = await boardService.saveTask({ boardId: state.board._id, task })
+            // console.log("🚀 ~ file: board.store.js ~ line 40 ~ saveTask ~ boardAns, taskAns", boardAns, taskAns)
+            // if (taskAns.id === state.task.id) this.commit({ type: 'setCurrTask', task })
+
             this.commit({ type: 'setBoard', board });
 
             //console.log('Board store ~ save task ~ line 34 ~ Board', board);
