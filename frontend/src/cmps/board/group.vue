@@ -93,7 +93,8 @@ export default {
         boardId: this.boardId,
         taskId,
       });
-      this.saveGroup(ans.group);
+      console.log("file: group.vue - line 96 - removeTask - ans", ans);
+      this.saveGroup(ans.group); //Not necessary?
     },
     saveGroup(group) {
       this.$store.commit({ type: "saveGroup", group });

@@ -18,7 +18,7 @@
     <div class="task-main">
       <task-title v-model="task.title" />
 
-      <h6>In list: {{ this.group.title }}</h6>
+      <h6>In list: {{ this.group() }}</h6>
 
       <div v-if="task" class="task-info">
         <member-list :members="task.members" />
@@ -126,7 +126,10 @@ export default {
   },
   methods: {
     async group() {
-      const group = await this.$store.commit({ type: "getGroup" });
+      const group = await this.$store.commit({
+        type: "getGroup",
+        taskId: this.task.id,
+      });
       console.log("group", group);
       return group;
     },
