@@ -12,8 +12,8 @@
       />
       <button @click="deleteChecklist">Delete</button>
     </div>
-    <div class="progress-bar"></div>
-
+      <progress id="file" value="32" max="100">  </progress> 92%
+ 
     <form>
       <ul class="todos clean-list">
         <li v-for="todo in checklist.todos" :key="todo.id">
