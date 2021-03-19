@@ -7,9 +7,7 @@
     <task-label-preview v-if="taskLabelIds" :taskLabelIds="taskLabelIds" />
     <div class="flex">
       <h2 class="task-title">{{ task.title }}</h2>
-      <div
-        class="btn task-edit"
-      >
+      <div class="btn task-edit">
         <span>🖊</span>
       </div>
     </div>
@@ -70,7 +68,6 @@ export default {
         (acc, checklist) => {
           acc.complete += checklist.todos.filter((todo) => todo.isDone).length;
           acc.total += checklist.todos.length;
-
           return acc;
         },
         { total: 0, complete: 0 }
