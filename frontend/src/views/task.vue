@@ -145,7 +145,7 @@ export default {
 
     saveChecklist(checklist) {
       const task = this.task;
-      if (!task.checklists.todos) task.checklists = [];
+      // if (!task.checklists.todos) task.checklists = [];
       task.checklists.push(checklist);
       this.saveTask(task);
     },
