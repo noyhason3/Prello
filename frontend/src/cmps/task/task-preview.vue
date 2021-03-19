@@ -57,23 +57,24 @@ export default {
       return this.task.description;
     },
     isTaskAttachment() {
-      return false;
+      return;
       // return this.task.attachment?.length;
     },
 
     isTaskDuedate() {
-      return false;
+      return;
       //return this.task.duedate;
     },
     taskMemebers() {
-      if (!this.task.members?.length) return false;
+      if (!this.task.members?.length) return;
       return this.task.members;
     },
     taskLabelIds() {
-      if (!this.task.labelIds?.length) return false;
+      if (!this.task.labelIds?.length) return;
       return this.task.labelIds;
     },
     taskChecklists() {
+      if(!this.task.checklists) return;
       const todosTotals = this.task.checklists.reduce(
         (acc, checklist) => {
           acc.complete += checklist.todos.filter((todo) => todo.isDone).length;

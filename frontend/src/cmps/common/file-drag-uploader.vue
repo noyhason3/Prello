@@ -32,15 +32,18 @@ export default {
       try {
         this.isLoading = true;
         const res = await uploadImg(file);
-        this.attachments.push(res.url);
-        this.$emit("save-attachments", res.url);
         this.isLoading = false;
+        saveAttachment(res.url)
       } catch (err) {
         console.log('Couldn\'t load image');
       } finally {
         this.$emit("not-drag-over");
       }
     },
+    saveAttachment(url){
+this.attachments.push(res.url);
+        this.$emit("save-attachments", this.attachments);
+    }
   },
 };
 </script>
