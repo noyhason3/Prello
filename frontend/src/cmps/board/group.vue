@@ -65,12 +65,12 @@ export default {
   methods: {
     openTask(task) {
       task = JSON.parse(JSON.stringify(task));
-      task.group = { id: this.group.id, title: this.group.title };
+      // task.group = { id: this.group.id, title: this.group.title };
       this.$store.commit({ type: "setCurrTask", task });
       this.$router.push(`/board/${this.boardId}/${task.id}`);
     },
     addTask() {
-      this.newTask.group = { id: this.group.id, title: this.group.title };
+      // this.newTask.group = { id: this.group.id, title: this.group.title };
       this.$store.commit({ type: "saveTask", task: this.newTask });
       this.newTask = boardService.getEmptyTask();
       this.isAddNewTask = false;
@@ -83,7 +83,7 @@ export default {
       // console.log("taskIdx:", taskIdx);
       // if (taskIdx < 0) return;
       // group.tasks.splice(taskIdx, 1);
-      const task = { id: taskId, inGroup: this.group.id };
+      // const task = { id: taskId, inGroup: this.group.id };//TODO:fchange funcction
       const ans = await boardService.removeTask({
         boardId: this.boardId,
         task,

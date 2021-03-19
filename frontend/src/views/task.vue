@@ -18,9 +18,8 @@
     <div class="task-main">
       <task-title v-model="task.title" />
 
-      <!-- <h6>In list: {{ this.task.group.title }}</h6> -->
+      <h6>In list: {{ this.group.title }}</h6>
 
-      <!-- :taskTitle="task.title"  @setTitle="setTitle" -->
       <div v-if="task" class="task-info">
         <member-list :members="task.members" />
 
@@ -105,6 +104,22 @@ export default {
   //   this.loadTask();
   // },
   computed: {
+    // group() {
+    //   console.log("taskid", this.task.id);
+    //   const group = this.$store.commit({
+    //     type: "getGroup",
+    //     taskId: this.task.id,
+    //   });
+    //   console.log("group", group);
+    //   return group;
+    // },
+    group(taskId ) {
+      const group = this.$store.getters.currBoard.groups.find(({ tasks }) => {
+        return tasks.some(({ id }) => id === taskId);
+      });
+      console.log("group:", group);
+      return group;
+    },
     // taskId() {
     //   return this.$router.parmas.taskId;
     // },
