@@ -398,15 +398,6 @@ const DEMO_BOARD = {
                 fullname: 'Abi Abambi',
                 imgUrl: 'http://some-img',
             },
-<<<<<<< HEAD
-            task: {
-                id: 'c101',
-                title: 'Replace Logo',
-            },
-        },
-    ],
-};
-=======
             "task": {
                 "id": "c101",
                 "title": "Replace Logo"
@@ -485,7 +476,6 @@ function loadDemoBoard() {
 
 
 
->>>>>>> 814842f6075526959c242ee7740f998c6d12a017
 
 // function createTask({ type, content }) {
 
