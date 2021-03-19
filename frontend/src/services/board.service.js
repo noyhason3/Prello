@@ -18,10 +18,10 @@ function getEmptyTask() {
     }
 }
 
-function getEmptyGroup(){
-    return{
+function getEmptyGroup() {
+    return {
         "title": "",
-        "tasks": [ 
+        "tasks": [
         ],
         "style": {}
     }
@@ -69,7 +69,6 @@ const gBoard = {
         {
             "_id": "u102",
             "fullname": "Noam Ben Yosef",
-            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
         },
         {
             "_id": "u103",
@@ -101,6 +100,7 @@ const gBoard = {
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
                     ],
+                    "attachments": []
                 },
                 {
                     "id": "c102",
@@ -149,6 +149,7 @@ const gBoard = {
                             ]
                         }
                     ],
+                    "attachments": []
                 }
             ],
             "style": {}
@@ -160,7 +161,9 @@ const gBoard = {
                 {
                     "id": "c103",
                     "title": "Do that",
-                    "checklists": []
+                    "checklists": [],
+                    "attachments": [],
+
                 },
                 {
                     "id": "c104",
@@ -190,6 +193,9 @@ const gBoard = {
                                 }
                             ]
                         }
+                    ],
+                    "attachments": [
+
                     ],
                     "members": [
                         {
@@ -234,24 +240,28 @@ const gBoard = {
                 {
                     "id": "DGY",
                     "title": "Replace logo",
-                    "checklists": []
+                    "checklists": [],
+                    "attachments": [],
                 },
                 {
                     "id": "RTY",
                     "title": "Add Samples",
-                    "checklists": []
-                    
+                    "checklists": [],
+                    "attachments": [],
+
                 }
             ],
             "style": {}
-        },  {
+        }, {
             "id": "DGHG",
             "title": "Group 1",
             "tasks": [
                 {
                     "id": "THDG",
                     "title": "Replace logo",
-                    "checklists": []
+                    "checklists": [],
+                    "attachments": [],
+
                 },
                 {
                     "id": "DFHJ",
@@ -300,6 +310,7 @@ const gBoard = {
                             ]
                         }
                     ],
+                    "attachments": [],
                     "members": [
                         {
                             "_id": "u101",
@@ -323,7 +334,7 @@ const gBoard = {
                 }
             ],
             "style": {}
-        },  
+        },
         {
             "id": "FJD",
             "title": "Group 1",
@@ -331,7 +342,8 @@ const gBoard = {
                 {
                     "id": "GHHF",
                     "title": "Replace logo",
-                    "checklists": []
+                    "checklists": [],
+                    "attachments": [],
                 },
                 {
                     "id": "G4HF",
@@ -380,6 +392,7 @@ const gBoard = {
                             ]
                         }
                     ],
+                    "attachments": [],
                 }
             ],
             "style": {}
