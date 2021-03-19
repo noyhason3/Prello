@@ -37,6 +37,7 @@ export const boardStore = {
                 task.id = utilService.makeId();
                 group.tasks.push(task);
             }
+            if (task.id === state.task.id) this.commit({ type: 'setCurrTask', task })
             this.commit({ type: 'setBoard', board });
 
             //console.log('Board store ~ save task ~ line 34 ~ Board', board);

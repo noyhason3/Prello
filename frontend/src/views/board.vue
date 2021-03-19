@@ -8,7 +8,7 @@
         @start="drag = true"
         @end="drag = false"
         animation="150"
-        emptyInsertThreshold="5"
+        :empty-insert-threshold="100"
         ghost-class="ghost"
         chosen-class="chosen"
         drag-class="drag"
@@ -17,7 +17,11 @@
         draggable=".group-container"
         handle=".clean-list"
       >
-        <li v-for="group in board.groups" :key="group.id" class="group-container">
+        <li
+          v-for="group in board.groups"
+          :key="group.id"
+          class="group-container"
+        >
           <group :group="group" :boardId="board._id" />
         </li>
       </draggable>

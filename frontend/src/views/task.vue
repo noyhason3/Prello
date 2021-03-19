@@ -1,5 +1,10 @@
 <template>
-  <section class="task" v-if="task">
+  <section
+    class="task"
+    v-if="task"
+    @dragover.prevent="dragOver"
+    @dragleave="isDragOver = false"
+  >
     <button @click="closeTask()" class="btn close">X</button>
     <!-- <pre>{{ task }}</pre> -->
     <popup-label
@@ -38,8 +43,9 @@
       <!-- :currTaskDescription="task.description"
       :task="task"
       @setDescription="setDescription" -->
-      <task-attachment :attachments="attachments"/>
+      <task-attachment :attachments="attachments" />
       <file-drag-uploader
+        v-if="isDragOver"
         @save-attachments="saveAttachments"
         class="drag-uploader"
       />
@@ -48,10 +54,10 @@
         <draggable
           v-model="task.checklists"
           group="checklists"
-          @start="startDrag"
+          @start="drag = true"
           @end="drag = false"
           animation="150"
-          emptyInsertThreshold="50"
+          empty-insert-threshold="50"
           ghost-class="ghost"
           chosen-class="chosen"
           drag-class="drag"
@@ -92,9 +98,9 @@ export default {
   data() {
     return {
       isLabelOpen: false,
-      ghostRect: null,
+      // ghostRect: null,
       isDragOver: false,
-      // attachments:null
+      // attachments: null,
     };
   },
   computed: {
@@ -104,14 +110,12 @@ export default {
     task() {
       return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
     },
-    attachments(){
-      console.log('loading attachments');
-      return this.task.attachments
-    }
+    attachments() {
+      console.log("loading attachments");
+      return this.task.attachments;
+    },
   },
-  created(){
-    this.attachments = this.task.attachments;
-  },
+
   methods: {
     setTitle(title) {
       this.task.title = title;
@@ -170,29 +174,15 @@ export default {
     openLabelPopup() {
       this.isLabelOpen = true;
     },
-    onDrag(evt) {
-      console.log("🚀 ~ file: group.vue ~ line 88 ~ onDrag ~ evt", evt);
-      const dragRect = evt.draggedRect;
-    },
-    startDrag(ev, drag) {
-      const rect = ev.item.getBoundingClientRect();
-      this.ghostRect = ev.item.getBoundingClientRect();
-      drag = true;
-    },
-    closeTask() {
-      const boardId = this.$route.params.boardId;
-      this.$router.push("/board/" + boardId);
-    },
-    dragOver(ev) {
-      // console.log('dragging');
-      this.isDragOver = true;
-      console.log("this.isDragOver:", this.isDragOver);
-    },
     saveAttachments(attachment) {
-      this.task.attachments.push(attachment)
+      this.task.attachments.push(attachment);
       this.saveTask(this.task);
       // this.attachments = this.task.attachments;
-      console.log('task atts',this.task.attachments);
+      console.log("task atts", this.task.attachments);
+    },
+     dragOver(ev) {
+      this.isDragOver = true;
+      console.log(this.isDragOver);
     },
   },
   components: {

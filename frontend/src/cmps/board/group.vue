@@ -7,12 +7,12 @@
       group="tasks"
       @start="startDrag"
       @end="drag = false"
-      animation="150"
-      emptyInsertThreshold="50"
+      :empty-insert-threshold="100"
       ghost-class="ghost"
       chosen-class="chosen"
       drag-class="drag"
       draggable=".group-tasks-wrapper"
+      class="draggable"
     >
       <div
         v-for="task in group.tasks"

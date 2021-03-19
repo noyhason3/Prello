@@ -7,8 +7,8 @@
           <button @click="assignMember(member)">Invite</button>
           <div v-if="member.imgUrl" class="user">
             <img :src="member.imgUrl" height="120px" width="120px" />
-            <h2>{{ member.fullname }}</h2>
           </div>
+          <h2>{{ member.fullname }}</h2>
         </div>
       </ul>
     </div>
