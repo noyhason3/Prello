@@ -445,16 +445,18 @@ async function saveTask({ boardId, task }) {
         group.tasks.push(task);
     }
     storageService.put(DB_KEY, board)
-    return Promise.resolve({ boardAns: board, taskAns: task })
+    return Promise.resolve({ bboard, task })
 }
 
 async function removeTask({ boardId, task }) {
-    console.log("🚀 ~ file: board.service.js ~ line 436 ~ removeTask ~ task", task)
-    //const group = JSON.parse(JSON.stringify(this.group));
-    const taskIdx = group.tasks.findIndex((task) => task.id === taskId);
-    console.log("taskIdx:", taskIdx);
+    const { id, inGroup } = task
+    const board = gBoards.find(savedBoard => savedBoard._id === boardId)
+    const group = board.groups.find(savedGroup => savedGroup.id === inGroup)
+    const taskIdx = group.tasks.findIndex((savedTask) => savedTask.id === id);
     if (taskIdx < 0) return;
     group.tasks.splice(taskIdx, 1);
+    saveBoard(board)
+    return Promise.resolve({ group, board })
 }
 
 function getEmptyTask() {
@@ -478,7 +480,17 @@ function loadDemoBoard() {
     localStorage.setItem(DB_KEY, JSON.stringify([DEMO_BOARD]))
 }
 
-
+function saveBoard(board) {
+    if (board._id) {//update
+        const idx = gBoards.findIndex(savedBoard => savedBoard._id === board._id)
+        gBoards.splice(idx, 1, board)
+        localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
+    } else {//add
+        board._id = utilService.makeId()
+        gBoards.push(board)
+        localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
+    }
+}
 
 
 // function createTask({ type, content }) {
