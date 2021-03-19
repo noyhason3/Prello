@@ -414,7 +414,8 @@ export default {
     getEmptyGroup,
     query,
     saveTask,
-    removeTask
+    removeTask,
+    saveGroup
 }
 
 if (!localStorage.getItem(DB_KEY)) loadDemoBoard()
@@ -432,7 +433,6 @@ async function query(id) {
 async function saveTask({ boardId, task }) {
     const board = gBoards.find(savedBoard => savedBoard._id === boardId)
     const group = board.groups.find((group) => group.id === task.group.id);
-    delete task.group
     if (task.id) {
         //update
         console.log('Updating task', task);
@@ -445,7 +445,7 @@ async function saveTask({ boardId, task }) {
         group.tasks.push(task);
     }
     storageService.put(DB_KEY, board)
-    return Promise.resolve({ bboard, task })
+    return Promise.resolve({ board, task })
 }
 
 async function removeTask({ boardId, task }) {
@@ -466,6 +466,18 @@ function getEmptyTask() {
     }
 }
 
+async function saveGroup({ boardId, group }) {
+    const board = gBoards.find(savedBoard => savedBoard._id === boardId)
+    if (group.id) {//update
+        console.log('Updating group', group);
+        const groupIdx = board.groups.findIndex(({ id }) => id === task.id);
+        group.tasks.splice(taskIdx, 1, task);
+    } else {//add
+        console.log('Adding group', group);
+        task.id = utilService.makeId();
+        group.tasks.push(task);
+    }
+}
 
 function getEmptyGroup() {
     return {
