@@ -190,9 +190,11 @@ export default {
     dragOver(ev) {
       if(this.drag) return;
       this.isDragOver = true;
+      this.drag = false;
     },
     notDragOver() {
       this.isDragOver = false;
+      this.drag = false;
     },
   },
   components: {
