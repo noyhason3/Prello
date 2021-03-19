@@ -445,7 +445,7 @@ async function saveTask({ boardId, task }) {
         group.tasks.push(task);
     }
     storageService.put(DB_KEY, board)
-    return Promise.resolve({ bboard, task })
+    return Promise.resolve({ board, task })
 }
 
 async function removeTask({ boardId, task }) {
