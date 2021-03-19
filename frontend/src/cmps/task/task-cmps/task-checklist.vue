@@ -36,8 +36,8 @@
           <li v-for="todo in checklist.todos" :key="todo.id" class="todo-container">
             <input
               type="checkbox"
-              :id="todo.id"
               :ref="todo.id"
+              :id="todo.id"
               :name="todo.id"
               @click="toggleChecked(todo)"
               :checked="todo.isDone"
@@ -48,12 +48,12 @@
             <editable-text
               v-else
               v-model="todo.txt"
-              :value="'todo'"
-              :type="'todo'"
+              :type="todo.id"
+              :value="todo.id"
+              :isEditFirst="true"
               @close-textarea="isEditTodoOpen = false"
               @input="editTodo(todo)"
             />
-              <!-- :isEditFirst="true" -->
           </li>
         </draggable>
       </ul>
@@ -109,7 +109,7 @@ export default {
     openAddTodo() {
       this.isAddTodoOpen = true;
     },
-    openEditTodo(id) {
+    openEditTodo() {
       this.isEditTodoOpen = true;
     },
     openEditTitle() {
