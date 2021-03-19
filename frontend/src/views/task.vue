@@ -38,21 +38,25 @@
       <!-- :currTaskDescription="task.description"
       :task="task"
       @setDescription="setDescription" -->
-      <!-- <task-attachment /> -->
+      <task-attachment :attachments="attachments"/>
+      <file-drag-uploader
+        @save-attachments="saveAttachments"
+        class="drag-uploader"
+      />
 
-        <ul class="clean-list">
-      <draggable
-        v-model="task.checklists"
-        group="checklists"
-        @start="startDrag"
-        @end="drag = false"
-        animation="150"
-        emptyInsertThreshold="50"
-        ghost-class="ghost"
-        chosen-class="chosen"
-        drag-class="drag"
-        draggable=".checklist-container"
-      >
+      <ul class="clean-list">
+        <draggable
+          v-model="task.checklists"
+          group="checklists"
+          @start="startDrag"
+          @end="drag = false"
+          animation="150"
+          emptyInsertThreshold="50"
+          ghost-class="ghost"
+          chosen-class="chosen"
+          drag-class="drag"
+          draggable=".checklist-container"
+        >
           <li
             v-for="checklist in task.checklists"
             :key="checklist.id"
@@ -64,8 +68,8 @@
               @delete-checklist="deleteChecklist"
             />
           </li>
-      </draggable>
-        </ul>
+        </draggable>
+      </ul>
     </div>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
@@ -74,19 +78,23 @@
 
 <script>
 import draggable from "vuedraggable";
-import taskControl from "../cmps/task/task-cmps/task-control.vue";
-import taskTitle from "../cmps/common/editable-title.vue";
-import editableText from "../cmps/task/task-cmps/editable-text.vue";
-import memberList from "../cmps/common/member-list.vue";
-import taskChecklist from "../cmps/task/task-cmps/task-checklist.vue";
-import taskLabel from "../cmps/task/task-cmps/task-label.vue";
-import popupLabel from "@/cmps/task/popup/popup-label";
+import taskControl from "@/cmps/task/task-cmps/task-control.vue";
+import taskTitle from "@/cmps/common/editable-title.vue";
+import editableText from "@/cmps/task/task-cmps/editable-text.vue";
+import memberList from "@/cmps/common/member-list.vue";
+import taskChecklist from "@/cmps/task/task-cmps/task-checklist.vue";
+import taskLabel from "@/cmps/task/task-cmps/task-label.vue";
+import popupLabel from "@/cmps/task/popup/popup-label.vue";
+import taskAttachment from "@/cmps/task/task-cmps/task-attachment.vue";
+import fileDragUploader from "@/cmps/common/file-drag-uploader.vue";
 
 export default {
   data() {
     return {
       isLabelOpen: false,
       ghostRect: null,
+      isDragOver: false,
+      attachments:null
     };
   },
   computed: {
@@ -94,8 +102,15 @@ export default {
       return this.$route.parmas.taskId;
     },
     task() {
-      return this.$store.getters.currTask; //Should we copy the task here? not inside methods.
+      return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
     },
+    // attachments(){
+    //   console.log('loading attachments');
+    //   return this.task.attachments
+    // }
+  },
+  created(){
+    this.attachments = this.task.attachments;
   },
   methods: {
     setTitle(title) {
@@ -164,10 +179,21 @@ export default {
       this.ghostRect = ev.item.getBoundingClientRect();
       drag = true;
     },
-    closeTask(){
+    closeTask() {
       const boardId = this.$route.params.boardId;
-      this.$router.push('/board/'+boardId)
-    }
+      this.$router.push("/board/" + boardId);
+    },
+    dragOver(ev) {
+      // console.log('dragging');
+      this.isDragOver = true;
+      console.log("this.isDragOver:", this.isDragOver);
+    },
+    saveAttachments(attachment) {
+      this.task.attachments.push(attachment)
+      this.attachments = this.task.attachments;
+      console.log('task atts',this.task.attachments);
+      this.saveTask(this.task);
+    },
   },
   components: {
     draggable,
@@ -178,6 +204,8 @@ export default {
     editableText,
     taskLabel,
     popupLabel,
+    taskAttachment,
+    fileDragUploader,
   },
 };
 </script>

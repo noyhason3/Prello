@@ -38,4 +38,19 @@
   background-color: $clr3;
 
   margin: 0 auto;
+  .drag-uploader{
+    position:absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index:-1;
+    &.file-drag{
+      background-color: rgba(238, 238, 238, 0.5);
+    }
+  }
 }
