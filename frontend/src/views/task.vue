@@ -104,22 +104,6 @@ export default {
   //   this.loadTask();
   // },
   computed: {
-    // group() {
-    //   console.log("taskid", this.task.id);
-    //   const group = this.$store.commit({
-    //     type: "getGroup",
-    //     taskId: this.task.id,
-    //   });
-    //   console.log("group", group);
-    //   return group;
-    // },
-    group(taskId ) {
-      const group = this.$store.getters.currBoard.groups.find(({ tasks }) => {
-        return tasks.some(({ id }) => id === taskId);
-      });
-      console.log("group:", group);
-      return group;
-    },
     // taskId() {
     //   return this.$router.parmas.taskId;
     // },
@@ -137,6 +121,11 @@ export default {
     // },
   },
   methods: {
+      async  group() {
+      const group = await this.$store.commit({type: "getGroup"});
+      console.log("group", group);
+      return group;
+    },
     // setTitle(title) {
     //   this.task.title = title;
     // },
