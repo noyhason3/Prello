@@ -162,6 +162,7 @@ export default {
       this.saveTask(this.task);
     },
     saveTask(task) {
+      console.log("file: task.vue - line 165 - saveTask - task", task);
       this.$store.commit({ type: "saveTask", task });
     },
     closeTask() {

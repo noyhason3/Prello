@@ -70,7 +70,7 @@ export default {
       this.$router.push(`/board/${this.boardId}/${task.id}`);
     },
     addTask() {
-      this.newTask.group = { id: this.group.id };
+      this.newTask.group = { id: this.group.id, title: this.group.title };
       this.$store.commit({ type: "saveTask", task: this.newTask });
       this.newTask = boardService.getEmptyTask();
       this.isAddNewTask = false;

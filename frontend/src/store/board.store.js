@@ -43,14 +43,17 @@ export const boardStore = {
             //     board.groups.push(group);
             // }
 
+            const board = await boardService.saveGroup(group)
             this.commit({ type: 'setBoard', board });
         },
-        removeGroup(state, { groupId }) {
-            const board = JSON.parse(JSON.stringify(state.board));
-            const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
-            console.log('groupIdx:', groupIdx);
-            if (groupIdx < 0) return;
-            board.groups.splice(groupIdx, 1);
+        async removeGroup(state, { groupId }) {
+            // const board = JSON.parse(JSON.stringify(state.board));
+            // const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
+            // console.log('groupIdx:', groupIdx);
+            // if (groupIdx < 0) return;
+            // board.groups.splice(groupIdx, 1);
+
+            const board = await boardService.removeGroup({ groupId, boardId: state.board._id })
             this.commit({ type: 'setBoard', board });
         },
         // setBoardList(state, {boards}){
