@@ -1,7 +1,7 @@
 <template>
   <section>
     <pop-up v-if="!isDelete">
-      <div slot="header" class="flex space-between">
+      <div slot="header" class="label-edit-header">
         <h3>{{ action }} label</h3>
         <button @click="closeLabelEdit">X</button>
       </div>
@@ -34,6 +34,7 @@
           from all cards.
         </p>
         <button @click="removeBoardLabel">Delete</button>
+        <button @click="toggleIsDelete">X</button>
       </div>
     </pop-up>
   </section>

@@ -13,6 +13,8 @@
       @set-checklist="saveChecklist"
       @set-task-labels="setTaskLabels"
       @toggle-popup="togglePopup"
+      @save-attachments="saveAttachments"
+      :attachments="attachments"
     />
     <!-- <task-cover /> -->
     <div class="task-main">
