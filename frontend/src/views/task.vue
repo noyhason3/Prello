@@ -1,7 +1,7 @@
 <template>
   <section class="task" v-if="task" @dragover.prevent="dragOver">
     <button @click="closeTask" class="btn close">X</button>
-    <!-- <pre>{{ task }}</pre> -->
+    <!-- <pre>{{ task.attachments }}</pre> -->
     <popup-label
       v-if="isLabelOpen"
       @set-task-labels="setTaskLabels"
@@ -38,8 +38,10 @@
         @input="setDescription"
       />
 
-      <task-attachment :attachments="attachments" 
-      @save-attachments="saveAttachments"/>
+      <task-attachment
+        :attachments="attachments"
+        @save-attachments="saveAttachments"
+      />
       <file-drag-uploader
         v-if="isDragOver"
         :isDragOver="isDragOver"
@@ -98,7 +100,7 @@ export default {
       isLabelOpen: false,
       // ghostRect: null,
       isDragOver: false,
-      drag:false
+      drag: false,
     };
   },
   computed: {
@@ -188,7 +190,7 @@ export default {
     //   this.saveTask(this.task);
     // },
     dragOver(ev) {
-      if(this.drag) return;
+      if (this.drag) return;
       this.isDragOver = true;
       // this.drag = false;
     },

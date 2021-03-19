@@ -90,8 +90,7 @@ const DEMO_BOARD = {
                         {
                             id: 'a103',
                             title: 'smile!',
-                            url:
-                                'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gnome-face-smile-big.svg/1024px-Gnome-face-smile-big.svg.png',
+                            url:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gnome-face-smile-big.svg/1024px-Gnome-face-smile-big.svg.png',
                             createdAt: '1616152734274',
                         },
                     ],
@@ -414,7 +413,8 @@ export default {
     getEmptyGroup,
     query,
     saveTask,
-    removeTask
+    removeTask,
+    saveGroup
 }
 
 if (!localStorage.getItem(DB_KEY)) loadDemoBoard()
@@ -432,7 +432,6 @@ async function query(id) {
 async function saveTask({ boardId, task }) {
     const board = gBoards.find(savedBoard => savedBoard._id === boardId)
     const group = board.groups.find((group) => group.id === task.group.id);
-    delete task.group
     if (task.id) {
         //update
         console.log('Updating task', task);
@@ -466,6 +465,18 @@ function getEmptyTask() {
     }
 }
 
+async function saveGroup({ boardId, group }) {
+    const board = gBoards.find(savedBoard => savedBoard._id === boardId)
+    if (group.id) {//update
+        console.log('Updating group', group);
+        const groupIdx = board.groups.findIndex(({ id }) => id === task.id);
+        group.tasks.splice(taskIdx, 1, task);
+    } else {//add
+        console.log('Adding group', group);
+        task.id = utilService.makeId();
+        group.tasks.push(task);
+    }
+}
 
 function getEmptyGroup() {
     return {
