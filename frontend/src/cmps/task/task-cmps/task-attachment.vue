@@ -15,7 +15,7 @@
         <div class="attachment-info">
           <h5>{{ attachment.title }}</h5>
           <p>{{ (attachment.createdAt) }}</p>
-          <button class="btn attachment-action">Comment</button>
+          <!-- <button class="btn attachment-action">Comment</button> -->
           <button
             @click="removeAttachment(attachment.id)"
             class="btn attachment-action"
