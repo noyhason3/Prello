@@ -19,7 +19,7 @@
     <button @click="toggleGeneralPopup('Label')">Labels</button>
 
     <!-- <button>Due date</button> -->
-    <!-- <button>Attachement</button> -->
+    <button @click="toggleGeneralPopup('Attachment')">Attachement</button>
     <!-- <button>Cover</button> -->
   </section>
 </template>
@@ -34,6 +34,7 @@ export default {
       isMemberOpen: false,
       isLabelOpen: false,
       isChecklistOpen: false,
+      isAttachmentOpen:false
     };
   },
   methods: {
