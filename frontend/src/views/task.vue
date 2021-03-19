@@ -1,5 +1,6 @@
 <template>
   <section class="task" v-if="task">
+    <button @click="closeTask()" class="btn close">X</button>
     <!-- <pre>{{ task }}</pre> -->
     <popup-label
       v-if="isLabelOpen"
@@ -37,7 +38,11 @@
       <!-- :currTaskDescription="task.description"
       :task="task"
       @setDescription="setDescription" -->
-      <!-- <task-attachment /> -->
+      <task-attachment :attachments="attachments" />
+      <file-drag-uploader
+        @save-attachments="saveAttachments"
+        class="drag-uploader"
+      />
 
       <ul class="clean-list">
         <draggable
@@ -73,18 +78,21 @@
 
 <script>
 import draggable from "vuedraggable";
-import taskControl from "../cmps/task/task-cmps/task-control.vue";
-import taskTitle from "../cmps/common/editable-title.vue";
-import editableText from "../cmps/task/task-cmps/editable-text.vue";
-import memberList from "../cmps/common/member-list.vue";
-import taskChecklist from "../cmps/task/task-cmps/task-checklist.vue";
-import taskLabel from "../cmps/task/task-cmps/task-label.vue";
-import popupLabel from "@/cmps/task/popup/popup-label";
+import taskControl from "@/cmps/task/task-cmps/task-control.vue";
+import taskTitle from "@/cmps/common/editable-title.vue";
+import editableText from "@/cmps/task/task-cmps/editable-text.vue";
+import memberList from "@/cmps/common/member-list.vue";
+import taskChecklist from "@/cmps/task/task-cmps/task-checklist.vue";
+import taskLabel from "@/cmps/task/task-cmps/task-label.vue";
+import popupLabel from "@/cmps/task/popup/popup-label.vue";
+import taskAttachment from "@/cmps/task/task-cmps/task-attachment.vue";
+import fileDragUploader from "@/cmps/common/file-drag-uploader.vue";
 
 export default {
   data() {
     return {
       isLabelOpen: false,
+      attachments: null,
     };
   },
   computed: {
@@ -92,8 +100,15 @@ export default {
       return this.$route.parmas.taskId;
     },
     task() {
-      return this.$store.getters.currTask; //Should we copy the task here? not inside methods.
+      return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
     },
+    // attachments(){
+    //   console.log('loading attachments');
+    //   return this.task.attachments
+    // }
+  },
+  created() {
+    this.attachments = this.task.attachments;
   },
   methods: {
     setTitle(title) {
@@ -153,6 +168,12 @@ export default {
     openLabelPopup() {
       this.isLabelOpen = true;
     },
+    saveAttachments(attachment) {
+      this.task.attachments.push(attachment);
+      this.attachments = this.task.attachments;
+      console.log("task atts", this.task.attachments);
+      this.saveTask(this.task);
+    },
   },
   components: {
     draggable,
@@ -163,6 +184,8 @@ export default {
     editableText,
     taskLabel,
     popupLabel,
+    taskAttachment,
+    fileDragUploader,
   },
 };
 </script>
