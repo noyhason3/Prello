@@ -18,12 +18,14 @@
           @change="toggleAddName"
           placeholder="Paste any link here..."
         />
+        <div v-if="url">
         <h3>Link name (optional)</h3>
         <input
           type="text"
           v-model="newAttachment.title"
         />
         <button>Attach</button>
+        </div>
       </form>
     </div>
   </pop-up>
@@ -40,6 +42,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      // isLinkUrl:false,
       url: null,
       newAttachment: {
         id: null,
@@ -91,7 +94,7 @@ export default {
       this.$emit("toggle-popup", "Attachment");
     },
     toggleAddName(){
-
+    //   this.isLinkUrl = !!this.url;
     }
   },
   components: { popUp },
