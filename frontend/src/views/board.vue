@@ -1,5 +1,5 @@
 <template>
-  <section class="board">
+  <section class="board" v-if="board">
     <board-header :board="board" />
     <draggable
       v-model="board.groups"
@@ -24,7 +24,7 @@
         group="tasks"
         @start="drag = true"
         @end="drag = false"
-        :empty-insert-threshold="100"
+        empty-insert-threshold="5"
         draggable=".group-tasks-preview"
         class="clean-list group-container"
         tag="li"
@@ -67,6 +67,11 @@ export default {
       isAddNewGroup: false,
       newGroup: boardService.getEmptyGroup(),
     };
+  },
+  async created() {
+    ////DONT FORGET TO LOAD PROPERLY - not that we will
+    const board = await boardService.query("b101");
+    this.$store.commit({ type: "setBoard", board });
   },
   methods: {
     addGroup() {

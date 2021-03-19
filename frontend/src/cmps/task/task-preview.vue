@@ -19,7 +19,7 @@
     <div class="task-info-preview">
       <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
       <div v-if="isTaskDescription">📄</div>
-      <!-- <div v-if="isTaskAttachment">📎{{attachmentCount}}</div> -->
+      <div v-if="attachmentCount">📎{{attachmentCount}}</div>
       <member-list v-if="taskMemebers" :members="taskMemebers" />
     </div>
   </section>
@@ -48,9 +48,8 @@ export default {
     isTaskDescription() {
       return this.task.description;
     },
-    isTaskAttachment() {
-      return;
-      // return this.task.attachment?.length;
+    attachmentCount() {
+      return this.task.attachment?.length;
     },
 
     isTaskDuedate() {

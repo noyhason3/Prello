@@ -3,6 +3,7 @@
     <button @click="removeGroup">X</button>
     <div class="header">{{ group.title }}</div>
     <!-- <ul class="clean-list"> -->
+    <!-- <pre>{{ group }}</pre> -->
     <draggable
       v-for="task in group.tasks"
       :key="task.id"

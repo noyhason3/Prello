@@ -1,7 +1,7 @@
-import { makeId } from "./util.service";
+import utilService from "./util.service";
 
 
-export const storageService = {
+export default {
     query,
     get,
     post,
@@ -21,7 +21,7 @@ function get(entityType, entityId) {
 }
 
 function post(entityType, newEntity) {
-    newEntity.id = makeId()
+    newEntity.id = utilService.makeId()
     return query(entityType)
         .then(entities => {
             entities.push(newEntity);
