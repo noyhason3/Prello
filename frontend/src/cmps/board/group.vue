@@ -66,11 +66,11 @@ export default {
     openTask(task) {
       task = JSON.parse(JSON.stringify(task));
       task.group = { id: this.group.id, title: this.group.title };
-      this.$store.commit({ type: "setCurrTask", task });
+      //this.$store.commit({ type: "setCurrTask", task });
       this.$router.push(`/board/${this.boardId}/${task.id}`);
     },
     addTask() {
-      this.newTask.group = { id: this.group.id };
+      this.newTask.group = { id: this.group.id, title: this.group.title };
       this.$store.commit({ type: "saveTask", task: this.newTask });
       this.newTask = boardService.getEmptyTask();
       this.isAddNewTask = false;

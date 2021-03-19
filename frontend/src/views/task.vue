@@ -93,6 +93,7 @@ import taskLabel from "@/cmps/task/task-cmps/task-label.vue";
 import popupLabel from "@/cmps/task/popup/popup-label.vue";
 import taskAttachment from "@/cmps/task/task-cmps/task-attachment.vue";
 import fileDragUploader from "@/cmps/common/file-drag-uploader.vue";
+import boardService from "../services/board.service";
 
 export default {
   data() {
@@ -101,14 +102,24 @@ export default {
       // ghostRect: null,
       isDragOver: false,
       drag: false,
+      task: null,
     };
+  },
+  async created() {
+    this.loadTask();
   },
   computed: {
     // taskId() {
     //   return this.$router.parmas.taskId;
     // },
-    task() {
-      return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
+    // task() {
+    //   return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
+    // },
+    id() {
+      return this.$route.params.taskId;
+    },
+    boardId() {
+      return this.$route.params.boardId;
     },
     attachments() {
       return this.task.attachments;
@@ -119,6 +130,16 @@ export default {
     // setTitle(title) {
     //   this.task.title = title;
     // },
+    async loadTask() {
+      this.task = await boardService.getTask({
+        board: this.$store.getters.currBoard,
+        taskId: this.id,
+      });
+      console.log(
+        "file: task.vue - line 138 - loadTask - this.task",
+        this.task
+      );
+    },
     setDescription() {
       this.saveTask(this.task);
     },
@@ -162,6 +183,7 @@ export default {
       this.saveTask(this.task);
     },
     saveTask(task) {
+      console.log("file: task.vue - line 165 - saveTask - task", task);
       this.$store.commit({ type: "saveTask", task });
     },
     closeTask() {
@@ -197,6 +219,11 @@ export default {
     notDragOver() {
       this.isDragOver = false;
       // this.drag = false;
+    },
+  },
+  watch: {
+    id() {
+      this.loadTask();
     },
   },
   components: {

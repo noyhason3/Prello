@@ -412,9 +412,11 @@ export default {
     getEmptyTask,
     getEmptyGroup,
     query,
+    getTask,
     saveTask,
     removeTask,
-    saveGroup
+    saveGroup,
+    removeGroup
 }
 
 if (!localStorage.getItem(DB_KEY)) loadDemoBoard()
@@ -428,10 +430,19 @@ async function query(id) {
     return board
 }
 
+async function getTask({ board, taskId }) {
+    const group = board.groups.find(group => group.tasks.some(task => task.id === taskId))
+    const task = group.tasks.find(task => task.id === taskId)
+    if (task) return Promise.resolve(task)
+    else return Promise.reject()
+}
 
 async function saveTask({ boardId, task }) {
+    const miniGroup = task.group
+    delete task.group
+    console.log("file: board.service.js - line 453 - saveTask - task", task)
     const board = gBoards.find(savedBoard => savedBoard._id === boardId)
-    const group = board.groups.find((group) => group.id === task.group.id);
+    const group = board.groups.find((group) => group.id === miniGroup.id);
     if (task.id) {
         //update
         console.log('Updating task', task);
@@ -444,7 +455,8 @@ async function saveTask({ boardId, task }) {
         group.tasks.push(task);
     }
     storageService.put(DB_KEY, board)
-    return Promise.resolve({ board, task })
+    const taskCopy = { ...task, group: miniGroup }
+    return Promise.resolve({ board, task: taskCopy })
 }
 
 async function removeTask({ boardId, task }) {
@@ -465,7 +477,9 @@ function getEmptyTask() {
     }
 }
 
-async function saveGroup({ boardId, group }) {
+async function saveGroup(group) {
+    const boardId = group.board.id
+    delete group.board
     const board = gBoards.find(savedBoard => savedBoard._id === boardId)
     if (group.id) {//update
         console.log('Updating group', group);
@@ -473,9 +487,20 @@ async function saveGroup({ boardId, group }) {
         group.tasks.splice(taskIdx, 1, task);
     } else {//add
         console.log('Adding group', group);
-        task.id = utilService.makeId();
-        group.tasks.push(task);
+        group.id = utilService.makeId();
+        board.groups.push(group);
     }
+    //localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
+    storageService.put(DB_KEY, board)
+    return Promise.resolve(board)
+}
+
+async function removeGroup({ boardId, groupId }) {
+    const board = gBoards.find(savedBoard => savedBoard._id === boardId)
+    const idx = board.groups.findIndex(savedGroup => savedGroup.id === groupId)
+    board.groups.splice(idx, 1)
+    storageService.put(DB_KEY, board)
+    return Promise.resolve(board)
 }
 
 function getEmptyGroup() {

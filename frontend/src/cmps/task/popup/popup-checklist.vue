@@ -16,17 +16,18 @@ import popUp from "@/cmps/common/pop-up";
 export default {
   data() {
     return {
-        checklist:{
-            title:''
-        }
+      checklist: {
+        title: "",
+        todos: [],
+      },
     };
   },
   methods: {
     addChecklist() {
-        this.$emit('add-checklist', {...this.checklist})
-        this.checklist = {
-          title:''
-        }
+      this.$emit("add-checklist", { ...this.checklist });
+      this.checklist = {
+        title: "",
+      };
     },
   },
   components: { popUp },
