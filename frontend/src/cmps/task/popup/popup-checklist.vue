@@ -24,6 +24,9 @@ export default {
   methods: {
     addChecklist() {
         this.$emit('add-checklist', {...this.checklist})
+        this.checklist = {
+          title:''
+        }
     },
   },
   components: { popUp },

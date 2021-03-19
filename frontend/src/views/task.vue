@@ -1,6 +1,6 @@
 <template>
-  <section class="task" v-if="task">
-    <button @click="closeTask()" class="btn close">X</button>
+  <section class="task" v-if="task" @dragover.prevent="dragOver">
+    <button @click="closeTask" class="btn close">X</button>
     <!-- <pre>{{ task }}</pre> -->
     <popup-label
       v-if="isLabelOpen"
@@ -20,7 +20,6 @@
 
       <h6 contenteditable="true">In list: {{ this.task.group.title }}</h6>
 
-      <!-- :taskTitle="task.title"  @setTitle="setTitle" -->
       <div v-if="task" class="task-info">
         <member-list :members="task.members" />
 
@@ -33,14 +32,18 @@
       </div>
 
       <h4>Description</h4>
-      <editable-text v-model="task.description" :type="'description'" />
+      <editable-text
+        v-model="task.description"
+        :type="'description'"
+        @input="setDescription"
+      />
 
-      <!-- :currTaskDescription="task.description"
-      :task="task"
-      @setDescription="setDescription" -->
       <task-attachment :attachments="attachments" />
       <file-drag-uploader
+        v-if="isDragOver"
+        :isDragOver="isDragOver"
         @save-attachments="saveAttachments"
+        @not-drag-over="notDragOver"
         class="drag-uploader"
       />
 
@@ -92,30 +95,32 @@ export default {
   data() {
     return {
       isLabelOpen: false,
-      attachments: null,
+      // ghostRect: null,
+      isDragOver: false,
     };
   },
   computed: {
-    taskId() {
-      return this.$route.parmas.taskId;
-    },
+    // taskId() {
+    //   return this.$router.parmas.taskId;
+    // },
     task() {
       return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
     },
-    // attachments(){
-    //   console.log('loading attachments');
-    //   return this.task.attachments
-    // }
-  },
-  methods: {
-    setTitle(title) {
-      this.task.title = title;
+    attachments() {
+      console.log("loading attachments");
+      return this.task.attachments;
     },
-    setDescription(description) {
-      this.task.description = description;
+  },
+
+  methods: {
+    // setTitle(title) {
+    //   this.task.title = title;
+    // },
+    setDescription() {
+      this.saveTask(this.task);
     },
     assignMember(member) {
-      var task = JSON.parse(JSON.stringify(this.task));
+      var task = this.task;
       if (!task.members) task.members = [];
       if (
         task.members.some((assignedMember) => assignedMember._id === member._id)
@@ -136,7 +141,7 @@ export default {
 
     saveChecklist(checklist) {
       const task = this.task;
-      if (!task.checklists.todos) task.checklists = [];
+      // if (!task.checklists.todos) task.checklists = [];
       task.checklists.push(checklist);
       this.saveTask(task);
     },
@@ -157,6 +162,10 @@ export default {
     saveTask(task) {
       this.$store.commit({ type: "saveTask", task });
     },
+    closeTask() {
+      const boardId = this.$route.params.boardId;
+      this.$router.push("/board/" + boardId);
+    },
     togglePopup(str) {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
@@ -167,9 +176,13 @@ export default {
     },
     saveAttachments(attachment) {
       this.task.attachments.push(attachment);
-      this.attachments = this.task.attachments;
-      console.log("task atts", this.task.attachments);
       this.saveTask(this.task);
+    },
+    dragOver(ev) {
+      this.isDragOver = true;
+    },
+    notDragOver() {
+      this.isDragOver = false;
     },
   },
   components: {

@@ -1,9 +1,7 @@
 <template>
-  <section 
+  <section
     class="file-drag-upload"
     @drop.prevent="handleFile"
-    @dragover.prevent="dragOver"
-    @dragleave="isDragOver = false"
     :class="{ 'file-drag': isDragOver }"
   >
     <h3 v-if="isDragOver" class="msg drop-file">Drop files to upload</h3>
@@ -13,17 +11,16 @@
 <script>
 import { uploadImg } from "@/services/img-upload.service.js";
 export default {
+  props: {
+    isDragOver: Boolean,
+  },
   data() {
     return {
       attachments: [],
       isLoading: false,
-      isDragOver: false,
     };
   },
   methods: {
-    dragOver(ev) {
-      this.isDragOver = true;
-    },
     handleFile(ev) {
       let file;
       if (ev.type === "change") file = ev.target.files[0];
@@ -32,12 +29,17 @@ export default {
     },
 
     async onUploadImg(file) {
-      this.isLoading = true;
-      this.isDragOver = false;
-      const res = await uploadImg(file);
-      this.attachments.push(res.url);
-      this.$emit("save-attachments", res.url);
-      this.isLoading = false;
+      try {
+        this.isLoading = true;
+        const res = await uploadImg(file);
+        this.attachments.push(res.url);
+        this.$emit("save-attachments", res.url);
+        this.isLoading = false;
+      } catch (err) {
+        console.log('Couldn\'t load image');
+      } finally {
+        this.$emit("not-drag-over");
+      }
     },
   },
 };
