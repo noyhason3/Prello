@@ -7,13 +7,13 @@
     height: 30px;
     width: 30px;
     text-align: center;
-    border: 1px solid $clr2;
+    border: 1px solid $clr5;
 
     a {
         margin: 0 auto;
         height: fit-content
     }
-
+    color:$clr1;
     $memberColors:("clr2":$clr2,
         "clr3":$clr3,
         "clr4":$clr4,
@@ -28,6 +28,7 @@
     $i in $memberColors {
         &.#{$memberColor} {
             background-color: $i;
+            color:set-color($i,60)
         }
     }
 }
