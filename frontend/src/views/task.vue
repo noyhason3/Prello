@@ -1,17 +1,16 @@
 <template>
-  <!-- <section class="task" v-if="task" @dragover.prevent="dragOver"> -->
   <section
     class="task"
     v-if="task"
     @dragover.prevent="dragOver"
     @click.prevent="closeTask"
   >
-    <div class="task-container">
-        <div class="header">
-          <button @click="closeTask" class="btn close">X</button>
-        </div>
-      <div class="task-content" @click.stop>
 
+    <div class="task-container">
+      <div class="header">
+        <button @click="closeTask" class="btn close">X</button>
+      </div>
+      <div class="task-content" @click.stop>
         <!-- <pre>{{ task.attachments }}</pre> -->
         <popup-label
           v-if="isLabelOpen"
@@ -21,7 +20,8 @@
         >
         </popup-label>
         <task-control
-          @assign-member="assignMember"
+          @assign-task-member="assignTaskMember"
+          @remove-task-member="removeTaskMember"
           @set-checklist="saveChecklist"
           @set-task-labels="setTaskLabels"
           @toggle-popup="togglePopup"
@@ -34,70 +34,76 @@
 
           <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
 
-          <div v-if="task" class="task-info">
-            <member-list
-              :members="task.members"
-              :isTaskRelated="true"
-              @remove-task-member="removeTaskMember"
+          <div class="task-main">
+            <task-title v-model="task.title" />
+
+            <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
+
+            <div v-if="task" class="task-info">
+              <member-list
+                :members="task.members"
+                :isTaskRelated="true"
+                @remove-task-member="removeTaskMember"
+              />
+
+              <task-label
+                :taskLabelIds="task.labelIds"
+                @set-task-labels="setTaskLabels"
+                @openLabelPopup="openLabelPopup"
+              />
+              <!-- <task-duedate /> -->
+            </div>
+
+            <h4>Description</h4>
+            <editable-text
+              v-model="task.description"
+              :type="'description'"
+              @input="setDescription"
             />
 
-            <task-label
-              :taskLabelIds="task.labelIds"
-              @set-task-labels="setTaskLabels"
-              @openLabelPopup="openLabelPopup"
+            <task-attachment
+              v-if="attachments.length"
+              :attachments="attachments"
+              @save-attachments="saveAttachments"
             />
-            <!-- <task-duedate /> -->
+            <file-drag-uploader
+              v-if="isDragOver"
+              :isDragOver="isDragOver"
+              :attachments="attachments"
+              @save-attachments="saveAttachments"
+              @not-drag-over="notDragOver"
+              class="drag-uploader"
+            />
+
+            <!-- <ul class="clean-list"> -->
+            <draggable
+              v-for="checklist in task.checklists"
+              :key="checklist.id"
+              group="checklists"
+              @start="drag = true"
+              @end="drag = false"
+              :move="move"
+              animation="150"
+              empty-insert-threshold="50"
+              draggable=".checklist-container"
+              tag="ul"
+              class="clean-list"
+            >
+              <!-- :progressPercentage="progressPercentage(checklist)" -->
+              <task-checklist
+                class="checklist-container"
+                :checklist="checklist"
+                @save-todo="saveTodo"
+                @delete-checklist="deleteChecklist"
+                @toggle-drag="toggleDrag"
+              />
+              <!-- {{ checklist.id }} -->
+            </draggable>
+            <!-- </ul> -->
           </div>
-
-          <h4>Description</h4>
-          <editable-text
-            v-model="task.description"
-            :type="'description'"
-            @input="setDescription"
-          />
-
-          <task-attachment
-            v-if="attachments.length"
-            :attachments="attachments"
-            @save-attachments="saveAttachments"
-          />
-          <file-drag-uploader
-            v-if="isDragOver"
-            :isDragOver="isDragOver"
-            :attachments="attachments"
-            @save-attachments="saveAttachments"
-            @not-drag-over="notDragOver"
-            class="drag-uploader"
-          />
-
-          <!-- <ul class="clean-list"> -->
-          <draggable
-            v-for="checklist in task.checklists"
-            :key="checklist.id"
-            group="checklists"
-            @start="drag = true"
-            @end="drag = false"
-            :move="move"
-            animation="150"
-            empty-insert-threshold="50"
-            draggable=".checklist-container"
-            tag="ul"
-            class="clean-list"
-          >
-            <!-- :progressPercentage="progressPercentage(checklist)" -->
-            <task-checklist
-              class="checklist-container"
-              :checklist="checklist"
-              @save-todo="saveTodo"
-              @delete-checklist="deleteChecklist"
-              @toggle-drag="toggleDrag"
-            />
-            <!-- {{ checklist.id }} -->
-          </draggable>
-          <!-- </ul> -->
+          <!-- <task-comment /> -->
+          <!-- <activity-list /> -->
         </div>
-        <!-- <task-comment /> -->
-        <!-- <activity-list /> -->
       </div>
     </div>
   </section>
@@ -183,24 +189,23 @@ export default {
     setDescription() {
       this.saveTask(this.task);
     },
-    assignMember(member) {
-      var task = JSON.parse(JSON.stringify(this.task));
-      if (!task.members) task.members = [];
-      if (
-        task.members.some((assignedMember) => assignedMember._id === member._id)
-      ) {
-        // throw new Error('User already assigned to task')
-        console.log("User already assigned to task");
-        return;
-      }
-      task.members.push(member);
-      this.saveTask(task);
+    assignTaskMember(member) {
+      if (!this.task.members) this.task.members = [];
+
+      // if (
+      //   task.members.some((assignedMember) => assignedMember._id === member._id)
+      // ) {
+      //   // throw new Error('User already assigned to task')
+      //   console.log("User already assigned to task");
+      //   return;
+      // }
+      this.task.members.push(member);
+      this.saveTask(this.task);
     },
     removeTaskMember(id) {
       const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
       if (memberIdx < 0) return;
-      const task = JSON.parse(JSON.stringify(this.task));
-      task.members.splice(memberIdx, 1);
+      this.task.members.splice(memberIdx, 1);
       this.$store.commit({ type: "saveTask", task });
     },
     setTaskLabels({ labelIds }) {
