@@ -5,7 +5,7 @@
     @dragover.prevent="dragOver"
     @click.prevent="closeTask"
   >
-    <div class="task-container">
+    <div class="task-container" :style="`top:${initialHeight}px;`">
       <div class="header">
         <button @click="closeTask" class="btn close">X</button>
       </div>
@@ -124,12 +124,16 @@ export default {
       drag: false,
       popupLeftPos: null,
       groupTitle: null,
+      initialHeight: null,
       // task: null,
     };
   },
   async created() {
     await this.group();
     //   this.loadTask();
+    const body = document.querySelector(".main").getBoundingClientRect();
+    console.log("file: task.vue - line 135 - created - body", body);
+    this.initialHeight = body.top;
   },
   computed: {
     // taskId() {
