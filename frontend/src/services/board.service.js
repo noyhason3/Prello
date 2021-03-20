@@ -4,7 +4,7 @@ import storageService from './async-storage-service.js'
 const DB_KEY = 'boards_db'
 const DEMO_BOARD = {
     "_id": "b101",
-    "title": "Robot dev proj",
+    "title": "Web Dev. Prello Management",
     "createdAt": 1589983468418,
     "createdBy": {
         "_id": "u101",
@@ -53,11 +53,12 @@ const DEMO_BOARD = {
     groups: [
         {
             id: 'g101',
-            title: 'Group 1',
+            title: 'Backlog',
             tasks: [
                 {
                     id: 'c101',
-                    title: 'Replace logo',
+                    title: 'Additional views for board',
+                    description: 'Enable the user to view his tasks consistently across multiple layouts',
                     checklists: [],
                     members: [
                         {
@@ -77,45 +78,39 @@ const DEMO_BOARD = {
                     attachments: [
                         {
                             id: 'a101',
-                            title: 'Logo inspiration',
-                            url: 'https://trimitiy.com/assets/images/logo/new-logo-white.png',
+                            title: 'Ex. 1 -- Table View',
+                            url: 'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NitzanChen/2734acac-d903-476a-9332-32050c06df79_1050_772_green.png',
                             createdAt: '1616155239874',
                         },
                         {
                             id: 'a102',
-                            title: 'another logo option',
-                            url: 'https://printfiam.com/wp-content/uploads/2020/02/contant-logo.png',
-                            createdAt: '16161455239874',
-                        },
-                        {
-                            id: 'a103',
-                            title: 'smile!',
-                            url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gnome-face-smile-big.svg/1024px-Gnome-face-smile-big.svg.png',
-                            createdAt: '1616152734274',
+                            title: 'Ex. 2 -- Timeline View',
+                            url: 'https://www.smartsheet.com/sites/default/files/IC-Project-Timeline-Template.jpg',
+                            createdAt: '1616155239874',
                         },
                     ],
                 },
                 {
                     id: 'c102',
-                    title: 'Add Samples',
+                    title: 'Customization Features - approval',
                     checklists: [
                         {
                             id: 'PRBYH',
-                            title: 'Sprint 4',
+                            title: 'Board Customization',
                             todos: [
                                 {
                                     id: '34fsc',
-                                    txt: 'Vuex',
+                                    txt: 'Board Customization - Cover - UI',
                                     isDone: true,
                                 },
                                 {
                                     id: '3sdfrc',
-                                    txt: 'Scss',
-                                    isDone: false,
+                                    txt: 'Board Customization - Cover - UX',
+                                    isDone: true,
                                 },
                                 {
                                     id: '3dffsc',
-                                    txt: 'Backend',
+                                    txt: 'Board Customization - Animations - UX',
                                     isDone: false,
                                 },
                             ],
@@ -404,6 +399,71 @@ const DEMO_BOARD = {
         }
     ]
 }
+
+
+// checklists: [
+//     {
+//         id: 'PRBYH',
+//         title: 'Board Customization',
+//         todos: [
+//             {
+//                 id: '34fsc',
+//                 txt: 'Vuex',
+//                 isDone: true,
+//             },
+//             {
+//                 id: '3sdfrc',
+//                 txt: 'Scss',
+//                 isDone: false,
+//             },
+//             {
+//                 id: '3dffsc',
+//                 txt: 'Backend',
+//                 isDone: false,
+//             },
+//         ],
+//     },
+//     {
+//         id: 'PRBSD',
+//         title: 'Sprint 3',
+//         todos: [
+//             {
+//                 id: '34hgjc',
+//                 txt: 'Vue',
+//                 isDone: false,
+//             },
+//             {
+//                 id: '3hvsc',
+//                 txt: 'Css',
+//                 isDone: true,
+//             },
+//             {
+//                 id: '3bhjc',
+//                 txt: 'Frontend',
+//                 isDone: false,
+//             },
+//         ],
+//     },
+// ],
+
+// {
+//     id: 'a103',
+//         title: 'Logo inspiration',
+//             url: 'https://trimitiy.com/assets/images/logo/new-logo-white.png',
+//                 createdAt: '1616155239874',
+//                         },
+// {
+//     id: 'a104',
+//         title: 'another logo option',
+//             url: 'https://printfiam.com/wp-content/uploads/2020/02/contant-logo.png',
+//                 createdAt: '16161455239874',
+//                         },
+// {
+//     id: 'a105',
+//         title: 'smile!',
+//             url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gnome-face-smile-big.svg/1024px-Gnome-face-smile-big.svg.png',
+//                 createdAt: '1616152734274',
+//                         },
 
 var gBoards = []
 

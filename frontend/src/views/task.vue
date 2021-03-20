@@ -7,6 +7,8 @@
     @click.prevent="closeTask"
   >
     <div class="task-content" @click.stop>
+      <button @click="closeTask" class="btn close">X</button>
+
       <!-- <pre>{{ task.attachments }}</pre> -->
       <popup-label
         v-if="isLabelOpen"
