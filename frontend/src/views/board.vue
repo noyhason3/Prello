@@ -12,7 +12,7 @@
       chosen-class="chosen"
       drag-class="drag"
       filter=".group-tasks-preview"
-      draggable=".group-container"
+      draggable=".group"
       class="clean-list main"
       tag="ul"
     >
