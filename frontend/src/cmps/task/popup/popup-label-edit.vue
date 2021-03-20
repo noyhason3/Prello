@@ -1,14 +1,14 @@
 <template>
-  <section>
+  <section class="label-edit">
     <pop-up v-if="!isDelete">
       <div slot="header" class="label-edit-header">
-        <h3>{{ action }} label</h3>
-        <button @click="closeLabelEdit">X</button>
+        <h2>{{ action }} label</h2>
+        <button @click="closeLabelEdit" class="btn close">X</button>
       </div>
       <div slot="main">
-        <label>Name</label>
-        <input type="text" v-model="labelToEdit.title" />
-        <ul class="clean-list">
+        <h3>Name</h3>
+        <input type="text" v-model="labelToEdit.title"/>
+        <ul class="clean-list label-color-list">
           <li
             v-for="(color, idx) in colors"
             :key="'c' + idx"
@@ -17,8 +17,8 @@
             <button
               @click="setLabelColor(color.color)"
               :style="{ 'background-color': color.color }"
-              class="btn label-color"
-              :class="{ 'is-selected': color.selected }"
+              class="btn color"
+              :class="{ 'color-in-use': color.selected }"
             ></button>
           </li>
         </ul>

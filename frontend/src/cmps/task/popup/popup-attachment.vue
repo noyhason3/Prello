@@ -2,14 +2,14 @@
   <pop-up class="popup-attachment">
     <div slot="header" class="popup-attachment-header">
       <h2>Attach from...</h2>
-      <button @click="togglePopup">X</button>
+      <button @click="togglePopup" class="btn close">X</button>
     </div>
     <div slot="main">
       <button class="btn file-upload">
         Computer
         <input class="file-upload-input" @change="onUploadImg" type="file" />
       </button>
-      <button>Trello(?)</button>
+      <!-- <button>Trello(?)</button> -->
       <form @submit.prevent="saveAttachment">
         <h3>Attach a link</h3>
         <input
@@ -24,8 +24,8 @@
           type="text"
           v-model="newAttachment.title"
         />
-        <button>Attach</button>
         </div>
+        <button>Attach</button>
       </form>
     </div>
   </pop-up>

@@ -61,14 +61,20 @@
         //background: red;
     }
     .popup{
+        position:fixed;
         background-color: $clr1;
         border-radius: 5px;
+        width: 200px;
+        padding:5px;
         h2{
             font-size: 1.1rem;
         }
         h3{
             font-size: 1rem;
             margin-bottom:0.3em;
+        }
+        input{
+            margin-bottom:10px;
         }
     }
 } 

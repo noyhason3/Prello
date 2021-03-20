@@ -1,9 +1,11 @@
 <template>
+  <!-- <section class="task" v-if="task" @dragover.prevent="dragOver"> -->
   <section class="task" v-if="task" @dragover.prevent="dragOver">
     <button @click="closeTask" class="btn close">X</button>
     <!-- <pre>{{ task.attachments }}</pre> -->
     <popup-label
       v-if="isLabelOpen"
+      :popupLeftPos="popupLeftPos"
       @set-task-labels="setTaskLabels"
       @toggle-popup="togglePopup"
     >
@@ -20,7 +22,7 @@
     <div class="task-main">
       <task-title v-model="task.title" />
 
-      <h6>In list: {{ this.group.title }}</h6>
+      <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
 
       <div v-if="task" class="task-info">
         <member-list :members="task.members" />
@@ -41,6 +43,7 @@
       />
 
       <task-attachment
+      v-if="attachments.length"
         :attachments="attachments"
         @save-attachments="saveAttachments"
       />
@@ -53,33 +56,30 @@
         class="drag-uploader"
       />
 
-      <ul class="clean-list">
-        <!-- <draggable
-          v-model="task.checklists"
-          group="checklists"
-          @start="setDrag(true)"
-          @end="setDrag(false)"
-          animation="150"
-          empty-insert-threshold="5"
-          ghost-class="ghost"
-          chosen-class="chosen"
-          drag-class="drag"
-          draggable=".checklist-container"
-        > -->
-          <li
-            v-for="checklist in task.checklists"
-            :key="checklist.id"
-            class="checklist-container"
-          >
-            <task-checklist
-              :checklist="checklist"
-              @save-todo="saveTodo"
-              @delete-checklist="deleteChecklist"
-              @toggle-drag="toggleDrag"
-            />
-          </li>
-        <!-- </draggable> -->
-      </ul>
+      <!-- <ul class="clean-list"> -->
+      <draggable
+        v-for="checklist in task.checklists"
+        :key="checklist.id"
+        group="checklists"
+        @start="drag = true"
+        @end="drag = false"
+        :move="move"
+        animation="150"
+        empty-insert-threshold="50"
+        draggable=".checklist-container"
+        tag="ul"
+        class="clean-list"
+      >
+        <task-checklist
+          class="checklist-container"
+          :checklist="checklist"
+          @save-todo="saveTodo"
+          @delete-checklist="deleteChecklist"
+          @toggle-drag="toggleDrag"
+        />
+        <!-- {{ checklist.id }} -->
+      </draggable>
+      <!-- </ul> -->
     </div>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
@@ -105,12 +105,15 @@ export default {
       isLabelOpen: false,
       isDragOver: false,
       drag: false,
+      popupLeftPos:null,
+      groupTitle:null
       // task: null,
     };
   },
-  // async created() {
+  async created() {
+    await this.group()
   //   this.loadTask();
-  // },
+  },
   computed: {
     // taskId() {
     //   return this.$router.parmas.taskId;
@@ -127,12 +130,18 @@ export default {
     // boardId() {
     //   return this.$route.params.boardId;
     // },
+
   },
   methods: {
     async group() {
-      const group = await this.$store.commit({ type: "getGroup" });
-      console.log("group", group);
-      return group;
+      const group = await this.$store.dispatch({ type: "getGroup" });
+      this.groupTitle = group.title;
+    },
+    move(ev) {
+      console.log("file: task.vue - line 142 - move - ev", ev);
+    },
+    reorder(ev) {
+      console.log("file: task.vue - line 151 - reorder - ev", ev);
     },
     // setTitle(title) {
     //   this.task.title = title;
@@ -198,10 +207,12 @@ export default {
       const boardId = this.$route.params.boardId;
       this.$router.push("/board/" + boardId);
     },
-    togglePopup(str) {
+    togglePopup({str,buttonLeftPos}) {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
-      console.log(this.isLabelOpen);
+      if(!this[dataStr]) this.popupLeftPos =0;
+      else this.popupLeftPos = buttonLeftPos;
+      console.log('buttonLeftPos:', this.popupLeftPos)
     },
     openLabelPopup() {
       this.isLabelOpen = true;
@@ -247,5 +258,3 @@ export default {
 };
 </script>
 
-<style>
-</style>

@@ -47,6 +47,13 @@ textarea::placeholder,
 input::placeholder{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+.btn.close{
+    height: 30px;
+    width: 30px;
+    background-color:transparent;
+    outline: none;
+}
 // a{
 //     color:$clr3;
 //     text-decoration: none;

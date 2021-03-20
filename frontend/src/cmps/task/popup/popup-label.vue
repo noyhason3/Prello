@@ -1,9 +1,9 @@
 <template>
-  <section>
-    <pop-up v-if="!isPopupEdit">
+  <section class="popup-label">
+    <pop-up v-if="!isPopupEdit" :style="{left:leftPos}">
       <div slot="header" class="flex space-between">
         <h2>Labels</h2>
-        <button @click="togglePopupLabel()">X</button>
+        <button @click="togglePopupLabel()" class="btn close">X</button>
       </div>
       <div slot="main">
         <input
@@ -48,6 +48,9 @@
 import popUp from "@/cmps/common/pop-up.vue";
 import popupLabelEdit from "@/cmps/task/popup/popup-label-edit.vue";
 export default {
+  props:{
+    popupLeftPos:Number
+  },
   data() {
     return {
       // labels: this.$store.getters.currBoard.labels,
@@ -83,7 +86,7 @@ export default {
       this.isPopupEdit = !this.isPopupEdit;
     },
     togglePopupLabel() {
-      this.$emit("toggle-popup", "Label");
+      this.$emit("toggle-popup", {str:"Label", buttonLeftPos:0});
     },
     saveLabel(label) {
       if (this.selectedLabel) {
@@ -111,6 +114,10 @@ export default {
       if (!taskLabels) return [];
       return [...taskLabels];
     },
+    leftPos(){
+      console.log(this.popupLeftPos);
+      return `${this.popupLeftPos}px`
+    }
   },
   components: {
     popUp,

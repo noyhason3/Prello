@@ -470,7 +470,7 @@ function getEmptyTask() {
     return {
         title: '',
         description: '',
-        //REMEMBER TO DELETE
+        //REMEMBER TO
         attachments: [],
         checklists: []
     }
@@ -491,8 +491,8 @@ async function saveGroup({ boardId, group }) {
     const board = gBoards.find(savedBoard => savedBoard._id === boardId)
     if (group.id) {//update
         console.log('Updating group', group);
-        const groupIdx = board.groups.findIndex(({ id }) => id === task.id);
-        group.tasks.splice(taskIdx, 1, task);
+        const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
+        board.groups.splice(groupIdx, 1, group);
     } else {//add
         console.log('Adding group', group);
         group.id = utilService.makeId();

@@ -16,7 +16,7 @@
       @add-checklist="setChecklist"
     ></popup-checklist>
 
-    <button @click="toggleGeneralPopup('Label')">Labels</button>
+    <button @click="toggleGeneralPopup($event, 'Label')">Labels</button>
 
     <!-- <button>Due date</button> -->
     <button @click="togglePopup('Attachment')">Attachement</button>
@@ -53,8 +53,10 @@ export default {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
     },
-    toggleGeneralPopup(str) {
-      this.$emit("toggle-popup", str);
+    toggleGeneralPopup(e, str) {
+      const targetRect = e.target.getBoundingClientRect();
+      const buttonLeftPos = targetRect.left
+      this.$emit("toggle-popup", {str, buttonLeftPos});
     },
     assignMember(member) {
       this.$emit("assign-member", member);

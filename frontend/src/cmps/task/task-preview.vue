@@ -75,6 +75,9 @@ export default {
       if (!todosTotals.total) return;
       return todosTotals;
     },
+    attachmentCount(){
+      return this.task. attachments.length
+    }
   },
   components: {
     taskLabelPreview,
