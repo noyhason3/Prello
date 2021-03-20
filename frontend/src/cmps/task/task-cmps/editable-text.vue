@@ -2,7 +2,7 @@
   <section class="editable-text">
     <form v-if="isEditing" @submit.prevent="setText">
       <textarea ref="input" :value="value" :placeholder="placeholder"></textarea>
-      <button>save</button>
+      <button class="save-btn">Save</button>
       <button type="button" @click.prevent="closeTextarea">X</button>
     </form>
     <template v-else>

@@ -1,20 +1,21 @@
 .task-label {
     margin-bottom: 30px;
-
     >*:not(:last-child) {
         margin-inline-end: 6px;
         ;
     }
 
     .label-color {
-        height: 20px;
+        // height: 20px;
         min-width: 30px;
         max-width: fit-content;
-        padding:0 5px;
+        padding:5px 10px;
         border-radius: 5px;
         font-size: 0.7em;
         text-align: center;
         color:$clr1;
+        white-space: nowrap;
+
         
         &.is-selected::before {
             content: "✔";

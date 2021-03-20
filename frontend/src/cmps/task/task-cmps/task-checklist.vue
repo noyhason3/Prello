@@ -14,10 +14,13 @@
         @close-textarea="isEditTitleOpen = false"
         @input="editTitle"
       />
-      <button @click="deleteChecklist">Delete</button>
+      <button @click="deleteChecklist" class="delete-btn">Delete</button>
     </div>
+
+    <div class="progress-checklist">
     {{ progressPercentage }}%
-    <progress id="file" :value="progressPercentage" max="100" />
+    <progress id="file" :value="progressPercentage" max="100" class="progress-bar" />
+    </div>
 
     <form>
       <!-- <ul class="todos clean-list"> -->
@@ -72,7 +75,7 @@
       </draggable>
       <!-- </ul> -->
       <!-- <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt" /> -->
-      <button v-if="!isAddTodoOpen" @click="openAddTodo">Add Item</button>
+      <button v-if="!isAddTodoOpen" @click="openAddTodo" class="add-btn">Add Item</button>
       <editable-text
         v-else
         v-model="todo.txt"

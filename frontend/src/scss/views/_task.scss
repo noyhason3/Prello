@@ -9,7 +9,6 @@
   justify-content: center;
   align-items: center;
   overflow-y: auto;
-  
 
   .task-container {
     z-index: 100;
@@ -18,43 +17,64 @@
     flex-direction: row-reverse;
     justify-content: space-between;
     font-size: 22px;
-    padding: 20px;
+    padding: 10px 10px 10px 15px;
     margin-top: 100px;
     display: flex;
     flex-direction: column;
     // margin-top: 300px;
 
-    .header{
-        
+    .header {
+      margin-bottom: 20px;
+      .btn.close {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        border-radius: 50%;
+        background-color: #e4e4e3;
+      }
     }
-
-    .task-content{
+    .task-content {
       display: flex;
       flex-direction: row-reverse;
       justify-content: space-between;
     }
-    
+
     .task-control {
       display: flex;
       flex-direction: column;
       .control-btn {
         outline: none;
-        background-color: #EAECF0;
+        background-color: #eaecf0;
         width: 150px;
         padding: 10px;
         margin-bottom: 10px;
+      }
+      .add-to-card-btn{
+        margin: 5px;
+        // margin-bottom: 20px;
       }
     }
 
     .task-main {
       display: flex;
       flex-direction: column;
+      width: 400px;
+    }
+
+    .task-info {
+      display: flex;
+      margin-bottom: 30px;
+    }
+
+    .task-info > * {
+      margin-right: 30px;
     }
 
     // height: 500px;
     // background-color: rgba(71, 71, 236, 0.541);
     // background-color: $clr1;
-    background-color: #F1F2F5;
+    background-color: #f1f2f5;
     border-radius: 5px;
     // margin: 0 auto;
     .drag-uploader {
@@ -73,7 +93,7 @@
       }
     }
 
-    .editable-text,
+    .editable-text-task,
     .task-title {
       margin-bottom: 30px;
     }
