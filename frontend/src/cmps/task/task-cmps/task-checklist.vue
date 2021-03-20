@@ -21,9 +21,12 @@
 
     <form>
       <!-- <ul class="todos clean-list"> -->
+        <!-- :list="checklist.todos" -->
+        <!-- :move="updateTask" -->
       <draggable
         @start="setDrag(true)"
-        @end="setDrag(false)"
+        @end="setDrag(false),updateTask()"
+        
         group="todos"
         animation="150"
         empty-insert-threshold="50"
@@ -48,23 +51,24 @@
           <!-- <label :for="todo.id"  @click="openEditTodo(todo.id)">
             {{ todo.txt }}
           </label> -->
-           <label :for="todo.id" v-if="todo.id!==currTodoId"  @click="setCurrTodo(todo.id)">
+          <label
+            :for="todo.id"
+            v-if="todo.id !== currTodoId"
+            @click="setCurrTodo(todo.id)"
+          >
             {{ todo.txt }}
           </label>
-          
+
           <editable-text
             v-else
             v-model="todo.txt"
             :type="todo.id"
             :value="todo.id"
-            :isEditFirst="todo.id===currTodoId"
+            :isEditFirst="todo.id === currTodoId"
             @close-textarea="isEditTodoOpen = false"
             @input="editTodo(todo)"
           >
-         
-
           </editable-text>
-
         </li>
       </draggable>
       <!-- </ul> -->
@@ -91,6 +95,7 @@ import editableText from "./editable-text.vue";
 export default {
   props: {
     checklist: Object,
+    progressPercentage: Number,
   },
   data() {
     return {
@@ -102,21 +107,21 @@ export default {
       isEditTitleOpen: false,
       isAddTodoOpen: false,
 
-      currTodoId:'',
+      currTodoId: "",
       isEditTodoOpen: false,
       isDragOver: false,
       dragTodo: false,
     };
   },
   computed: {
-    progressPercentage() {
-      if (!this.checklist.todos.length) return 0;
-      const doneTodos = this.checklist.todos.filter((todo) => todo.isDone);
-      const progress = Math.floor(
-        (doneTodos.length / this.checklist.todos.length) * 100
-      );
-      return progress;
-    },
+    // progressPercentage() {
+    //   if (!this.checklist.todos.length) return 0;
+    //   const doneTodos = this.checklist.todos.filter((todo) => todo.isDone);
+    //   const progress = Math.floor(
+    //     (doneTodos.length / this.checklist.todos.length) * 100
+    //   );
+    //   return progress;
+    // },
   },
   methods: {
     openAddTodo() {
@@ -166,6 +171,17 @@ export default {
     setDrag(isDrag) {
       this.dragTodo = isDrag;
       this.$emit("toggle-drag", isDrag);
+    },
+    updateTask(ev) {
+      console.log("D&D todo event", ev);
+      const { draggedContext, relatedContext } = ev;
+      if (
+        draggedContext.element.id ===
+        relatedContext.list[draggedContext.index]?.id
+      ) {
+        //console.log("Moving to same container");
+        return false;
+      }
     },
   },
   components: {
