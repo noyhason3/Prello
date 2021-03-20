@@ -54,18 +54,18 @@
       />
 
       <ul class="clean-list">
-        <draggable
+        <!-- <draggable
           v-model="task.checklists"
           group="checklists"
-          @start="drag = true"
-          @end="drag = false"
+          @start="setDrag(true)"
+          @end="setDrag(false)"
           animation="150"
-          emptyInsertThreshold="50"
+          empty-insert-threshold="5"
           ghost-class="ghost"
           chosen-class="chosen"
           drag-class="drag"
           draggable=".checklist-container"
-        >
+        > -->
           <li
             v-for="checklist in task.checklists"
             :key="checklist.id"
@@ -78,7 +78,7 @@
               @toggle-drag="toggleDrag"
             />
           </li>
-        </draggable>
+        <!-- </draggable> -->
       </ul>
     </div>
     <!-- <task-comment /> -->
@@ -220,6 +220,10 @@ export default {
     },
     toggleDrag(isDrag) {
       this.drag = isDrag;
+    },
+    setDrag(isDrag) {
+      this.dragTodo = isDrag;
+      this.$emit("toggle-drag", isDrag);
     },
   },
   // watch: {

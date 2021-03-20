@@ -21,18 +21,18 @@
 
     <form>
       <ul class="todos clean-list">
-        <draggable
+        <!-- <draggable
           v-model="checklist.todos"
           group="todos"
           @start="setDrag(true)"
           @end="setDrag(false)"
           animation="150"
-          emptyInsertThreshold="50"
+          empty-insert-threshold="5"
           ghost-class="ghost"
           chosen-class="chosen"
           drag-class="drag"
           draggable=".todo-container"
-        >
+        > -->
           <li v-for="todo in checklist.todos" :key="todo.id" class="todo-container">
             <input
               type="checkbox"
@@ -55,7 +55,7 @@
               @input="editTodo(todo)"
             />
           </li>
-        </draggable>
+        <!-- </draggable> -->
       </ul>
       <!-- <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt" /> -->
       <button v-if="!isAddTodoOpen" @click="openAddTodo">Add Item</button>
