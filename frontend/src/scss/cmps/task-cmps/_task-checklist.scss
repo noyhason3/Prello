@@ -1,4 +1,5 @@
 .task-checklist{
+    margin-bottom: 30px;
     .header{
         display: flex;
         justify-content: space-between;
@@ -6,5 +7,11 @@
 
     .todo-container{
         display: flex;
+        width: 400px;
+        padding: 10px;
     }
+    
+    // form>label{
+    //     width: 100%;
+    // }
 }

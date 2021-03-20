@@ -6,94 +6,99 @@
     @dragover.prevent="dragOver"
     @click.prevent="closeTask"
   >
-    <div class="task-content" @click.stop>
-      <button @click="closeTask" class="btn close">X</button>
-
-      <!-- <pre>{{ task.attachments }}</pre> -->
-      <popup-label
-        v-if="isLabelOpen"
-        :popupLeftPos="popupLeftPos"
-        @set-task-labels="setTaskLabels"
-        @toggle-popup="togglePopup"
-      >
-      </popup-label>
-      <task-control
-        @assign-member="assignMember"
-        @set-checklist="saveChecklist"
-        @set-task-labels="setTaskLabels"
-        @toggle-popup="togglePopup"
-        @save-attachments="saveAttachments"
-        :attachments="attachments"
-      />
-      <!-- <task-cover /> -->
-      <div class="task-main">
-        <task-title v-model="task.title" />
-
-        <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
-
-        <div v-if="task" class="task-info">
-          <member-list 
-          :members="task.members" 
-          :isTaskRelated="true"
-          @remove-task-member="removeTaskMember"/>
-
-          <task-label
-            :taskLabelIds="task.labelIds"
-            @set-task-labels="setTaskLabels"
-            @openLabelPopup="openLabelPopup"
-          />
-          <!-- <task-duedate /> -->
+    <div class="task-container">
+        <div class="header">
+          <button @click="closeTask" class="btn close">X</button>
         </div>
+      <div class="task-content" @click.stop>
 
-        <h4>Description</h4>
-        <editable-text
-          v-model="task.description"
-          :type="'description'"
-          @input="setDescription"
-        />
-
-        <task-attachment
-          v-if="attachments.length"
-          :attachments="attachments"
-          @save-attachments="saveAttachments"
-        />
-        <file-drag-uploader
-          v-if="isDragOver"
-          :isDragOver="isDragOver"
-          :attachments="attachments"
-          @save-attachments="saveAttachments"
-          @not-drag-over="notDragOver"
-          class="drag-uploader"
-        />
-
-        <!-- <ul class="clean-list"> -->
-        <draggable
-          v-for="checklist in task.checklists"
-          :key="checklist.id"
-          group="checklists"
-          @start="drag = true"
-          @end="drag = false"
-          :move="move"
-          animation="150"
-          empty-insert-threshold="50"
-          draggable=".checklist-container"
-          tag="ul"
-          class="clean-list"
+        <!-- <pre>{{ task.attachments }}</pre> -->
+        <popup-label
+          v-if="isLabelOpen"
+          :popupLeftPos="popupLeftPos"
+          @set-task-labels="setTaskLabels"
+          @toggle-popup="togglePopup"
         >
-          <task-checklist
-            class="checklist-container"
-            :checklist="checklist"
-            :progressPercentage="progressPercentage(checklist)"
-            @save-todo="saveTodo"
-            @delete-checklist="deleteChecklist"
-            @toggle-drag="toggleDrag"
+        </popup-label>
+        <task-control
+          @assign-member="assignMember"
+          @set-checklist="saveChecklist"
+          @set-task-labels="setTaskLabels"
+          @toggle-popup="togglePopup"
+          @save-attachments="saveAttachments"
+          :attachments="attachments"
+        />
+        <!-- <task-cover /> -->
+        <div class="task-main">
+          <task-title v-model="task.title" />
+
+          <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
+
+          <div v-if="task" class="task-info">
+            <member-list
+              :members="task.members"
+              :isTaskRelated="true"
+              @remove-task-member="removeTaskMember"
+            />
+
+            <task-label
+              :taskLabelIds="task.labelIds"
+              @set-task-labels="setTaskLabels"
+              @openLabelPopup="openLabelPopup"
+            />
+            <!-- <task-duedate /> -->
+          </div>
+
+          <h4>Description</h4>
+          <editable-text
+            v-model="task.description"
+            :type="'description'"
+            @input="setDescription"
           />
-          <!-- {{ checklist.id }} -->
-        </draggable>
-        <!-- </ul> -->
+
+          <task-attachment
+            v-if="attachments.length"
+            :attachments="attachments"
+            @save-attachments="saveAttachments"
+          />
+          <file-drag-uploader
+            v-if="isDragOver"
+            :isDragOver="isDragOver"
+            :attachments="attachments"
+            @save-attachments="saveAttachments"
+            @not-drag-over="notDragOver"
+            class="drag-uploader"
+          />
+
+          <!-- <ul class="clean-list"> -->
+          <draggable
+            v-for="checklist in task.checklists"
+            :key="checklist.id"
+            group="checklists"
+            @start="drag = true"
+            @end="drag = false"
+            :move="move"
+            animation="150"
+            empty-insert-threshold="50"
+            draggable=".checklist-container"
+            tag="ul"
+            class="clean-list"
+          >
+            <!-- :progressPercentage="progressPercentage(checklist)" -->
+            <task-checklist
+              class="checklist-container"
+              :checklist="checklist"
+              @save-todo="saveTodo"
+              @delete-checklist="deleteChecklist"
+              @toggle-drag="toggleDrag"
+            />
+            <!-- {{ checklist.id }} -->
+          </draggable>
+          <!-- </ul> -->
+        </div>
+        <!-- <task-comment /> -->
+        <!-- <activity-list /> -->
       </div>
-      <!-- <task-comment /> -->
-      <!-- <activity-list /> -->
     </div>
   </section>
 </template>
@@ -144,14 +149,14 @@ export default {
     // },
   },
   methods: {
-    progressPercentage(checklist) {
-      if (!checklist.todos.length) return 0;
-      const doneTodos = checklist.todos.filter((todo) => todo.isDone);
-      const progress = Math.floor(
-        (doneTodos.length / checklist.todos.length) * 100
-      );
-      return progress;
-    },
+    // progressPercentage(checklist) {
+    //   if (!checklist.todos.length) return 0;
+    //   const doneTodos = checklist.todos.filter((todo) => todo.isDone);
+    //   const progress = Math.floor(
+    //     (doneTodos.length / checklist.todos.length) * 100
+    //   );
+    //   return progress;
+    // },
     async group() {
       const group = await this.$store.dispatch({ type: "getGroup" });
       this.groupTitle = group.title;
@@ -254,15 +259,14 @@ export default {
     setDrag(isDrag) {
       this.dragTodo = isDrag;
       this.$emit("toggle-drag", isDrag);
-      this.$forceUpdate();
     },
-    removeTaskMember(id){
-      console.log('memberIdx:')
-      const memberIdx = this.task.members.findIndex(({_id}) => _id === id)
-      if(memberIdx <0) return;
-      this.task.members.splice(memberIdx,1);
+    removeTaskMember(id) {
+      console.log("memberIdx:");
+      const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
+      if (memberIdx < 0) return;
+      this.task.members.splice(memberIdx, 1);
       this.saveTask(this.task);
-    }
+    },
   },
   // watch: {
   //   id() {

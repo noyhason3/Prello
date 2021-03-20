@@ -94,7 +94,7 @@ import editableText from "./editable-text.vue";
 export default {
   props: {
     checklist: Object,
-    progressPercentage: Number,
+    // progressPercentage: Number,
   },
   data() {
     return {
@@ -113,14 +113,14 @@ export default {
     };
   },
   computed: {
-    // progressPercentage() {
-    //   if (!this.checklist.todos.length) return 0;
-    //   const doneTodos = this.checklist.todos.filter((todo) => todo.isDone);
-    //   const progress = Math.floor(
-    //     (doneTodos.length / this.checklist.todos.length) * 100
-    //   );
-    //   return progress;
-    // },
+    progressPercentage() {
+      if (!this.checklist.todos.length) return 0;
+      const doneTodos = this.checklist.todos.filter((todo) => todo.isDone);
+      const progress = Math.floor(
+        (doneTodos.length / this.checklist.todos.length) * 100
+      );
+      return progress;
+    },
   },
   methods: {
     openAddTodo() {
@@ -170,7 +170,6 @@ export default {
     setDrag(isDrag) {
       this.dragTodo = isDrag;
       this.$emit("toggle-drag", isDrag);
-      this.$forceUpdate();
     },
   },
   components: {
