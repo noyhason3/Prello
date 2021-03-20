@@ -5,6 +5,7 @@
   .egt{
     display: flex;
     flex-grow: 1;
+    visibility: hidden;
   }
 
   .group-tasks-wrapper {
@@ -31,9 +32,9 @@
      display: flex;
      flex-flow: column;
     // flex-grow:1;
-    overflow-y: auto;
+    //overflow-y: auto;
     max-height: 100%;
-    width: 300px;
+    min-width: 300px;
     border-radius: 4px;
     // padding: 10px;
     &>*{

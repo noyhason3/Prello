@@ -14,10 +14,10 @@
       > -->
     <draggable
       v-model="group.tasks"
-      group="tasks"
+      :group="`tasks`"
       @start="drag = true"
       @end="drag = false"
-      :move="updateBoard"
+      :change="updateBoard"
       empty-insert-threshold="50"
       draggable=".task-preview"
       :class="`clean-list group-tasks gt-${this.idx}`"
@@ -56,10 +56,11 @@
     <draggable
       :class="`egt egt-${this.idx}`"
       v-model="emptyList"
-      group="tasks"
+      group="tasks-e"
       @start="drag = true"
       @end="drag = false"
       :move="updateBoard"
+      :drop="updateBoard"
     >
     </draggable>
   </section>
@@ -145,9 +146,20 @@ export default {
         //return false;
       }
       console.log("file: group.vue - line 148 - updateBoard - ev.to", ev.to);
+      console.log(
+        "file: group.vue - line 151 - updateBoard - document.querySelector(`.gt-${this.idx}`)",
+        document.querySelector(`.gt-${this.idx}`)
+      );
       if (ev.to.classList.contains("egt")) {
         console.log("Dragging to empty group tasks list");
-        return false;
+        var correspondingList = document.querySelector(`.gt-${this.idx}`);
+
+        console.log(
+          "file: group.vue - line 157 - updateBoard - ev.dragged",
+          ev.dragged
+        );
+        correspondingList.appendChild(ev.dragged);
+        //return false;
       }
     },
   },
