@@ -37,16 +37,49 @@ const DEMO_BOARD = {
     members: [
         {
             _id: 'u101',
+            username: 'Tal',
             fullname: 'Tal Tarablus',
             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
         },
         {
             _id: 'u102',
+            username: 'Noam',
             fullname: 'Noam Ben Yosef',
         },
         {
             _id: 'u103',
+            username: 'Gabi1337',
             fullname: 'Gabi Amsalem',
+            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+        },
+        {
+            _id: 'u104',
+            username: 'Efi',
+            fullname: 'Efrat Kaminski',
+            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+        },
+        {
+            _id: 'u105',
+            username: 'Dov',
+            fullname: 'Dov Menashe',
+            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+        },
+        {
+            _id: 'u107',
+            username: 'Benny',
+            fullname: 'Biniamin Shemi',
+            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+        },
+        {
+            _id: 'u108',
+            username: 'Keshet',
+            fullname: 'Keshet Sheshet',
+            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+        },
+        {
+            _id: 'u109',
+            username: 'Goni',
+            fullname: 'Anna Avraham',
             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
         },
     ],
@@ -70,14 +103,13 @@ const DEMO_BOARD = {
                     checklists: [],
                     members: [
                         {
-                            _id: 'u101',
+                            _id: 'u104',
                             username: 'Efi',
                             fullname: 'Efrat Kaminski',
                             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                         },
-
                         {
-                            _id: 'u101',
+                            _id: 'u105',
                             username: 'Dov',
                             fullname: 'Dov Menashe',
                             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
@@ -159,18 +191,19 @@ const DEMO_BOARD = {
         },
         {
             id: 'g102',
-            title: 'Group 2',
+            title: 'New Features',
             tasks: [
                 {
-                    id: 'c103',
-                    title: 'Do that',
+                    id: 'c104',
+                    title: 'Cover Customization',
+                    description: 'Enable picture customzation in addition to color',
                     checklists: [],
                     attachments: [],
+                    labelIds: ['done']
                 },
                 {
-                    id: 'c104',
-                    title: 'Help me',
-                    description: 'description',
+                    id: 'c105',
+                    title: 'Suggested templates by user usage',
                     comments: [
                         {
                             id: 'ZdPnm',
@@ -186,15 +219,30 @@ const DEMO_BOARD = {
                     checklists: [
                         {
                             id: 'YEhmF',
-                            title: 'Checklist',
+                            title: 'Data Gathering',
                             todos: [
                                 {
                                     id: '212jX',
-                                    txt: 'To Do 1',
+                                    txt: 'Activity handler design doc',
+                                    isDone: true,
+                                },
+                                {
+                                    id: '212js',
+                                    txt: 'Activity handler design approval',
+                                    isDone: false,
+                                },
+                                {
+                                    id: '212jz',
+                                    txt: 'Activity handler design base implementation',
+                                    isDone: false,
+                                },
+                                {
+                                    id: '212jh',
+                                    txt: 'Activity handler design training cycle',
                                     isDone: false,
                                 },
                             ],
-                        },
+                        }
                     ],
                     attachments: [],
                     members: [
@@ -211,11 +259,12 @@ const DEMO_BOARD = {
                             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                         },
                         {
-                            _id: 'u101',
+                            _id: 'u107',
                             username: 'Benny',
                             fullname: 'Biniamin Shemi',
                             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                         },
+
                     ],
                     labelIds: ['progress', 'important'],
                     createdAt: 1590999730348,
@@ -234,164 +283,170 @@ const DEMO_BOARD = {
             style: {},
         },
         {
-            id: 'RURY',
-            title: 'Group 1',
+            id: 'g103',
+            title: 'Running tasks',
             tasks: [
-                {
-                    id: 'DGY',
-                    title: 'Replace logo',
-                    checklists: [],
-                    attachments: [],
-                },
-                {
-                    id: 'RTY',
-                    title: 'Add Samples',
-                    checklists: [],
-                    attachments: [],
-                },
             ],
             style: {},
         },
         {
-            id: 'DGHG',
-            title: 'Group 1',
+            id: 'g104',
+            title: 'Fix & Upgrade',
             tasks: [
                 {
                     id: 'THDG',
                     title: 'Replace logo',
                     checklists: [],
-                    attachments: [],
+                    attachments: [
+                        {
+                            id: 'a103',
+                            title: 'Logo inspiration',
+                            url: 'https://trimitiy.com/assets/images/logo/new-logo-white.png',
+                            createdAt: '1616155239874',
+                        },
+                        {
+                            id: 'a104',
+                            title: 'another logo option',
+                            url: 'https://printfiam.com/wp-content/uploads/2020/02/contant-logo.png',
+                            createdAt: '16161455239874',
+                        },
+                        {
+                            id: 'a105',
+                            title: 'smile!',
+                            url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gnome-face-smile-big.svg/1024px-Gnome-face-smile-big.svg.png',
+                            createdAt: '1616152734274',
+                        },
+                    ],
+                    labelIds: ['progress'],
+                    members: [
+                        {
+                            _id: 'u104',
+                            username: 'Efi',
+                            fullname: 'Efrat Kaminski',
+                            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                        },
+                        {
+                            _id: 'u101',
+                            username: 'Tal',
+                            fullname: 'Tal Tarablus',
+                            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                        },
+                    ]
                 },
+                {
+                    id: 'GDSJKM',
+                    title: 'D&D Feature customization',
+                    checklists: [],
+                    attachments: [],
+                    labelIds: ['hold']
+                },
+            ],
+            style: {},
+        },
+        {
+            id: 'g105',
+            title: 'Testing',
+            tasks: [
+                {
+                    id: 'GHH9f',
+                    title: 'User login from different sources',
+                    checklists: [],
+                    attachments: [],
+                    labelIds: ['progress']
+                },
+                {
+                    id: 'GDSJKL',
+                    title: 'Better dashboard implementation for 3rd party software',
+                    checklists: [],
+                    attachments: [],
+                    labelIds: ['hold'],
+                    members: [
+                        {
+                            _id: 'u109',
+                            username: 'Goni',
+                            fullname: 'Anna Avraham',
+                            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                        },
+                    ]
+                },
+                {
+                    id: 'GDSJKP',
+                    title: 'User satiabillity and experience tests',
+                    checklists: [],
+                    attachments: [],
+                    labelIds: ['hold', 'important'],
+                    members: [
+                        {
+                            _id: 'u107',
+                            username: 'Benny',
+                            fullname: 'Biniamin Shemi',
+                            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                        },
+                        {
+                            _id: 'u102',
+                            fullname: 'Noam Ben Yosef',
+                        },
+                    ]
+                },
+            ],
+            style: {},
+        },
+        {
+            id: 'g106',
+            title: 'Ready',
+            tasks: [
                 {
                     id: 'DFHJ',
                     title: 'Add Samples',
                     checklists: [
                         {
                             id: 'MGFH',
-                            title: 'Sprint 4',
+                            title: 'Design',
                             todos: [
                                 {
-                                    id: 'SGHT',
-                                    txt: 'Vuex',
+                                    id: 'GRRAA',
+                                    txt: 'Create sample designs',
                                     isDone: true,
                                 },
                                 {
-                                    id: 'DHHR',
-                                    txt: 'Scss',
-                                    isDone: false,
+                                    id: 'SHMONE',
+                                    txt: 'Approve sample desings',
+                                    isDone: true,
                                 },
                                 {
-                                    id: 'JKGB',
-                                    txt: 'Backend',
-                                    isDone: false,
+                                    id: 'IMFAT',
+                                    txt: 'Make desings',
+                                    isDone: true,
                                 },
                             ],
                         },
                         {
                             id: 'SRYSB',
-                            title: 'Sprint 3',
+                            title: 'Implementation',
                             todos: [
                                 {
-                                    id: 'DHDN',
-                                    txt: 'Vue',
+                                    id: 'dsagjkl',
+                                    txt: 'Create design templates for smooth implementation across all platforms',
                                     isDone: false,
                                 },
                                 {
-                                    id: 'DHGN',
-                                    txt: 'Css',
-                                    isDone: true,
-                                },
-                                {
-                                    id: 'JGFD',
-                                    txt: 'Frontend',
+                                    id: 'SHMONE',
+                                    txt: 'Implement design into all product displays',
                                     isDone: false,
                                 },
                             ],
                         },
                     ],
+                    labelIds: ['progress', 'important'],
                     attachments: [],
                     members: [
                         {
-                            _id: 'u101',
+                            _id: 'u108',
                             username: 'Keshet',
                             fullname: 'Keshet Sheshet',
                             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                         },
-                        {
-                            _id: 'u103',
-                            username: 'Goni',
-                            fullname: 'Anna Avraham',
-                            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                        },
-                        {
-                            _id: 'u103',
-                            username: 'Gabi',
-                            fullname: 'Gabi Amsalem',
-                            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-                        },
                     ],
-                },
-            ],
-            style: {},
-        },
-        {
-            id: 'FJD',
-            title: 'Group 1',
-            tasks: [
-                {
-                    id: 'GHHF',
-                    title: 'Replace logo',
-                    checklists: [],
-                    attachments: [],
-                },
-                {
-                    id: 'G4HF',
-                    title: 'Add Samples',
-                    checklists: [
-                        {
-                            id: 'T5TJH',
-                            title: 'Sprint 4',
-                            todos: [
-                                {
-                                    id: '5T5GT',
-                                    txt: 'Vuex',
-                                    isDone: true,
-                                },
-                                {
-                                    id: 'RTSD',
-                                    txt: 'Scss',
-                                    isDone: false,
-                                },
-                                {
-                                    id: 'LJK',
-                                    txt: 'Backend',
-                                    isDone: false,
-                                },
-                            ],
-                        },
-                        {
-                            id: 'PFGD',
-                            title: 'Sprint 3',
-                            todos: [
-                                {
-                                    id: 'DGH',
-                                    txt: 'Vue',
-                                    isDone: false,
-                                },
-                                {
-                                    id: 'FHG',
-                                    txt: 'Css',
-                                    isDone: true,
-                                },
-                                {
-                                    id: 'SDF',
-                                    txt: 'Frontend',
-                                    isDone: false,
-                                },
-                            ],
-                        },
-                    ],
-                    attachments: [],
                 },
             ],
             style: {},
