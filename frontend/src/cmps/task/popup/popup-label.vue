@@ -10,8 +10,9 @@
           type="search"
           @input="searchLabel"
           placeholder="Search labels..."
+          class="search-label"
         />
-        <ul v-if="boardLabels" class="clean-list">
+        <ul v-if="boardLabels" class="clean-list label-list">
           <li
             v-for="label in boardLabels"
             :key="label.id"
@@ -30,7 +31,7 @@
             <button @click="openLabelEdit('Change', label)">🖋</button>
           </li>
         </ul>
-        <button @click="openLabelEdit('Create')">Create a new lael</button>
+        <button @click="openLabelEdit('Create')" class="btn wide">Create a new lael</button>
       </div>
     </pop-up>
     <popup-label-edit

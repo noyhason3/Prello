@@ -2,11 +2,18 @@
     display: flex;
     margin-bottom:10px;
     // justify-content: space-between;
+    .search-member{
+        margin-bottom:20px;
+    }
     align-items: center;
     .member-initials{
         margin-inline-end: 10px;;
     }
+    .member-name{
+        flex-grow: 1;
+    }
     &.member-selected::after{
         content: "✔";
+        font-size:1rem;
     }
 }
