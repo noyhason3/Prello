@@ -72,7 +72,7 @@ export default {
     removeTaskMember(id){
       console.log('id:', id)
       this.$emit('remove-task-member',id)
-      // this.closeMemberDetails()
+      this.closeMemberDetails()
     }
   },
   computed: {
