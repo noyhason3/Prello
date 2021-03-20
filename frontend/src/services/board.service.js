@@ -92,7 +92,8 @@ const DEMO_BOARD = {
                 },
                 {
                     id: 'c102',
-                    title: 'Customization Features - approval',
+                    title: 'Customization Features',
+                    description: 'For the tracking of the conceptualization and approval process of customization features',
                     checklists: [
                         {
                             id: 'PRBYH',
@@ -117,21 +118,26 @@ const DEMO_BOARD = {
                         },
                         {
                             id: 'PRBSD',
-                            title: 'Sprint 3',
+                            title: 'Task Customization',
                             todos: [
                                 {
                                     id: '34hgjc',
-                                    txt: 'Vue',
+                                    txt: 'UX Rework',
                                     isDone: false,
                                 },
                                 {
                                     id: '3hvsc',
-                                    txt: 'Css',
-                                    isDone: true,
+                                    txt: 'Concept redesign',
+                                    isDone: false,
                                 },
                                 {
                                     id: '3bhjc',
-                                    txt: 'Frontend',
+                                    txt: 'Full feature list',
+                                    isDone: false,
+                                },
+                                {
+                                    id: '3bhjc',
+                                    txt: 'Full feature data flow',
                                     isDone: false,
                                 },
                             ],
