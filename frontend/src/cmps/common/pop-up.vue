@@ -1,5 +1,9 @@
 <template>
-  <div class="popup" ref="container" :style="`max-height:${maxHeight}px;`">
+  <div
+    class="popup"
+    ref="container"
+    :style="`max-height:${maxHeight}px; overflow-y:auto;`"
+  >
     <header>
       <slot name="header"></slot>
     </header>
