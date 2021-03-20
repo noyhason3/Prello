@@ -36,6 +36,7 @@
         :group="group"
         :boardId="board._id"
         :idx="idx"
+        @save-board="saveBoard"
       />
       <!-- </draggable> -->
       <!-- </li> -->
@@ -89,6 +90,9 @@ export default {
       this.newGroup = boardService.getEmptyGroup();
       this.isAddNewGroup = false;
     },
+    // saveBoard(){
+
+    // }
   },
   computed: {
     board() {
