@@ -1,11 +1,10 @@
 <template>
-  <div class="popup">
+  <div class="popup" ref="container" :style="`max-height:${maxHeight}px;`">
     <header>
       <slot name="header"></slot>
     </header>
     <main>
-      <slot name="main">
-      </slot>
+      <slot name="main"> </slot>
     </main>
     <footer>
       <slot name="footer"></slot>
@@ -15,7 +14,19 @@
 
 <script>
 export default {
-    components:{
-    }
+  data() {
+    return {
+      maxHeight: null,
+    };
+  },
+  mounted() {
+    const top = this.$refs.container.getBoundingClientRect().y;
+    this.maxHeight = window.innerHeight - top;
+    console.log(
+      "file: pop-up.vue - line 25 - mounted - window.innerHeight - top",
+      window.innerHeight - top
+    );
+  },
+  components: {},
 };
 </script>
