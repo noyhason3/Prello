@@ -6,9 +6,7 @@
         justify-content: space-around;
         font-size: 16px;
 
-        & > *{
-            // margin:0 auto;
-        }
+
         & > *:not(:last-child){
             margin-block-end: 3px;
         }
