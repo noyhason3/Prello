@@ -144,7 +144,7 @@ const DEMO_BOARD = {
                                     isDone: false,
                                 },
                                 {
-                                    id: '3bhjc',
+                                    id: '3bhjd',
                                     txt: 'Full feature data flow',
                                     isDone: false,
                                 },
