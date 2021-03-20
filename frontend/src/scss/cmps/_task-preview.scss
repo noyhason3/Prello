@@ -22,6 +22,9 @@
         font-size:1em;
         &.enlarged-label{
             height: 20px;
+            width: fit-content;
+            padding-inline: 5px;
+            color:$clr1;
         }
     }
     .member-list {

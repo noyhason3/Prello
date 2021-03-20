@@ -1,6 +1,6 @@
 <template>
   <section class="popup-label">
-    <pop-up v-if="!isPopupEdit" :style="{left:leftPos}">
+    <pop-up v-if="!isPopupEdit" :style="{ left: leftPos }">
       <div slot="header" class="task-popup-header">
         <h2>Labels</h2>
         <button @click="togglePopupLabel()" class="btn close">X</button>
@@ -20,7 +20,7 @@
             <div class="label-color">
               <button
                 @click="toggleSelectLabel(label.id)"
-                :style="{ 'background-color': label.color }"
+                :style="'background-color:' + label.color + ';color:$clr1;'"
                 :class="{ 'label-in-use': isUsed(label.id) }"
                 class="btn label"
               >
@@ -48,8 +48,8 @@
 import popUp from "@/cmps/common/pop-up.vue";
 import popupLabelEdit from "@/cmps/task/popup/popup-label-edit.vue";
 export default {
-  props:{
-    popupLeftPos:Number
+  props: {
+    popupLeftPos: Number,
   },
   data() {
     return {
@@ -86,7 +86,7 @@ export default {
       this.isPopupEdit = !this.isPopupEdit;
     },
     togglePopupLabel() {
-      this.$emit("toggle-popup", {str:"Label", buttonLeftPos:0});
+      this.$emit("toggle-popup", { str: "Label", buttonLeftPos: 0 });
     },
     saveLabel(label) {
       if (this.selectedLabel) {
@@ -94,13 +94,13 @@ export default {
         this.selectedLabel.color = color;
         this.selectedLabel.title = title;
       } else this.boardLabels.push(label);
-      this.$store.commit({ type: "saveBoardLabels", labels:this.boardLabels });
+      this.$store.commit({ type: "saveBoardLabels", labels: this.boardLabels });
       this.closeLabelEdit();
     },
     removeBoardLabel(id) {
       const labelIdx = this.boardLabels.findIndex((label) => label.id === id);
       if (labelIdx >= 0) this.boardLabels.splice(labelIdx, 1);
-      this.$store.commit({ type: "saveBoardLabels", labels:this.boardLabels });
+      this.$store.commit({ type: "saveBoardLabels", labels: this.boardLabels });
     },
   },
   computed: {
@@ -114,10 +114,10 @@ export default {
       if (!taskLabels) return [];
       return [...taskLabels];
     },
-    leftPos(){
+    leftPos() {
       console.log(this.popupLeftPos);
-      return `${this.popupLeftPos}px`
-    }
+      return `${this.popupLeftPos}px`;
+    },
   },
   components: {
     popUp,
