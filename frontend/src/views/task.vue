@@ -1,88 +1,96 @@
 <template>
   <!-- <section class="task" v-if="task" @dragover.prevent="dragOver"> -->
-  <section class="task" v-if="task" @dragover.prevent="dragOver">
-    <button @click="closeTask" class="btn close">X</button>
-    <!-- <pre>{{ task.attachments }}</pre> -->
-    <popup-label
-      v-if="isLabelOpen"
-      :popupLeftPos="popupLeftPos"
-      @set-task-labels="setTaskLabels"
-      @toggle-popup="togglePopup"
-    >
-    </popup-label>
-    <task-control
-      @assign-member="assignMember"
-      @set-checklist="saveChecklist"
-      @set-task-labels="setTaskLabels"
-      @toggle-popup="togglePopup"
-      @save-attachments="saveAttachments"
-      :attachments="attachments"
-    />
-    <!-- <task-cover /> -->
-    <div class="task-main">
-      <task-title v-model="task.title" />
+  <section
+    class="task"
+    v-if="task"
+    @dragover.prevent="dragOver"
+    @click.prevent="closeTask"
+  >
+    <div class="task-content" @click.stop>
+      <button @click="closeTask" class="btn close">X</button>
 
-      <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
-
-      <div v-if="task" class="task-info">
-        <member-list :members="task.members" />
-
-        <task-label
-          :taskLabelIds="task.labelIds"
-          @set-task-labels="setTaskLabels"
-          @openLabelPopup="openLabelPopup"
-        />
-        <!-- <task-duedate /> -->
-      </div>
-
-      <h4>Description</h4>
-      <editable-text
-        v-model="task.description"
-        :type="'description'"
-        @input="setDescription"
-      />
-
-      <task-attachment
-      v-if="attachments.length"
-        :attachments="attachments"
-        @save-attachments="saveAttachments"
-      />
-      <file-drag-uploader
-        v-if="isDragOver"
-        :isDragOver="isDragOver"
-        :attachments="attachments"
-        @save-attachments="saveAttachments"
-        @not-drag-over="notDragOver"
-        class="drag-uploader"
-      />
-
-      <!-- <ul class="clean-list"> -->
-      <draggable
-        v-for="checklist in task.checklists"
-        :key="checklist.id"
-        group="checklists"
-        @start="drag = true"
-        @end="drag = false"
-        :move="move"
-        animation="150"
-        empty-insert-threshold="50"
-        draggable=".checklist-container"
-        tag="ul"
-        class="clean-list"
+      <!-- <pre>{{ task.attachments }}</pre> -->
+      <popup-label
+        v-if="isLabelOpen"
+        :popupLeftPos="popupLeftPos"
+        @set-task-labels="setTaskLabels"
+        @toggle-popup="togglePopup"
       >
-        <task-checklist
-          class="checklist-container"
-          :checklist="checklist"
-          @save-todo="saveTodo"
-          @delete-checklist="deleteChecklist"
-          @toggle-drag="toggleDrag"
+      </popup-label>
+      <task-control
+        @assign-member="assignMember"
+        @set-checklist="saveChecklist"
+        @set-task-labels="setTaskLabels"
+        @toggle-popup="togglePopup"
+        @save-attachments="saveAttachments"
+        :attachments="attachments"
+      />
+      <!-- <task-cover /> -->
+      <div class="task-main">
+        <task-title v-model="task.title" />
+
+        <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
+
+        <div v-if="task" class="task-info">
+          <member-list :members="task.members" />
+
+          <task-label
+            :taskLabelIds="task.labelIds"
+            @set-task-labels="setTaskLabels"
+            @openLabelPopup="openLabelPopup"
+          />
+          <!-- <task-duedate /> -->
+        </div>
+
+        <h4>Description</h4>
+        <editable-text
+          v-model="task.description"
+          :type="'description'"
+          @input="setDescription"
         />
-        <!-- {{ checklist.id }} -->
-      </draggable>
-      <!-- </ul> -->
+
+        <task-attachment
+          v-if="attachments.length"
+          :attachments="attachments"
+          @save-attachments="saveAttachments"
+        />
+        <file-drag-uploader
+          v-if="isDragOver"
+          :isDragOver="isDragOver"
+          :attachments="attachments"
+          @save-attachments="saveAttachments"
+          @not-drag-over="notDragOver"
+          class="drag-uploader"
+        />
+
+        <!-- <ul class="clean-list"> -->
+        <draggable
+          v-for="checklist in task.checklists"
+          :key="checklist.id"
+          group="checklists"
+          @start="drag = true"
+          @end="drag = false"
+          :move="move"
+          animation="150"
+          empty-insert-threshold="50"
+          draggable=".checklist-container"
+          tag="ul"
+          class="clean-list"
+        >
+          <task-checklist
+            class="checklist-container"
+            :checklist="checklist"
+            @save-todo="saveTodo"
+            @delete-checklist="deleteChecklist"
+            @toggle-drag="toggleDrag"
+          />
+          <!-- {{ checklist.id }} -->
+        </draggable>
+        <!-- </ul> -->
+      </div>
+      <!-- <task-comment /> -->
+      <!-- <activity-list /> -->
     </div>
-    <!-- <task-comment /> -->
-    <!-- <activity-list /> -->
   </section>
 </template>
 
@@ -105,14 +113,14 @@ export default {
       isLabelOpen: false,
       isDragOver: false,
       drag: false,
-      popupLeftPos:null,
-      groupTitle:null
+      popupLeftPos: null,
+      groupTitle: null,
       // task: null,
     };
   },
   async created() {
-    await this.group()
-  //   this.loadTask();
+    await this.group();
+    //   this.loadTask();
   },
   computed: {
     // taskId() {
@@ -130,7 +138,6 @@ export default {
     // boardId() {
     //   return this.$route.params.boardId;
     // },
-
   },
   methods: {
     async group() {
@@ -207,12 +214,12 @@ export default {
       const boardId = this.$route.params.boardId;
       this.$router.push("/board/" + boardId);
     },
-    togglePopup({str,buttonLeftPos}) {
+    togglePopup({ str, buttonLeftPos }) {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
-      if(!this[dataStr]) this.popupLeftPos =0;
+      if (!this[dataStr]) this.popupLeftPos = 0;
       else this.popupLeftPos = buttonLeftPos;
-      console.log('buttonLeftPos:', this.popupLeftPos)
+      console.log("buttonLeftPos:", this.popupLeftPos);
     },
     openLabelPopup() {
       this.isLabelOpen = true;
