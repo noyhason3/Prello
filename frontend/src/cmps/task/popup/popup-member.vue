@@ -1,10 +1,10 @@
 <template>
-  <pop-up>
+  <pop-up class="popup-member">
     <div slot="header" class="task-popup-header">
       <h2>Members</h2>
       <button @click="togglePopup" class="btn close">X</button>
     </div>
-    <div slot="main" class="task-popup-main">
+    <div slot="main" class="task-popup-main ">
       <input type="text" v-model="q" placeholder="Search for members..." class="search-member"/>
       <ul class="clean-list" v-if="memberList">
         <li
