@@ -37,7 +37,7 @@
     .task-control {
       display: flex;
       flex-direction: column;
-      & button {
+      .control-btn {
         outline: none;
         background-color: #EAECF0;
         width: 150px;
