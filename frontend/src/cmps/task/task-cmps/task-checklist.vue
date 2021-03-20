@@ -1,5 +1,5 @@
 <template>
-  <li class="task-checklist">
+  <li class="task-checklist" v-if="">
     <div class="header">
       ✅
       <h4 v-if="!isEditTitleOpen" @click="openEditTitle">
@@ -21,8 +21,8 @@
 
     <form>
       <!-- <ul class="todos clean-list"> -->
-      <!-- :list="checklist.todos" -->
       <!-- :move="updateTask" -->
+      <!-- :list="checklist.todos" -->
       <draggable
         @start="setDrag(true)"
         @end="setDrag(false), updateTask()"
@@ -170,9 +170,7 @@ export default {
     setDrag(isDrag) {
       this.dragTodo = isDrag;
       this.$emit("toggle-drag", isDrag);
-    },
-    updateTask(ev) {
-        console.log(ev);
+      this.$forceUpdate();
     },
   },
   components: {
