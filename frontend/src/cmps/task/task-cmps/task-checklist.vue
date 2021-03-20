@@ -26,7 +26,6 @@
       <draggable
         @start="setDrag(true)"
         @end="setDrag(false), updateTask()"
-        :list="checklist.todos"
         group="todos"
         animation="150"
         empty-insert-threshold="50"
