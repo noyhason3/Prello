@@ -17,7 +17,7 @@
             :class="member.color"
             class="member-initials"
           />
-          <h4>{{ member.fullname }}</h4>
+          <h4>{{ member.fullname }}<span></span></h4>
           <!-- <button @click="assignMember(member)">Invite</button> -->
           <!-- <div v-if="member.imgUrl" class="user">
             <img :src="member.imgUrl" height="120px" width="120px" />
