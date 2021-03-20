@@ -1,36 +1,64 @@
-.label-preview {
-   
-    & button:hover {
-        filter: brightness(90%);
+.popup-label {
+    position: absolute;
+
+    .label-preview {
+
+        & button:hover {
+            filter: brightness(90%);
+        }
+
+        .label-color {
+            width: 100%;
+            height: 30px;
+        }
+
+        .btn.label {
+            background-color: transparent;
+            color: black;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            border-radius: 5px;
+        }
+
+        .label-in-use::after {
+            content: "✔";
+        }
+    }
+}
+
+.label-edit {
+    .label-edit-header {
+        display: flex;
+        justify-content: space-between;
     }
 
-    .label-color {
+    .label-color-list {
+
         width: 100%;
-        height: 30px;
-    }
+        display: flex;
+        flex-wrap: wrap;
 
-    .btn.label {
-        background-color: transparent;
-        color: black;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-    }
+        .label-color {
+            width: 40px;
+            height: 30px;
+            margin-bottom: 10px;
+            margin-inline-end: 5px;
+            ;
+        }
 
-    .label-in-use::after {
-        content: "✔";
+        .btn.color {
+
+            display: block;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+
+        }
+
+        .color-in-use::after {
+            content: "✔";
+        }
     }
 }
-
-.label-edit-header{
-    display:flex;
-    justify-content: space-between;
-}
-.label-color{
-    height: 50px;
-    width: 100px;
-    &.is-selected::before{
-        content: "✔";
-    }
-}
-

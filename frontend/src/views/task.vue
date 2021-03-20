@@ -4,6 +4,7 @@
     <!-- <pre>{{ task.attachments }}</pre> -->
     <popup-label
       v-if="isLabelOpen"
+      :popupLeftPos="popupLeftPos"
       @set-task-labels="setTaskLabels"
       @toggle-popup="togglePopup"
     >
@@ -20,7 +21,7 @@
     <div class="task-main">
       <task-title v-model="task.title" />
 
-      <h6>In list: {{ this.group.title }}</h6>
+      <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
 
       <div v-if="task" class="task-info">
         <member-list :members="task.members" />
@@ -106,12 +107,15 @@ export default {
       isLabelOpen: false,
       isDragOver: false,
       drag: false,
+      popupLeftPos:null,
+      groupTitle:null
       // task: null,
     };
   },
-  // async created() {
+  async created() {
+    await this.group()
   //   this.loadTask();
-  // },
+  },
   computed: {
     // taskId() {
     //   return this.$router.parmas.taskId;
@@ -128,12 +132,12 @@ export default {
     // boardId() {
     //   return this.$route.params.boardId;
     // },
+
   },
   methods: {
     async group() {
-      const group = await this.$store.commit({ type: "getGroup" });
-      console.log("group", group);
-      return group;
+      const group = await this.$store.dispatch({ type: "getGroup" });
+      this.groupTitle = group.title;
     },
     // setTitle(title) {
     //   this.task.title = title;
@@ -199,10 +203,12 @@ export default {
       const boardId = this.$route.params.boardId;
       this.$router.push("/board/" + boardId);
     },
-    togglePopup(str) {
+    togglePopup({str,buttonLeftPos}) {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
-      console.log(this.isLabelOpen);
+      if(!this[dataStr]) this.popupLeftPos =0;
+      else this.popupLeftPos = buttonLeftPos;
+      console.log('buttonLeftPos:', this.popupLeftPos)
     },
     openLabelPopup() {
       this.isLabelOpen = true;
@@ -244,5 +250,3 @@ export default {
 };
 </script>
 
-<style>
-</style>

@@ -55,18 +55,19 @@ export const boardStore = {
             const board = await boardService.removeGroup({ groupId, boardId: state.board._id })
             this.commit({ type: 'setBoard', board });
         },
-        getGroup(state, { taskId }) {
-            const group = state.board.groups.find(({ tasks }) => {
-                return tasks.some(({ id }) => id === state.task.id);
-            });
-            console.log('group:', group);
-            return group
-        },
+
         // setBoardList(state, {boards}){
         //     state.boards = boards;
         // }
     },
     actions: {
+        async getGroup({state}) {
+            const group = await state.board.groups.find(({ tasks }) => {
+                return tasks.some(({ id }) => id === state.task.id);
+            });
+            console.log('group:', group);
+            return group
+        },
         // async loadBoardList({ commit }) {
         //   try {
         //     // const boards =  await boardService.query()
