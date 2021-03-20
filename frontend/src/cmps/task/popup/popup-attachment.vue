@@ -25,7 +25,7 @@
           v-model="newAttachment.title"
         />
         </div>
-        <button>Attach</button>
+        <button class="btn narrow">Attach</button>
       </form>
     </div>
   </pop-up>

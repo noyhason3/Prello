@@ -5,7 +5,7 @@
       <button @click="togglePopup" class="btn close">X</button>
     </div>
     <div slot="main" class="task-popup-main">
-      <input type="text" v-model="q" placeholder="Search for members..." />
+      <input type="text" v-model="q" placeholder="Search for members..." class="search-member"/>
       <ul class="clean-list" v-if="memberList">
         <li
           v-for="member in memberList"
@@ -19,7 +19,7 @@
             :class="member.color"
             class="member-initials"
           />
-          <h4>{{ member.fullname }}<span></span></h4>
+          <h4 class="member-name">{{ member.fullname }}<span></span></h4>
           <!-- <button @click="assignMember(member)">Invite</button> -->
           <!-- <div v-if="member.imgUrl" class="user">
             <img :src="member.imgUrl" height="120px" width="120px" />
