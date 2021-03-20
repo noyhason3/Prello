@@ -13,7 +13,7 @@
       </div> -->
 
     <!-- </div> -->
-    <ul class="clean-list member-list">
+    <ul class="clean-list flex member-list">
       <li
         v-for="(member, idx) in membersToShow"
         :key="'inits' + idx"
