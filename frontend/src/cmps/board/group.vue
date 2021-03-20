@@ -73,7 +73,7 @@ export default {
       this.$router.push(`/board/${this.boardId}/${task.id}`);
     },
     addTask() {
-      if(!this.newTask.title)return;
+      if (!this.newTask.title) return;
       // this.newTask.group = { id: this.group.id, title: this.group.title };
       this.$store.commit({
         type: "saveTask",
@@ -121,7 +121,7 @@ export default {
         relatedContext.list[draggedContext.index]?.id
       ) {
         //console.log("Moving to same container");
-        return false;
+        //return false;
       }
     },
   },

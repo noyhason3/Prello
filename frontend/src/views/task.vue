@@ -1,4 +1,5 @@
 <template>
+  <!-- <section class="task" v-if="task" @dragover.prevent="dragOver"> -->
   <section class="task" v-if="task" @dragover.prevent="dragOver">
     <button @click="closeTask" class="btn close">X</button>
     <!-- <pre>{{ task.attachments }}</pre> -->
@@ -53,33 +54,30 @@
         class="drag-uploader"
       />
 
-      <ul class="clean-list">
-        <draggable
-          v-model="task.checklists"
-          group="checklists"
-          @start="drag = true"
-          @end="drag = false"
-          animation="150"
-          emptyInsertThreshold="50"
-          ghost-class="ghost"
-          chosen-class="chosen"
-          drag-class="drag"
-          draggable=".checklist-container"
-        >
-          <li
-            v-for="checklist in task.checklists"
-            :key="checklist.id"
-            class="checklist-container"
-          >
-            <task-checklist
-              :checklist="checklist"
-              @save-todo="saveTodo"
-              @delete-checklist="deleteChecklist"
-              @toggle-drag="toggleDrag"
-            />
-          </li>
-        </draggable>
-      </ul>
+      <!-- <ul class="clean-list"> -->
+      <draggable
+        v-for="checklist in task.checklists"
+        :key="checklist.id"
+        group="checklists"
+        @start="drag = true"
+        @end="drag = false"
+        :move="move"
+        animation="150"
+        empty-insert-threshold="50"
+        draggable=".checklist-container"
+        tag="ul"
+        class="clean-list"
+      >
+        <task-checklist
+          class="checklist-container"
+          :checklist="checklist"
+          @save-todo="saveTodo"
+          @delete-checklist="deleteChecklist"
+          @toggle-drag="toggleDrag"
+        />
+        <!-- {{ checklist.id }} -->
+      </draggable>
+      <!-- </ul> -->
     </div>
     <!-- <task-comment /> -->
     <!-- <activity-list /> -->
@@ -132,10 +130,15 @@ export default {
     async group() {
       const group = await this.$store.commit({
         type: "getGroup",
-        taskId: this.task.id,
       });
       console.log("group", group);
       return group;
+    },
+    move(ev) {
+      console.log("file: task.vue - line 142 - move - ev", ev);
+    },
+    reorder(ev) {
+      console.log("file: task.vue - line 151 - reorder - ev", ev);
     },
     // setTitle(title) {
     //   this.task.title = title;
