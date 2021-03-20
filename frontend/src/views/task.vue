@@ -80,6 +80,7 @@
           <task-checklist
             class="checklist-container"
             :checklist="checklist"
+            :progressPercentage="progressPercentage(checklist)"
             @save-todo="saveTodo"
             @delete-checklist="deleteChecklist"
             @toggle-drag="toggleDrag"
@@ -140,6 +141,14 @@ export default {
     // },
   },
   methods: {
+    progressPercentage(checklist) {
+      if (!checklist.todos.length) return 0;
+      const doneTodos = checklist.todos.filter((todo) => todo.isDone);
+      const progress = Math.floor(
+        (doneTodos.length / checklist.todos.length) * 100
+      );
+      return progress;
+    },
     async group() {
       const group = await this.$store.dispatch({ type: "getGroup" });
       this.groupTitle = group.title;
