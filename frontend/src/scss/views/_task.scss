@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   overflow-y: auto;
+  
 
   .task-container {
     z-index: 100;
@@ -21,6 +22,7 @@
     margin-top: 100px;
     display: flex;
     flex-direction: column;
+    // margin-top: 300px;
 
     .header{
         
@@ -37,6 +39,10 @@
       flex-direction: column;
       & button {
         outline: none;
+        background-color: #EAECF0;
+        width: 150px;
+        padding: 10px;
+        margin-bottom: 10px;
       }
     }
 
@@ -47,9 +53,10 @@
 
     // height: 500px;
     // background-color: rgba(71, 71, 236, 0.541);
-    background-color: $clr1;
+    // background-color: $clr1;
+    background-color: #F1F2F5;
     border-radius: 5px;
-    margin: 0 auto;
+    // margin: 0 auto;
     .drag-uploader {
       position: absolute;
       height: 100%;
