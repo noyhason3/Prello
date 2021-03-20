@@ -1,17 +1,60 @@
-.task-checklist{
-    margin-bottom: 30px;
-    .header{
-        display: flex;
-        justify-content: space-between;
+.task-checklist {
+  margin-bottom: 30px;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h4{
+        margin: 0 auto;
+    }
+  }
+
+  .todo-container {
+    // width: 400px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+
+    input{
+        margin-right: 10px;
     }
 
-    .todo-container{
+    form{
         display: flex;
-        width: 400px;
-        padding: 10px;
+        align-items: center;
     }
-    
-    // form>label{
-    //     width: 100%;
-    // }
+
+    textarea {
+        width: 60%;
+        font-size: 16px;
+    }
+
+    .editable-text,
+    .editable-text p{
+        font-size: 22px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 0;
+    }
+  }
+
+  .delete-btn,
+  .add-btn {
+    background-color: #eaecf0;
+    padding: 10px;
+  }
+}
+
+.checklist-container > * {
+}
+
+.progress-checklist{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    .progress-bar{
+        width: 85%;
+    }
+
 }

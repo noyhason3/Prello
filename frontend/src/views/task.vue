@@ -54,6 +54,7 @@
             v-model="task.description"
             :type="'description'"
             @input="setDescription"
+            class="editable-text-task"
           />
 
           <task-attachment
