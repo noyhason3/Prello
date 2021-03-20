@@ -13,15 +13,18 @@
       </div> -->
 
     <!-- </div> -->
-    <ul class="clean-list flex member-list">
+    <ul class="clean-list member-list">
       <li
-        v-for="(member, idx) in memebersToShow"
+        v-for="(member, idx) in membersToShow"
         :key="'inits' + idx"
         class="member-initials"
         @click="toggleMemberDetails($event, member)"
         :class="member.color"
       >
-        <a class="flex center">{{ member.initials }}</a>
+        <member-preview
+          :member="member"
+          @toggle-member-details="toggleMemberDetails"
+        />
       </li>
     </ul>
     <popup-member-details
@@ -33,7 +36,7 @@
 </template>
 
 <script>
-import utilService from "../../services/util.service";
+import memberPreview from "../common/member-preview.vue";
 import popupMemberDetails from "../task/popup/popup-member-details.vue";
 export default {
   props: {
@@ -46,8 +49,7 @@ export default {
     };
   },
   methods: {
-    toggleMemberDetails(ev, member) {
-      ev.stopPropagation();
+    toggleMemberDetails(member) {
       this.selectedMember = member;
       this.isShowMemberDetails = !this.isShowMemberDetails;
     },
@@ -64,7 +66,7 @@ export default {
     },
   },
   computed: {
-    memebersToShow() {
+    membersToShow() {
       if (!this.members) return;
       const membersToShow = this.members.map((member) => {
         const nameSplit = member.fullname.split(" ");
@@ -72,17 +74,18 @@ export default {
           nameSplit[0].charAt(0) + nameSplit[1].charAt(0)
         ).toUpperCase();
         const color = this.getMemeberColor(initials);
-        console.log('color:', color)
-        // const color = utilService.stringToHslColor(initials, 50, 50);
+        // console.log("color:", color);
         member.color = color;
         member.initials = initials;
         return member;
       });
+      // console.log("membersToShow:", membersToShow);
       return membersToShow;
     },
   },
   components: {
     popupMemberDetails,
+    memberPreview,
   },
 };
 </script>
