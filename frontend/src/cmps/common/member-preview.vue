@@ -1,5 +1,5 @@
 <template>
-      <a class="flex center">{{ member.initials }}</a>
+      <a class="flex center member-preview">{{ member.initials }}</a>
 </template>
 
 <script>
@@ -8,7 +8,7 @@ export default {
         member:Object
     },
     created(){
-      // console.log('this.membersToShow:', this.member)
+      // console.log('this.member:', this.member)
     },
     methods:{
       toggleMemberDetails(){

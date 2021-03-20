@@ -17,11 +17,12 @@
       <li
         v-for="(member, idx) in membersToShow"
         :key="'inits' + idx"
-        class="member-initials"
         @click="toggleMemberDetails($event, member)"
-        :class="member.color"
+
       >
         <member-preview
+                class="member-initials"
+        :class="member.color"
           :member="member"
           @toggle-member-details="toggleMemberDetails"
         />
