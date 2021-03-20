@@ -546,7 +546,8 @@ export default {
     saveTask,
     removeTask,
     saveGroup,
-    removeGroup
+    removeGroup,
+    saveBoard
 }
 
 if (!localStorage.getItem(DB_KEY)) loadDemoBoard()
