@@ -6,51 +6,9 @@
     @dragover.prevent="dragOver"
     @click.prevent="closeTask"
   >
-<<<<<<< HEAD
     <div class="task-container">
         <div class="header">
           <button @click="closeTask" class="btn close">X</button>
-=======
-    <div class="task-content" @click.stop>
-      <button @click="closeTask" class="btn close">X</button>
-
-      <!-- <pre>{{ task.attachments }}</pre> -->
-      <popup-label
-        v-if="isLabelOpen"
-        :popupLeftPos="popupLeftPos"
-        @set-task-labels="setTaskLabels"
-        @toggle-popup="togglePopup"
-      >
-      </popup-label>
-      <task-control
-        @assign-member="assignMember"
-        @remove-task-member="removeTaskMember"
-        @set-checklist="saveChecklist"
-        @set-task-labels="setTaskLabels"
-        @toggle-popup="togglePopup"
-        @save-attachments="saveAttachments"
-        :attachments="attachments"
-      />
-      <!-- <task-cover /> -->
-      <div class="task-main">
-        <task-title v-model="task.title" />
-
-        <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
-
-        <div v-if="task" class="task-info">
-          <member-list
-            :members="task.members"
-            :isTaskRelated="true"
-            @remove-task-member="removeTaskMember"
-          />
-
-          <task-label
-            :taskLabelIds="task.labelIds"
-            @set-task-labels="setTaskLabels"
-            @openLabelPopup="openLabelPopup"
-          />
-          <!-- <task-duedate /> -->
->>>>>>> e1ccb1ed37fe60e9d1c9c0123cf37814ae8d838f
         </div>
       <div class="task-content" @click.stop>
 
