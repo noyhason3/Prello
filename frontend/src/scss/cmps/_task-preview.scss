@@ -49,30 +49,3 @@
         background-color: #EFEFEF;
     }
 }
-
-.member-initials {
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: 1px solid grey;
-    height: 30px;
-    width: 30px;
-    text-align:center;
-    a{
-        margin:0 auto;
-        height:fit-content
-    }
-    &.clr2{
-        background-color: $clr2;
-    }
-    &.clr3{
-        background-color: $clr3;
-    }
-    &.clr4{
-        background-color: $clr4;
-    }
-    &.clr5{
-        background-color: $clr5;
-    }
-}

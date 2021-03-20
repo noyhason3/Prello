@@ -334,7 +334,7 @@ const DEMO_BOARD = {
                     ]
                 },
                 {
-                    id: 'GDSJKL',
+                    id: 'GDSJKM',
                     title: 'D&D Feature customization',
                     checklists: [],
                     attachments: [],
@@ -370,7 +370,7 @@ const DEMO_BOARD = {
                     ]
                 },
                 {
-                    id: 'GDSJKL',
+                    id: 'GDSJKP',
                     title: 'User satiabillity and experience tests',
                     checklists: [],
                     attachments: [],
