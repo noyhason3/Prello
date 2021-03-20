@@ -39,11 +39,22 @@
             width: 100%;
         }
         &.action-color{
-            background-color: $clr4;
-            color:$clr1;
+            // background-color: #A1FD9D;
+            background-color: $clr1;
+            border:2px solid $clr7;
+            color:$clr7;
             font-weight:600;
         }
-
+        &.warning-color{
+            // background-color: $clr4;
+            background-color: $clr1;
+            border:2px solid $clr4;
+            color:$clr4;
+            font-weight:600;
+        }
+        &:hover {
+            filter: brightness(90%);
+        }
     }
     .task-popup-header {
         display: flex;

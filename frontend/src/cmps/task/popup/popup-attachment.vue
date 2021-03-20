@@ -17,12 +17,15 @@
           v-model="url"
           @change="toggleAddName"
           placeholder="Paste any link here..."
+          class="url-input"
         />
         <div v-if="url">
         <h3>Link name (optional)</h3>
         <input
           type="text"
           v-model="newAttachment.title"
+          class="url-name-input"
+
         />
         </div>
         <button class="btn narrow">Attach</button>

@@ -1,5 +1,5 @@
 <template>
-  <pop-up>
+  <pop-up class="member-details">
     <div slot="main">
       <button @click="closeMemberDetails" class="btn close">X</button>
       <div class="member-details-container">
@@ -8,15 +8,16 @@
         </div>
         <div>
           <h2>{{ member.fullname }}</h2>
-          <h2>@{{ member.username }}</h2>
+          <h3>@{{ member.username }}</h3>
+        </div>
+      </div>
           <button
             v-if="isTaskRelated"
             @click="removeTaskMember($event, member._id)"
+            class="btn remove"
           >
             Remove from task
           </button>
-        </div>
-      </div>
     </div>
   </pop-up>
 </template>
