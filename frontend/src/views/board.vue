@@ -5,7 +5,10 @@
       v-model="board.groups"
       group="group"
       @start="drag = true"
-      @end="drag = false"
+      @end="
+        drag = false;
+        saveBoard();
+      "
       animation="150"
       empty-insert-threshold="5"
       ghost-class="ghost"
