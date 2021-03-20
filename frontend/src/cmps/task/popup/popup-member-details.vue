@@ -2,13 +2,14 @@
   <pop-up>
     <div slot="main">
       <button @click="closeMemberDetails">X</button>
-      <div class="member-initials" :style="{ 'background-color': member.color }">
+
+      <div class="member-initials" :class="member.color">
         {{ member.initials }}
       </div>
       <h2>{{ member.fullname }}</h2>
-      <h2>{{ member.username }}</h2>
-      <button @click="removeMemberFromTask(member._id)">
-        Remove from card
+      <h2>@{{ member.username }}</h2>
+      <button v-if="isTaskRelated" @click="removeTaskMember($event, member._id)">
+        Remove from task
       </button>
     </div>
   </pop-up>
@@ -19,11 +20,16 @@ import popUp from "@/cmps/common/pop-up";
 export default {
   props: {
     member: Object,
+    isTaskRelated:Boolean
   },
   methods: {
     closeMemberDetails(ev) {
-        ev.stopPropagation();
+      ev.stopPropagation();
       this.$emit("close-member-details");
+    },
+    removeTaskMember(ev, id) {
+      ev.stopPropagation();
+      this.$emit("remove-task-member", id);
     },
   },
   components: {

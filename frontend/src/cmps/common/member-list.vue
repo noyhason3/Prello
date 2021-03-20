@@ -18,11 +18,10 @@
         v-for="(member, idx) in membersToShow"
         :key="'inits' + idx"
         @click="toggleMemberDetails($event, member)"
-
       >
         <member-preview
-                class="member-initials"
-        :class="member.color"
+          class="member-initials"
+          :class="member.color"
           :member="member"
           @toggle-member-details="toggleMemberDetails"
         />
@@ -31,7 +30,9 @@
     <popup-member-details
       v-if="isShowMemberDetails"
       @close-member-details="closeMemberDetails"
+      @remove-task-member="removeTaskMember"
       :member="selectedMember"
+      :isTaskRelated="isTaskRelated"
     />
   </div>
 </template>
@@ -42,6 +43,7 @@ import popupMemberDetails from "../task/popup/popup-member-details.vue";
 export default {
   props: {
     members: Array,
+    isTaskRelated:Boolean
   },
   data() {
     return {
@@ -50,7 +52,9 @@ export default {
     };
   },
   methods: {
-    toggleMemberDetails(member) {
+    toggleMemberDetails(ev, member) {
+      ev.stopPropagation();
+      console.log('member:', member)
       this.selectedMember = member;
       this.isShowMemberDetails = !this.isShowMemberDetails;
     },
@@ -65,6 +69,11 @@ export default {
       }, 0);
       return "clr" + ((num % 7) + 2);
     },
+    removeTaskMember(id){
+      console.log('id:', id)
+      this.$emit('remove-task-member',id)
+      // this.closeMemberDetails()
+    }
   },
   computed: {
     membersToShow() {
