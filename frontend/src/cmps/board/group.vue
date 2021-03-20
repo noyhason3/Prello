@@ -3,9 +3,9 @@
   <!-- <ul class="clean-list"> -->
   <!-- <pre>{{ group }}</pre> -->
   <section class="group">
-    <div slot="header">
+    <div slot="header" class="flex jcc aic space-between header">
+      <div>{{ group.title }}</div>
       <button @click="removeGroup">X</button>
-      <div class="header">{{ group.title }}</div>
     </div>
     <!-- <li
         v-for="task in group.tasks"

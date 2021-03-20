@@ -27,6 +27,7 @@
       // width: 80%;
       // margin: 0 auto;
     }
+
     //height: fit-content;
     //height:100%;
      display: flex;
@@ -49,7 +50,10 @@
   }
   .header {
     font-size: 20px;
-    margin: 10px;
+    padding-inline-start: 8px;
+    :first-child{
+      font-weight: bold;
+    }
   }
   // overflow-y: auto;
   // height:100%;
