@@ -22,7 +22,8 @@
         height: fit-content;      
     }
 
-    $memberColors:("clr2":$clr2,
+    $memberColors:(
+        "clr2":$clr2,
         "clr3":$clr3,
         "clr4":$clr4,
         "clr5":$clr5,
@@ -32,8 +33,7 @@
         "clr9":$clr9,
     );
 
-    @each $memberColor,
-    $i in $memberColors {
+    @each $memberColor, $i in $memberColors {
         &.#{$memberColor} {
             background-color: $i;
             color: set-color($i, 60);

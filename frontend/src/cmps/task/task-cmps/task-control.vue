@@ -9,6 +9,7 @@
       @close-popup="isMemberOpen = false"
       @assign-member="assignMember"
       @toggle-popup="togglePopup"
+      @save-members="saveMember"
     ></popup-member>
     <!-- <button>Labels</button> -->
     <button @click="togglePopup('Checklist')">Checklist</button>
@@ -62,6 +63,9 @@ export default {
     },
     assignMember(member) {
       this.$emit("assign-member", member);
+    },
+    removeTaskMember(id){
+      this.$emit("remove-task-member", id);
     },
     setChecklist(checklist) {
       this.$emit("set-checklist", checklist);

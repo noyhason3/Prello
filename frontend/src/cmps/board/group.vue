@@ -1,7 +1,17 @@
 <template>
-  <li class="group-container">
-    <!-- <ul class="clean-list"> -->
-    <!-- <pre>{{ group }}</pre> -->
+  <!-- <li class="group-container"> -->
+  <!-- <ul class="clean-list"> -->
+  <!-- <pre>{{ group }}</pre> -->
+  <section class="group">
+    <div slot="header">
+      <button @click="removeGroup">X</button>
+      <div class="header">{{ group.title }}</div>
+    </div>
+    <!-- <li
+        v-for="task in group.tasks"
+        :key="task.id"
+        class="group-tasks-wrapper"
+      > -->
     <draggable
       v-model="group.tasks"
       group="tasks"
@@ -10,18 +20,9 @@
       :move="updateBoard"
       empty-insert-threshold="50"
       draggable=".task-preview"
-      class="clean-list group"
+      :class="`clean-list group-tasks gt-${this.idx}`"
       tag="ul"
     >
-      <div slot="header">
-        <button @click="removeGroup">X</button>
-        <div class="header">{{ group.title }}</div>
-      </div>
-      <!-- <li
-        v-for="task in group.tasks"
-        :key="task.id"
-        class="group-tasks-wrapper"
-      > -->
       <task-preview
         v-for="task in group.tasks"
         :key="task.id"
@@ -29,27 +30,39 @@
         @click.native="openTask(task)"
         @remove-task="removeTask"
       />
-      <!-- </li> -->
-      <!-- </ul> -->
-      <!-- <pre>{{ this.group }}</pre> -->
-      <!-- <pre>{{ this.newTask }}</pre> -->
-      <div class="add-task">
-        <button v-if="!isAddNewTask" @click="isAddNewTask = true">
-          Add a new task
-        </button>
-        <editable-text
-          v-else
-          v-model="newTask.title"
-          :type="'title'"
-          :elementType="'task'"
-          :isEditFirst="true"
-          @close-textarea="isAddNewTask = false"
-          @input="addTask"
-        />
-      </div>
-      <div slot="footer" class="group-footer"></div>
     </draggable>
-  </li>
+
+    <!-- </li> -->
+    <!-- </ul> -->
+    <!-- <pre>{{ this.group }}</pre> -->
+    <!-- <pre>{{ this.newTask }}</pre> -->
+    <div class="add-task">
+      <button v-if="!isAddNewTask" @click="isAddNewTask = true">
+        Add a new task
+      </button>
+      <editable-text
+        v-else
+        v-model="newTask.title"
+        :type="'title'"
+        :elementType="'task'"
+        :isEditFirst="true"
+        @close-textarea="isAddNewTask = false"
+        @input="addTask"
+      />
+    </div>
+    <!-- <div slot="footer" class="group-footer"></div> -->
+    <!-- </li> -->
+
+    <draggable
+      :class="`egt egt-${this.idx}`"
+      v-model="emptyList"
+      group="tasks"
+      @start="drag = true"
+      @end="drag = false"
+      :move="updateBoard"
+    >
+    </draggable>
+  </section>
 </template>
 
 <script>
@@ -62,12 +75,14 @@ export default {
   props: {
     group: Object,
     boardId: String,
+    idx: Number,
   },
   data() {
     return {
       newTask: boardService.getEmptyTask(),
       isAddNewTask: false,
       ghostRect: null,
+      emptyList: [],
     };
   },
   methods: {
@@ -128,6 +143,11 @@ export default {
       ) {
         //console.log("Moving to same container");
         //return false;
+      }
+      console.log("file: group.vue - line 148 - updateBoard - ev.to", ev.to);
+      if (ev.to.classList.contains("egt")) {
+        console.log("Dragging to empty group tasks list");
+        return false;
       }
     },
   },

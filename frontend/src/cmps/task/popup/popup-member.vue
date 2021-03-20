@@ -7,15 +7,18 @@
     <div slot="main">
       <input type="text" v-model="q" placeholder="Search for members..." />
       <ul class="clean-list" v-if="memberList">
-        <li 
-        v-for="member in memberList" 
-        :key="member._id"
-    >
-          <member-preview :member="member"
-              :class="member.color"
-              class="member-initials" />
-          <h2>{{ member.fullname }}</h2>
-          <button @click="assignMember(member)">Invite</button>
+        <li v-for="member in memberList" 
+        :key="member._id" 
+        class="member-details" 
+        :class="{ 'member-selected': isSelected(member._id) }"
+        @click="toggleAddMember(member)">
+          <member-preview
+            :member="member"
+            :class="member.color"
+            class="member-initials"
+          />
+          <h4>{{ member.fullname }}</h4>
+          <!-- <button @click="assignMember(member)">Invite</button> -->
           <!-- <div v-if="member.imgUrl" class="user">
             <img :src="member.imgUrl" height="120px" width="120px" />
           </div> -->
@@ -33,7 +36,8 @@ export default {
   data() {
     return {
       q: "",
-      members: this.$store.getters.currBoard.members || [],
+      boardMembers: null,
+      taskMembers: null
     };
   },
   methods: {
@@ -51,28 +55,41 @@ export default {
       }, 0);
       return "clr" + ((num % 7) + 2);
     },
+    isSelected(id){
+        return this.taskMembers.some(({_id}) => _id === id)
+    },
+    toggleAddMember(member){
+      if(!isSelected(id)) this.taskMembers.push(member)
+      else{
+        const memberIdx = this.taskMembers.findIndex(({_id}) => _id === member._id)
+        this.taskMembers.splice(memberIdx,1)
+      }
+      this.$emit('save-members', this.taskMembers)
+    }
   },
   computed: {
     memberList() {
-      const boardMembers = this.$store.getters.currBoard.members;
-      const taskmembers = this.$store.getters.currTask.members;
+      this.boardMembers = this.$store.getters.currBoard.members;
+      this.taskMembers = JSON.parse(JSON.stringify(this.$store.getters.currTask.members)) || [];
       // console.log('boardMembers:', boardMembers)
-      if (!taskmembers) return boardMembers;
-      let membersToShow = boardMembers.filter((member) => {
-         return taskmembers.every(({ _id }) => {
-          return _id !== member._id});
-      });
-      membersToShow = membersToShow.map(member =>{
+      if (!this.taskMembers) return this.boardMembers;
+      // let membersToShow = boardMembers.filter((member) => {
+      //   return taskmembers.every(({ _id }) => {
+      //     return _id !== member._id;
+      //   });
+      // });
+      let membersToShow = this.boardMembers.map((member) => {
         const nameSplit = member.fullname.split(" ");
-        const initials = (nameSplit[0].charAt(0) + nameSplit[1].charAt(0)).toUpperCase();
+        const initials = (
+          nameSplit[0].charAt(0) + nameSplit[1].charAt(0)
+        ).toUpperCase();
         const color = this.getMemeberColor(initials);
         member.color = color;
         member.initials = initials;
         return member;
-
-      })
-      console.log('membersToShow:', membersToShow)
-      return membersToShow
+      });
+      console.log("membersToShow:", membersToShow);
+      return membersToShow;
     },
   },
 
