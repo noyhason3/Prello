@@ -31,7 +31,6 @@
         tag="ul"
         class="todos clean-list"
       >
-        <!--  -->
         <!-- <li v-for="todo in checklist.todos" :key="todo.id">{{ todo.txt }}</li> -->
         <li
           v-for="todo in checklist.todos"
