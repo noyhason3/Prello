@@ -17,7 +17,7 @@
       tag="ul"
     >
       <!-- <li v-for="group in board.groups" :key="group.id" class="group-container"> -->
-      <draggable
+      <!-- <draggable
         v-for="group in board.groups"
         :key="group.id"
         v-model="group.tasks"
@@ -29,11 +29,15 @@
         draggable=".task-preview"
         class="clean-list group-container"
         tag="li"
-      >
-        <group :group="group" :boardId="board._id" />
-      </draggable>
+      > -->
+      <group
+        v-for="group in board.groups"
+        :key="group.id"
+        :group="group"
+        :boardId="board._id"
+      />
+      <!-- </draggable> -->
       <!-- </li> -->
-
       <div class="add-new-group">
         <button v-if="!isAddNewGroup" @click="isAddNewGroup = true">
           Add a new group
@@ -49,6 +53,7 @@
         />
       </div>
     </draggable>
+
     <router-view />
   </section>
 </template>

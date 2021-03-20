@@ -27,9 +27,12 @@
         background-color: $clr5;
         padding: 5px;
         // border:solid 1px $clr3;
+        .group{
+            margin-inline-end:8px;
+        }
     }
 
-    .group-list{
+    //.group-list{
     // ul{
     //     display: flex;
     //     flex-grow: 1;
@@ -42,8 +45,8 @@
     //         //display: flex;
     //     }
     //     }
-    display: flex;
-    }
+    //display: flex;
+    //}
     // .chosen{
     //     position:relative;
     //     ::after{
