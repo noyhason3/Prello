@@ -251,6 +251,7 @@ export default {
     setDrag(isDrag) {
       this.dragTodo = isDrag;
       this.$emit("toggle-drag", isDrag);
+      this.$forceUpdate();
     },
   },
   // watch: {
