@@ -48,8 +48,12 @@
           <!-- <label :for="todo.id"  @click="openEditTodo(todo.id)">
             {{ todo.txt }}
           </label> -->
-
+           <label :for="todo.id" v-if="todo.id!==currTodoId"  @click="setCurrTodo(todo.id)">
+            {{ todo.txt }}
+          </label>
+          
           <editable-text
+            v-else
             v-model="todo.txt"
             :type="todo.id"
             :value="todo.id"
@@ -57,9 +61,8 @@
             @close-textarea="isEditTodoOpen = false"
             @input="editTodo(todo)"
           >
-          <label :for="todo.id"  @click="setCurrTodo(todo.id)">
-            {{ todo.txt }}
-          </label>
+         
+
           </editable-text>
 
         </li>
@@ -120,7 +123,6 @@ export default {
       this.isAddTodoOpen = true;
     },
     setCurrTodo(todoId) {
-      this.$emit('close-textarea')
       this.currTodoId = todoId;
     },
     openEditTitle() {
