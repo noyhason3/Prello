@@ -7,13 +7,13 @@
     <div slot="main">
       <input type="text" v-model="q" placeholder="Search for members..." />
       <ul class="members" v-if="members && members.length">
-        <div v-for="member in memberList" :key="member._id">
+        <li v-for="member in memberList" :key="member._id">
           <button @click="assignMember(member)">Invite</button>
           <div v-if="member.imgUrl" class="user">
             <img :src="member.imgUrl" height="120px" width="120px" />
           </div>
           <h2>{{ member.fullname }}</h2>
-        </div>
+        </li>
       </ul>
     </div>
   </pop-up>
@@ -42,7 +42,9 @@ export default {
       const boardMembers = this.$store.getters.currBoard.members;
       const taskmembers = this.$store.getters.currTask.members;
       if (!taskmembers) return boardMembers;
-      return boardMembers.filter((member) => !taskmembers.includes(member));
+      return boardMembers.filter((member) => {
+        taskmembers.every(({ _id }) => _id !== member._id);
+      });
     },
   },
   components: { popUp },

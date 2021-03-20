@@ -19,7 +19,7 @@ export const boardStore = {
             state.board = board;
         },
         setCurrTask(state, { task }) {
-            console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
+            // console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
             state.task = task;
         },
         async saveTask(state, { groupId, task }) {
@@ -65,7 +65,7 @@ export const boardStore = {
             const group = await state.board.groups.find(({ tasks }) => {
                 return tasks.some(({ id }) => id === state.task.id);
             });
-            console.log('group:', group);
+            // console.log('group:', group);
             return group
         },
         // async loadBoardList({ commit }) {
