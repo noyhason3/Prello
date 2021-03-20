@@ -31,10 +31,11 @@
         tag="li"
       > -->
       <group
-        v-for="group in board.groups"
+        v-for="(group, idx) in board.groups"
         :key="group.id"
         :group="group"
         :boardId="board._id"
+        :idx="idx"
       />
       <!-- </draggable> -->
       <!-- </li> -->
