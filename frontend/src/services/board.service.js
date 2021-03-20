@@ -14,24 +14,24 @@ const DEMO_BOARD = {
     style: {},
     labels: [
         {
-            id: 'l101',
+            id: 'done',
             title: 'Done',
-            color: '#0079BF',
-        },
-        {
-            id: 'l102',
-            title: '',
-            color: '#F2D600',
-        },
-        {
-            id: 'l103',
-            title: '',
             color: '#51E898',
         },
         {
-            id: 'l104',
-            title: 'On hold',
+            id: 'important',
+            title: 'Imporant',
             color: '#EB5A46',
+        },
+        {
+            id: 'progress',
+            title: 'In Progress',
+            color: '#0079BF',
+        },
+        {
+            id: 'hold',
+            title: 'On hold',
+            color: '#F0DB3A',
         },
     ],
     members: [
@@ -57,6 +57,14 @@ const DEMO_BOARD = {
             tasks: [
                 {
                     id: 'c101',
+                    title: 'REMINDER!',
+                    description: 'Please refrain from editing other people\'s work. \n Reviewed every 2nd sunday',
+                    checklists: [],
+                    attachments: [],
+                    labelIds: ['important']
+                },
+                {
+                    id: 'c102',
                     title: 'Additional views for board',
                     description: 'Enable the user to view his tasks consistently across multiple layouts',
                     checklists: [],
@@ -91,7 +99,7 @@ const DEMO_BOARD = {
                     ],
                 },
                 {
-                    id: 'c102',
+                    id: 'c103',
                     title: 'Customization Features',
                     description: 'For the tracking of the conceptualization and approval process of customization features',
                     checklists: [
@@ -145,6 +153,7 @@ const DEMO_BOARD = {
                     ],
                     attachments: [],
                 },
+
             ],
             style: {},
         },
@@ -208,7 +217,7 @@ const DEMO_BOARD = {
                             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                         },
                     ],
-                    labelIds: ['l101', 'l102'],
+                    labelIds: ['progress', 'important'],
                     createdAt: 1590999730348,
                     dueDate: 16156215211,
                     byMember: {
@@ -399,7 +408,7 @@ const DEMO_BOARD = {
                 imgUrl: 'http://some-img',
             },
             "task": {
-                "id": "c101",
+                "id": "t101",
                 "title": "Replace Logo"
             }
         }
