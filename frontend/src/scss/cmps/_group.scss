@@ -10,11 +10,13 @@
     //background: green;
   }
   .group-footer{
-    //background: red;
+    //background: rgba(255, 0, 0, 0.322);
+    background:$clr5;
     display: flex;
     flex-grow: 1;
   }
   .group {
+    background-color: #ebecf0;
     & > *:not(.group-footer):not(.task-preview) {
       background-color: #ebecf0;
       // width: 80%;
