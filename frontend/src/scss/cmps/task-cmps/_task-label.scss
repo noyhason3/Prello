@@ -14,7 +14,8 @@
         border-radius: 5px;
         font-size: 0.7em;
         text-align: center;
-
+        color:$clr1;
+        
         &.is-selected::before {
             content: "✔";
         }
