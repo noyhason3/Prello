@@ -19,7 +19,6 @@ export const boardStore = {
             state.board = board;
         },
         setCurrTask(state, { task }) {
-            console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
             state.task = task;
         },
         async saveTask(state, { groupId, task }) {

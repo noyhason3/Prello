@@ -24,12 +24,9 @@ export default {
     };
   },
   mounted() {
+    console.log(this.$refs.container);
     const top = this.$refs.container.getBoundingClientRect().y;
     this.maxHeight = window.innerHeight - top;
-    console.log(
-      "file: pop-up.vue - line 25 - mounted - window.innerHeight - top",
-      window.innerHeight - top
-    );
   },
   components: {},
 };

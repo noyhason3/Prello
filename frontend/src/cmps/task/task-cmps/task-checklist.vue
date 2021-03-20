@@ -173,15 +173,7 @@ export default {
       this.$emit("toggle-drag", isDrag);
     },
     updateTask(ev) {
-      console.log("D&D todo event", ev);
-      const { draggedContext, relatedContext } = ev;
-      if (
-        draggedContext.element.id ===
-        relatedContext.list[draggedContext.index]?.id
-      ) {
-        //console.log("Moving to same container");
-        return false;
-      }
+        console.log(ev);
     },
   },
   components: {
