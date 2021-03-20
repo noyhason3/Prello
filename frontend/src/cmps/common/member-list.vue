@@ -86,8 +86,8 @@ export default {
         ).toUpperCase();
         // const color = this.getMemeberColor(initials);
         // console.log('color:', color)
-        // const color = utilService.stringToHslColor(initials, 50, 50);
-        // member.color = color;
+        const color = utilService.stringToHslColor(initials, 50, 50);
+        member.color = color;
         member.initials = initials;
         return member;
       });

@@ -45,18 +45,23 @@
             @click="toggleChecked(todo)"
             :checked="todo.isDone"
           />
-          <label :for="todo.id" v-if="!isEditTodoOpen" @click="openEditTodo">
+          <!-- <label :for="todo.id"  @click="openEditTodo(todo.id)">
             {{ todo.txt }}
-          </label>
+          </label> -->
+
           <editable-text
-            v-else
             v-model="todo.txt"
             :type="todo.id"
             :value="todo.id"
-            :isEditFirst="true"
+            :isEditFirst="todo.id===currTodoId"
             @close-textarea="isEditTodoOpen = false"
             @input="editTodo(todo)"
-          />
+          >
+          <label :for="todo.id"  @click="setCurrTodo(todo.id)">
+            {{ todo.txt }}
+          </label>
+          </editable-text>
+
         </li>
       </draggable>
       <!-- </ul> -->
@@ -93,6 +98,8 @@ export default {
       },
       isEditTitleOpen: false,
       isAddTodoOpen: false,
+
+      currTodoId:'',
       isEditTodoOpen: false,
       isDragOver: false,
       dragTodo: false,
@@ -112,8 +119,9 @@ export default {
     openAddTodo() {
       this.isAddTodoOpen = true;
     },
-    openEditTodo() {
-      this.isEditTodoOpen = true;
+    setCurrTodo(todoId) {
+      this.$emit('close-textarea')
+      this.currTodoId = todoId;
     },
     openEditTitle() {
       this.isEditTitleOpen = true;
@@ -142,7 +150,6 @@ export default {
     toggleChecked(todo) {
       const checkBox = document.getElementById(todo.id);
       // const checkBox = this.$refs[todoId]
-      console.log(checkBox);
       if (checkBox.checked) todo.isDone = true;
       else todo.isDone = false;
 
