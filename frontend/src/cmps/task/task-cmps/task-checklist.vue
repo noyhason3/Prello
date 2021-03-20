@@ -1,5 +1,5 @@
 <template>
-  <li class="task-checklist" v-if="">
+  <li class="task-checklist">
     <div class="header">
       ✅
       <h4 v-if="!isEditTitleOpen" @click="openEditTitle">
