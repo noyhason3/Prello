@@ -4,6 +4,8 @@
         position:relative;
         background-color: transparent;
         padding:0;
+        margin-bottom:15px;
+        font-size: 0.9rem;
     }
     .file-upload-input{
         cursor:pointer;
@@ -13,5 +15,13 @@
         height: 100%;
         left: 0;
         top: 0;
+    }
+    .url-input{
+
+        margin-bottom:15px;
+    }
+    .url-name-input{
+        
+        margin-bottom:20px;
     }
 }

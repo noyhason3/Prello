@@ -3,6 +3,7 @@
     <!-- SUGGESTED                       ******TODO********
       <button>Join</button> -->
 
+    <h6 class="add-to-card-btn"> ADD TO CARD  </h6>
     <button @click="togglePopup('Member')" class="control-btn">Members</button>
     <popup-member
       v-if="isMemberOpen"

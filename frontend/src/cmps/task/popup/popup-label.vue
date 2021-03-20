@@ -18,17 +18,17 @@
             :key="label.id"
             class="flex align-center label-preview"
           >
-            <div class="label-color">
+            <!-- <div class="label-color"> -->
               <button
                 @click="toggleSelectLabel(label.id)"
                 :style="'background-color:' + label.color + ';color:$clr1;'"
                 :class="{ 'label-in-use': isUsed(label.id) }"
-                class="btn label"
+                class="btn label label-color"
               >
                 {{ label.title }}
               </button>
-            </div>
-            <button @click="openLabelEdit('Change', label)">🖋</button>
+            <!-- </div> -->
+            <button @click="openLabelEdit('Change', label)" class="btn edit-label">🖋</button>
           </li>
         </ul>
         <button @click="openLabelEdit('Create')" class="btn wide">Create a new lael</button>
@@ -38,6 +38,7 @@
       v-else
       :action="action"
       :label="selectedLabel"
+      :leftPos="leftPos"
       @save-label="saveLabel"
       @closeLabelEdit="closeLabelEdit"
       @remove-board-label="removeBoardLabel"

@@ -1,5 +1,5 @@
 <template>
-  <section class="flex column space-between task-preview" v-if="task">
+  <section class="task-preview" v-if="task">
     <button @click="removeTask" class="btn close">X</button>
     <!-- <img v-if="isTaskCover" src="task.coverUrl"> -->
     <!-- If cover image- show image, if cover color set section background-color-->

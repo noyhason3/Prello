@@ -16,22 +16,22 @@ const DEMO_BOARD = {
         {
             id: 'done',
             title: 'Done',
-            color: '#51E898',
+            color: '#3c4b68',
         },
         {
             id: 'important',
             title: 'Imporant',
-            color: '#EB5A46',
+            color: '#0079BF',
         },
         {
             id: 'progress',
             title: 'In Progress',
-            color: '#0079BF',
+            color: '#A98EDA',
         },
         {
             id: 'hold',
             title: 'On hold',
-            color: '#F0DB3A',
+            color: '#EB5A46',
         },
     ],
     members: [

@@ -1,6 +1,9 @@
 .task-preview {
     // min-height: 150px;
-    width:80%;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-between;
+    width:95%;
     margin: 10px auto;
     background-color: $clr1;
     cursor: pointer;
