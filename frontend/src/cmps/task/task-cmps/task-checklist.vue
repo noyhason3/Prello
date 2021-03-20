@@ -1,5 +1,5 @@
 <template>
-  <section class="task-checklist">
+  <li class="task-checklist">
     <div class="header">
       ✅
       <h4 v-if="!isEditTitleOpen" @click="openEditTitle">
@@ -20,43 +20,47 @@
     <progress id="file" :value="progressPercentage" max="100" />
 
     <form>
-      <ul class="todos clean-list">
-        <draggable
-          v-model="checklist.todos"
-          group="todos"
-          @start="setDrag(true)"
-          @end="setDrag(false)"
-          animation="150"
-          emptyInsertThreshold="50"
-          ghost-class="ghost"
-          chosen-class="chosen"
-          drag-class="drag"
-          draggable=".todo-container"
+      <!-- <ul class="todos clean-list"> -->
+      <draggable
+        @start="setDrag(true)"
+        @end="setDrag(false)"
+        group="todos"
+        animation="150"
+        empty-insert-threshold="50"
+        draggable="li"
+        tag="ul"
+        class="todos clean-list"
+      >
+        <!--  -->
+        <!-- <li v-for="todo in checklist.todos" :key="todo.id">{{ todo.txt }}</li> -->
+        <li
+          v-for="todo in checklist.todos"
+          :key="todo.id"
+          class="todo-container"
         >
-          <li v-for="todo in checklist.todos" :key="todo.id" class="todo-container">
-            <input
-              type="checkbox"
-              :ref="todo.id"
-              :id="todo.id"
-              :name="todo.id"
-              @click="toggleChecked(todo)"
-              :checked="todo.isDone"
-            />
-            <label :for="todo.id" v-if="!isEditTodoOpen" @click="openEditTodo">
-              {{ todo.txt }}
-            </label>
-            <editable-text
-              v-else
-              v-model="todo.txt"
-              :type="todo.id"
-              :value="todo.id"
-              :isEditFirst="true"
-              @close-textarea="isEditTodoOpen = false"
-              @input="editTodo(todo)"
-            />
-          </li>
-        </draggable>
-      </ul>
+          <input
+            type="checkbox"
+            :ref="todo.id"
+            :id="todo.id"
+            :name="todo.id"
+            @click="toggleChecked(todo)"
+            :checked="todo.isDone"
+          />
+          <label :for="todo.id" v-if="!isEditTodoOpen" @click="openEditTodo">
+            {{ todo.txt }}
+          </label>
+          <editable-text
+            v-else
+            v-model="todo.txt"
+            :type="todo.id"
+            :value="todo.id"
+            :isEditFirst="true"
+            @close-textarea="isEditTodoOpen = false"
+            @input="editTodo(todo)"
+          />
+        </li>
+      </draggable>
+      <!-- </ul> -->
       <!-- <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt" /> -->
       <button v-if="!isAddTodoOpen" @click="openAddTodo">Add Item</button>
       <editable-text
@@ -69,7 +73,7 @@
         @input="addTodo"
       />
     </form>
-  </section>
+  </li>
 </template>
 
 <script>
@@ -151,9 +155,9 @@ export default {
     saveChecklist() {
       this.$emit("save-todo", { ...this.checklist });
     },
-    setDrag(isDrag){
-      this.dragTodo = isDrag
-      this.$emit('toggle-drag', isDrag)
+    setDrag(isDrag) {
+      this.dragTodo = isDrag;
+      this.$emit("toggle-drag", isDrag);
     },
   },
   components: {
