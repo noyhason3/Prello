@@ -3,7 +3,7 @@
     <!-- SUGGESTED                       ******TODO********
       <button>Join</button> -->
 
-    <button @click="togglePopup('Member')">Members</button>
+    <button @click="togglePopup('Member')" class="control-btn">Members</button>
     <popup-member
       v-if="isMemberOpen"
       @close-popup="isMemberOpen = false"
@@ -12,17 +12,17 @@
       @remove-task-member="removeTaskMember"
     ></popup-member>
     <!-- <button>Labels</button> -->
-    <button @click="togglePopup('Checklist')">Checklist</button>
+    <button @click="togglePopup('Checklist')" class="control-btn">Checklist</button>
     <popup-checklist
       v-if="isChecklistOpen"
       @add-checklist="setChecklist"
       @toggle-popup="togglePopup"
     ></popup-checklist>
 
-    <button @click="toggleGeneralPopup($event, 'Label')">Labels</button>
+    <button @click="toggleGeneralPopup($event, 'Label')" class="control-btn">Labels</button>
 
     <!-- <button>Due date</button> -->
-    <button @click="togglePopup('Attachment')">Attachement</button>
+    <button @click="togglePopup('Attachment')" class="control-btn">Attachement</button>
     <popup-attachment
       v-if="isAttachmentOpen"
       @save-attachments="saveAttachments"
