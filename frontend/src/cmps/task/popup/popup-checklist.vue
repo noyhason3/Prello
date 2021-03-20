@@ -1,6 +1,9 @@
 <template>
-  <pop-up>
-    <h2 slot="header">Add Checklist</h2>
+  <pop-up class="popup-checklist">
+    <div slot="header" class="task-popup-header">
+      <h2 >Add Checklist</h2>
+      <button @click="togglePopup" class="btn close">X</button>
+    </div>
     <div slot="main">
       <h3>Title</h3>
       <input type="text" name="title" id="title" v-model="checklist.title" />
@@ -28,6 +31,9 @@ export default {
       this.checklist = {
         title: "",
       };
+    },
+    togglePopup() {
+      this.$emit("toggle-popup", "Checklist");
     },
   },
   components: { popUp },

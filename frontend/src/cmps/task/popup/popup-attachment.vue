@@ -1,6 +1,6 @@
 <template>
   <pop-up class="popup-attachment">
-    <div slot="header" class="popup-attachment-header">
+    <div slot="header" class="task-popup-header">
       <h2>Attach from...</h2>
       <button @click="togglePopup" class="btn close">X</button>
     </div>

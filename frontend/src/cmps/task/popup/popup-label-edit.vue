@@ -1,7 +1,7 @@
 <template>
   <section class="label-edit">
     <pop-up v-if="!isDelete">
-      <div slot="header" class="label-edit-header">
+      <div slot="header" class="task-popup-header">
         <h2>{{ action }} label</h2>
         <button @click="closeLabelEdit" class="btn close">X</button>
       </div>
