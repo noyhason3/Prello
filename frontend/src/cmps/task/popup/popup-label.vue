@@ -1,7 +1,7 @@
 <template>
   <section class="popup-label">
     <pop-up v-if="!isPopupEdit" :style="{left:leftPos}">
-      <div slot="header" class="flex space-between">
+      <div slot="header" class="task-popup-header">
         <h2>Labels</h2>
         <button @click="togglePopupLabel()" class="btn close">X</button>
       </div>

@@ -8,12 +8,14 @@
       v-if="isMemberOpen"
       @close-popup="isMemberOpen = false"
       @assign-member="assignMember"
+      @toggle-popup="togglePopup"
     ></popup-member>
     <!-- <button>Labels</button> -->
     <button @click="togglePopup('Checklist')">Checklist</button>
     <popup-checklist
       v-if="isChecklistOpen"
       @add-checklist="setChecklist"
+      @toggle-popup="togglePopup"
     ></popup-checklist>
 
     <button @click="toggleGeneralPopup($event, 'Label')">Labels</button>
