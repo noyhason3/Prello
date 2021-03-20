@@ -122,7 +122,7 @@ export default {
         relatedContext.list[draggedContext.index]?.id
       ) {
         //console.log("Moving to same container");
-        return false;
+        //return false;
       }
     },
   },

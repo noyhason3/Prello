@@ -21,12 +21,12 @@
 
     <form>
       <!-- <ul class="todos clean-list"> -->
-        <!-- :list="checklist.todos" -->
-        <!-- :move="updateTask" -->
+      <!-- :list="checklist.todos" -->
+      <!-- :move="updateTask" -->
       <draggable
         @start="setDrag(true)"
-        @end="setDrag(false),updateTask()"
-        
+        @end="setDrag(false), updateTask()"
+        :list="checklist.todos"
         group="todos"
         animation="150"
         empty-insert-threshold="50"
@@ -180,7 +180,7 @@ export default {
         relatedContext.list[draggedContext.index]?.id
       ) {
         //console.log("Moving to same container");
-        return false;
+        //return false;
       }
     },
   },
