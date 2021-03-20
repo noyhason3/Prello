@@ -12,7 +12,7 @@
       chosen-class="chosen"
       drag-class="drag"
       filter=".group-tasks-preview"
-      draggable=".group-container"
+      draggable=".group"
       class="clean-list main"
       tag="ul"
     >
@@ -31,10 +31,11 @@
         tag="li"
       > -->
       <group
-        v-for="group in board.groups"
+        v-for="(group, idx) in board.groups"
         :key="group.id"
         :group="group"
         :boardId="board._id"
+        :idx="idx"
       />
       <!-- </draggable> -->
       <!-- </li> -->
