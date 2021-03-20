@@ -18,7 +18,12 @@
       <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
       <div v-if="isTaskDescription">📄</div>
       <div v-if="attachmentCount">📎{{ attachmentCount }}</div>
-      <member-list v-if="taskMemebers" :members="taskMemebers" />
+      <member-list
+        v-if="taskMemebers"
+        :members="taskMemebers"
+        :isTaskRelated="true"
+        @remove-task-member="removeTaskMember"
+      />
     </div>
   </section>
 </template>
@@ -36,6 +41,13 @@ export default {
     removeTask(ev) {
       ev.stopPropagation();
       this.$emit("remove-task", this.task.id);
+    },
+    removeTaskMember(id) {
+      const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
+      if (memberIdx < 0) return;
+      const task = JSON.parse(JSON.stringify(this.task))
+      task.members.splice(memberIdx, 1);
+      this.$store.commit({ type: "saveTask", task });
     },
   },
   computed: {
@@ -75,9 +87,9 @@ export default {
       if (!todosTotals.total) return;
       return todosTotals;
     },
-    attachmentCount(){
-      return this.task. attachments.length
-    }
+    attachmentCount() {
+      return this.task.attachments.length;
+    },
   },
   components: {
     taskLabelPreview,

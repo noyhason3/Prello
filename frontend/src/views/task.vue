@@ -32,7 +32,10 @@
         <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
 
         <div v-if="task" class="task-info">
-          <member-list :members="task.members" />
+          <member-list 
+          :members="task.members" 
+          :isTaskRelated="true"
+          @remove-task-member="removeTaskMember"/>
 
           <task-label
             :taskLabelIds="task.labelIds"
@@ -253,6 +256,13 @@ export default {
       this.$emit("toggle-drag", isDrag);
       this.$forceUpdate();
     },
+    removeTaskMember(id){
+      console.log('memberIdx:')
+      const memberIdx = this.task.members.findIndex(({_id}) => _id === id)
+      if(memberIdx <0) return;
+      this.task.members.splice(memberIdx,1);
+      this.saveTask(this.task);
+    }
   },
   // watch: {
   //   id() {
