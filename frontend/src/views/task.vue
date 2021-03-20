@@ -42,6 +42,7 @@
       />
 
       <task-attachment
+      v-if="attachments.length"
         :attachments="attachments"
         @save-attachments="saveAttachments"
       />

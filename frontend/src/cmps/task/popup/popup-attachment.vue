@@ -9,7 +9,7 @@
         Computer
         <input class="file-upload-input" @change="onUploadImg" type="file" />
       </button>
-      <button>Trello(?)</button>
+      <!-- <button>Trello(?)</button> -->
       <form @submit.prevent="saveAttachment">
         <h3>Attach a link</h3>
         <input
@@ -24,8 +24,8 @@
           type="text"
           v-model="newAttachment.title"
         />
-        <button>Attach</button>
         </div>
+        <button>Attach</button>
       </form>
     </div>
   </pop-up>
