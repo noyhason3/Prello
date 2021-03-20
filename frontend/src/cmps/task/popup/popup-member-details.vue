@@ -1,7 +1,7 @@
 <template>
   <pop-up>
     <div slot="main">
-      <button @click="closeMemberDetails">X</button>
+      <button @click="closeMemberDetails" class="btn close">X</button>
 
       <div class="member-initials" :class="member.color">
         {{ member.initials }}

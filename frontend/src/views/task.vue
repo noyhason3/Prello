@@ -19,6 +19,7 @@
       </popup-label>
       <task-control
         @assign-member="assignMember"
+        @remove-task-member="removeTaskMember"
         @set-checklist="saveChecklist"
         @set-task-labels="setTaskLabels"
         @toggle-popup="togglePopup"
@@ -32,10 +33,11 @@
         <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
 
         <div v-if="task" class="task-info">
-          <member-list 
-          :members="task.members" 
-          :isTaskRelated="true"
-          @remove-task-member="removeTaskMember"/>
+          <member-list
+            :members="task.members"
+            :isTaskRelated="true"
+            @remove-task-member="removeTaskMember"
+          />
 
           <task-label
             :taskLabelIds="task.labelIds"
@@ -191,6 +193,13 @@ export default {
       task.members.push(member);
       this.saveTask(task);
     },
+    removeTaskMember(id) {
+      const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
+      if (memberIdx < 0) return;
+      const task = JSON.parse(JSON.stringify(this.task));
+      task.members.splice(memberIdx, 1);
+      this.$store.commit({ type: "saveTask", task });
+    },
     setTaskLabels({ labelIds }) {
       this.task.labelIds = labelIds;
       this.saveTask(this.task);
@@ -256,13 +265,13 @@ export default {
       this.$emit("toggle-drag", isDrag);
       this.$forceUpdate();
     },
-    removeTaskMember(id){
-      console.log('memberIdx:')
-      const memberIdx = this.task.members.findIndex(({_id}) => _id === id)
-      if(memberIdx <0) return;
-      this.task.members.splice(memberIdx,1);
+    removeTaskMember(id) {
+      console.log("memberIdx:");
+      const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
+      if (memberIdx < 0) return;
+      this.task.members.splice(memberIdx, 1);
       this.saveTask(this.task);
-    }
+    },
   },
   // watch: {
   //   id() {

@@ -14,7 +14,7 @@
       tag="ul"
     >
       <div slot="header">
-        <button @click="removeGroup">X</button>
+        <button @click="removeGroup" class="btn close">X</button>
         <div class="header">{{ group.title }}</div>
       </div>
       <!-- <li
