@@ -7,9 +7,9 @@
     <task-label-preview v-if="taskLabelIds" :taskLabelIds="taskLabelIds" />
     <div class="flex">
       <h2 class="task-title">{{ task.title }}</h2>
-      <div class="btn task-edit">
+      <!-- <div class="btn task-edit">
         <span>🖊</span>
-      </div>
+      </div> -->
     </div>
     <div v-if="taskChecklists">
       ☑ {{ taskChecklists.complete }}/{{ taskChecklists.total }}
