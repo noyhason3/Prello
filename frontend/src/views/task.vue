@@ -18,7 +18,7 @@
       >
       </popup-label>
       <task-control
-        @assign-member="assignMember"
+        @assign-task-member="assignTaskMember"
         @remove-task-member="removeTaskMember"
         @set-checklist="saveChecklist"
         @set-task-labels="setTaskLabels"
@@ -180,24 +180,23 @@ export default {
     setDescription() {
       this.saveTask(this.task);
     },
-    assignMember(member) {
-      var task = JSON.parse(JSON.stringify(this.task));
-      if (!task.members) task.members = [];
-      if (
-        task.members.some((assignedMember) => assignedMember._id === member._id)
-      ) {
-        // throw new Error('User already assigned to task')
-        console.log("User already assigned to task");
-        return;
-      }
-      task.members.push(member);
-      this.saveTask(task);
+    assignTaskMember(member) {
+      if (!this.task.members) this.task.members = [];
+
+      // if (
+      //   task.members.some((assignedMember) => assignedMember._id === member._id)
+      // ) {
+      //   // throw new Error('User already assigned to task')
+      //   console.log("User already assigned to task");
+      //   return;
+      // }
+      this.task.members.push(member);
+      this.saveTask(this.task);
     },
     removeTaskMember(id) {
       const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
       if (memberIdx < 0) return;
-      const task = JSON.parse(JSON.stringify(this.task));
-      task.members.splice(memberIdx, 1);
+      this.task.members.splice(memberIdx, 1);
       this.$store.commit({ type: "saveTask", task });
     },
     setTaskLabels({ labelIds }) {

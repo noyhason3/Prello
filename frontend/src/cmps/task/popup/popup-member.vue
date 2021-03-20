@@ -41,10 +41,10 @@ export default {
     };
   },
   methods: {
-    assignMember(id) {
-      this.$emit("assign-member", id);
-      this.$emit("close-popup");
-    },
+    // assignMember(id) {
+    //   this.$emit("assign-member", id);
+      
+    // },
     togglePopup() {
       this.$emit("toggle-popup", "Member");
     },
@@ -59,18 +59,24 @@ export default {
         return this.taskMembers.some(({_id}) => _id === id)
     },
     toggleAddMember(member){
-      if(!isSelected(id)) this.taskMembers.push(member)
+      if(!this.isSelected(member._id)) {
+        console.log('selected');
+        this.taskMembers.push(member)
+        this.$emit("assign-task-member", member);
+        }
       else{
+        console.log('de-selected');
         const memberIdx = this.taskMembers.findIndex(({_id}) => _id === member._id)
         this.taskMembers.splice(memberIdx,1)
+        this.$emit("remove-task-member", member._id);
       }
-      this.$emit('save-members', this.taskMembers)
+      // this.$emit("close-popup");
     }
   },
   computed: {
     memberList() {
       this.boardMembers = this.$store.getters.currBoard.members;
-      this.taskMembers = JSON.parse(JSON.stringify(this.$store.getters.currTask.members)) || [];
+      this.taskMembers = JSON.parse(JSON.stringify(this.$store.getters.currTask.members || [])) ;
       // console.log('boardMembers:', boardMembers)
       if (!this.taskMembers) return this.boardMembers;
       // let membersToShow = boardMembers.filter((member) => {

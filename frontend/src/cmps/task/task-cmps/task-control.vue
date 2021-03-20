@@ -7,9 +7,9 @@
     <popup-member
       v-if="isMemberOpen"
       @close-popup="isMemberOpen = false"
-      @assign-member="assignMember"
+      @assign-task-member="assignTaskMember"
       @toggle-popup="togglePopup"
-      @save-members="saveMember"
+      @remove-task-member="removeTaskMember"
     ></popup-member>
     <!-- <button>Labels</button> -->
     <button @click="togglePopup('Checklist')">Checklist</button>
@@ -61,8 +61,8 @@ export default {
       const buttonLeftPos = targetRect.left
       this.$emit("toggle-popup", {str, buttonLeftPos});
     },
-    assignMember(member) {
-      this.$emit("assign-member", member);
+    assignTaskMember(member) {
+      this.$emit("assign-task-member", member);
     },
     removeTaskMember(id){
       this.$emit("remove-task-member", id);
