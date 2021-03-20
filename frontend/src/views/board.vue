@@ -5,7 +5,10 @@
       v-model="board.groups"
       group="group"
       @start="drag = true"
-      @end="drag = false"
+      @end="
+        drag = false;
+        saveBoard();
+      "
       animation="150"
       empty-insert-threshold="5"
       ghost-class="ghost"
@@ -36,6 +39,7 @@
         :group="group"
         :boardId="board._id"
         :idx="idx"
+        @save-board="saveBoard"
       />
       <!-- </draggable> -->
       <!-- </li> -->
@@ -88,6 +92,9 @@ export default {
       this.$store.commit({ type: "saveGroup", group: this.newGroup });
       this.newGroup = boardService.getEmptyGroup();
       this.isAddNewGroup = false;
+    },
+    saveBoard() {
+      boardService.saveBoard(this.$store.getters.currBoard);
     },
   },
   computed: {
