@@ -36,8 +36,8 @@
         :group="group"
         :boardId="board._id"
         :idx="idx"
-        @save-board="saveBoard"
       />
+      <!-- @save-board="saveBoard" -->
       <!-- </draggable> -->
       <!-- </li> -->
       <div class="add-new-group">
