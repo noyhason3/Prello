@@ -1,5 +1,9 @@
 <template>
   <pop-up>
+    <div slot="header" class="task-popup-header">
+      <h2>Members</h2>
+      <button @click="togglePopup" class="btn close">X</button>
+    </div>
     <div slot="main">
       <input type="text" v-model="q" placeholder="Search for members..." />
       <ul class="members" v-if="members && members.length">
@@ -28,6 +32,9 @@ export default {
     assignMember(id) {
       this.$emit("assign-member", id);
       this.$emit("close-popup");
+    },
+    togglePopup() {
+      this.$emit("toggle-popup", "Member");
     },
   },
   components: { popUp },
