@@ -23,7 +23,7 @@
       >
         <!-- :class="getMemeberColor(member.initials)" -->
         <!-- :style="{ 'background-color': member.color }" -->
-      <!-- <li
+        <!-- <li
         v-for="(member, idx) in memebersToShow"
         :key="'inits' + idx"
         class="member-initials"
@@ -64,17 +64,17 @@ export default {
       this.selectedMember = null;
       this.isShowMemberDetails = false;
     },
-    getMemeberColor(str){
-      let num = str.split('').reduce((acc,char) => {
-        acc+=char.charCodeAt(0);
-        return acc
-      },0)
-      return 'clr'+ num%4+1
+    getMemeberColor(str) {
+      let num = str.split("").reduce((acc, char) => {
+        acc += char.charCodeAt(0);
+        return acc;
+      }, 0);
+      return "clr" + (num % 4) + 1;
       // if(num<13) return '$clr2'
       // else if(num<25) return '$clr3'
       // else if(num<38) return '$clr4'
       // return '$clr5'
-    }
+    },
   },
   computed: {
     memebersToShow() {
@@ -86,14 +86,13 @@ export default {
         ).toUpperCase();
         // const color = this.getMemeberColor(initials);
         // console.log('color:', color)
-        // const color = utilService.stringToHslColor(initials, 50, 50);
-        // member.color = color;
+        const color = utilService.stringToHslColor(initials, 50, 50);
+        member.color = color;
         member.initials = initials;
         return member;
       });
       return membersToShow;
     },
-
   },
   components: {
     popupMemberDetails,

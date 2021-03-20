@@ -115,13 +115,14 @@ export default {
     //   drag = true;
     // },
     updateBoard(ev) {
+      console.log("file: group.vue - line 118 - updateBoard - ev", ev);
       const { draggedContext, relatedContext } = ev;
       if (
         draggedContext.element.id ===
         relatedContext.list[draggedContext.index]?.id
       ) {
         //console.log("Moving to same container");
-        //return false;
+        return false;
       }
     },
   },
