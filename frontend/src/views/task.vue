@@ -5,7 +5,6 @@
     @dragover.prevent="dragOver"
     @click.prevent="closeTask"
   >
-
     <div class="task-container">
       <div class="header">
         <button @click="closeTask" class="btn close">X</button>
@@ -29,81 +28,76 @@
           :attachments="attachments"
         />
         <!-- <task-cover /> -->
+
         <div class="task-main">
           <task-title v-model="task.title" />
 
           <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
 
-          <div class="task-main">
-            <task-title v-model="task.title" />
-
-            <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
-
-            <div v-if="task" class="task-info">
-              <member-list
-                :members="task.members"
-                :isTaskRelated="true"
-                @remove-task-member="removeTaskMember"
-              />
-
-              <task-label
-                :taskLabelIds="task.labelIds"
-                @set-task-labels="setTaskLabels"
-                @openLabelPopup="openLabelPopup"
-              />
-              <!-- <task-duedate /> -->
-            </div>
-
-            <h4>Description</h4>
-            <editable-text
-              v-model="task.description"
-              :type="'description'"
-              @input="setDescription"
+          <div v-if="task" class="task-info">
+            <member-list
+              :members="task.members"
+              :isTaskRelated="true"
+              @remove-task-member="removeTaskMember"
             />
 
-            <task-attachment
-              v-if="attachments.length"
-              :attachments="attachments"
-              @save-attachments="saveAttachments"
+            <task-label
+              :taskLabelIds="task.labelIds"
+              @set-task-labels="setTaskLabels"
+              @openLabelPopup="openLabelPopup"
             />
-            <file-drag-uploader
-              v-if="isDragOver"
-              :isDragOver="isDragOver"
-              :attachments="attachments"
-              @save-attachments="saveAttachments"
-              @not-drag-over="notDragOver"
-              class="drag-uploader"
-            />
-
-            <!-- <ul class="clean-list"> -->
-            <draggable
-              v-for="checklist in task.checklists"
-              :key="checklist.id"
-              group="checklists"
-              @start="drag = true"
-              @end="drag = false"
-              :move="move"
-              animation="150"
-              empty-insert-threshold="50"
-              draggable=".checklist-container"
-              tag="ul"
-              class="clean-list"
-            >
-              <!-- :progressPercentage="progressPercentage(checklist)" -->
-              <task-checklist
-                class="checklist-container"
-                :checklist="checklist"
-                @save-todo="saveTodo"
-                @delete-checklist="deleteChecklist"
-                @toggle-drag="toggleDrag"
-              />
-              <!-- {{ checklist.id }} -->
-            </draggable>
-            <!-- </ul> -->
+            <!-- <task-duedate /> -->
           </div>
-          <!-- <task-comment /> -->
-          <!-- <activity-list /> -->
+
+          <h4>Description</h4>
+          <editable-text
+            v-model="task.description"
+            :type="'description'"
+            @input="setDescription"
+          />
+
+          <task-attachment
+            v-if="attachments.length"
+            :attachments="attachments"
+            @save-attachments="saveAttachments"
+          />
+          <file-drag-uploader
+            v-if="isDragOver"
+            :isDragOver="isDragOver"
+            :attachments="attachments"
+            @save-attachments="saveAttachments"
+            @not-drag-over="notDragOver"
+            class="drag-uploader"
+          />
+
+          <!-- <ul class="clean-list"> -->
+          <draggable
+            v-for="checklist in task.checklists"
+            :key="checklist.id"
+            group="checklists"
+            @start="drag = true"
+            @end="drag = false"
+            :move="move"
+            animation="150"
+            empty-insert-threshold="50"
+            draggable=".checklist-container"
+            tag="ul"
+            class="clean-list"
+          >
+            <!-- :progressPercentage="progressPercentage(checklist)" -->
+            <task-checklist
+              class="checklist-container"
+              :checklist="checklist"
+              @save-todo="saveTodo"
+              @delete-checklist="deleteChecklist"
+              @toggle-drag="toggleDrag"
+            />
+            <!-- {{ checklist.id }} -->
+          </draggable>
+          <!-- </ul> -->
         </div>
+        <!-- <task-comment /> -->
+        <!-- <activity-list /> -->
       </div>
     </div>
   </section>
