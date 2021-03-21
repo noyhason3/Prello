@@ -7,7 +7,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        
+        background:$clr1;
         &>*:not(.board-header-members){
             margin: 10px;
             padding: 3px 10px;
@@ -19,14 +19,23 @@
     }
     
     .main{
+        //position:relative;
         display: flex;
         overflow-y:hidden;
         overflow-x: auto;
         display: flex;
         flex-grow: 1;
-        background-color: $clr5;
         padding: 5px;
+        margin-block-end:5px;
         // border:solid 1px $clr3;
+        background-color: $clr5;
+        &::before{
+            content:'';
+            z-index: -1;
+            background-color: $clr5;
+            position: absolute;
+            top:0;bottom:0;left:0;right:0;
+        }
         .group{
             margin-inline-end:8px;
         }
@@ -35,12 +44,23 @@
             justify-content: center;
             min-width: 300px;
             height:100%;
-            textarea{
-                min-height: 150px;
+            .editable-text{
+                width:100%;
+                form{
+                    max-height: 100%;
+                    textarea{
+                        min-height: 150px;
+                        max-height: 95%;
+                        width: calc(100% - 8px);
+                        background: #EBECF0;
+                        border-radius: 5px;
+                        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                        box-shadow:0px 2px 0px #0000002e;
+                    }
+                }
             }
              .group-addition{
                  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                 height:100%;
                  font-weight: bold;
                  font-size: rem(20px);
                  color:#ebecf0;
