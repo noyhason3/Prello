@@ -51,10 +51,11 @@
             <!-- <task-duedate /> -->
           </div>
 
-          <h4>Description</h4>
+          <h4>📄 Description</h4>
           <editable-text
             v-model="task.description"
             :type="'description'"
+            :elementType="'task'"
             @input="setDescription"
             class="task-description-content"
           />
