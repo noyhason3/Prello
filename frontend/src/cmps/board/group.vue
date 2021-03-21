@@ -7,25 +7,18 @@
       <div>{{ group.title }}</div>
       <button @click="removeGroup">X</button>
     </div>
-    <!-- <li
-        v-for="task in group.tasks"
-        :key="task.id"
-        class="group-tasks-wrapper"
-      > -->
     <draggable
       v-model="group.tasks"
       :group="`tasks`"
-      @start="drag = true"
-      @end="
-        drag = false;
-        $emit('save-board');
-      "
+      @start="startDrag"
+      @end="endDrag"
       :move="updateBoard"
       empty-insert-threshold="50"
       draggable=".task-preview"
       :class="`clean-list group-tasks gt-${this.idx}`"
       tag="ul"
       drag-class="dragging"
+      ghost-class="ghost"
     >
       <task-preview
         v-for="task in group.tasks"
@@ -36,10 +29,6 @@
       />
     </draggable>
 
-    <!-- </li> -->
-    <!-- </ul> -->
-    <!-- <pre>{{ this.group }}</pre> -->
-    <!-- <pre>{{ this.newTask }}</pre> -->
     <div class="add-task">
       <button v-if="!isAddNewTask" @click="isAddNewTask = true">
         Add a new task
@@ -54,8 +43,6 @@
         @input="addTask"
       />
     </div>
-    <!-- <div slot="footer" class="group-footer"></div> -->
-    <!-- </li> -->
 
     <draggable
       :class="`egt egt-${this.idx}`"
@@ -152,6 +139,13 @@ export default {
         correspondingList.appendChild(ev.dragged);
         return false;
       }
+    },
+    startDrag(ev) {
+      console.log("file: group.vue - line 144 - startDrag - ev", ev);
+      ev.clone.classList.add("drag");
+    },
+    endDrag(ev) {
+      this.$emit("save-board");
     },
   },
   components: { taskPreview, editableText, draggable },
