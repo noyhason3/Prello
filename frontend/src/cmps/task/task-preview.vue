@@ -4,7 +4,7 @@
     <!-- <img v-if="isTaskCover" src="task.coverUrl"> -->
     <!-- If cover image- show image, if cover color set section background-color-->
 
-    <task-label-preview v-if="taskLabelIds" :taskLabelIds="taskLabelIds" />
+    <task-label-preview v-if="taskLabelIds" :taskLabelIds="taskLabelIds" class="task-label-preview"/>
     <div>
       <h2 class="task-title">{{ task.title }}</h2>
       <!-- <div class="btn task-edit">
