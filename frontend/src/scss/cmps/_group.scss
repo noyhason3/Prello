@@ -37,9 +37,9 @@
     }
     .tasks-wrapper{
       max-height:100%;
+      overflow-y: auto;
       .group-tasks{
         height:100%;
-        overflow-y: auto;
         margin-inline: 4px;
       }
     }
