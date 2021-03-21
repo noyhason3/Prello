@@ -25,6 +25,7 @@
       draggable=".task-preview"
       :class="`clean-list group-tasks gt-${this.idx}`"
       tag="ul"
+      drag-class="dragging"
     >
       <task-preview
         v-for="task in group.tasks"
@@ -140,20 +141,16 @@ export default {
     // },
     updateBoard(ev) {
       // console.log("file: group.vue - line 118 - updateBoard - ev", ev);
-      const { draggedContext, relatedContext } = ev;
-      console.log("file: group.vue - line 144 - updateBoard - ev", ev);
+      //const { draggedContext, relatedContext } = ev;
       if (ev.to.classList.contains("egt")) {
-        console.log("Dragging to empty group tasks list");
-        const selector = ".gt-" + this.idx;
-        console.log(
-          "file: group.vue - line 157 - updateBoard - document.querySelector",
-          document.querySelectorAll(selector),
-          "selctor",
-          selector
-        );
-        var correspondingList = document.querySelector("header");
+        //console.log("Dragging to empty group tasks list");
+        const classes = Array.from(ev.to.classList);
+        var toIndex = classes.find((savedClass) => savedClass.includes("egt-"));
+        toIndex = toIndex.charAt(toIndex.length - 1);
+        const selector = ".gt-" + toIndex;
+        var correspondingList = document.querySelector(selector);
         correspondingList.appendChild(ev.dragged);
-        //return false;
+        return false;
       }
     },
   },
