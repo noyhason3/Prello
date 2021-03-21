@@ -8,8 +8,8 @@
 
     .main-checklist-header {
       display: flex;
-      // width: 100%;
-      justify-content: space-between;
+      width: 100%;
+      // justify-content: space-between;
     }
 
     .checklist-icon {
@@ -49,8 +49,9 @@
       padding: 3px;
     }
 
-    .editable-todo-title > form > textarea {
+    .editable-todo-title  {
       width: 100%;
+      // width: 200px;
     }
 
     .editable-todo,
@@ -67,12 +68,26 @@
     }
   }
 
+  .todo-container:hover{
+    background-color: #eaecf0;
+  }
+
   .btn {
     background-color: #eaecf0;
     padding: 10px;
 
     &:hover {
       background-color: #e4e4e3;
+    }
+  }
+
+  .editable-text {
+    width: 100%;
+    form {
+      width: 100%;
+      .save-btn:hover{
+        background-color: #e4e4e3;
+      }
     }
   }
 

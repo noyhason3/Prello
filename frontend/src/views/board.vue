@@ -1,5 +1,5 @@
 <template>
-  <section class="board" v-if="board">
+  <section class="board" v-if="board" >
     <board-header :board="board" />
     <draggable
       v-model="board.groups"

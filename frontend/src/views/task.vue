@@ -5,7 +5,7 @@
     @dragover.prevent="dragOver"
     @click.prevent="closeTask"
   >
-    <div class="task-container" :style="`top:${initialHeight}px;`">
+    <div class="task-container" @click.stop :style="`top:${initialHeight}px;`">
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
         <task-title v-model="task.title" />
