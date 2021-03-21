@@ -5,9 +5,9 @@
         v-for="board in boardList"
         :key="board._id"
         class="board-preview"
-        :style="backGroundStyle(board)"
+        :style="{backgroundImage: `url(${img})`}"
       >
-        <!-- style="{backgroundImage: url('~@/assets/img/1.jpg')}" -->
+        <!-- :style="backGroundStyle(board)" -->
         {{ board.title }}
       </li>
       <li>
@@ -32,6 +32,7 @@
 <script>
 import popup from "@/cmps/common/pop-up.vue";
 import boardService from "../services/board.service";
+import img from '../assets/img/i.jpg'
 // import editableTitle from "@/cmps/common/editable-title.vue";
 export default {
   data() {
@@ -39,6 +40,7 @@ export default {
       isAddBoard: false,
       boardToEdit: null,
       boardList: null,
+      img
     };
   },
   async created() {
@@ -81,6 +83,7 @@ export default {
   },
   components: {
     popup,
+    img
     // editableTitle,
   },
 };
