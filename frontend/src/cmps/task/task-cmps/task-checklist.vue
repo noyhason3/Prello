@@ -94,7 +94,7 @@
 
 <script>
 import draggable from "vuedraggable";
-import editableText from "./editable-text.vue";
+import editableText from "@/cmps/common/editable-text.vue";
 // import editableTitle from '../../common/editable-title.vue'
 
 export default {

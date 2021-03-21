@@ -56,7 +56,7 @@
 <script>
 import moment from "moment";
 import popup from "@/cmps/common/pop-up.vue";
-import editableText from "@/cmps/task/task-cmps/editable-text.vue";
+import editableText from "@/cmps/common/editable-text.vue";
 
 export default {
   props: {

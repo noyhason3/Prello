@@ -73,7 +73,7 @@
 import draggable from "vuedraggable";
 import boardService from "@/services/board.service.js";
 import taskPreview from "../task/task-preview.vue";
-import editableText from "../task/task-cmps/editable-text.vue";
+import editableText from "../common/editable-text.vue";
 
 export default {
   props: {

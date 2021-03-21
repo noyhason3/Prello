@@ -72,7 +72,7 @@
 import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
 import boardService from "../services/board.service";
-import editableText from "@/cmps/task/task-cmps/editable-text.vue";
+import editableText from "@/cmps/common/editable-text.vue";
 
 import draggable from "vuedraggable";
 
