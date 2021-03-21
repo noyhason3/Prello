@@ -3,9 +3,7 @@
     <div slot="main">
       <button @click="closeMemberDetails" class="btn close">X</button>
       <div class="member-details-container">
-        <div class="member-initials" :class="member.color">
-          {{ member.initials }}
-        </div>
+          <member-preview :member="member"/>
         <div>
           <h2>{{ member.fullname }}</h2>
           <h3>@{{ member.username }}</h3>
@@ -24,6 +22,8 @@
 
 <script>
 import popUp from "@/cmps/common/pop-up";
+import memberPreview from "@/cmps/common/member-preview.vue";
+
 export default {
   props: {
     member: Object,
@@ -41,6 +41,7 @@ export default {
   },
   components: {
     popUp,
+    memberPreview
   },
 };
 </script>

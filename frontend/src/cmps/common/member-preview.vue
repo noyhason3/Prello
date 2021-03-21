@@ -1,20 +1,36 @@
 <template>
-      <a class="flex center member-preview">{{ member.initials }}</a>
+  <a class="flex center member-preview" :class="colorClassByInitials">
+    {{memberInitials}}
+  </a>
 </template>
 
 <script>
 export default {
-    props:{
-        member:Object
+  props: {
+    member: Object,
+  },
+  methods: {
+    toggleMemberDetails() {
+      this.$emit("toggle-member-details", { ev, member });
     },
-    created(){
-      // console.log('this.member:', this.member)
+  },
+  computed: {
+    memberInitials() {
+      const nameSplit = this.member.fullname.split(" ");
+      const initials = (
+        nameSplit[0].charAt(0) + nameSplit[1].charAt(0)
+      ).toUpperCase();
+      return initials;
     },
-    methods:{
-      toggleMemberDetails(){
-        this.$emit('toggle-member-details', {ev, member})
-      }
-    }
+    colorClassByInitials() {
+      const initials = this.memberInitials;
+      let num = initials.split("").reduce((acc, char) => {
+        acc += char.charCodeAt(0);
+        return acc;
+      }, 0);
+      return "clr" + ((num % 7) + 2);
+    },
+  },
 };
 </script>
 
