@@ -3,7 +3,7 @@
   <!-- <ul class="clean-list"> -->
   <!-- <pre>{{ group }}</pre> -->
   <section class="group">
-    <div class="flex jcc aic space-between header">
+    <div class="flex jcc aic space-between group-header">
       <div>{{ group.title }}</div>
       <button @click="removeGroup">X</button>
     </div>
