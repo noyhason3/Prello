@@ -32,7 +32,7 @@
 <script>
 import popup from "@/cmps/common/pop-up.vue";
 import boardService from "../services/board.service";
-import img from '../assets/img/i1.jpg'
+import img from '../assets/img/i.jpg'
 // import editableTitle from "@/cmps/common/editable-title.vue";
 export default {
   data() {
@@ -40,6 +40,7 @@ export default {
       isAddBoard: false,
       boardToEdit: null,
       boardList: null,
+      img
     };
   },
   async created() {
