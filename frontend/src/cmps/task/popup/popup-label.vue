@@ -31,7 +31,7 @@
             <button @click="openLabelEdit('Change', label)" class="btn edit-label">🖋</button>
           </li>
         </ul>
-        <button @click="openLabelEdit('Create')" class="btn wide">Create a new lael</button>
+        <button @click="openLabelEdit('Create')" class="btn wide">Create a new label</button>
       </div>
     </pop-up>
     <popup-label-edit

@@ -33,12 +33,14 @@
         </div>
       </li>
     </ul>
-    <popup v-if="selectedAttachment">
-      <div slot="header">
-        <h3>Edit attachment</h3>
+    <popup v-if="selectedAttachment" class="attachment-edit">
+
+      <div slot="header"  class="task-popup-header">
+        <h2>Edit attachment</h2>
+      <button @click="closeEditAttachment" class="btn close" >X</button>
       </div>
-      <div slot="main">
-        <h4>Link name</h4>
+      <div slot="main" class="attachment-edit-main">
+        <h3>Link name</h3>
         <editable-text
           :isEditFirst="true"
           v-model="selectedAttachment.title"
@@ -75,6 +77,9 @@ export default {
     },
     editAttachment(attachment) {
       this.selectedAttachment = { ...attachment };
+    },
+    closeEditAttachment(){
+      this.selectedAttachment = null;
     },
     updateAttachment() {
       const attachmentIdx = this.attachmentsToEdit.findIndex(

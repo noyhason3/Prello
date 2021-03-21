@@ -28,4 +28,11 @@
         }
         
     }
+    .attachment-edit{
+        bottom:10px;
+        .attachment-edit-main{
+            display:flex;
+            flex-direction: column;        }
+
+    }
 }

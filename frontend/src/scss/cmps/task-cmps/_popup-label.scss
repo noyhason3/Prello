@@ -31,9 +31,14 @@
         }
         .btn.edit-label{
             background-color: transparent;
+            width: 30px;
+            border-radius: 50%;
         }
         .btn.edit-label:hover{
-            background-color:rgb(238, 238, 238);
+            // background-color:green;
+            filter: none;
+            background-color:rgb(245, 245, 245);
+
         }
         .label-in-use::after {
             content: "✔";

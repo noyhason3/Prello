@@ -2,8 +2,11 @@
   <section class="editable-text">
     <form v-if="isEditing" @submit.prevent="setText">
       <textarea ref="input" :value="value" :placeholder="placeholder"></textarea>
+      <div>
+
       <button class="save-btn">Save</button>
       <button type="button" @click.prevent="closeTextarea">X</button>
+      </div>
     </form>
     <template v-else>
       <p v-if="value" @click="editDescription">{{ value }}</p>

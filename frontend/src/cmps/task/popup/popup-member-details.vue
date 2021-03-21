@@ -1,5 +1,5 @@
 <template>
-  <pop-up class="member-details">
+  <pop-up class="member-details" >
     <div slot="main">
       <button @click="closeMemberDetails" class="btn close">X</button>
       <div class="member-details-container">
