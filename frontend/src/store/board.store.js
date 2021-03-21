@@ -57,17 +57,29 @@ export const boardStore = {
         },
 
         // setBoardList(state, {boards}){
-        //     state.boards = boards;
-        // }
-    },
-    actions: {
-        async getGroup({state}) {
-            const group = await state.board.groups.find(({ tasks }) => {
-                return tasks.some(({ id }) => id === state.task.id);
-            });
-            // console.log('group:', group);
-            return group
+            //     state.boards = boards;
+            // }
         },
+        actions: {
+            async getGroup({state}) {
+                const group = await state.board.groups.find(({ tasks }) => {
+                    return tasks.some(({ id }) => id === state.task.id);
+                });
+                // console.log('group:', group);
+                return group
+            },
+            async getEmptyBoard(){
+                return boardService.getEmptyBoard();
+            },
+            async saveBoard({commit}, {board}){
+                try{
+                    const newBoard = await boardService.saveBoard(board);
+                    commit({ type: 'setBoard', newBoard })
+                    return newBoard
+                }catch(err){
+                    // console.log('err:', err)
+                }
+            }
         // async loadBoardList({ commit }) {
         //   try {
         //     // const boards =  await boardService.query()
