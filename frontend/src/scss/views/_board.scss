@@ -100,10 +100,13 @@
             background: $clr5;
             color:$clr5;
         }
-        transform: rotate(25deg) ;
     }
     .dragging{
         opacity: 0.1;
+        background: aquamarine;
+    }
+    .tilted{
+        transform: rotate(25deg) ;
     }
     
 } 
