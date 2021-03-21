@@ -145,11 +145,11 @@ export default {
     startDrag(ev, ui) {
       console.log("file: group.vue - line 144 - startDrag - ui", ui);
       console.log("file: group.vue - line 144 - startDrag - ev", ev);
-      const el = document.querySelector(".drag");
+      //const el = document.querySelector(".drag");
       console.log("file: group.vue - line 147 - startDrag - el", el);
-      el.classList.add("tilted");
-      ev.item.classList.add("tilted");
-      ev.clone.classList.add("tilted");
+      //el.classList.add("tilted");
+      //ev.item.classList.add("tilted");
+      //ev.clone.classList.add("tilted");
     },
     endDrag(ev) {
       this.$emit("save-board");
