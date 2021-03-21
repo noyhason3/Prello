@@ -40,7 +40,7 @@
       .group-tasks{
         height:100%;
         overflow-y: auto;
-        margin-inline: 8px;
+        margin-inline: 4px;
       }
     }
 
@@ -51,7 +51,7 @@
   .group-header {
     border-radius: 5px 5px 0 0 ;
     font-size: 20px;
-    // padding-inline-start: 8px;
+    padding-inline-start: 10px;
     :first-child{
       font-weight: bold;
     }
