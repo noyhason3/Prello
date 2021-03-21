@@ -3,7 +3,7 @@
     <!-- SUGGESTED                       ******TODO********
       <button>Join</button> -->
 
-    <h6 class="add-to-card-btn"> ADD TO CARD  </h6>
+    <h6 class="add-to-card-btn">ADD TO CARD</h6>
     <button @click="togglePopup('Member')" class="control-btn">Members</button>
     <popup-member
       v-if="isMemberOpen"
@@ -13,17 +13,23 @@
       @remove-task-member="removeTaskMember"
     ></popup-member>
     <!-- <button>Labels</button> -->
-    <button @click="togglePopup('Checklist')" class="control-btn">Checklist</button>
+    <button @click="togglePopup('Checklist')" class="control-btn">
+      Checklist
+    </button>
     <popup-checklist
       v-if="isChecklistOpen"
       @add-checklist="setChecklist"
       @toggle-popup="togglePopup"
     ></popup-checklist>
 
-    <button @click="toggleGeneralPopup($event, 'Label')" class="control-btn">Labels</button>
+    <button @click="toggleGeneralPopup($event, 'Label')" class="control-btn">
+      Labels
+    </button>
 
     <!-- <button>Due date</button> -->
-    <button @click="togglePopup('Attachment')" class="control-btn">Attachement</button>
+    <button @click="togglePopup('Attachment')" class="control-btn">
+      Attachement
+    </button>
     <popup-attachment
       v-if="isAttachmentOpen"
       @save-attachments="saveAttachments"
@@ -59,18 +65,18 @@ export default {
     },
     toggleGeneralPopup(ev, str) {
       const targetRect = ev.target.getBoundingClientRect();
-      const buttonLeftPos = targetRect.left
-      this.$emit("toggle-popup", {str, buttonLeftPos});
+      const buttonLeftPos = targetRect.left;
+      this.$emit("toggle-popup", { str, buttonLeftPos });
     },
     assignTaskMember(member) {
       this.$emit("assign-task-member", member);
     },
-    removeTaskMember(id){
+    removeTaskMember(id) {
       this.$emit("remove-task-member", id);
     },
     setChecklist(checklist) {
       this.$emit("set-checklist", checklist);
-      this.togglePopup("Checklist")
+      this.togglePopup("Checklist");
     },
     setTaskLabels(labelIds) {
       this.$emit("set-task-labels", labelIds);

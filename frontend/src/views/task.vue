@@ -83,7 +83,6 @@
               drag = false;
               saveTask(task);
             "
-            :move="move"
             animation="150"
             empty-insert-threshold="50"
             draggable=".checklist-container"
@@ -173,12 +172,6 @@ export default {
       const group = await this.$store.dispatch({ type: "getGroup" });
       this.groupTitle = group.title;
     },
-    move(ev) {
-      console.log("file: task.vue - line 142 - move - ev", ev);
-    },
-    reorder(ev) {
-      console.log("file: task.vue - line 151 - reorder - ev", ev);
-    },
     // setTitle(title) {
     //   this.task.title = title;
     // },
@@ -254,7 +247,6 @@ export default {
       this[dataStr] = !this[dataStr];
       if (!this[dataStr]) this.popupLeftPos = 0;
       else this.popupLeftPos = buttonLeftPos;
-      console.log("buttonLeftPos:", this.popupLeftPos);
     },
     openLabelPopup(buttonLeftPos) {
       this.popupLeftPos = buttonLeftPos;

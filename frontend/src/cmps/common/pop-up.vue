@@ -2,7 +2,7 @@
   <div
     class="popup"
     ref="container"
-    :style="`max-height:${maxHeight}px; overflow-y:auto;`"
+    :style="`max-height:${maxHeight}px; top:${top}px; overflow-y:auto;`"
   >
     <header>
       <slot name="header"></slot>
@@ -21,16 +21,17 @@ export default {
   data() {
     return {
       maxHeight: null,
+      top: null,
     };
   },
   mounted() {
-    console.log(this.$refs.container);
-    const top = this.$refs.container.getBoundingClientRect().y;
-    this.maxHeight = window.innerHeight - top;
-    // console.log(
-    //   "file: pop-up.vue - line 25 - mounted - window.innerHeight - top",
-    //   window.innerHeight - top
-    // );
+    const prev = this.$refs.container.previousElementSibling?.getBoundingClientRect();
+    if (prev) {
+      const top = prev.y + prev.height;
+      this.maxHeight = window.innerHeight - prev.y;
+
+      //this.top = top;
+    }
   },
   components: {},
 };
