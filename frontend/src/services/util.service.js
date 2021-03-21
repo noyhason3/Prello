@@ -4,6 +4,7 @@ export default {
     debounce,
     stringToHslColor,
     getFilename,
+    getRandomIntInclusive
 };
 
 function makeId(length = 5) {
@@ -56,4 +57,8 @@ function getFilename(url) {
     } else url = urlSplit.pop();
     const filename = url.split('/').pop();
     return filename;
+}
+
+function getRandomIntInclusive(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
