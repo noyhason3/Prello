@@ -87,10 +87,22 @@
     // }
     .ghost{
         opacity: 0.6;
+        background: $clr5;
+        color:$clr5;
+        &>*{
+            .preview-label{
+                background: $clr5!important;
+            }
+            .member-preview{
+                background: $clr5!important;
+                color:$clr5!important;
+            }
+            background: $clr5;
+            color:$clr5;
+        }
+        transform: rotate(25deg) ;
     }
     .dragging{
-        transform: rotate(25deg);
-        background: red;
         opacity: 0.1;
     }
     
