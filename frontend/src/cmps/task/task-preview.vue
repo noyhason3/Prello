@@ -11,10 +11,10 @@
         <span>🖊</span>
       </div> -->
     </div>
+    <div class="task-info-preview">
     <div v-if="taskChecklists">
       ☑ {{ taskChecklists.complete }}/{{ taskChecklists.total }}
     </div>
-    <div class="task-info-preview">
       <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
       <div v-if="isTaskDescription">📄</div>
       <div v-if="attachmentCount">📎{{ attachmentCount }}</div>

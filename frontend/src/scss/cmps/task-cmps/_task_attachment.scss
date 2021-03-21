@@ -13,8 +13,12 @@
         width: 150px;
         object-fit: contain;
         background-color: $clr1;
+        margin-inline-end: 20px;
     }
     .attachment-info{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
         h5{
             margin-bottom:0.3em;        
         }
@@ -25,11 +29,16 @@
             background-color: transparent;
             text-decoration: underline;
             margin:0; 
+            padding:0;
+        }
+        .btn.attachment-action:not(:last-of-type){
+            margin-inline-end: 5px;;
         }
         
     }
     .attachment-edit{
-        bottom:10px;
+        bottom:20px;
+        left: 50%;
         .attachment-edit-main{
             display:flex;
             flex-direction: column;        }

@@ -11,10 +11,20 @@
     cursor: pointer;
     border-radius: 5px;
     box-shadow: 0px 2px 0px #0000002e;
-    padding:5px;
+    padding: 10px;
     text-align: start;
     .btn.close{
-        margin:0
+        margin:0;
+        align-self: flex-end;
+    }
+    .task-info-preview{
+        > *:not(:last-child){
+            float:left;
+            margin-inline-end: 20px;
+        }
+    }
+    .member-list {
+        float: right;
     }
     .label-preview {
         > *:not(:last-child){
@@ -32,9 +42,6 @@
             padding-inline: 5px;
             color:$clr1;
         }
-    }
-    .member-list {
-        float: right;
     }
 
     .btn.task-edit{

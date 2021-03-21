@@ -13,31 +13,35 @@
           class="attachment-img"
         />
         <div class="attachment-info">
+          <div>
+
           <h5>{{ attachment.title }}</h5>
           <p>{{ date(attachment.createdAt) }}</p>
           <!-- <button class="btn attachment-action">Comment</button> -->
-          <button
-            @click="removeAttachment(attachment.id)"
-            class="btn attachment-action"
-          >
-            Delete
-          </button>
-          <button
-            @click="editAttachment(attachment)"
-            class="btn attachment-action"
-          >
-            Edit
-          </button>
+          </div>
+          <div>
+            <button
+              @click="removeAttachment(attachment.id)"
+              class="btn attachment-action"
+            >
+              Delete
+            </button>-
+            <button
+              @click="editAttachment(attachment)"
+              class="btn attachment-action"
+            >
+              Edit
+            </button>
+          </div>
           <!-- <button class="btn attachment-action">🚃 Make cover</button> TODO
           <button class="btn attachment-action">🚃 Remove cover</button> -->
         </div>
       </li>
     </ul>
     <popup v-if="selectedAttachment" class="attachment-edit">
-
-      <div slot="header"  class="task-popup-header">
+      <div slot="header" class="task-popup-header">
         <h2>Edit attachment</h2>
-      <button @click="closeEditAttachment" class="btn close" >X</button>
+        <button @click="closeEditAttachment" class="btn close">X</button>
       </div>
       <div slot="main" class="attachment-edit-main">
         <h3>Link name</h3>
@@ -78,7 +82,7 @@ export default {
     editAttachment(attachment) {
       this.selectedAttachment = { ...attachment };
     },
-    closeEditAttachment(){
+    closeEditAttachment() {
       this.selectedAttachment = null;
     },
     updateAttachment() {
@@ -93,7 +97,7 @@ export default {
       this.selectedAttachment = null;
     },
     date(timeStamp) {
-      return moment(timeStamp).fromNow();
+      return moment(+timeStamp).fromNow();
     },
   },
   computed: {
