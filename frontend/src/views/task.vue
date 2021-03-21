@@ -1,14 +1,14 @@
 <template>
   <section
-    class="task"
+    class="task-screen"
     v-if="task"
     @dragover.prevent="dragOver"
-    @click.prevent="closeTask"
+    @click.stop="closeTask"
   >
-    <div class="task-container" :style="`top:${initialHeight}px;`">
+    <div class="task" :style="`top:${initialHeight}px;`" @click.stop>
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
-        <task-title v-model="task.title" />
+        <task-title v-model="task.title" @click.prevent />
         <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
       </div>
       <div class="task-content" @click.stop>
