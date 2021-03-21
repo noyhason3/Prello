@@ -14,7 +14,7 @@
         @start="startDrag"
         @end="endDrag"
         :move="updateBoard"
-        empty-insert-threshold="50"
+        :empty-insert-threshold="15"
         draggable=".task-preview"
         :class="`clean-list group-tasks gt-${this.idx}`"
         tag="ul"
