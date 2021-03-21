@@ -7,27 +7,29 @@
       <div>{{ group.title }}</div>
       <button @click="removeGroup">X</button>
     </div>
-    <draggable
-      v-model="group.tasks"
-      :group="`tasks`"
-      @start="startDrag"
-      @end="endDrag"
-      :move="updateBoard"
-      empty-insert-threshold="50"
-      draggable=".task-preview"
-      :class="`clean-list group-tasks gt-${this.idx}`"
-      tag="ul"
-      drag-class="dragging"
-      ghost-class="ghost"
-    >
-      <task-preview
-        v-for="task in group.tasks"
-        :key="task.id"
-        :task="task"
-        @click.native="openTask(task)"
-        @remove-task="removeTask"
-      />
-    </draggable>
+    <div class="tasks-wrapper">
+      <draggable
+        v-model="group.tasks"
+        :group="`tasks`"
+        @start="startDrag"
+        @end="endDrag"
+        :move="updateBoard"
+        empty-insert-threshold="50"
+        draggable=".task-preview"
+        :class="`clean-list group-tasks gt-${this.idx}`"
+        tag="ul"
+        drag-class="drag"
+        ghost-class="ghost"
+      >
+        <task-preview
+          v-for="task in group.tasks"
+          :key="task.id"
+          :task="task"
+          @click.native="openTask(task)"
+          @remove-task="removeTask"
+        />
+      </draggable>
+    </div>
 
     <div class="add-task">
       <button v-if="!isAddNewTask" @click="isAddNewTask = true">
@@ -140,9 +142,14 @@ export default {
         return false;
       }
     },
-    startDrag(ev) {
+    startDrag(ev, ui) {
+      console.log("file: group.vue - line 144 - startDrag - ui", ui);
       console.log("file: group.vue - line 144 - startDrag - ev", ev);
-      ev.clone.classList.add("drag");
+      const el = document.querySelector(".drag");
+      console.log("file: group.vue - line 147 - startDrag - el", el);
+      el.classList.add("tilted");
+      ev.item.classList.add("tilted");
+      ev.clone.classList.add("tilted");
     },
     endDrag(ev) {
       this.$emit("save-board");
