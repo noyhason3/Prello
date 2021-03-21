@@ -1,15 +1,15 @@
-import utilService from "./util.service";
-import storageService from './async-storage-service.js'
+import utilService from './util.service';
+import storageService from './async-storage-service.js';
 
-const DB_KEY = 'boards_db'
+const DB_KEY = 'boards_db';
 const DEMO_BOARD = {
-    "_id": "b101",
-    "title": "Web Dev. Prello Management",
-    "createdAt": 1589983468418,
-    "createdBy": {
-        "_id": "u101",
-        "fullname": "Abi Abambi",
-        "imgUrl": "http://some-img"
+    _id: 'b101',
+    title: 'Web Dev. Prello Management',
+    createdAt: 1589983468418,
+    createdBy: {
+        _id: 'u101',
+        fullname: 'Abi Abambi',
+        imgUrl: 'http://some-img',
     },
     style: {},
     labels: [
@@ -91,10 +91,10 @@ const DEMO_BOARD = {
                 {
                     id: 'c101',
                     title: 'REMINDER!',
-                    description: 'Please refrain from editing other people\'s work. \n Reviewed every 2nd sunday',
+                    description: "Please refrain from editing other people's work. \n Reviewed every 2nd sunday",
                     checklists: [],
                     attachments: [],
-                    labelIds: ['important']
+                    labelIds: ['important'],
                 },
                 {
                     id: 'c102',
@@ -119,7 +119,8 @@ const DEMO_BOARD = {
                         {
                             id: 'a101',
                             title: 'Ex. 1 -- Table View',
-                            url: 'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NitzanChen/2734acac-d903-476a-9332-32050c06df79_1050_772_green.png',
+                            url:
+                                'https://dapulse-res.cloudinary.com/image/upload/f_auto,q_auto/remote_mondaycom_static/uploads/NitzanChen/2734acac-d903-476a-9332-32050c06df79_1050_772_green.png',
                             createdAt: '1616155239874',
                         },
                         {
@@ -198,9 +199,8 @@ const DEMO_BOARD = {
                             fullname: 'Tal Tarablus',
                             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                         },
-                    ]
+                    ],
                 },
-
             ],
             style: {},
         },
@@ -257,7 +257,7 @@ const DEMO_BOARD = {
                                     isDone: false,
                                 },
                             ],
-                        }
+                        },
                     ],
                     attachments: [],
                     members: [
@@ -279,7 +279,6 @@ const DEMO_BOARD = {
                             fullname: 'Biniamin Shemi',
                             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                         },
-
                     ],
                     labelIds: ['progress', 'important'],
                     createdAt: 1590999730348,
@@ -300,8 +299,7 @@ const DEMO_BOARD = {
         {
             id: 'g103',
             title: 'Running tasks',
-            tasks: [
-            ],
+            tasks: [],
             style: {},
         },
         {
@@ -328,7 +326,8 @@ const DEMO_BOARD = {
                         {
                             id: 'a105',
                             title: 'smile!',
-                            url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gnome-face-smile-big.svg/1024px-Gnome-face-smile-big.svg.png',
+                            url:
+                                'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Gnome-face-smile-big.svg/1024px-Gnome-face-smile-big.svg.png',
                             createdAt: '1616152734274',
                         },
                     ],
@@ -346,14 +345,14 @@ const DEMO_BOARD = {
                             fullname: 'Tal Tarablus',
                             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                         },
-                    ]
+                    ],
                 },
                 {
                     id: 'GDSJKM',
                     title: 'D&D Feature customization',
                     checklists: [],
                     attachments: [],
-                    labelIds: ['hold']
+                    labelIds: ['hold'],
                 },
             ],
             style: {},
@@ -367,7 +366,7 @@ const DEMO_BOARD = {
                     title: 'User login from different sources',
                     checklists: [],
                     attachments: [],
-                    labelIds: ['progress']
+                    labelIds: ['progress'],
                 },
                 {
                     id: 'GDSJKL',
@@ -382,7 +381,7 @@ const DEMO_BOARD = {
                             fullname: 'Anna Avraham',
                             imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
                         },
-                    ]
+                    ],
                 },
                 {
                     id: 'GDSJKP',
@@ -401,7 +400,7 @@ const DEMO_BOARD = {
                             _id: 'u102',
                             fullname: 'Noam Ben Yosef',
                         },
-                    ]
+                    ],
                 },
             ],
             style: {},
@@ -477,14 +476,13 @@ const DEMO_BOARD = {
                 fullname: 'Abi Abambi',
                 imgUrl: 'http://some-img',
             },
-            "task": {
-                "id": "t101",
-                "title": "Replace Logo"
-            }
-        }
-    ]
-}
-
+            task: {
+                id: 't101',
+                title: 'Replace Logo',
+            },
+        },
+    ],
+};
 
 // checklists: [
 //     {
@@ -550,7 +548,7 @@ const DEMO_BOARD = {
 //                 createdAt: '1616152734274',
 //                         },
 
-var gBoards = []
+var gBoards = [];
 
 export default {
     loadDemoBoard,
@@ -562,31 +560,35 @@ export default {
     removeTask,
     saveGroup,
     removeGroup,
-    saveBoard
-}
+    getEmptyBoard,
+    saveBoard,
+    removeBoard,
+    getBoards,
+    getBoardById,
+    getRandomImg,
+};
 
-if (!localStorage.getItem(DB_KEY)) loadDemoBoard()
-
+if (!localStorage.getItem(DB_KEY)) loadDemoBoard();
 
 async function query(id) {
-    const boards = await storageService.query(DB_KEY)
-    gBoards = boards
-    if (!id) return gBoards
-    const board = boards.find(savedBoard => savedBoard._id === id)
-    return board
+    const boards = await storageService.query(DB_KEY);
+    gBoards = boards;
+    if (!id) return gBoards;
+    const board = boards.find((savedBoard) => savedBoard._id === id);
+    return board;
 }
 
 async function getTask({ board, taskId }) {
-    const group = board.groups.find(group => group.tasks.some(task => task.id === taskId))
-    const task = group.tasks.find(task => task.id === taskId)
-    if (task) return Promise.resolve(task)
-    else return Promise.reject()
+    const group = board.groups.find((group) => group.tasks.some((task) => task.id === taskId));
+    const task = group.tasks.find((task) => task.id === taskId);
+    if (task) return Promise.resolve(task);
+    else return Promise.reject();
 }
 
 async function saveTask({ boardId, groupId, task }) {
-    const board = gBoards.find(savedBoard => savedBoard._id === boardId)
-    if (groupId) var group = board.groups.find(savedGroup => savedGroup.id === groupId)
-    else group = board.groups.find(savedGroup => savedGroup.tasks.some(savedTask => savedTask.id === task.id))
+    const board = gBoards.find((savedBoard) => savedBoard._id === boardId);
+    if (groupId) var group = board.groups.find((savedGroup) => savedGroup.id === groupId);
+    else group = board.groups.find((savedGroup) => savedGroup.tasks.some((savedTask) => savedTask.id === task.id));
     if (task.id) {
         //update
         console.log('Updating task', task);
@@ -598,18 +600,18 @@ async function saveTask({ boardId, groupId, task }) {
         task.id = utilService.makeId();
         group.tasks.push(task);
     }
-    storageService.put(DB_KEY, board)
-    return Promise.resolve({ board, task })
+    storageService.put(DB_KEY, board);
+    return Promise.resolve({ board, task });
 }
 
 async function removeTask({ boardId, taskId }) {
-    const board = gBoards.find(savedBoard => savedBoard._id === boardId)
-    const group = board.groups.find(savedGroup => savedGroup.tasks.some(savedTask => savedTask.id === taskId))
+    const board = gBoards.find((savedBoard) => savedBoard._id === boardId);
+    const group = board.groups.find((savedGroup) => savedGroup.tasks.some((savedTask) => savedTask.id === taskId));
     const taskIdx = group.tasks.findIndex((savedTask) => savedTask.id === taskId);
     if (taskIdx < 0) return;
     group.tasks.splice(taskIdx, 1);
-    saveBoard(board)
-    return Promise.resolve({ group, board })
+    saveBoard(board);
+    return Promise.resolve({ group, board });
 }
 
 function getEmptyTask() {
@@ -618,71 +620,115 @@ function getEmptyTask() {
         description: '',
         //REMEMBER TO
         attachments: [],
-        checklists: []
-    }
+        checklists: [],
+    };
 }
 
 async function getGroup({ board, taskId }) {
-    console.log("file: board.service.js - line 483 - getGroup - taskId", taskId)
+    console.log('file: board.service.js - line 483 - getGroup - taskId', taskId);
     //const board = gBoards.find(savedBoard => savedBoard._id === boardId)
-    console.log("file: board.service.js - line 484 - getGroup - board", board)
+    console.log('file: board.service.js - line 484 - getGroup - board', board);
     const group = board.groups.find(({ tasks }) => {
         return tasks.some(({ id }) => id === taskId);
     });
     console.log('group:', group);
-    return group
+    return group;
 }
 
 async function saveGroup({ boardId, group }) {
-    const board = gBoards.find(savedBoard => savedBoard._id === boardId)
-    if (group.id) {//update
+    const board = gBoards.find((savedBoard) => savedBoard._id === boardId);
+    if (group.id) {
+        //update
         console.log('Updating group', group);
         const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
         board.groups.splice(groupIdx, 1, group);
-    } else {//add
+    } else {
+        //add
         console.log('Adding group', group);
         group.id = utilService.makeId();
         board.groups.push(group);
     }
     //localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
-    storageService.put(DB_KEY, board)
-    return Promise.resolve(board)
+    storageService.put(DB_KEY, board);
+    return Promise.resolve(board);
 }
 
 async function removeGroup({ boardId, groupId }) {
-    const board = gBoards.find(savedBoard => savedBoard._id === boardId)
-    const idx = board.groups.findIndex(savedGroup => savedGroup.id === groupId)
-    board.groups.splice(idx, 1)
-    storageService.put(DB_KEY, board)
-    return Promise.resolve(board)
+    const board = gBoards.find((savedBoard) => savedBoard._id === boardId);
+    const idx = board.groups.findIndex((savedGroup) => savedGroup.id === groupId);
+    board.groups.splice(idx, 1);
+    storageService.put(DB_KEY, board);
+    return Promise.resolve(board);
 }
 
 function getEmptyGroup() {
     return {
-        "title": "",
-        "tasks": [
-        ],
-        "style": {}
-    }
+        title: '',
+        tasks: [],
+        style: {},
+    };
 }
 
 function loadDemoBoard() {
-    localStorage.setItem(DB_KEY, JSON.stringify([DEMO_BOARD]))
+    localStorage.setItem(DB_KEY, JSON.stringify([DEMO_BOARD]));
 }
 
-function saveBoard(board) {
-    if (board._id) {//update
-        const idx = gBoards.findIndex(savedBoard => savedBoard._id === board._id)
-        gBoards.splice(idx, 1, board)
-        localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
-    } else {//add
-        board._id = utilService.makeId()
-        gBoards.push(board)
-        localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
+async function getEmptyBoard() {
+    return {
+        title: '',
+        createdAt: null,
+        createdBy: {},
+        style: {imgUrl:'', color:'#'+utilService.getRandomIntInclusive(111,999)},
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
+    };
+
+}
+
+async function getBoards(){
+    return storageService.query('board')
+}
+
+async function getBoardById(boardId){
+    return storageService.get('board',boardId)
+}
+// async function saveBoard(board) {
+//     if (board._id) {//update
+//         const idx = gBoards.findIndex(savedBoard => savedBoard._id === board._id)
+//         gBoards.splice(idx, 1, board)
+//         localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
+//     } else {//add
+//         board._id = utilService.makeId()
+//         gBoards.push(board)
+//         localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
+//     }
+// }
+async function saveBoard(board) {
+    try{
+        const boardToSave = JSON.parse(JSON.stringify( board))
+        if (board._id) {
+            return storageService.put('board', board);
+        } else {
+            const board = await storageService.post('board', boardToSave);
+            board._id = board.id;
+            return board;
+        }
+    }catch(err){
+        return err
     }
 }
 
+async function removeBoard(boardId) {
+    return storageService.remove('board', boardId);
+}
 
+function getRandomImg(){
+    const num = utilService.getRandomIntInclusive(1,5);
+    return `../../assets/img/${num}.jpg`
+    // return `@/assets/img/${num}.jpg`
+}
 // function createTask({ type, content }) {
 
 // }

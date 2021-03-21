@@ -21,9 +21,11 @@ function get(entityType, entityId) {
 }
 
 function post(entityType, newEntity) {
+    console.log('newEntity:', newEntity)
     newEntity.id = utilService.makeId()
     return query(entityType)
         .then(entities => {
+            console.log('entities:', entities)
             entities.push(newEntity);
             _save(entityType, entities)
             return newEntity;
