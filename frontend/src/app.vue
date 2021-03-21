@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <main-header />
-    <router-view />
+    <router-view  />
   </div>
 </template>
 
@@ -11,7 +11,8 @@ import boardService from "./services/board.service.js";
 
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   components: {
     mainHeader,

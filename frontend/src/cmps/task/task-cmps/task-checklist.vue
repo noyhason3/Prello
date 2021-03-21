@@ -8,7 +8,7 @@
         </h4>
         <editable-text
           v-else
-          v-model="checklistTitle"
+          v-model="checklist.title"
           :value="'todo-title'"
           :type="'title'"
           :elementType="'checklist'"
@@ -19,7 +19,7 @@
         />
       </div>
 
-      <button @click="deleteChecklist" class="btn">Delete</button>
+      <button @click="deleteChecklist" v-if="!isEditTitleOpen" class="btn">Delete</button>
     </div>
 
     <div class="progress-bar-container">
