@@ -5,8 +5,8 @@
     justify-content: space-between;
     align-items: center;
 
-    h4{
-        margin: 0 auto;
+    h4 {
+      margin: 0 auto;
     }
   }
 
@@ -16,26 +16,30 @@
     align-items: center;
     padding: 10px;
 
-    input{
-        margin-right: 10px;
+    input {
+      margin-right: 10px;
     }
 
-    form{
-        display: flex;
-        align-items: center;
+    form {
+      display: flex;
+      align-items: center;
     }
 
     textarea {
-        width: 60%;
-        font-size: 16px;
+      width: 60%;
+      font-size: 14px;
+    }
+
+    label {
+      font-size: 18px;
     }
 
     .editable-text,
-    .editable-text p{
-        font-size: 22px;
-        display: flex;
-        align-items: center;
-        margin-bottom: 0;
+    .editable-text p {
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 0;
     }
   }
 
@@ -44,17 +48,21 @@
     background-color: #eaecf0;
     padding: 10px;
   }
+
+  .delete-btn:hover,
+  .add-btn:hover {
+    background-color: #e4e4e3;
+  }
 }
 
 .checklist-container > * {
 }
 
-.progress-checklist{
-    display: flex;
-    align-items: center;
-    justify-content:space-between;
-    .progress-bar{
-        width: 85%;
-    }
-
+.progress-checklist {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .progress-bar {
+    width: 85%;
+  }
 }

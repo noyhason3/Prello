@@ -9,7 +9,6 @@
       <div class="header">
         <button @click="closeTask" class="btn close">X</button>
          <task-title v-model="task.title" />
-
           <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
       </div>
       <div class="task-content" @click.stop>

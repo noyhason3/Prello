@@ -12,7 +12,7 @@
 
   .task-container {
     z-index: 100;
-    width: 600px;
+    width: 650px;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -22,15 +22,17 @@
     display: flex;
     flex-direction: column;
     // margin-top: 300px;
-    position:absolute;
+    position: absolute;
 
     .header {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       .btn.close {
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 20px;
+      }
+      .btn.close:hover {
         border-radius: 50%;
         background-color: #e4e4e3;
       }
@@ -45,13 +47,20 @@
       display: flex;
       flex-direction: column;
       .control-btn {
+        display: flex;
+        justify-content: flex-start;
         outline: none;
         background-color: #eaecf0;
         width: 150px;
         padding: 10px;
         margin-bottom: 10px;
+        letter-spacing: 0.3px;
       }
-      .add-to-card-btn{
+
+      .control-btn:hover {
+        background-color: #e4e4e3;
+      }
+      .add-to-card-btn {
         margin: 5px;
         // margin-bottom: 20px;
       }

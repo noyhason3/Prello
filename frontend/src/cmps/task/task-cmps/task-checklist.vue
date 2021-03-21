@@ -75,7 +75,7 @@
       </draggable>
       <!-- </ul> -->
       <!-- <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt" /> -->
-      <button v-if="!isAddTodoOpen" @click="openAddTodo" class="add-btn">Add Item</button>
+      <button v-if="!isAddTodoOpen" @click="openAddTodo" class="add-btn">Add an item</button>
       <editable-text
         v-else
         v-model="todo.txt"
