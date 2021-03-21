@@ -44,7 +44,7 @@
             <task-label
               :taskLabelIds="task.labelIds"
               @set-task-labels="setTaskLabels"
-              @openLabelPopup="openLabelPopup"
+              @open-label-popup="openLabelPopup"
             />
             <!-- <task-duedate /> -->
           </div>
@@ -249,7 +249,8 @@ export default {
       else this.popupLeftPos = buttonLeftPos;
       console.log("buttonLeftPos:", this.popupLeftPos);
     },
-    openLabelPopup() {
+    openLabelPopup(buttonLeftPos) {
+      this.popupLeftPos = buttonLeftPos;
       this.isLabelOpen = true;
     },
     saveAttachments(attachments) {
