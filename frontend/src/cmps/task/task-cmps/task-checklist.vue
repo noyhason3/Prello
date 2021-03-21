@@ -36,6 +36,7 @@
       <!-- :move="updateTask" -->
       <!-- :list="checklist.todos" -->
       <draggable
+        v-model="checklist.todos"
         @start="setDrag(true)"
         @end="setDrag(false), $emit('update-task')"
         group="todos"

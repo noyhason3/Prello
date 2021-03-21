@@ -79,7 +79,10 @@
             v-model="task.checklists"
             group="checklists"
             @start="drag = true"
-            @end="drag = false"
+            @end="
+              drag = false;
+              saveTask(task);
+            "
             :move="move"
             animation="150"
             empty-insert-threshold="50"
