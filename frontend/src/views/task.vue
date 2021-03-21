@@ -7,7 +7,7 @@
   >
     <div class="task-container" :style="`top:${initialHeight}px;`">
       <div class="header">
-        <button @click="closeTask" class="btn close">X</button>
+        <button @click.stop="closeTask" class="btn close">X</button>
          <task-title v-model="task.title" />
           <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
       </div>
@@ -56,7 +56,7 @@
             v-model="task.description"
             :type="'description'"
             @input="setDescription"
-            class="editable-text-task"
+            class="task-description-content"
           />
 
           <task-attachment

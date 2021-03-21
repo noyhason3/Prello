@@ -9,14 +9,15 @@
       margin: 0 auto;
     }
   }
-
+  
   .todo-container {
-    // width: 400px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     padding: 10px;
-
+    
     input {
+      cursor: pointer;
       margin-right: 10px;
     }
 
@@ -31,16 +32,30 @@
     }
 
     label {
+      cursor: pointer;
       font-size: 18px;
+      width: 100%;
+      // padding: 10px;
     }
 
-    .editable-text,
-    .editable-text p {
+    // .editable-todo,
+    // .editable-todo-title,
+    // .editable-todo-add,
+    .editable-todo p ,
+    .editable-todo-title p ,
+    .editable-todo-add p {
       font-size: 18px;
       display: flex;
       align-items: center;
       margin-bottom: 0;
+      width: 100%;
+      // padding: 10px;
     }
+  }
+
+  label:hover,
+  .editable-text p:hover{
+    background-color: #eaecf0;
   }
 
   .delete-btn,

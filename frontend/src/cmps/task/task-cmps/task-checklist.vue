@@ -13,6 +13,7 @@
         :isEditFirst="true"
         @close-textarea="isEditTitleOpen = false"
         @input="editTitle"
+        class="editable-todo-title"
       />
       <button @click="deleteChecklist" class="delete-btn">Delete</button>
     </div>
@@ -69,6 +70,7 @@
             :isEditFirst="todo.id === currTodoId"
             @close-textarea="isEditTodoOpen = false"
             @input="editTodo(todo)"
+            class="editable-todo"
           >
           </editable-text>
         </li>
@@ -84,6 +86,7 @@
         :isEditFirst="true"
         @close-textarea="isAddTodoOpen = false"
         @input="addTodo"
+        class="editable-todo-add"
       />
     </form>
   </li>
