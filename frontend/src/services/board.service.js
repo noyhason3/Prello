@@ -168,7 +168,7 @@ const DEMO_BOARD = {
                                 {
                                     id: '3hvsc',
                                     txt: 'Concept redesign',
-                                    isDone: false,
+                                    isDone: true,
                                 },
                                 {
                                     id: '3bhjc',

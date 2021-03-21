@@ -70,6 +70,7 @@ export default {
     },
     setChecklist(checklist) {
       this.$emit("set-checklist", checklist);
+      this.togglePopup("Checklist")
     },
     setTaskLabels(labelIds) {
       this.$emit("set-task-labels", labelIds);

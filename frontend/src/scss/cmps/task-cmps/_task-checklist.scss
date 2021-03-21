@@ -5,10 +5,11 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    // padding-left: 0px;
 
     .main-checklist-header {
       display: flex;
+      // width: 100%;
+      justify-content: space-between;
     }
 
     .checklist-icon {
@@ -17,6 +18,8 @@
 
     h4 {
       margin: 0 auto;
+      cursor: pointer;
+      width: 100%;
     }
   }
 
@@ -46,8 +49,11 @@
       padding: 3px;
     }
 
+    .editable-todo-title > form > textarea {
+      width: 100%;
+    }
+
     .editable-todo,
-    // .editable-todo-title,
     // .editable-todo-add,
     .editable-todo p,
     .editable-todo-title p,
@@ -99,11 +105,12 @@
   .meter span {
     display: block;
     height: 100%;
+    transition:width .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .progress {
     background-color: $clr7;
-    animation: progressBar 3s ease-in-out;
+    animation: progressBar .75s ease-in-out;
     animation-fill-mode: both;
   }
 
