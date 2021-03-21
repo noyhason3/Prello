@@ -9,12 +9,14 @@
         font-size: 16px;
 
         & > *:not(:last-child){
-            margin-block-end: 3px;
+            margin-block-end: 10px;
         }
 
         textarea{
             resize: vertical;
             width: 100%;
+            border:none;
+            resize:none;
         }
 
         .save-btn{

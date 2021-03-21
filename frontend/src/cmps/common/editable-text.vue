@@ -1,7 +1,7 @@
 <template>
   <section class="editable-text" @click="editDescription">
     <form v-if="isEditing" @submit.prevent="setText">
-      <textarea ref="input" :value="value" :placeholder="placeholder"></textarea>
+      <textarea ref="input" :value="value" :placeholder="placeholder" ></textarea>
       <div>
 
       <button class="save-btn">Save</button>
