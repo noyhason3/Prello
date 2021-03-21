@@ -21,14 +21,20 @@
       <button @click="deleteChecklist" class="btn">Delete</button>
     </div>
 
-    <div class="progress-checklist">
+    <div class="progress-bar-container">
       {{ progressPercentage }}%
-      <progress
+      
+      <div class="meter">
+        <span :style="'width:' + progressPercentage + '%'">
+          <span class="progress"></span>
+        </span>
+      </div>
+      <!-- <progress
         id="file"
         :value="progressPercentage"
         max="100"
         class="progress-bar"
-      />
+      /> -->
     </div>
 
     <form>

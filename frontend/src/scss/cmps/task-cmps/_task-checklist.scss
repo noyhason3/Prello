@@ -7,11 +7,11 @@
     margin-bottom: 10px;
     // padding-left: 0px;
 
-    .main-checklist-header{
+    .main-checklist-header {
       display: flex;
     }
 
-    .checklist-icon{
+    .checklist-icon {
       margin-right: 7px;
     }
 
@@ -76,14 +76,43 @@
   }
 }
 
-.progress-checklist {
+.progress-bar-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   .progress-bar {
     &::-webkit-progress-value {
-    transition: width 1s;
+      transition: width 1s;
     }
+    // width: 85%;
+  }
+
+  .meter {
+    height: 7px;
+    border-radius: 12px;
+    position: relative;
+    background: $clr1;
+    overflow: hidden;
     width: 85%;
+  }
+
+  .meter span {
+    display: block;
+    height: 100%;
+  }
+
+  .progress {
+    background-color: $clr7;
+    animation: progressBar 3s ease-in-out;
+    animation-fill-mode: both;
+  }
+
+  @keyframes progressBar {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
   }
 }

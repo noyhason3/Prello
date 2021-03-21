@@ -184,6 +184,21 @@ const DEMO_BOARD = {
                         },
                     ],
                     attachments: [],
+                    labelIds: ['important'],
+                    members: [
+                        {
+                            _id: 'u104',
+                            username: 'Efi',
+                            fullname: 'Efrat Kaminski',
+                            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                        },
+                        {
+                            _id: 'u101',
+                            username: 'Tal',
+                            fullname: 'Tal Tarablus',
+                            imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+                        },
+                    ]
                 },
 
             ],
@@ -199,7 +214,7 @@ const DEMO_BOARD = {
                     description: 'Enable picture customzation in addition to color',
                     checklists: [],
                     attachments: [],
-                    labelIds: ['done']
+                    labelIds: ['done'],
                 },
                 {
                     id: 'c105',
