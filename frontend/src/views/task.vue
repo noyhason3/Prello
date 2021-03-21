@@ -8,6 +8,9 @@
     <div class="task-container" :style="`top:${initialHeight}px;`">
       <div class="header">
         <button @click="closeTask" class="btn close">X</button>
+         <task-title v-model="task.title" />
+
+          <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
       </div>
       <div class="task-content" @click.stop>
         <!-- <pre>{{ task.attachments }}</pre> -->
@@ -30,9 +33,9 @@
         <!-- <task-cover /> -->
 
         <div class="task-main">
-          <task-title v-model="task.title" />
+          <!-- <task-title v-model="task.title" />
 
-          <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
+          <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6> -->
 
           <div v-if="task" class="task-info">
             <member-list
