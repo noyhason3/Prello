@@ -14,7 +14,7 @@
         @start="startDrag"
         @end="endDrag"
         :move="updateBoard"
-        :empty-insert-threshold="15"
+        empty-insert-threshold="50"
         draggable=".task-preview"
         :class="`clean-list group-tasks gt-${this.idx}`"
         tag="ul"
@@ -32,7 +32,7 @@
     </div>
 
     <div class="add-task">
-      <button v-if="!isAddNewTask" @click="isAddNewTask = true" class="btn-add-task">
+      <button v-if="!isAddNewTask" @click="isAddNewTask = true">
         Add a new task
       </button>
       <editable-text
