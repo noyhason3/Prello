@@ -44,7 +44,11 @@
       <!-- </draggable> -->
       <!-- </li> -->
       <div class="add-new-group">
-        <button v-if="!isAddNewGroup" @click="isAddNewGroup = true">
+        <button
+          v-if="!isAddNewGroup"
+          @click="isAddNewGroup = true"
+          class="group-addition"
+        >
           Add a new group
         </button>
         <editable-text

@@ -57,8 +57,8 @@ export default {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
     },
-    toggleGeneralPopup(e, str) {
-      const targetRect = e.target.getBoundingClientRect();
+    toggleGeneralPopup(ev, str) {
+      const targetRect = ev.target.getBoundingClientRect();
       const buttonLeftPos = targetRect.left
       this.$emit("toggle-popup", {str, buttonLeftPos});
     },

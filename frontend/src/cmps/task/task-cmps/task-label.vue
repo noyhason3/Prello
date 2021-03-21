@@ -18,8 +18,11 @@ export default {
     taskLabelIds: Array,
   },
   methods: {
-    openLabelPopup() {
-      this.$emit("openLabelPopup");
+    openLabelPopup(ev) {
+      const targetRect = ev.target.getBoundingClientRect();
+      const buttonLeftPos = targetRect.left
+      console.log('buttonLeftPos:', buttonLeftPos)
+      this.$emit("open-label-popup", buttonLeftPos);
     },
   },
   computed: {
