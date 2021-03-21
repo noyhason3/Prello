@@ -2,7 +2,7 @@
   <li class="task-checklist">
     <div class="header">
       <div class="main-checklist-header">
-        <div class="checklis-icon">☑</div>
+        <div class="checklist-icon">☑</div>
         <h4 v-if="!isEditTitleOpen" @click="openEditTitle">
           {{ checklist.title }}
         </h4>
