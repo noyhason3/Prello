@@ -1,5 +1,5 @@
 <template>
-  <ul @click="toggleEnlargeLabels" class="clean-list flex label-preview">
+  <ul @click="toggleEnlargeLabels" class="clean-list label-preview">
     <li
       v-for="label in taskLabels"
       :key="label.id"
