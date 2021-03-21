@@ -20,7 +20,7 @@
         drag = false;
         $emit('save-board');
       "
-      :drop="updateBoard"
+      :move="updateBoard"
       empty-insert-threshold="50"
       draggable=".task-preview"
       :class="`clean-list group-tasks gt-${this.idx}`"
@@ -59,12 +59,12 @@
     <draggable
       :class="`egt egt-${this.idx}`"
       v-model="emptyList"
-      group="tasks-eע"
-      @start="drag = true"
-      @end="drag = false"
+      group="tasks"
       :move="updateBoard"
       :drop="updateBoard"
     >
+      <!-- @start="drag = true"
+      @end="drag = false" -->
     </draggable>
   </section>
 </template>
@@ -139,11 +139,19 @@ export default {
     //   drag = true;
     // },
     updateBoard(ev) {
-      console.log("file: group.vue - line 118 - updateBoard - ev", ev);
+      // console.log("file: group.vue - line 118 - updateBoard - ev", ev);
       const { draggedContext, relatedContext } = ev;
+      console.log("file: group.vue - line 144 - updateBoard - ev", ev);
       if (ev.to.classList.contains("egt")) {
         console.log("Dragging to empty group tasks list");
-        var correspondingList = document.querySelector(`.gt-${this.idx}`);
+        const selector = ".gt-" + this.idx;
+        console.log(
+          "file: group.vue - line 157 - updateBoard - document.querySelector",
+          document.querySelectorAll(selector),
+          "selctor",
+          selector
+        );
+        var correspondingList = document.querySelector("header");
         correspondingList.appendChild(ev.dragged);
         //return false;
       }
