@@ -5,10 +5,11 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    // padding-left: 0px;
 
     .main-checklist-header {
       display: flex;
+      // width: 100%;
+      justify-content: space-between;
     }
 
     .checklist-icon {
@@ -17,6 +18,8 @@
 
     h4 {
       margin: 0 auto;
+      cursor: pointer;
+      width: 100%;
     }
   }
 
@@ -46,8 +49,11 @@
       padding: 3px;
     }
 
+    .editable-todo-title > form > textarea {
+      width: 100%;
+    }
+
     .editable-todo,
-    // .editable-todo-title,
     // .editable-todo-add,
     .editable-todo p,
     .editable-todo-title p,

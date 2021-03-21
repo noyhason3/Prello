@@ -10,7 +10,8 @@
           v-else
           v-model="checklistTitle"
           :value="'todo-title'"
-          :type="'todo-title'"
+          :type="'title'"
+          :elementType="'checklist'"
           :isEditFirst="true"
           @close-textarea="isEditTitleOpen = false"
           @input="editTitle"
@@ -23,7 +24,7 @@
 
     <div class="progress-bar-container">
       {{ progressPercentage }}%
-      
+
       <div class="meter">
         <span :style="'width:' + progressPercentage + '%'">
           <span class="progress"></span>
