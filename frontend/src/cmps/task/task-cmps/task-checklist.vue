@@ -37,7 +37,7 @@
       <!-- :list="checklist.todos" -->
       <draggable
         @start="setDrag(true)"
-        @end="setDrag(false), updateTask()"
+        @end="setDrag(false), $emit('update-task')"
         group="todos"
         animation="150"
         empty-insert-threshold="50"

@@ -76,8 +76,7 @@
 
           <!-- <ul class="clean-list"> -->
           <draggable
-            v-for="checklist in task.checklists"
-            :key="checklist.id"
+            v-model="task.checklists"
             group="checklists"
             @start="drag = true"
             @end="drag = false"
@@ -90,11 +89,14 @@
           >
             <!-- :progressPercentage="progressPercentage(checklist)" -->
             <task-checklist
+              v-for="checklist in task.checklists"
+              :key="checklist.id"
               class="checklist-container"
               :checklist="checklist"
               @save-todo="saveTodo"
               @delete-checklist="deleteChecklist"
               @toggle-drag="toggleDrag"
+              @update-task="saveTask(task)"
             />
             <!-- {{ checklist.id }} -->
           </draggable>
