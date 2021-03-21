@@ -126,7 +126,7 @@ const DEMO_BOARD = {
                             id: 'a102',
                             title: 'Ex. 2 -- Timeline View',
                             url: 'https://www.smartsheet.com/sites/default/files/IC-Project-Timeline-Template.jpg',
-                            createdAt: '1616155239874',
+                            createdAt: '1615155239874',
                         },
                     ],
                 },
