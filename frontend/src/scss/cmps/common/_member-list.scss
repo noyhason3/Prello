@@ -3,8 +3,7 @@
     >*:not(:last-child) {
         margin-inline-end: 5px;
     }
-
-    
+   
 }
 
 .member-initials {
@@ -16,6 +15,9 @@
     width: 30px;
     text-align: center;
     // border: 1px solid $clr5;
+    &:hover{
+        filter:brightness(110%)
+    }
 
     a {
         margin: 0 auto;
@@ -39,7 +41,7 @@
             color: set-color($i, 60);
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             font-weight: 600;
-            font-size:1rem;
+            font-size:0.9rem;
         }
     }
 }
