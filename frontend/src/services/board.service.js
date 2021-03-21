@@ -670,7 +670,19 @@ function loadDemoBoard() {
     localStorage.setItem(DB_KEY, JSON.stringify([DEMO_BOARD]))
 }
 
-function saveBoard(board) {
+
+async function getEmptyBoard(){
+    return {
+        "_id": "b101",
+        "title": "Web Dev. Prello Management",
+        "createdAt": 1589983468418,
+        "createdBy": {        },
+        style: {},
+        labels: []
+    }
+}
+
+async function saveBoard(board) {
     if (board._id) {//update
         const idx = gBoards.findIndex(savedBoard => savedBoard._id === board._id)
         gBoards.splice(idx, 1, board)
