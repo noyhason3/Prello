@@ -1,26 +1,34 @@
 <template>
   <li class="task-checklist">
     <div class="header">
-      ✅
-      <h4 v-if="!isEditTitleOpen" @click="openEditTitle">
-        {{ checklist.title }}
-      </h4>
-      <editable-text
-        v-else
-        v-model="checklistTitle"
-        :value="'todo-title'"
-        :type="'todo-title'"
-        :isEditFirst="true"
-        @close-textarea="isEditTitleOpen = false"
-        @input="editTitle"
-        class="editable-todo-title"
-      />
-      <button @click="deleteChecklist" class="delete-btn">Delete</button>
+      <div class="main-checklist-header">
+        <div class="checklis-icon">☑</div>
+        <h4 v-if="!isEditTitleOpen" @click="openEditTitle">
+          {{ checklist.title }}
+        </h4>
+        <editable-text
+          v-else
+          v-model="checklistTitle"
+          :value="'todo-title'"
+          :type="'todo-title'"
+          :isEditFirst="true"
+          @close-textarea="isEditTitleOpen = false"
+          @input="editTitle"
+          class="editable-todo-title"
+        />
+      </div>
+
+      <button @click="deleteChecklist" class="btn">Delete</button>
     </div>
 
     <div class="progress-checklist">
-    {{ progressPercentage }}%
-    <progress id="file" :value="progressPercentage" max="100" class="progress-bar" />
+      {{ progressPercentage }}%
+      <progress
+        id="file"
+        :value="progressPercentage"
+        max="100"
+        class="progress-bar"
+      />
     </div>
 
     <form>
@@ -77,7 +85,9 @@
       </draggable>
       <!-- </ul> -->
       <!-- <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt" /> -->
-      <button v-if="!isAddTodoOpen" @click="openAddTodo" class="add-btn">Add an item</button>
+      <button v-if="!isAddTodoOpen" @click="openAddTodo" class="btn">
+        Add an item
+      </button>
       <editable-text
         v-else
         v-model="todo.txt"

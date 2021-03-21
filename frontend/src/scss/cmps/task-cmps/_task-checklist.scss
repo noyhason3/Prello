@@ -5,29 +5,36 @@
     justify-content: space-between;
     align-items: center;
 
+    .main-checklist-header{
+      display: flex;
+    }
+
+    .checklis-icon{
+      // margin-right: 10px;
+    }
+
     h4 {
       margin: 0 auto;
     }
   }
-  
+
   .todo-container {
     cursor: pointer;
     display: flex;
-    align-items: center;
     padding: 10px;
-    
+
     input {
       cursor: pointer;
       margin-right: 10px;
+      height: 100%;
     }
 
     form {
-      display: flex;
-      align-items: center;
+      width: 100%;
     }
 
     textarea {
-      width: 60%;
+      width: 100%;
       font-size: 14px;
     }
 
@@ -38,11 +45,11 @@
       // padding: 10px;
     }
 
-    // .editable-todo,
+    .editable-todo,
     // .editable-todo-title,
     // .editable-todo-add,
-    .editable-todo p ,
-    .editable-todo-title p ,
+    .editable-todo p,
+    .editable-todo-title p,
     .editable-todo-add p {
       font-size: 18px;
       display: flex;
@@ -53,24 +60,19 @@
     }
   }
 
-  label:hover,
-  .editable-text p:hover{
-    background-color: #eaecf0;
-  }
-
-  .delete-btn,
-  .add-btn {
+  .btn {
     background-color: #eaecf0;
     padding: 10px;
+
+    &:hover {
+      background-color: #e4e4e3;
+    }
   }
 
-  .delete-btn:hover,
-  .add-btn:hover {
-    background-color: #e4e4e3;
+  label:hover,
+  .editable-text p:hover {
+    background-color: #eaecf0;
   }
-}
-
-.checklist-container > * {
 }
 
 .progress-checklist {

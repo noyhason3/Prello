@@ -1,6 +1,6 @@
 <template>
   <section class="task-attachment-container">
-    <h4>Attachments</h4>
+    <h4>📎 Attachments</h4>
     <ul class="clean-list">
       <li
         v-for="attachment in attachmentsToEdit"
