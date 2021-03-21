@@ -32,7 +32,7 @@
     </div>
 
     <div class="add-task">
-      <button v-if="!isAddNewTask" @click="isAddNewTask = true">
+      <button v-if="!isAddNewTask" @click="isAddNewTask = true" class="btn-add-task">
         Add a new task
       </button>
       <editable-text
