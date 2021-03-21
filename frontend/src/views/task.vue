@@ -8,8 +8,8 @@
     <div class="task-container" :style="`top:${initialHeight}px;`">
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
-         <task-title v-model="task.title" />
-          <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
+        <task-title v-model="task.title" />
+        <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
       </div>
       <div class="task-content" @click.stop>
         <!-- <pre>{{ task.attachments }}</pre> -->
@@ -135,8 +135,7 @@ export default {
     await this.group();
     //   this.loadTask();
     const body = document.querySelector(".main").getBoundingClientRect();
-    console.log("file: task.vue - line 135 - created - body", body);
-    this.initialHeight = body.top;
+    this.initialHeight = body.top + 5;
   },
   computed: {
     // taskId() {
