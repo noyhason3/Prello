@@ -75,16 +75,10 @@ async function remove(userId) {
 async function update(user) {
     try {
         // peek only updatable fields!
-        const userToSave = {
-            _id: ObjectId(user._id),
-            fullname: user.fullname,
-            username: user.username,
-            imgUrl: user.imgUrl,
-            mentions: user.mentions
-        }
+        user._id = ObjectId(user._id)
         const collection = await dbService.getCollection('user')
-        await collection.updateOne({ '_id': userToSave._id }, { $set: userToSave })
-        return userToSave;
+        await collection.updateOne({ '_id': user._id }, { $set: user })
+        return user;
     } catch (err) {
         logger.error(`cannot update user ${user._id}`, err)
         throw err
@@ -94,14 +88,9 @@ async function update(user) {
 async function add(user) {
     try {
         // peek only updatable fields!
-        const userToAdd = {
-            fullname: user.fullname,
-            username: user.username,
-            imgUrl: user.imgUrl,
-        }
         const collection = await dbService.getCollection('user')
-        await collection.insertOne(userToAdd)
-        return userToAdd
+        await collection.insertOne(user)
+        return user
     } catch (err) {
         logger.error('cannot insert user', err)
         throw err

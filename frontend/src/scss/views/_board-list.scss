@@ -58,26 +58,31 @@
 }
 
 .popup-create-board {
-    width: 400px;
+    width: 450px;
     background-color:transparent;
     box-shadow: none;
+    top:35px;
     left:50%;
     transform: translate(-50%);
     .btn.close {
         margin: 0;
         color:$clr1;
     }
-
+    
     .new-board-info {
         display: flex;
         justify-content: space-between;
         margin-bottom:10px;
+        height: 100px;
         .title-container {
+            width: 290px;
+            padding:10px 10px 10px 10px;
+            border-radius:3px;
             background-size: cover;
             display: flex;
             margin-inline-end: 10px;
-            >*{
-                margin-inline-end:5px;
+            >*:not(:last-child){
+                margin-inline-end:30px;
             }
         }
 
@@ -86,7 +91,7 @@
             flex-wrap: wrap;
             width: 130px;
         }
-
+        
         .bgStyle {
             width: 30px;
             height: 30px;
@@ -95,8 +100,13 @@
             margin-inline-end: 5px;
             margin-bottom: 5px;
             cursor: pointer;
+            text-align: center;
         }
-
+        .bgStyle.selected::before{
+            content: "✔";
+            color:$clr1;
+        }
+        
         .bgStyle:hover {
             filter: brightness(95%)
         }

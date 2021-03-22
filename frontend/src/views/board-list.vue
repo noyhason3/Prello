@@ -6,11 +6,7 @@
         :key="board._id"
         class="board-preview"
         @click="openBoard(board._id)"
-        :style="{
-          backgroundColor: backgroundColor(board),
-          backgroundImage: backgroundStyle(board),
-        }"
-      >
+        :style="boardStyle(board)">
         {{ board.title }}
         <button @click.stop="removeBoard(board._id)">X</button>
       </li>
@@ -31,7 +27,8 @@
         <div slot="main">
           <form @submit.prevent="createNewBoard">
             <div class="new-board-info">
-              <div class="title-container" :style="bgStyles[0]">
+              <div  class="title-container" 
+              :style="boardToEdit.style.style">
                 <input
                   type="text"
                   placeholder="Add board title"
@@ -46,7 +43,8 @@
                   @click="selectStyle(style)"
                   :key="'style' + idx"
                   class="bgStyle"
-                  :style="style"
+                  :class="{selected:isSelected(style.id)}"
+                  :style="style.style"
                 ></li>
               </ul>
             </div>
@@ -66,14 +64,14 @@
 <script>
 import popup from "@/cmps/common/pop-up.vue";
 import boardService from "../services/board.service";
-// import img from '../assets/img/i.jpg'
-// import editableTitle from "@/cmps/common/editable-title.vue";
+import utilService from '../services/util.service';
 export default {
   data() {
     return {
       isAddBoard: false,
       boardToEdit: null,
       boardList: null,
+
     };
   },
   async created() {
@@ -110,6 +108,7 @@ export default {
   methods: {
     async openBoardPopup() {
       this.boardToEdit = await this.$store.dispatch({ type: "getEmptyBoard" });
+      this.boardToEdit.style = this.bgStyles[0]
       this.isAddBoard = true;
     },
     closeBoardPopup() {
@@ -131,42 +130,38 @@ export default {
       this.$store.dispatch({ type: "removeBoard", boardId });
     },
     selectStyle(style) {
-      //TODO_set style as background of image and boardToEdit
+      this.boardToEdit.style = style;
     },
-    backgroundStyle(board) {
-      if (board.style.bgImg) {
-        const str1 = board.style.bgImg;
-        const img3 = require("@/assets/img/" + str1);
-        return `url(${img3})`;
-      }
+    boardStyle(board){
+     if (board.style.bgImg){
+        const img = require("@/assets/img/" + board.style.bgImg);
+        return {backgroundImage: `url(${img})` };
+     }
+        return {backgroundColor: board.style.color} 
     },
-    backgroundColor(board) {
-      return board.style.color;
-    },
+    isSelected(id){
+      return this.boardToEdit.style.id === id;
+    }
   },
   computed: {
     bgStyles() {
       const imgNames = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"];
       const colors = ["#C10BB3", "#03A7BE", "#003152", "#8BCB8A"];
+
       const imgStyles = imgNames.map((imgName) => {
         const img = require("@/assets/img/" + imgName);
-        return { backgroundImage: `url(${img})` };
+        return { id:utilService.makeId(), style:{backgroundImage: `url(${img})`} };
       });
       const colorStyles = colors.map((color) => {
-        return { backgroundColor: color };
+        return { id:utilService.makeId(), style:{backgroundColor: color} };
       });
-      console.log("colorStyles:", colorStyles);
-      console.log("imgStyles:", imgStyles);
       const styles = imgStyles.concat(colorStyles);
-      console.log("styles:", styles);
       return styles;
-      // return [{a:1},{b:2}]
-      // return imgStyles
+
     },
   },
   components: {
     popup,
-    // editableTitle,
   },
 };
 </script>
