@@ -9,8 +9,8 @@
         @click="openBoard(board._id)"
         :style="boardStyle(board)"
       >
-        {{ board.title }}
-        <button class="board-options" @click.stop="toggleOptionsMenu"></button>
+        <h3>{{ board.title }}</h3>
+        <button class="toggle-starred" @click.stop="toggleStarred(board._id)"></button>
         <!-- <button @click.stop="removeBoard(board._id)">X</button> -->
       </li>
     </ul>
@@ -23,8 +23,11 @@
         @click="openBoard(board._id)"
         :style="boardStyle(board)"
       >
-        {{ board.title }}
+        <h3>{{ board.title }}</h3>
         <button class="board-options"></button>
+        <div v-if="isOptionsOpen" class="nav-board-options">
+          <button>Remove board</button>
+        </div>
         <!-- <button @click.stop="removeBoard(board._id)">X</button> -->
       </li>
       <li>
@@ -86,6 +89,7 @@ export default {
       boardToEdit: null,
       boardList: null,
       selectedStyle: null,
+      isOptionsOpen:false,
       imgs: [
         { id: "i101", name: "1.jpg" },
         { id: "i102", name: "2.jpg" },
@@ -151,6 +155,9 @@ export default {
     toggleOptionsMenu() {
       this.isOptionsOpen = !this.isOptionsOpen;
     },
+    toggleStarred(id){
+      
+    }
   },
   computed: {
     bgStyles() {
