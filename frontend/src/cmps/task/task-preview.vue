@@ -47,12 +47,12 @@ export default {
       ev.stopPropagation();
       this.$emit("remove-task", this.task.id);
     },
-    removeTaskMember(id) {
+    async removeTaskMember(id) {
       const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
       if (memberIdx < 0) return;
       const task = JSON.parse(JSON.stringify(this.task));
       task.members.splice(memberIdx, 1);
-      this.$store.commit({ type: "saveTask", task });
+      await this.$store.dispatch({ type: "saveTask", task });
     },
   },
   computed: {
