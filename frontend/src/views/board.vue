@@ -85,7 +85,13 @@ export default {
   async created() {
     ////DONT FORGET TO LOAD PROPERLY - not that we will
     const boardId = this.$route.params.boardId;
+<<<<<<< HEAD
     await this.$store.dispatch({type:'getBoard', boardId})
+=======
+    const board = await boardService.query(boardId);
+    // const board = await boardService.getBoardById(boardId);
+    this.$store.commit({ type: "setBoard", board });
+>>>>>>> 1094a39620d6a11e3c4ff187971c8c9a1088dff8
   },
   methods: {
     addGroup() {
