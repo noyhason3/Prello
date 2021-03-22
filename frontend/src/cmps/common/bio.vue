@@ -5,7 +5,7 @@
     <div class="info">
       <div v-for="icon in user.social" :key="icon.url" class="social">
         <button
-          :href="icon.url"
+          @click="location.href = icon.url"
           :class:="icon.type"
           class="social-icon"
           v-html="content(icon.type)"

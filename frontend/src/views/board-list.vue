@@ -1,8 +1,21 @@
 <template>
   <section class="board-list-container">
-    <h2>Starred boards</h2>
-    <h2>Recently viewed</h2>
-    <ul class="clean-list board-list">
+    <h2><span class="starred"></span>Starred boards</h2>
+    <ul v-if="boardList" class="clean-list board-list">
+      <li
+        v-for="board in starredBoards"
+        :key="board._id"
+        class="board-preview"
+        @click="openBoard(board._id)"
+        :style="boardStyle(board)"
+      >
+        {{ board.title }}
+        <button class="board-options" @click.stop="toggleOptionsMenu"></button>
+        <!-- <button @click.stop="removeBoard(board._id)">X</button> -->
+      </li>
+    </ul>
+    <h2><span class="recent"></span>Recently viewed</h2>
+    <ul v-if="boardList" class="clean-list board-list">
       <li
         v-for="board in boardList"
         :key="board._id"
@@ -11,7 +24,8 @@
         :style="boardStyle(board)"
       >
         {{ board.title }}
-        <button @click.stop="removeBoard(board._id)">X</button>
+        <button class="board-options"></button>
+        <!-- <button @click.stop="removeBoard(board._id)">X</button> -->
       </li>
       <li>
         <button @click="openBoardPopup" class="btn add-board">
@@ -77,7 +91,7 @@ export default {
         { id: "i102", name: "2.jpg" },
         { id: "i103", name: "3.jpg" },
         { id: "i104", name: "4.jpg" },
-        { id: "i101", name: "5.jpg" },
+        { id: "i105", name: "5.jpg" },
       ],
       colors: [
         { id: "c101", name: "#C10BB3" },
@@ -88,70 +102,7 @@ export default {
     };
   },
   async created() {
-    this.boardList = [
-      {
-        _id: "demo102",
-        title: "Apsus upgrade",
-        style: { bgImg: { id: "i102", name: "2.jpg" }, bgColor: "" },
-        createdAt: 1546678789800,
-        lastViewedAt: 1606678789800,
-        isStarred: false,
-        labels: [],
-        members: [],
-        groups: [],
-        activities: [],
-      },
-      {
-        _id: "demo103",
-        title: "MegoTap web",
-        style: { bgImg: { id: "i104", name: "4.jpg" }, bgColor: "" },
-        createdAt: 1426678789800,
-        lastViewedAt: 1544678789800,
-        isStarred: true,
-        labels: [],
-        members: [],
-        groups: [],
-        activities: [],
-      },
-      {
-        _id: "demo104",
-        title: "MrToy frontend",
-        style: { bgImg: "", bgColor: { id: "c101", name: "#C10BB3" } },
-        createdAt: 1265678789800,
-        lastViewedAt: 1585678789800,
-        isStarred: false,
-        labels: [],
-        members: [],
-        groups: [],
-        activities: [],
-      },
-      {
-        _id: "demo105",
-        title: "Getro ",
-        style: { bgImg: { id: "i103", name: "3.jpg" }, bgColor: "" },
-        createdAt: 1426678789800,
-        lastViewedAt: 1606678789800,
-        isStarred: false,
-        labels: [],
-        members: [],
-        groups: [],
-        activities: [],
-      },
-      {
-        _id: "demo106",
-        title: "Web Dev. MiniMoney",
-        style: { bgImg: "", bgColor: { id: "c103", name: "#003152" } },
-        createdAt: 1566678789800,
-        lastViewedAt: 1588678789800,
-        isStarred: false,
-        labels: [],
-        members: [],
-        groups: [],
-        activities: [],
-      },
-    ];
-    // this.boardList = await this.$store.dispatch({ type: "loadBoards" });
-    // console.log('this.boardToEdit:', this.boardToEdit)
+    this.boardList = await this.$store.dispatch({ type: "loadBoards" });
   },
   methods: {
     async openBoardPopup() {
@@ -189,13 +140,16 @@ export default {
       return { backgroundColor: board.style.bgColor.name };
     },
     isSelected(id) {
-      return this.boardToEdit.style.id === id;
+      return this.selectedStyle.id === id;
     },
     getSelectedStyle(styleId) {
       let style = this.imgs.find(({ id }) => id === styleId);
       if (style) return style;
       style = this.colors.find(({ id }) => id === styleId);
       return style;
+    },
+    toggleOptionsMenu() {
+      this.isOptionsOpen = !this.isOptionsOpen;
     },
   },
   computed: {
@@ -209,6 +163,9 @@ export default {
       });
       const styles = imgStyles.concat(colorStyles);
       return styles;
+    },
+    starredBoards() {
+      return this.boardList.filter(({ isStarred }) => isStarred);
     },
   },
   components: {
