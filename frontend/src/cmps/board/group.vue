@@ -4,7 +4,12 @@
   <!-- <pre>{{ group }}</pre> -->
   <section class="group">
     <div class="flex jcc aic space-between group-header">
-      <div>{{ group.title }}</div>
+      <!-- <div>{{ group.title }}</div> -->
+      <editableTitle
+        v-model="group.title"
+        @input="saveGroup(group)"
+      ></editableTitle>
+
       <button @click="removeGroup">X</button>
     </div>
     <div class="tasks-wrapper">
@@ -14,7 +19,7 @@
         @start="startDrag"
         @end="endDrag"
         :move="updateBoard"
-        empty-insert-threshold="50"
+        :empty-insert-threshold="50"
         draggable=".task-preview"
         :class="`clean-list group-tasks gt-${this.idx}`"
         tag="ul"
@@ -64,6 +69,7 @@ import draggable from "vuedraggable";
 import boardService from "@/services/board.service.js";
 import taskPreview from "../task/task-preview.vue";
 import editableText from "../common/editable-text.vue";
+import editableTitle from "../common/editable-title.vue";
 
 export default {
   props: {
@@ -155,7 +161,7 @@ export default {
       this.$emit("save-board");
     },
   },
-  components: { taskPreview, editableText, draggable },
+  components: { taskPreview, editableText, draggable, editableTitle },
 };
 </script>
 

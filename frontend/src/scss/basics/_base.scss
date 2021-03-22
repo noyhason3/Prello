@@ -49,8 +49,13 @@ textarea,
 textarea::placeholder,
 input::placeholder{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding-left:7px;
-    font-size: 0.9rem;
+    //padding-left:7px;
+    //font-size: 0.9rem;
+    font-size: 1rem;
+  }
+textarea{
+  padding:5px;
+  border-radius: 5px;
 }
 
 .btn.close{
@@ -74,18 +79,18 @@ input::placeholder{
 }
 ::-webkit-scrollbar-thumb {
   background: #6b768b;
-  border: 0px none #ffffff;
+  //border: 0px none #ffffff;
   border-radius: 9px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #58889d;
+  background: #87b0c2;
 }
 ::-webkit-scrollbar-thumb:active {
-  background: #3b3050;
+  background: #4b928f;
 }
 ::-webkit-scrollbar-track {
-  background: #ebecf0;
-  border: 0px none #ffffff;
+  background: #cccdd3;
+  //border: 0px none #ffffff;
   border-radius: 9px;
 }
 ::-webkit-scrollbar-track:hover {

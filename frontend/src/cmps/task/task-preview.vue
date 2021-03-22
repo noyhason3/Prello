@@ -4,7 +4,11 @@
     <!-- <img v-if="isTaskCover" src="task.coverUrl"> -->
     <!-- If cover image- show image, if cover color set section background-color-->
 
-    <task-label-preview v-if="taskLabelIds" :taskLabelIds="taskLabelIds" class="task-label-preview"/>
+    <task-label-preview
+      v-if="taskLabelIds"
+      :taskLabelIds="taskLabelIds"
+      class="task-label-preview"
+    />
     <div>
       <h2 class="task-title">{{ task.title }}</h2>
       <!-- <div class="btn task-edit">
@@ -12,9 +16,9 @@
       </div> -->
     </div>
     <div class="task-info-preview">
-    <div v-if="taskChecklists">
-      ☑ {{ taskChecklists.complete }}/{{ taskChecklists.total }}
-    </div>
+      <div v-if="taskChecklists">
+        ☑ {{ taskChecklists.complete }}/{{ taskChecklists.total }}
+      </div>
       <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
       <div v-if="isTaskDescription">📄</div>
       <div v-if="attachmentCount">📎{{ attachmentCount }}</div>
@@ -31,6 +35,7 @@
 <script>
 import memberList from "@/cmps/common/member-list.vue";
 import taskLabelPreview from "@/cmps/task/task-cmps/task-label-preview.vue";
+import editableTitle from "@/cmps/common/editable-text.vue";
 
 export default {
   props: {
@@ -45,7 +50,7 @@ export default {
     removeTaskMember(id) {
       const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
       if (memberIdx < 0) return;
-      const task = JSON.parse(JSON.stringify(this.task))
+      const task = JSON.parse(JSON.stringify(this.task));
       task.members.splice(memberIdx, 1);
       this.$store.commit({ type: "saveTask", task });
     },
