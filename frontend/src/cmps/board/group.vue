@@ -92,38 +92,30 @@ export default {
       this.$store.commit({ type: "setCurrTask", task });
       this.$router.push(`/board/${this.boardId}/${task.id}`);
     },
-    addTask() {
+    async addTask() {
       if (!this.newTask.title) return;
       // this.newTask.group = { id: this.group.id, title: this.group.title };
-      this.$store.commit({
+      await this.$store.dispatch({
         type: "saveTask",
         groupId: this.group.id,
         task: this.newTask,
       });
-      this.newTask = boardService.getEmptyTask();
+      this.newTask = this.$store.getEmptyTask();
       this.isAddNewTask = false;
       console.log("Group component - line 49 - this.newTask", this.newTask);
       console.log("Group component - line 50 - this.group", this.group);
     },
     async removeTask(taskId) {
-      //var group = JSON.parse(JSON.stringify(this.group));
-      // const taskIdx = group.tasks.findIndex((task) => task.id === taskId);
-      // console.log("taskIdx:", taskIdx);
-      // if (taskIdx < 0) return;
-      // group.tasks.splice(taskIdx, 1);
-      // const task = { id: taskId, inGroup: this.group.id };//TODO:fchange funcction
-      const ans = await boardService.removeTask({
-        boardId: this.boardId,
-        taskId,
+      await this.$store.dispatch({ type: "removeTask", taskId });
+    },
+    async saveGroup(group) {
+      await this.$store.dispatch({ type: "saveGroup", group });
+    },
+    async removeGroup() {
+      await this.$store.dispatch({
+        type: "removeGroup",
+        groupId: this.group.id,
       });
-      console.log("file: group.vue - line 96 - removeTask - ans", ans);
-      this.saveGroup(ans.group); //Not necessary?
-    },
-    saveGroup(group) {
-      this.$store.commit({ type: "saveGroup", group });
-    },
-    removeGroup() {
-      this.$store.commit({ type: "removeGroup", groupId: this.group.id });
     },
     // onDrag(evt) {
     //   console.log("🚀 ~ file: group.vue ~ line 88 ~ onDrag ~ evt", evt);

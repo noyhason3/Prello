@@ -7,6 +7,10 @@
 //     font-family: 'quicksand-Regular';
 // }
 // @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+ @font-face{
+     src: url('~@/scss/fonts/Pacifico-Regular.ttf');
+     font-family: 'Pacifico';
+ }
 @font-face{
     font-family: 'fa-brands';
     src: url('~@/scss/fonts/fa-regular-400.ttf') ;

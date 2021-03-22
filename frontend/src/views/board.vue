@@ -88,11 +88,11 @@ export default {
     await this.$store.dispatch({ type: "getBoard", boardId });
   },
   methods: {
-    addGroup() {
+    async addGroup() {
       if (!this.newGroup.title) return;
       this.newGroup.board = { id: this.board._id };
-      this.$store.commit({ type: "saveGroup", group: this.newGroup });
-      this.newGroup = boardService.getEmptyGroup();
+      await this.$store.dispatch({ type: "saveGroup", group: this.newGroup });
+      this.newGroup = this.$store.getEmptyGroup();
       this.isAddNewGroup = false;
     },
     saveBoard() {

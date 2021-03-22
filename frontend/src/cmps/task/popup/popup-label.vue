@@ -90,19 +90,19 @@ export default {
     togglePopupLabel() {
       this.$emit("toggle-popup", { str: "Label", buttonLeftPos: 0 });
     },
-    saveLabel(label) {
+    async saveLabel(label) {
       if (this.selectedLabel) {
         const { color, title } = label;
         this.selectedLabel.color = color;
         this.selectedLabel.title = title;
       } else this.boardLabels.push(label);
-      this.$store.commit({ type: "saveBoardLabels", labels: this.boardLabels });
+      await this.$store.dispatch({ type: "saveBoardLabels", labels: this.boardLabels });
       this.closeLabelEdit();
     },
-    removeBoardLabel(id) {
+    async removeBoardLabel(id) {
       const labelIdx = this.boardLabels.findIndex((label) => label.id === id);
       if (labelIdx >= 0) this.boardLabels.splice(labelIdx, 1);
-      this.$store.commit({ type: "saveBoardLabels", labels: this.boardLabels });
+      await this.$store.dispatch({ type: "saveBoardLabels", labels: this.boardLabels });
     },
   },
   computed: {
