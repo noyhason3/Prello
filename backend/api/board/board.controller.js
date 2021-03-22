@@ -31,7 +31,7 @@ async function deleteBoard(req, res) {
   try {
     const boardId = req.params.boardId;
     const deletedBoard = await boardService.remove(boardId);
-    res.send({ deleteBoard, msg: 'Deleted successfully' });
+    res.send({ deletedBoard, msg: 'Deleted successfully' });
   } catch (err) {
     logger.error('Failed to delete board', err);
     res.status(500).send({ err: 'Failed to delete board' });

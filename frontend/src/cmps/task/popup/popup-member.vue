@@ -7,7 +7,7 @@
     <div slot="main" class="task-popup-main">
       <input
         type="text"
-        v-model="q"
+        v-model="searchStr"
         placeholder="Search for members..."
         class="search-member"
       />
@@ -35,13 +35,15 @@ import memberPreview from "@/cmps/common/member-preview.vue";
 export default {
   data() {
     return {
-      q: "",
+      searchStr: "",
       boardMembers: null,
-      taskMembers:  null
+      taskMembers: null,
     };
   },
-  created(){
-    this.taskMembers = JSON.parse(JSON.stringify(this.$store.getters.currTask.members || []));
+  created() {
+    this.taskMembers = JSON.parse(
+      JSON.stringify(this.$store.getters.currTask.members || [])
+    );
   },
   methods: {
     togglePopup() {
@@ -67,7 +69,12 @@ export default {
   },
   computed: {
     memberList() {
-      return this.$store.getters.currBoard.members;
+      const board = this.$store.getters.currBoard;
+      return board.members.filter((member) => {
+        return member.fullname
+          .toLowerCase()
+          .includes(this.searchStr.toLowerCase());
+      });
     },
   },
 
