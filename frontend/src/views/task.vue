@@ -93,7 +93,6 @@
             tag="ul"
             class="clean-list"
           >
-            <!-- :progressPercentage="progressPercentage(checklist)" -->
             <task-checklist
               v-for="checklist in task.checklists"
               :key="checklist.id"
@@ -104,7 +103,6 @@
               @toggle-drag="toggleDrag"
               @update-task="saveTask(task)"
             />
-            <!-- {{ checklist.id }} -->
           </draggable>
           <!-- </ul> -->
         </div>
@@ -164,14 +162,6 @@ export default {
     // },
   },
   methods: {
-    // progressPercentage(checklist) {
-    //   if (!checklist.todos.length) return 0;
-    //   const doneTodos = checklist.todos.filter((todo) => todo.isDone);
-    //   const progress = Math.floor(
-    //     (doneTodos.length / checklist.todos.length) * 100
-    //   );
-    //   return progress;
-    // },
     async group() {
       const group = await this.$store.dispatch({ type: "getGroup" });
       this.groupTitle = group.title;
@@ -209,7 +199,7 @@ export default {
       const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
       if (memberIdx < 0) return;
       this.task.members.splice(memberIdx, 1);
-      this.$store.commit({ type: "saveTask", task });
+      this.saveTask(this.task);
     },
     setTaskLabels({ labelIds }) {
       this.task.labelIds = labelIds;
@@ -238,9 +228,9 @@ export default {
       this.task.checklists.splice(idx, 1, checklist);
       this.saveTask(this.task);
     },
-    saveTask(task) {
+    async saveTask(task) {
       console.log("file: task.vue - line 165 - saveTask - task", task);
-      this.$store.commit({ type: "saveTask", task });
+      await this.$store.dispatch({ type: "saveTask", task });
     },
     closeTask() {
       const boardId = this.$route.params.boardId;
