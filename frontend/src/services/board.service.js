@@ -11,7 +11,7 @@ const DEMO_BOARD = {
         fullname: 'Abi Abambi',
         imgUrl: 'http://some-img',
     },
-    style: {},
+    style: { bgImg: '', color: 'green' },
     labels: [
         {
             id: 'done',
@@ -548,7 +548,15 @@ const DEMO_BOARD = {
 //                 createdAt: '1616152734274',
 //                         },
 
-var gBoards = [];
+var gBoards = [
+    {
+        _id: 'b102',
+        title: 'Apsus upgrade',
+        style: { bgImg: 'i', color: 'yellow' },
+    },
+    { _id: 'b103', title: 'MegoTap market research', style: { bgImg: '', color: 'pink' } },
+    { _id: 'b104', title: 'Office management', style: { bgImg: '', color: 'blue' } },
+];
 
 export default {
     loadDemoBoard,
@@ -563,9 +571,9 @@ export default {
     getEmptyBoard,
     saveBoard,
     removeBoard,
-    getBoards,
     getBoardById,
     getRandomImg,
+    getBoardList,
 };
 
 if (!localStorage.getItem(DB_KEY)) loadDemoBoard();
@@ -669,6 +677,8 @@ function getEmptyGroup() {
     };
 }
 
+//---------BOARDS---------------\\
+//------------------------------\\
 function loadDemoBoard() {
     localStorage.setItem(DB_KEY, JSON.stringify([DEMO_BOARD]));
 }
@@ -678,21 +688,31 @@ async function getEmptyBoard() {
         title: '',
         createdAt: null,
         createdBy: {},
-        style: {imgUrl:'', color:'#'+utilService.getRandomIntInclusive(111,999)},
+        style: { imgUrl: '', color: '#' + utilService.getRandomIntInclusive(111, 999) },
         labels: [],
         members: [],
         groups: [],
         activities: [],
     };
-
 }
 
-async function getBoards(){
-    return storageService.query('board')
+async function getBoardList() {
+    const boards = await storageService.query('board');
+    //few line below are just for now
+    if (!boards?.length) {
+        gBoards.push(DEMO_BOARD);
+        const savedBoardList = await storageService.postMany('board', gBoards);
+        return savedBoardList;
+    }
+    // return boards.map(({ _id, title, style }) => {
+    //     return { _id, title, style };
+    // });
+    return boards
 }
 
-async function getBoardById(boardId){
-    return storageService.get('board',boardId)
+async function getBoardById(boardId) {
+    const board = await storageService.get('board', boardId);
+    return board;
 }
 // async function saveBoard(board) {
 //     if (board._id) {//update
@@ -706,8 +726,8 @@ async function getBoardById(boardId){
 //     }
 // }
 async function saveBoard(board) {
-    try{
-        const boardToSave = JSON.parse(JSON.stringify( board))
+    try {
+        const boardToSave = JSON.parse(JSON.stringify(board));
         if (board._id) {
             return storageService.put('board', board);
         } else {
@@ -715,18 +735,23 @@ async function saveBoard(board) {
             board._id = board.id;
             return board;
         }
-    }catch(err){
-        return err
+    } catch (err) {
+        return err;
     }
 }
 
 async function removeBoard(boardId) {
-    return storageService.remove('board', boardId);
+    try {
+        const boardList = await storageService.remove('board', boardId);
+        return boardList;
+    } catch (err) {
+        return err;
+    }
 }
 
-function getRandomImg(){
-    const num = utilService.getRandomIntInclusive(1,5);
-    return `../../assets/img/${num}.jpg`
+function getRandomImg() {
+    const num = utilService.getRandomIntInclusive(1, 5);
+    return `../../assets/img/${num}.jpg`;
     // return `@/assets/img/${num}.jpg`
 }
 // function createTask({ type, content }) {
