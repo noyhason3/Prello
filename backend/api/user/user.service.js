@@ -16,7 +16,7 @@ async function query(filterBy = {}) {
     const criteria = _buildCriteria(filterBy)
     try {
         const collection = await dbService.getCollection('user')
-        console.log("file: user.service.js - line 19 - query - collection", collection)
+        // console.log("file: user.service.js - line 19 - query - collection", collection)
         var users = await collection.find({}).toArray()
         users = users.map(user => {
             delete user.password
@@ -88,8 +88,10 @@ async function update(user) {
 async function add(user) {
     try {
         // peek only updatable fields!
+        console.log(user);
         const collection = await dbService.getCollection('user')
         await collection.insertOne(user)
+        console.log(user);
         return user
     } catch (err) {
         logger.error('cannot insert user', err)

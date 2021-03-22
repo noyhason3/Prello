@@ -51,7 +51,7 @@ const USERS = [{
     imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
 }]
 
-//registerDemoUsers()
+registerDemoUsers()
 
 async function login(username, password) {
     logger.debug(`auth.service - login with username: ${username}`)
@@ -73,7 +73,7 @@ async function signup(username, password, fullname, imgUrl = null) {
     if (!username || !password || !fullname) return Promise.reject('fullname, username and password are required!')
 
     const hash = await bcrypt.hash(password, saltRounds)
-    console.log("file: auth.service.js - line 76 - signup - hash", hash)
+    // console.log("file: auth.service.js - line 76 - signup - hash", hash)
     return userService.add({ username, password: hash, fullname, imgUrl })
 }
 
