@@ -6,7 +6,7 @@ async function query(filterBy = {}) {
   try {
     const criteria = _buildCriteria(filterBy);
     const collection = await dbService.getCollection('board');
-    const boards = await collection.find(criteria).toArray();
+    const boards = await collection.find({}).toArray();
     // var reviews = await collection.aggregate([
     //     {
     //         $match: filterBy
@@ -54,8 +54,10 @@ async function query(filterBy = {}) {
 async function getById(boardId) {
   try {
     const collection = await dbService.getCollection('board');
-    const board = await collection.findOne({ _id: ObjectId(boardId) });
-    return board;
+    if (boardId === 'demo_board') {
+      return await collection.findOne({ _id: boardId });
+    }
+    return await collection.findOne({ _id: ObjectId(boardId) });
   } catch (err) {
     logger.error(`while finding board ${boardId}:`, err);
     throw err;
@@ -105,9 +107,9 @@ async function add(board) {
 function _buildCriteria(filterBy) {
   const criteria = {};
 
-  if (filterBy.title) {
-    criteria.title = ObjectId(filterBy.title);
-  }
+  // if (filterBy.title) {
+  //     criteria.title = ObjectId(filterBy.title)
+  // }
 
   return criteria;
 }
