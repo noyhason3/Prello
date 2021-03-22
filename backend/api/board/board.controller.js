@@ -39,18 +39,14 @@ async function deleteBoard(req, res) {
 async function addBoard(req, res) {
   try {
     var board = req.body;
-    console.log(
-      'file: board.controller.js - line 42 - addBoard - board',
-      board
-    );
     board.createdBy = {
       _id: req.session.user._id,
     };
     board = await boardService.add(board);
 
-    board.createdBy.fullname =req.session.user.fullname
+    board.createdBy.fullname = req.session.user.fullname
     board.createdBy.imgUrl = req.session.user.imgUrl
-    
+
     ///////////////////////// BELOW IS CODE FOR ADVANCED STEPS WITH WEB SOCKETS ////////////////////
     // console.log('CTRL SessionId:', req.sessionID);
     // socketService.broadcast({ type: 'board-added', data: board });
@@ -59,7 +55,7 @@ async function addBoard(req, res) {
     //   data: board.byUser,
     //   room: req.session.user._id,
     // });
-    
+
     res.send(board);
   } catch (err) {
     console.log(err);

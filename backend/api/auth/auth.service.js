@@ -2,56 +2,62 @@ const bcrypt = require('bcrypt')
 const userService = require('../user/user.service')
 const logger = require('../../services/logger.service')
 
-const USERS = [{
-    username: 'Tal',
-    fullname: 'Tal Tarablus',
-    password: '1234',
-    imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-},
-{
-    username: 'Noam',
-    fullname: 'Noam Ben Yosef',
-    password: '1234'
+const USERS = [
+    {
+        username: "Guest",
+        fullname: "Demo User",
+        password: "guest"
+    },
+    {
+        username: 'Tal',
+        fullname: 'Tal Tarablus',
+        password: '1234',
+        imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+    },
+    {
+        username: 'Noam',
+        fullname: 'Noam Ben Yosef',
+        password: '1234'
 
-},
-{
-    username: 'Gabi1337',
-    fullname: 'Gabi Amsalem',
-    password: '1234',
-    imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-},
-{
-    username: 'Efi',
-    fullname: 'Efrat Kaminski',
-    password: '1234',
-    imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-},
-{
-    username: 'Dov',
-    fullname: 'Dov Menashe',
-    password: '1234',
-    imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-},
-{
-    username: 'Benny',
-    fullname: 'Biniamin Shemi',
-    password: '1234',
-    imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-},
-{
-    username: 'Keshet',
-    fullname: 'Keshet Sheshet',
-    password: '1234',
-    imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-},
-{
-    username: 'Goni',
-    fullname: 'Anna Avraham',
-    password: '1234',
-    imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
-}]
+    },
+    {
+        username: 'Gabi1337',
+        fullname: 'Gabi Amsalem',
+        password: '1234',
+        imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+    },
+    {
+        username: 'Efi',
+        fullname: 'Efrat Kaminski',
+        password: '1234',
+        imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+    },
+    {
+        username: 'Dov',
+        fullname: 'Dov Menashe',
+        password: '1234',
+        imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+    },
+    {
+        username: 'Benny',
+        fullname: 'Biniamin Shemi',
+        password: '1234',
+        imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+    },
+    {
+        username: 'Keshet',
+        fullname: 'Keshet Sheshet',
+        password: '1234',
+        imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+    },
+    {
+        username: 'Goni',
+        fullname: 'Anna Avraham',
+        password: '1234',
+        imgUrl: 'http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg',
+    }]
 
-registerDemoUsers()
+//registerDemoUsers()
 
 async function login(username, password) {
     logger.debug(`auth.service - login with username: ${username}`)

@@ -1,0 +1,36 @@
+.hero{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height:100vh;
+    .hero-img{
+        height: 100vh;
+        width:100vw;
+        object-fit: cover;
+        z-index: -2;
+        position:fixed;
+    }
+    &::after{
+        content:'';
+        position:absolute;
+        top:0;bottom:0;left:0;right:0;
+        z-index: -1;
+        background: linear-gradient(to top, rgba(255,255,255,1) 0%,rgba(125,185,232,0) 100%);
+    }
+    h1{
+        font-family: 'Pacifico', cursive;
+        font-size: rem(64px);
+        margin-block-end: 2px;
+        color:rgb(46, 46, 46)
+    }
+    h2{
+        font-size: rem(26px);
+        max-width:65%;
+        align-self: flex-end;
+        padding-inline-start: 8px;
+        border-left: 15px solid $clr5;
+        color:$clr5;
+        padding-block:15px;
+    }
+}

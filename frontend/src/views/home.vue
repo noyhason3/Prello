@@ -1,6 +1,13 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <div class="hero">
+      <img class="hero-img" src="../assets/hero.jpg" />
+      <h1>Manage your collaborative projects</h1>
+      <h2>
+        A solution for stucturing and online co-ordination for oganizations and
+        individuals alike
+      </h2>
+    </div>
   </div>
 </template>
 
@@ -8,8 +15,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'home',
-  components: {
-  }
-}
+  name: "home",
+  components: {},
+};
 </script>
