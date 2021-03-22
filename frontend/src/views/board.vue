@@ -87,7 +87,6 @@ export default {
     const boardId = this.$route.params.boardId;
     const board = await boardService.query(boardId);
     // const board = await boardService.getBoardById(boardId);
-    console.log("board:", board);
     this.$store.commit({ type: "setBoard", board });
   },
   methods: {
