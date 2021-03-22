@@ -11,8 +11,6 @@
           backgroundImage: backgroundStyle(board),
         }"
       >
-        <!-- :style="{backgroundImage: `url(${img})`}" -->
-        <!-- :style="backGroundStyle(board)" -->
         {{ board.title }}
         <button @click.stop="removeBoard(board._id)">X</button>
       </li>
@@ -23,38 +21,44 @@
       </li>
     </ul>
     <div>
-      <div @click="closeBoardPopup" class="create-board-screen" :class="{'add-board':isAddBoard}"></div>
-    <popup v-if="isAddBoard" class="popup-create-board">
-      <div slot="main">
-        <form @submit.prevent="createNewBoard">
-          <div class="new-board-info">
-            <template>
-              <input
-                type="text"
-                class="add-board-title"
-                placeholder="Add board title"
-                v-model="boardToEdit.title"
-              />
-              <button @click="closeBoardPopup" class="btn close">X</button>
-            </template>
-            <ul class="clean-list bgStyle-list">
-              <li
-                v-for="(style, idx) in styles"
-                @click="selectStyle(style)"
-                :key="'style' + idx"
-                class="bgStyle"
-              ></li>
-            </ul>
-          </div>
-          <button
-            class="btn create-board"
-            :class="{ gray: !boardToEdit.title }"
-          >
-            Create board
-          </button>
-        </form>
-      </div>
-    </popup>
+      <div
+        @click="closeBoardPopup"
+        class="create-board-screen"
+        :class="{ 'add-board': isAddBoard }"
+      ></div>
+      <popup v-if="isAddBoard" 
+      class="popup-create-board">
+        <div slot="main">
+          <form @submit.prevent="createNewBoard">
+            <div class="new-board-info">
+              <div class="title-container" :style="bgStyles[0]">
+                <input
+                  type="text"
+                  placeholder="Add board title"
+                  v-model="boardToEdit.title"
+                  class="title"
+                />
+                <button @click="closeBoardPopup" class="btn close">X</button>
+              </div>
+              <ul class="clean-list bgStyle-list">
+                <li
+                  v-for="(style, idx) in bgStyles"
+                  @click="selectStyle(style)"
+                  :key="'style' + idx"
+                  class="bgStyle"
+                  :style="style"
+                ></li>
+              </ul>
+            </div>
+            <button
+              class="btn create-board"
+              :class="{ gray: !boardToEdit.title }"
+            >
+              Create board
+            </button>
+          </form>
+        </div>
+      </popup>
     </div>
   </section>
 </template>
@@ -70,21 +74,37 @@ export default {
       isAddBoard: false,
       boardToEdit: null,
       boardList: null,
-      img: null,
     };
   },
   async created() {
-    // this.boardList = [
-    //   {
-    //     _id: 1,
-    //     title: "My new project",
-    //     style: { bgImg: "i", color: "yellow" },
-    //   },
-    //   { _id: 2, title: "Trip to USA", style: { bgImg: "", color: "pink" } },
-    //   { _id: 3, title: "a project", style: { bgImg: "", color: "blue" } },
-    // ];
-    this.boardList = await this.$store.dispatch({ type: "loadBoardList" });
-    this.img = require("@/assets/img/i.jpg");
+    this.boardList = [
+      {
+        _id: "b102",
+        title: "Apsus upgrade",
+        style: { bgImg: "1.jpg", color: "yellow" },
+      },
+      {
+        _id: "b103",
+        title: "MegoTap market research",
+        style: { bgImg: "2.jpg", color: "pink" },
+      },
+      {
+        _id: "b104",
+        title: "Office management",
+        style: { bgImg: "3.jpg", color: "blue" },
+      },
+      {
+        _id: "b105",
+        title: "Office management",
+        style: { bgImg: "", color: "lightBlue" },
+      },
+      {
+        _id: "b106",
+        title: "Office management",
+        style: { bgImg: "5.jpg", color: "blue" },
+      },
+    ];
+    // this.boardList = await this.$store.dispatch({ type: "loadBoards" });
     // console.log('this.boardToEdit:', this.boardToEdit)
   },
   methods: {
@@ -114,23 +134,10 @@ export default {
       //TODO_set style as background of image and boardToEdit
     },
     backgroundStyle(board) {
-      // console.log("board:", board);//Continue
-      // if (board.style.imgUrl) {
-      //   return { "background-image": require(img) };
-      //   }
-      // return { "background-color": board.style.color };
-
-      // const bgImg = boardService.getRandomImg()
-      // console.log('bgImg:', bgImg)
-      // return {'background-image': `url(${bgImg})`}
-
       if (board.style.bgImg) {
-        const img2 = require("@/assets/img/i.jpg");
-        console.log("img2:", img2);
-        // const str = `@/assets/img/${board.style.bgImg}.jpg`
-        // const img3 = require(str)
-        // console.log('img:', img3)
-        return `url(${img2})`;
+        const str1 = board.style.bgImg;
+        const img3 = require("@/assets/img/" + str1);
+        return `url(${img3})`;
       }
     },
     backgroundColor(board) {
@@ -138,8 +145,23 @@ export default {
     },
   },
   computed: {
-    styles() {
-      return [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    bgStyles() {
+      const imgNames = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"];
+      const colors = ["#C10BB3", "#03A7BE", "#003152", "#8BCB8A"];
+      const imgStyles = imgNames.map((imgName) => {
+        const img = require("@/assets/img/" + imgName);
+        return { backgroundImage: `url(${img})` };
+      });
+      const colorStyles = colors.map((color) => {
+        return { backgroundColor: color };
+      });
+      console.log("colorStyles:", colorStyles);
+      console.log("imgStyles:", imgStyles);
+      const styles = imgStyles.concat(colorStyles);
+      console.log("styles:", styles);
+      return styles;
+      // return [{a:1},{b:2}]
+      // return imgStyles
     },
   },
   components: {

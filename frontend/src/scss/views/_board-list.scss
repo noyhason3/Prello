@@ -28,56 +28,77 @@
         border-radius: 5px;
         font-size: 0.9rem;
     }
-    .btn.add-board:hover{
-        filter:brightness(98%)
+
+    .btn.add-board:hover {
+        filter: brightness(98%)
     }
+
     .btn.create-board {
+        background-color: $clr1;
+        border: 2px solid $clr7;
+        color: $clr7;
+        font-weight: 600;
+
         &.gray {
             color: rgb(177, 177, 177);
-
+            border-color: rgb(177, 177, 177);
+            filter: none;
         }
     }
 
 }
-.create-board-screen.add-board{
-    position:absolute;
-    top:0;
-    bottom:0;
-    right:0;
-    left:0;
+
+.create-board-screen.add-board {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
     background-color: rgba(0, 0, 0, 0.7);
 }
 
 .popup-create-board {
     width: 400px;
-    .btn.close{
-        margin:0;
-        margin-inline-end:10px;
+    background-color:transparent;
+    box-shadow: none;
+    left:50%;
+    transform: translate(-50%);
+    .btn.close {
+        margin: 0;
+        color:$clr1;
     }
+
     .new-board-info {
         display: flex;
         justify-content: space-between;
-
-        .add-board-title{
-            margin-inline-end:10px;
+        margin-bottom:10px;
+        .title-container {
+            background-size: cover;
+            display: flex;
+            margin-inline-end: 10px;
+            >*{
+                margin-inline-end:5px;
+            }
         }
+
         .bgStyle-list {
             display: flex;
             flex-wrap: wrap;
-            width: 175px;
+            width: 130px;
         }
-        
+
         .bgStyle {
             width: 30px;
             height: 30px;
-            background-color: aqua;
+            // background-color: aqua;
             border-radius: 3px;
             margin-inline-end: 5px;
             margin-bottom: 5px;
             cursor: pointer;
         }
-        .bgStyle:hover{
-            filter:brightness(95%)
+
+        .bgStyle:hover {
+            filter: brightness(95%)
         }
     }
 }

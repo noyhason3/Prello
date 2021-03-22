@@ -1,9 +1,11 @@
 import boardService from '../services/board.service.js';
+// import {boardService} from '../services/NEW-board.service.js';
+
 import utilService from '../services/util.service.js';
 export const boardStore = {
     state: {
         board: null,
-        boardList: null,
+        boards: null,
         task: null,
     },
     getters: {
@@ -17,18 +19,18 @@ export const boardStore = {
     mutations: {
         setBoard(state, { board }) {
             state.board = board;
-            console.log('state board',state.board);
+            console.log('state board', state.board);
         },
-        setBoardList(state, {boardList}){
-            state.boardList = boardList;
+        setBoards(state, { boards }) {
+            state.boards = boards;
         },
         setCurrTask(state, { task }) {
             // console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
             state.task = task;
         },
         async saveTask(state, { groupId, task }) {
-            const ans = await boardService.saveTask({ boardId: state.board._id, groupId, task })
-            if (state.task && ans.task.id === state.task.id) this.commit({ type: 'setCurrTask', task })
+            const ans = await boardService.saveTask({ boardId: state.board._id, groupId, task });
+            if (state.task && ans.task.id === state.task.id) this.commit({ type: 'setCurrTask', task });
             this.commit({ type: 'setBoard', board: ans.board });
         },
         saveBoardLabels(state, { labels }) {
@@ -46,7 +48,7 @@ export const boardStore = {
             //     board.groups.push(group);
             // }
 
-            const board = await boardService.saveGroup({ boardId: state.board._id, group })
+            const board = await boardService.saveGroup({ boardId: state.board._id, group });
             this.commit({ type: 'setBoard', board });
         },
         async removeGroup(state, { groupId }) {
@@ -56,59 +58,60 @@ export const boardStore = {
             // if (groupIdx < 0) return;
             // board.groups.splice(groupIdx, 1);
 
-            const board = await boardService.removeGroup({ groupId, boardId: state.board._id })
+            const board = await boardService.removeGroup({ groupId, boardId: state.board._id });
             this.commit({ type: 'setBoard', board });
         },
-        removeBoard(state, {boardId}){
-            console.log('boardId:', boardId)
-            const boardIdx = state.boardList.findIndex(board => board._id === boardId)
+        removeBoard(state, { boardId }) {
+            console.log('boardId:', boardId);
+            const boardIdx = state.boardList.findIndex((board) => board._id === boardId);
             console.log(boardIdx);
-            if(boardIdx < 0) return;
+            if (boardIdx < 0) return;
             state.boardList.splice(boardIdx, 1);
-        }
-        // setBoardList(state, {boards}){
-            //     state.boards = boards;
-            // }
         },
-        actions: {
-            async getGroup({state}) {
-                const group = await state.board.groups.find(({ tasks }) => {
-                    return tasks.some(({ id }) => id === state.task.id);
-                });
-                // console.log('group:', group);
-                return group
-            },
-            async getEmptyBoard(){
-                return boardService.getEmptyBoard();
-            },
-            async loadBoardList({commit}){
-                try{
-                    const boardList = await boardService.getBoardList();
-                    commit({ type: 'setBoardList', boardList })
-                    return boardList
-                }catch(err){
-                    console.log('err:', err)
-                }
-            },
-            async saveBoard({commit}, {board}){
-                try{
-                    const newBoard = await boardService.saveBoard(board);
-                    commit({ type: 'setBoard', newBoard })
-                    return newBoard
-                }catch(err){
-                    console.log('err:', err)
-                }
-            },
-            async removeBoard({commit},{boardId}){
-                console.log('boardId:', boardId)
-                try{
-                    await boardService.removeBoard(boardId);
-                    console.log('board deleted:', boardId);
-                    commit({ type: 'removeBoard', boardId })
-                }catch(err){
-                    // console.log('err:', err)
-                }
+        // setBoardList(state, {boards}){
+        //     state.boards = boards;
+        // }
+    },
+    actions: {
+        async getGroup({ state }) {
+            const group = await state.board.groups.find(({ tasks }) => {
+                return tasks.some(({ id }) => id === state.task.id);
+            });
+            // console.log('group:', group);
+            return group;
+        },
+        async getEmptyBoard() {
+            return boardService.getEmptyBoard();
+        },
+        async loadBoards({ commit }) {
+            try {
+                const boards = await boardService.query();
+                console.log('boards:', boards);
+                commit({ type: 'setBoards', boards });
+                return boards;
+            } catch (err) {
+                console.log('err:', err);
             }
+        },
+        async saveBoard({ commit }, { board }) {
+            try {
+                const newBoard = await boardService.saveBoard(board);
+                commit({ type: 'setBoard', newBoard });
+                return newBoard;
+            } catch (err) {
+                console.log('err:', err);
+            }
+        },
+        async removeBoard({ commit }, { boardId }) {
+            console.log('boardId:', boardId);
+            try {
+                await boardService.removeBoard(boardId);
+                console.log('board deleted:', boardId);
+                commit({ type: 'removeBoard', boardId });
+            } catch (err) {
+                // console.log('err:', err)
+            }
+        },
         // async loadBoardList({ commit }) {
         //   try {
         //     // const boards =  await boardService.query()

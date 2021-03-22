@@ -548,15 +548,7 @@ const DEMO_BOARD = {
 //                 createdAt: '1616152734274',
 //                         },
 
-var gBoards = [
-    {
-        _id: 'b102',
-        title: 'Apsus upgrade',
-        style: { bgImg: 'i', color: 'yellow' },
-    },
-    { _id: 'b103', title: 'MegoTap market research', style: { bgImg: '', color: 'pink' } },
-    { _id: 'b104', title: 'Office management', style: { bgImg: '', color: 'blue' } },
-];
+var gBoards = [];
 
 export default {
     loadDemoBoard,
@@ -573,7 +565,7 @@ export default {
     removeBoard,
     getBoardById,
     getRandomImg,
-    getBoardList,
+    getBoards,
 };
 
 if (!localStorage.getItem(DB_KEY)) loadDemoBoard();
@@ -696,8 +688,9 @@ async function getEmptyBoard() {
     };
 }
 
-async function getBoardList() {
+async function getBoards() {
     const boards = await storageService.query('board');
+    console.log('boards:', boards)
     //few line below are just for now
     if (!boards?.length) {
         gBoards.push(DEMO_BOARD);
@@ -714,31 +707,31 @@ async function getBoardById(boardId) {
     const board = await storageService.get('board', boardId);
     return board;
 }
-// async function saveBoard(board) {
-//     if (board._id) {//update
-//         const idx = gBoards.findIndex(savedBoard => savedBoard._id === board._id)
-//         gBoards.splice(idx, 1, board)
-//         localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
-//     } else {//add
-//         board._id = utilService.makeId()
-//         gBoards.push(board)
-//         localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
-//     }
-// }
 async function saveBoard(board) {
-    try {
-        const boardToSave = JSON.parse(JSON.stringify(board));
-        if (board._id) {
-            return storageService.put('board', board);
-        } else {
-            const board = await storageService.post('board', boardToSave);
-            board._id = board.id;
-            return board;
-        }
-    } catch (err) {
-        return err;
+    if (board._id) {//update
+        const idx = gBoards.findIndex(savedBoard => savedBoard._id === board._id)
+        gBoards.splice(idx, 1, board)
+        localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
+    } else {//add
+        board._id = utilService.makeId()
+        gBoards.push(board)
+        localStorage.setItem(DB_KEY, JSON.stringify(gBoards))
     }
 }
+// async function saveBoard(board) {
+//     try {
+//         const boardToSave = JSON.parse(JSON.stringify(board));
+//         if (board._id) {
+//             return storageService.put('board', board);
+//         } else {
+//             const board = await storageService.post('board', boardToSave);
+//             board._id = board.id;
+//             return board;
+//         }
+//     } catch (err) {
+//         return err;
+//     }
+// }
 
 async function removeBoard(boardId) {
     try {

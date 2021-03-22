@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
   <section class="board" v-if="board"  :style="background" >
-=======
-  <section class="board" v-if="board">
->>>>>>> 2f907afd2c6ae95c32c8994b3c4e469808833779
     <board-header :board="board" />
     <draggable
       v-model="board.groups"
