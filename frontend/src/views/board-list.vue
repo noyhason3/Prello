@@ -1,5 +1,7 @@
 <template>
   <section class="board-list-container">
+    <h2>Starred boards</h2>
+    <h2>Recently viewed</h2>
     <ul class="clean-list board-list">
       <li
         v-for="board in boardList"
@@ -91,26 +93,61 @@ export default {
         _id: "b102",
         title: "Apsus upgrade",
         style: { bgImg: { id: "i102", name: "2.jpg" }, bgColor: "" },
+        createdAt: 1546678789800,
+        lastViewedAt: 1606678789800,
+        isStarred: false,
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
       },
       {
         _id: "b103",
-        title: "MegoTap market research",
+        title: "MegoTap web",
         style: { bgImg: { id: "i104", name: "4.jpg" }, bgColor: "" },
+        createdAt: 1426678789800,
+        lastViewedAt: 1544678789800,
+        isStarred: true,
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
       },
       {
         _id: "b104",
-        title: "Office management",
+        title: "MrToy frontend",
         style: { bgImg: "", bgColor: { id: "c101", name: "#C10BB3" } },
+        createdAt: 1265678789800,
+        lastViewedAt: 1585678789800,
+        isStarred: false,
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
       },
       {
         _id: "b105",
-        title: "Office management",
+        title: "Getro ",
         style: { bgImg: { id: "i103", name: "3.jpg" }, bgColor: "" },
+        createdAt: 1426678789800,
+        lastViewedAt: 1606678789800,
+        isStarred: false,
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
       },
       {
         _id: "b106",
-        title: "Office management",
+        title: "Web Dev. MiniMoney",
         style: { bgImg: "", bgColor: { id: "c103", name: "#003152" } },
+        createdAt: 1566678789800,
+        lastViewedAt: 1588678789800,
+        isStarred: false,
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
       },
     ];
     // this.boardList = await this.$store.dispatch({ type: "loadBoards" });

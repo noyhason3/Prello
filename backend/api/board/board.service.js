@@ -1,6 +1,8 @@
 const dbService = require('../../services/db.service');
 const ObjectId = require('mongodb').ObjectId;
 const asyncLocalStorage = require('../../services/als.service');
+const logger = require('../../services/logger.service');
+
 
 async function query(filterBy = {}) {
   try {
@@ -54,7 +56,7 @@ async function query(filterBy = {}) {
 async function getById(boardId) {
   try {
     const collection = await dbService.getCollection('board');
-    if (boardId === 'demo_board') {
+    if (boardId.startsWith('demo')) {
       return await collection.findOne({ _id: boardId });
     }
     return await collection.findOne({ _id: ObjectId(boardId) });
@@ -82,9 +84,9 @@ async function remove(boardId) {
 
 async function update(board) {
   try {
-    board._id = ObjectId(board._id);
+    // board._id = ObjectId(board._id);                      **************************** NEED TO BE UN-COMMENT AFTER CHANGING DEMO-ID
     const collection = await dbService.getCollection('board');
-    await collection.updateOne({ _id: boardToSave._id }, { $set: board });
+    await collection.updateOne({ _id: board._id }, { $set: board });
     return board;
   } catch (err) {
     logger.error(`cannot update board ${board._id}`, err);

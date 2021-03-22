@@ -6,6 +6,8 @@ const DEMO_BOARD = {
     _id: 'b101',
     title: 'Web Dev. Prello Management',
     createdAt: 1589983468418,
+    lastViewedAt: 1589983468418,
+    isStarred: true,
     createdBy: {
         _id: 'u101',
         fullname: 'Abi Abambi',

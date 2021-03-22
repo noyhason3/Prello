@@ -7,9 +7,9 @@ export const userService = {
   remove,
   update,
   getLoggedinUser,
-  // login,
-  // logout,
-  // signup,
+  login,
+  logout,
+  signup,
   //   increaseScore,
 };
 
@@ -54,20 +54,20 @@ function getLoggedinUser() {
 
 // BETTER ON AUTH.SERVICE SO CAN BE DELETED
 
-// async function login(userCred) {
-//     const user = await httpService.post('auth/login', userCred);
-//     if (user) return _saveLocalUser(user);
-//   }
+async function login(userCred) {
+  const user = await httpService.post('auth/login', userCred);
+  if (user) return _saveLocalUser(user);
+}
 
-//   async function signup(userCred) {
-//     const user = await httpService.post('auth/signup', userCred);
-//     return _saveLocalUser(user);
-//   }
-//   async function logout() {
-//     return await httpService.post('auth/logout');
-//   }
+async function signup(userCred) {
+  const user = await httpService.post('auth/signup', userCred);
+  return _saveLocalUser(user);
+}
+async function logout() {
+  return await httpService.post('auth/logout');
+}
 
-//   function _saveLocalUser(user) {
-//     sessionStorage.setItem('loggedinUser', JSON.stringify(user));
-//     return user;
-//   }
+function _saveLocalUser(user) {
+  sessionStorage.setItem('loggedinUser', JSON.stringify(user));
+  return user;
+}

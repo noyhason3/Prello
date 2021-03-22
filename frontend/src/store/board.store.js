@@ -94,7 +94,7 @@ export const boardStore = {
       });
       return group;
     },
-    async saveGroup({ commit }, { group }) {
+    async saveGroup({state, commit }, { group }) {
       const board = JSON.parse(JSON.stringify(state.board));
       const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
       if (group.id) {
@@ -144,6 +144,7 @@ export const boardStore = {
       commit({ type: 'setBoard', board });
     },
     async removeTask({ state, commit }, { taskId }) {
+      console.log('hi');
       const board = JSON.parse(JSON.stringify(state.board));
       const group = board.groups.find((savedGroup) =>
         savedGroup.tasks.some((savedTask) => savedTask.id === taskId)
@@ -155,7 +156,7 @@ export const boardStore = {
       group.tasks.splice(taskIdx, 1);
       await boardService.save(board);
       commit({ type: 'setBoard', board });
-    //   return Promise.resolve({ group, board });
+      //   return Promise.resolve({ group, board });
     },
 
     async saveBoardLabels({ state, commit }, { labels }) {

@@ -1,5 +1,5 @@
 import { httpService } from './http.service.js';
-import { utilService } from './util.service.js';
+import utilService from './util.service.js';
 
 const BOARD_URL = 'board/';
 
@@ -10,7 +10,7 @@ export const boardService = {
   getById,
   getEmptyBoard,
   getEmptyGroup,
-  getEmptyTask
+  getEmptyTask,
 };
 
 function getById(boardId) {
@@ -38,14 +38,13 @@ function getEmptyBoard() {
     title: '',
     createdAt: null,
     createdBy: {},
-    style: {
-      imgUrl: '',
-      color: '#' + utilService.getRandomIntInclusive(111, 999),
-    },
+    style: { bgImg: {}, bgColor: {} },
     labels: [],
     members: [],
     groups: [],
     activities: [],
+    lastViewedAt: null,
+    isStarred: false,
   };
 }
 
