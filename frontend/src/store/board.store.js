@@ -103,7 +103,8 @@ export const boardStore = {
         },
         async saveBoard({ commit }, { board }) {
             try {
-                const newBoard = await boardService.saveBoard(board);
+                const newBoard = await boardService.save(board);
+                console.log('newBoard:', newBoard)
                 commit({ type: 'setBoard', newBoard });
                 return newBoard;
             } catch (err) {
