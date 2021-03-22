@@ -43,24 +43,14 @@ async function addBoard(req, res) {
       'file: board.controller.js - line 42 - addBoard - board',
       board
     );
-    // board.createdBy = {
-    //   _id: req.session.user._id,
-    //   fullname: req.session.user.fullname,
-    //   imgUrl: req.session.user.imgUrl,
-    // };
+    board.createdBy = {
+      _id: req.session.user._id,
+    };
     board = await boardService.add(board);
-    //  MAYBE WE SHOULD USE BELOW CODE TO USE THE MINI USER ONLY FOR THE FRONT ///////////////////////////
-    // board.createdBy ={
-    //     _id: req.session.user._id,
-    //     fullname: req.session.user.fullname,
-    //     imgUrl: req.session.user.imgUrl
-    // }
 
-    ////////////////////// SAME BELOW-- THE STARTER CODE WE GOT ///////////////////////////////
-    // prepare the updated board for sending out
-    // board.byUser = await userService.getById(board.byUserId);
-    // board.aboutUser = await userService.getById(board.aboutUserId);
-
+    board.createdBy.fullname =req.session.user.fullname
+    board.createdBy.imgUrl = req.session.user.imgUrl
+    
     ///////////////////////// BELOW IS CODE FOR ADVANCED STEPS WITH WEB SOCKETS ////////////////////
     // console.log('CTRL SessionId:', req.sessionID);
     // socketService.broadcast({ type: 'board-added', data: board });
@@ -69,6 +59,7 @@ async function addBoard(req, res) {
     //   data: board.byUser,
     //   room: req.session.user._id,
     // });
+    
     res.send(board);
   } catch (err) {
     console.log(err);

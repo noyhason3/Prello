@@ -1,6 +1,6 @@
 
 const dbService = require('../../services/db.service')
-// const logger = require('../../services/logger.service')
+const logger = require('../../services/logger.service')
 const ObjectId = require('mongodb').ObjectId
 
 module.exports = {
@@ -16,7 +16,8 @@ async function query(filterBy = {}) {
     const criteria = _buildCriteria(filterBy)
     try {
         const collection = await dbService.getCollection('user')
-        var users = await collection.find(criteria).toArray()
+        console.log("file: user.service.js - line 19 - query - collection", collection)
+        var users = await collection.find({}).toArray()
         users = users.map(user => {
             delete user.password
             user.createdAt = ObjectId(user._id).getTimestamp()
@@ -74,16 +75,10 @@ async function remove(userId) {
 async function update(user) {
     try {
         // peek only updatable fields!
-        const userToSave = {
-            _id: ObjectId(user._id),
-            fullname: user.fullname,
-            username: user.username,
-            imgUrl: user.imgUrl,
-            mentions: user.mentions
-        }
+        user._id = ObjectId(user._id)
         const collection = await dbService.getCollection('user')
-        await collection.updateOne({ '_id': userToSave._id }, { $set: userToSave })
-        return userToSave;
+        await collection.updateOne({ '_id': user._id }, { $set: user })
+        return user;
     } catch (err) {
         logger.error(`cannot update user ${user._id}`, err)
         throw err
@@ -93,14 +88,9 @@ async function update(user) {
 async function add(user) {
     try {
         // peek only updatable fields!
-        const userToAdd = {
-            fullname: user.fullname,
-            username: user.username,
-            imgUrl: user.imgUrl,
-        }
         const collection = await dbService.getCollection('user')
-        await collection.insertOne(userToAdd)
-        return userToAdd
+        await collection.insertOne(user)
+        return user
     } catch (err) {
         logger.error('cannot insert user', err)
         throw err
