@@ -96,6 +96,10 @@ export default {
         createdAt: 1546678789800,
         lastViewedAt: 1606678789800,
         isStarred: false,
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
       },
       {
         _id: "b103",
@@ -104,6 +108,10 @@ export default {
         createdAt: 1426678789800,
         lastViewedAt: 1544678789800,
         isStarred: true,
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
       },
       {
         _id: "b104",
@@ -112,6 +120,10 @@ export default {
         createdAt: 1265678789800,
         lastViewedAt: 1585678789800,
         isStarred: false,
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
       },
       {
         _id: "b105",
@@ -120,6 +132,10 @@ export default {
         createdAt: 1426678789800,
         lastViewedAt: 1606678789800,
         isStarred: false,
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
       },
       {
         _id: "b106",
@@ -128,6 +144,10 @@ export default {
         createdAt: 1566678789800,
         lastViewedAt: 1588678789800,
         isStarred: false,
+        labels: [],
+        members: [],
+        groups: [],
+        activities: [],
       },
     ];
     // this.boardList = await this.$store.dispatch({ type: "loadBoards" });
