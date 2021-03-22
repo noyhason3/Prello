@@ -1,5 +1,5 @@
-import boardService from '../services/board.service.js';
-// import {boardService} from '../services/NEW-board.service.js';
+// import boardService from '../services/board.service.js';
+import {boardService} from '../services/NEW-board.service.js';
 
 import utilService from '../services/util.service.js';
 export const boardStore = {
@@ -73,16 +73,6 @@ export const boardStore = {
         // }
     },
     actions: {
-        async getGroup({ state }) {
-            const group = await state.board.groups.find(({ tasks }) => {
-                return tasks.some(({ id }) => id === state.task.id);
-            });
-            // console.log('group:', group);
-            return group;
-        },
-        async getEmptyBoard() {
-            return boardService.getEmptyBoard();
-        },
         async loadBoards({ commit }) {
             try {
                 const boards = await boardService.query();
@@ -92,6 +82,24 @@ export const boardStore = {
             } catch (err) {
                 console.log('err:', err);
             }
+        },
+        async getBoard({ commit }, {boardId}){
+            try{
+                 const board = await boardService.getById(boardId)
+                 commit({type:'setBoard', board})
+            }catch(err){
+                console.log('err',err);
+            }
+        },
+        async getGroup({ state }) {
+            const group = await state.board.groups.find(({ tasks }) => {
+                return tasks.some(({ id }) => id === state.task.id);
+            });
+            // console.log('group:', group);
+            return group;
+        },
+        async getEmptyBoard() {
+            return boardService.getEmptyBoard();
         },
         async saveBoard({ commit }, { board }) {
             try {
@@ -112,6 +120,7 @@ export const boardStore = {
                 // console.log('err:', err)
             }
         },
+        // FOR ADVANCED STEPS- WITH WEB SOCKETS
         // async loadBoardList({ commit }) {
         //   try {
         //     // const boards =  await boardService.query()

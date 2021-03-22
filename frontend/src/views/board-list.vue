@@ -6,7 +6,8 @@
         :key="board._id"
         class="board-preview"
         @click="openBoard(board._id)"
-        :style="boardStyle(board)">
+        :style="boardStyle(board)"
+      >
         {{ board.title }}
         <button @click.stop="removeBoard(board._id)">X</button>
       </li>
@@ -22,13 +23,11 @@
         class="create-board-screen"
         :class="{ 'add-board': isAddBoard }"
       ></div>
-      <popup v-if="isAddBoard" 
-      class="popup-create-board">
+      <popup v-if="isAddBoard" class="popup-create-board">
         <div slot="main">
           <form @submit.prevent="createNewBoard">
             <div class="new-board-info">
-              <div  class="title-container" 
-              :style="boardToEdit.style.style">
+              <div class="title-container" :style="selectedStyle.style">
                 <input
                   type="text"
                   placeholder="Add board title"
@@ -43,7 +42,7 @@
                   @click="selectStyle(style)"
                   :key="'style' + idx"
                   class="bgStyle"
-                  :class="{selected:isSelected(style.id)}"
+                  :class="{ selected: isSelected(style.id) }"
                   :style="style.style"
                 ></li>
               </ul>
@@ -63,15 +62,27 @@
 
 <script>
 import popup from "@/cmps/common/pop-up.vue";
-import boardService from "../services/board.service";
-import utilService from '../services/util.service';
+
 export default {
   data() {
     return {
       isAddBoard: false,
       boardToEdit: null,
       boardList: null,
-
+      selectedStyle: null,
+      imgs: [
+        { id: "i101", name: "1.jpg" },
+        { id: "i102", name: "2.jpg" },
+        { id: "i103", name: "3.jpg" },
+        { id: "i104", name: "4.jpg" },
+        { id: "i101", name: "5.jpg" },
+      ],
+      colors: [
+        { id: "c101", name: "#C10BB3" },
+        { id: "c102", name: "#03A7BE" },
+        { id: "c103", name: "#003152" },
+        { id: "c104", name: "#8BCB8A" },
+      ],
     };
   },
   async created() {
@@ -79,27 +90,27 @@ export default {
       {
         _id: "b102",
         title: "Apsus upgrade",
-        style: { bgImg: "1.jpg", color: "yellow" },
+        style: { bgImg: { id: "i102", name: "2.jpg" }, bgColor: "" },
       },
       {
         _id: "b103",
         title: "MegoTap market research",
-        style: { bgImg: "2.jpg", color: "pink" },
+        style: { bgImg: { id: "i104", name: "4.jpg" }, bgColor: "" },
       },
       {
         _id: "b104",
         title: "Office management",
-        style: { bgImg: "3.jpg", color: "blue" },
+        style: { bgImg: "", bgColor: { id: "c101", name: "#C10BB3" } },
       },
       {
         _id: "b105",
         title: "Office management",
-        style: { bgImg: "", color: "lightBlue" },
+        style: { bgImg: { id: "i103", name: "3.jpg" }, bgColor: "" },
       },
       {
         _id: "b106",
         title: "Office management",
-        style: { bgImg: "5.jpg", color: "blue" },
+        style: { bgImg: "", bgColor: { id: "c103", name: "#003152" } },
       },
     ];
     // this.boardList = await this.$store.dispatch({ type: "loadBoards" });
@@ -108,7 +119,7 @@ export default {
   methods: {
     async openBoardPopup() {
       this.boardToEdit = await this.$store.dispatch({ type: "getEmptyBoard" });
-      this.boardToEdit.style = this.bgStyles[0]
+      this.selectedStyle = this.bgStyles[0];
       this.isAddBoard = true;
     },
     closeBoardPopup() {
@@ -117,6 +128,7 @@ export default {
     },
     async createNewBoard() {
       if (!this.boardToEdit.title) return;
+      this.boardToEdit.style = this.getSelectedStyle(this.selectedStyle.id);
       const board = await this.$store.dispatch({
         type: "saveBoard",
         board: this.boardToEdit,
@@ -130,34 +142,36 @@ export default {
       this.$store.dispatch({ type: "removeBoard", boardId });
     },
     selectStyle(style) {
-      this.boardToEdit.style = style;
+      this.selectedStyle = style;
     },
-    boardStyle(board){
-     if (board.style.bgImg){
-        const img = require("@/assets/img/" + board.style.bgImg);
-        return {backgroundImage: `url(${img})` };
-     }
-        return {backgroundColor: board.style.color} 
+    boardStyle(board) {
+      if (board.style.bgImg) {
+        const img = require("@/assets/img/" + board.style.bgImg.name);
+        return { backgroundImage: `url(${img})` };
+      }
+      return { backgroundColor: board.style.bgColor.name };
     },
-    isSelected(id){
+    isSelected(id) {
       return this.boardToEdit.style.id === id;
-    }
+    },
+    getSelectedStyle(styleId) {
+      let style = this.imgs.find(({ id }) => id === styleId);
+      if (style) return style;
+      style = this.colors.find(({ id }) => id === styleId);
+      return style;
+    },
   },
   computed: {
     bgStyles() {
-      const imgNames = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"];
-      const colors = ["#C10BB3", "#03A7BE", "#003152", "#8BCB8A"];
-
-      const imgStyles = imgNames.map((imgName) => {
-        const img = require("@/assets/img/" + imgName);
-        return { id:utilService.makeId(), style:{backgroundImage: `url(${img})`} };
+      const imgStyles = this.imgs.map((currImg) => {
+        const img = require("@/assets/img/" + currImg.name);
+        return { id: currImg.id, style: { backgroundImage: `url(${img})` } };
       });
-      const colorStyles = colors.map((color) => {
-        return { id:utilService.makeId(), style:{backgroundColor: color} };
+      const colorStyles = this.colors.map((currColor) => {
+        return { id: currColor.id, style: { backgroundColor: currColor.name } };
       });
       const styles = imgStyles.concat(colorStyles);
       return styles;
-
     },
   },
   components: {
