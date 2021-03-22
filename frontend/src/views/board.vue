@@ -1,5 +1,5 @@
 <template>
-  <section class="board" v-if="board" >
+  <section class="board" v-if="board"  :style="background" >
     <board-header :board="board" />
     <draggable
       v-model="board.groups"
@@ -70,8 +70,9 @@ import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
 import boardService from "../services/board.service";
 import editableText from "@/cmps/common/editable-text.vue";
-
 import draggable from "vuedraggable";
+
+// require './assets/blueNorange.jpg'
 
 export default {
   data() {
@@ -102,6 +103,9 @@ export default {
     board() {
       return this.$store.getters.currBoard;
     },
+    background(){
+      return {'background-image': 'url(' + require('../assets/blueNorange.jpg') + ')'}
+    }
   },
   components: {
     boardHeader,
