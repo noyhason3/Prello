@@ -41,8 +41,8 @@ async function addBoard(req, res) {
     var board = req.body;
     board.createdBy = {
       _id: req.session.user._id,
-      fullname: req.session.user.fullname,
-      imgUrl: req.session.user.imgUrl,
+      // fullname: req.session.user.fullname,
+      // imgUrl: req.session.user.imgUrl,
     };
     board = await boardService.add(board);
     //  MAYBE WE SHOULD USE BELOW CODE TO USE THE MINI USER ONLY FOR THE FRONT ///////////////////////////
@@ -57,7 +57,7 @@ async function addBoard(req, res) {
     // board.byUser = await userService.getById(board.byUserId);
     // board.aboutUser = await userService.getById(board.aboutUserId);
 
-    ///////////////////////// BELOW IS CODE FOR ADVANED STEPS WITH WEB SOCKETS ////////////////////
+    ///////////////////////// BELOW IS CODE FOR ADVANCED STEPS WITH WEB SOCKETS ////////////////////
     // console.log('CTRL SessionId:', req.sessionID);
     // socketService.broadcast({ type: 'board-added', data: board });
     // socketService.emitToAll({
