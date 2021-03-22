@@ -6,11 +6,7 @@
         :key="board._id"
         class="board-preview"
         @click="openBoard(board._id)"
-        :style="{
-          backgroundColor: backgroundColor(board),
-          backgroundImage: backgroundStyle(board),
-        }"
-      >
+        :style="boardStyle(board)">
         {{ board.title }}
         <button @click.stop="removeBoard(board._id)">X</button>
       </li>
@@ -32,7 +28,7 @@
           <form @submit.prevent="createNewBoard">
             <div class="new-board-info">
               <div  class="title-container" 
-              :style="selectedBg.style">
+              :style="boardToEdit.style.style">
                 <input
                   type="text"
                   placeholder="Add board title"
@@ -75,7 +71,7 @@ export default {
       isAddBoard: false,
       boardToEdit: null,
       boardList: null,
-      selectedBg:null
+
     };
   },
   async created() {
@@ -111,8 +107,8 @@ export default {
   },
   methods: {
     async openBoardPopup() {
-      this.selectedBg = this.bgStyles[0]
       this.boardToEdit = await this.$store.dispatch({ type: "getEmptyBoard" });
+      this.boardToEdit.style = this.bgStyles[0]
       this.isAddBoard = true;
     },
     closeBoardPopup() {
@@ -134,28 +130,24 @@ export default {
       this.$store.dispatch({ type: "removeBoard", boardId });
     },
     selectStyle(style) {
-      this.selectedBg = style;
-      console.log('this.selectedBg:', this.selectedBg)
+      this.boardToEdit.style = style;
     },
-    backgroundStyle(board) {
-      if (board.style.bgImg) {
-        const str1 = board.style.bgImg;
-        const img3 = require("@/assets/img/" + str1);
-        return `url(${img3})`;
-      }
-    },
-    backgroundColor(board) {
-      return board.style.color;
+    boardStyle(board){
+     if (board.style.bgImg){
+        const img = require("@/assets/img/" + board.style.bgImg);
+        return {backgroundImage: `url(${img})` };
+     }
+        return {backgroundColor: board.style.color} 
     },
     isSelected(id){
-      return this.selectedBg.id === id;
+      return this.boardToEdit.style.id === id;
     }
   },
   computed: {
     bgStyles() {
       const imgNames = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"];
       const colors = ["#C10BB3", "#03A7BE", "#003152", "#8BCB8A"];
-      
+
       const imgStyles = imgNames.map((imgName) => {
         const img = require("@/assets/img/" + imgName);
         return { id:utilService.makeId(), style:{backgroundImage: `url(${img})`} };
