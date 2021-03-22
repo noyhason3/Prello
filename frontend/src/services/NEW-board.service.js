@@ -39,10 +39,10 @@ function remove(id) {
   return httpService.delete(BOARD_URL + id);
 }
 
-function save(toy) {
-  if (toy._id) {
-    return httpService.put(BOARD_URL + toy._id, toy);
+function save(board) {
+  if (board._id) {
+    return httpService.put(BOARD_URL + board._id, board);
   } else {
-    return httpService.post(BOARD_URL, toy);
+    return httpService.post(BOARD_URL, board);
   }
 }
