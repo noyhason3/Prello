@@ -12,7 +12,7 @@
             border-radius: 3px;
             padding: 8px;
             font-weight: bold;
-            font-size: 1.1rem;;
+            font-size: 1.1rem;
             color: #fff;
             background-size: cover;
             margin-bottom: 30px;
@@ -21,10 +21,63 @@
     }
 
     .btn.add-board {
-        margin:auto;
+        margin: auto;
         width: 180px;
         height: 95px;
-        background-color: rgb(180, 180, 180);
+        background-color: #E7E9ED;
         border-radius: 5px;
+        font-size: 0.9rem;
+    }
+    .btn.add-board:hover{
+        filter:brightness(98%)
+    }
+    .btn.create-board {
+        &.gray {
+            color: rgb(177, 177, 177);
+
+        }
+    }
+
+}
+.create-board-screen.add-board{
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup-create-board {
+    width: 400px;
+    .btn.close{
+        margin:0;
+        margin-inline-end:10px;
+    }
+    .new-board-info {
+        display: flex;
+        justify-content: space-between;
+
+        .add-board-title{
+            margin-inline-end:10px;
+        }
+        .bgStyle-list {
+            display: flex;
+            flex-wrap: wrap;
+            width: 175px;
+        }
+        
+        .bgStyle {
+            width: 30px;
+            height: 30px;
+            background-color: aqua;
+            border-radius: 3px;
+            margin-inline-end: 5px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        .bgStyle:hover{
+            filter:brightness(95%)
+        }
     }
 }
