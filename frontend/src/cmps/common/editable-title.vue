@@ -1,12 +1,8 @@
 <template>
-  <section v-if="value" class="task-title">
-    <h3>💬</h3>
-    <!-- <pre>{{ value }}</pre> -->
-    <div>
-      <h2 contenteditable="true" @blur="onInput">{{ value }}</h2>
-
-    </div>
-  </section>
+  <h2 v-if="value" class="task-title" contenteditable="true" @blur="onBlur">
+    <!-- <h3>💬</h3> -->
+    {{ value }}
+  </h2>
 </template>
 
 <script>
@@ -16,8 +12,10 @@ export default {
     value: String,
   },
   methods: {
-    onInput(ev) {
-      this.$emit("input", ev.target.innerText);
+    onBlur(ev) {
+      if (ev.target.innerText) this.$emit("input", ev.target.innerText);
+      else this.$emit("input", this.value);
+      //this.$emit("input", this.value);
     },
   },
 };

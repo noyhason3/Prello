@@ -8,7 +8,11 @@
     <div class="task" :style="`top:${initialHeight}px;`" @click.stop>
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
-        <task-title v-model="task.title" @click.prevent />
+        <task-title
+          v-model="task.title"
+          @click.prevent
+          @input="saveTask(task)"
+        />
         <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
       </div>
       <div class="task-content" @click.stop>
