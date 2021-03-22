@@ -90,7 +90,7 @@ export default {
   async created() {
     this.boardList = [
       {
-        _id: "b102",
+        _id: "demo102",
         title: "Apsus upgrade",
         style: { bgImg: { id: "i102", name: "2.jpg" }, bgColor: "" },
         createdAt: 1546678789800,
@@ -102,7 +102,7 @@ export default {
         activities: [],
       },
       {
-        _id: "b103",
+        _id: "demo103",
         title: "MegoTap web",
         style: { bgImg: { id: "i104", name: "4.jpg" }, bgColor: "" },
         createdAt: 1426678789800,
@@ -114,7 +114,7 @@ export default {
         activities: [],
       },
       {
-        _id: "b104",
+        _id: "demo104",
         title: "MrToy frontend",
         style: { bgImg: "", bgColor: { id: "c101", name: "#C10BB3" } },
         createdAt: 1265678789800,
@@ -126,7 +126,7 @@ export default {
         activities: [],
       },
       {
-        _id: "b105",
+        _id: "demo105",
         title: "Getro ",
         style: { bgImg: { id: "i103", name: "3.jpg" }, bgColor: "" },
         createdAt: 1426678789800,
@@ -138,7 +138,7 @@ export default {
         activities: [],
       },
       {
-        _id: "b106",
+        _id: "demo106",
         title: "Web Dev. MiniMoney",
         style: { bgImg: "", bgColor: { id: "c103", name: "#003152" } },
         createdAt: 1566678789800,

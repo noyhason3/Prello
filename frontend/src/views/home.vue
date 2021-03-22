@@ -12,13 +12,14 @@
       </div>
     </div>
 
-    <div class="about"></div>
+    <about />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { userService } from "../services/NEW-user.service.js";
+import about from "./about.vue";
 export default {
   name: "home",
   methods: {
@@ -27,6 +28,6 @@ export default {
       this.$router.push("/board");
     },
   },
-  components: {},
+  components: { about },
 };
 </script>
