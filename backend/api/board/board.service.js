@@ -6,7 +6,7 @@ async function query(filterBy = {}) {
     try {
         const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('board')
-        const boards = await collection.find(criteria).toArray()
+        const boards = await collection.find({}).toArray()
         // var reviews = await collection.aggregate([
         //     {
         //         $match: filterBy
@@ -53,14 +53,15 @@ async function query(filterBy = {}) {
 }
 
 
-async function getById(boardId){
-    try{
-
+async function getById(boardId) {
+    try {
         const collection = await dbService.getCollection('board')
-        const board = await collection.findOne({'_id': ObjectId(boardId)})
-        return board;
+        if (boardId === 'demo_board') {
+            return await collection.findOne({ '_id': boardId })
+        }
+        return await collection.findOne({ '_id': ObjectId(boardId) })
 
-    } catch(err){
+    } catch (err) {
         logger.error(`while finding board ${boardId}:`, err);
         throw err
     }
@@ -82,7 +83,7 @@ async function remove(boardId) {
     }
 }
 
-async function update(board){
+async function update(board) {
     try {
         const boardToSave = {
             _id: ObjectId(board._id),
@@ -93,9 +94,9 @@ async function update(board){
             tasks: board.tasks
         }
         const collection = await dbService.getCollection('board')
-        await collection.updateOne({'_id': boardToSave._id}, {$set: boardToSave})
+        await collection.updateOne({ '_id': boardToSave._id }, { $set: boardToSave })
         return boardToSave
-    } catch(err){
+    } catch (err) {
         logger.error(`cannot update board ${board._id}`, err)
         throw err
     }
@@ -125,9 +126,9 @@ async function add(board) {
 function _buildCriteria(filterBy) {
     const criteria = {}
 
-    if(filterBy.title){
-        criteria.title = ObjectId(filterBy.title)
-    }
+    // if (filterBy.title) {
+    //     criteria.title = ObjectId(filterBy.title)
+    // }
 
     return criteria
 }

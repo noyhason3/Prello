@@ -4,7 +4,7 @@
     class="task-title"
     contenteditable="true"
     @blur="onBlur"
-    @input="input"
+    ref="title"
   >
     <!-- <h3>💬</h3> -->
     {{ str }}
@@ -26,18 +26,9 @@ export default {
     onBlur(ev) {
       if (ev.target.innerText) this.$emit("input", ev.target.innerText);
       else {
-        console.log(
-          "file: editable-title.vue - line 24 - onBlur - this.value",
-          this.value
-        );
-        this.str = this.value;
         this.$emit("input", this.value);
+        ev.target.innerText = this.value;
       }
-      //this.$emit("input", this.value);
-    },
-    input(ev) {
-      console.log("file: editable-title.vue - line 33 - input - ev", ev);
-      console.log("str", this.str, "\nvalue", this.value);
     },
   },
 };
