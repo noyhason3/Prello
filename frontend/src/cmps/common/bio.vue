@@ -3,14 +3,17 @@
     <img v-if="user.imgUrl" :src="src" :alt="user.name + '\'s Picture'" />
     <h1 class="name">{{ user.name }}</h1>
     <div class="info">
-      <div v-for="icon in user.social" :key="icon.url" class="social">
+      <a
+        v-for="icon in user.social"
+        :key="icon.url"
+        class="social"
+        :href="icon.url"
+      >
         <button
-          @click="location.href = icon.url"
-          :class:="icon.type"
-          class="social-icon"
+          :class="icon.type + ' social-icon'"
           v-html="content(icon.type)"
         ></button>
-      </div>
+      </a>
       <h2 class="description">{{ user.description }}</h2>
     </div>
   </div>
