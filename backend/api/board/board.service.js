@@ -54,7 +54,7 @@ async function query(filterBy = {}) {
 async function getById(boardId) {
   try {
     const collection = await dbService.getCollection('board');
-    if (boardId === 'demo_board') {
+    if (boardId.startsWith('demo')) {
       return await collection.findOne({ _id: boardId });
     }
     return await collection.findOne({ _id: ObjectId(boardId) });
