@@ -1,5 +1,5 @@
 import { httpService } from './http.service.js';
-import { utilService } from './util.service.js';
+import  utilService  from './util.service.js';
 
 const BOARD_URL = 'board/';
 
