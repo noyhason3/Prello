@@ -1,5 +1,5 @@
 <template>
-  <section class="board" v-if="board"  :style="background" >
+  <section class="board" v-if="board" :style="background">
     <board-header :board="board" />
     <draggable
       v-model="board.groups"
@@ -84,10 +84,10 @@ export default {
   },
   async created() {
     ////DONT FORGET TO LOAD PROPERLY - not that we will
-    const boardId = this.$route.params.boardId
+    const boardId = this.$route.params.boardId;
     const board = await boardService.query(boardId);
     // const board = await boardService.getBoardById(boardId);
-    console.log('board:', board)
+    console.log("board:", board);
     this.$store.commit({ type: "setBoard", board });
   },
   methods: {
@@ -106,9 +106,12 @@ export default {
     board() {
       return this.$store.getters.currBoard;
     },
-    background(){
-      return {'background-image': 'url(' + require('../assets/blueNorange.jpg') + ')'}
-    }
+    background() {
+      return {
+        "background-image": "url(" + require("../assets/blueNorange.jpg") + ")",
+        "background-size": "cover",
+      };
+    },
   },
   components: {
     boardHeader,
