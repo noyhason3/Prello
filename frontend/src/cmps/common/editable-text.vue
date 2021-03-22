@@ -1,16 +1,19 @@
 <template>
-  <section class="editable-text" @click="editDescription">
+  <section :class="computedClass()" @click="editDescription">
     <form v-if="isEditing" @submit.prevent="setText">
-      <textarea ref="input" :value="value" :placeholder="placeholder" ></textarea>
-      <div>
-
-      <button class="save-btn">Save</button>
-      <button type="button" @click.stop="closeTextarea">X</button>
+      <textarea
+        ref="input"
+        :value="value"
+        :placeholder="placeholder"
+      ></textarea>
+      <div class="editable-text-controls">
+        <button class="save-btn">Save</button>
+        <button type="button" @click.stop="closeTextarea">X</button>
       </div>
     </form>
     <template v-else>
-      <p v-if="value" >{{ value }}</p>
-      <p v-else>
+      <p v-if="value" class="editable-text-display">{{ value }}</p>
+      <p v-else class="editable-text-display">
         Enter a {{ type }} for this {{ elementType }}...
       </p>
     </template>
@@ -60,11 +63,20 @@ export default {
       this.isEditing = false;
       this.$emit("close-textarea");
     },
+    computedClass() {
+      var str = "editable-text";
+      str += this.isEditing ? " open" : " closed";
+      console.log(
+        "file: editable-text.vue - line 69 - computedClass - str",
+        str
+      );
+      return str;
+    },
   },
-  computed:{
-    placeholder(){
-      return `Enter a ${ this.type } for this ${ this.elementType }..`
-    }
+  computed: {
+    placeholder() {
+      return `Enter a ${this.type} for this ${this.elementType}..`;
+    },
   },
   mounted() {
     if (this.$refs?.input) this.$refs.input.focus();

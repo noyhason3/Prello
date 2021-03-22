@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
   <section class="board" v-if="board"  :style="background" >
+=======
+  <section class="board" v-if="board">
+>>>>>>> 2f907afd2c6ae95c32c8994b3c4e469808833779
     <board-header :board="board" />
     <draggable
       v-model="board.groups"
@@ -46,7 +50,7 @@
           @click="isAddNewGroup = true"
           class="group-addition"
         >
-          Add a new group
+          + Add an additional list
         </button>
         <editable-text
           v-else
@@ -84,7 +88,10 @@ export default {
   },
   async created() {
     ////DONT FORGET TO LOAD PROPERLY - not that we will
-    const board = await boardService.query("b101");
+    const boardId = this.$route.params.boardId
+    const board = await boardService.query(boardId);
+    // const board = await boardService.getBoardById(boardId);
+    console.log('board:', board)
     this.$store.commit({ type: "setBoard", board });
   },
   methods: {

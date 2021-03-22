@@ -60,30 +60,36 @@
                     textarea:hover{
                         background: #e4e4e3;
                     }
+                    textarea:active{
+                        background:#cfcfcc ;
+                    }
                 }
             }
              .group-addition{
+                 margin:0;
+                 margin-inline-end: 5px;
+                 outline:none;
+                 color: #EBECF0 ;
+                 background:#ebecf036;
                  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
                  font-weight: bold;
                  font-size: rem(20px);
-                 color:#ebecf0;
-                 border: 5px dashed #ebecf0;
-                 background:transparent;
+                 max-height: 35px;
+                 width:100%;
                  border-radius: 5px;
-                 outline:none;
-                 word-spacing: 100vw;
-                 margin:0;
+                 //border: 5px dashed #ebecf0;
+                 //word-spacing: 100vw;
              }
              .group-addition:hover{
-                 border-color:white;
-                 color:white;
+                 //border-color:white;
+                 background:#87b0c26e;
              }
              .group-addition:active{
-                 border-color:#222;
-                 color:#222;
+                 color:$clr5;
+                 background: #ebecf0c9;
              }
              .group-addition:focus{
-                 border-color:rgb(212, 212, 212);
+                 border-color:rgba(212, 212, 212, 0.932);
              }
         }
     }

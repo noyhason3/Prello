@@ -17,6 +17,10 @@ export const boardStore = {
     mutations: {
         setBoard(state, { board }) {
             state.board = board;
+            console.log('state board',state.board);
+        },
+        setBoardList(state, {boardList}){
+            state.boardList = boardList;
         },
         setCurrTask(state, { task }) {
             // console.log("🚀 ~ file: board.store.js ~ line 22 ~ setCurrTask ~ task", task)
@@ -55,7 +59,13 @@ export const boardStore = {
             const board = await boardService.removeGroup({ groupId, boardId: state.board._id })
             this.commit({ type: 'setBoard', board });
         },
-
+        removeBoard(state, {boardId}){
+            console.log('boardId:', boardId)
+            const boardIdx = state.boardList.findIndex(board => board._id === boardId)
+            console.log(boardIdx);
+            if(boardIdx < 0) return;
+            state.boardList.splice(boardIdx, 1);
+        }
         // setBoardList(state, {boards}){
             //     state.boards = boards;
             // }
@@ -71,11 +81,30 @@ export const boardStore = {
             async getEmptyBoard(){
                 return boardService.getEmptyBoard();
             },
+            async loadBoardList({commit}){
+                try{
+                    const boardList = await boardService.getBoardList();
+                    commit({ type: 'setBoardList', boardList })
+                    return boardList
+                }catch(err){
+                    console.log('err:', err)
+                }
+            },
             async saveBoard({commit}, {board}){
                 try{
                     const newBoard = await boardService.saveBoard(board);
                     commit({ type: 'setBoard', newBoard })
                     return newBoard
+                }catch(err){
+                    console.log('err:', err)
+                }
+            },
+            async removeBoard({commit},{boardId}){
+                console.log('boardId:', boardId)
+                try{
+                    await boardService.removeBoard(boardId);
+                    console.log('board deleted:', boardId);
+                    commit({ type: 'removeBoard', boardId })
                 }catch(err){
                     // console.log('err:', err)
                 }
