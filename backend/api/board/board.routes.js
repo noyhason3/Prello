@@ -21,10 +21,6 @@ router.delete('/:boardId' , deleteBoard);
 
 
 
-///////////DO WE NEED ROUTES FOR TASK TOO???????????? *********************
-// router.post('/:boardId/taskId', saveTask);
-// router.post('/:boardId/task',requireAuth, saveTask);
-
 module.exports = router;
 
 

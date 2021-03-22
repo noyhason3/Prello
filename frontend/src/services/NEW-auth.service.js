@@ -22,6 +22,7 @@ async function signup(userCred) {
   const user = await httpService.post('auth/signup', userCred);
   return _saveLocalUser(user);
 }
+
 async function logout() {
   return await httpService.post('auth/logout');
 }
