@@ -12,8 +12,9 @@ export default {
       users: [
         {
           name: "Anton Zebnitski",
-          description: "Kero kero",
-          imgUrl: "",
+          description:
+            "<p>\n With an interest in both artistic and technical fields from a young age, I strive to combine these two passions to bring the best possible outcome.</p><small>Also known as SQUID13.</small>",
+          imgUrl: "creator/anton.jpg",
           social: [{ type: "git", url: "https://github.com/SQUlD13" }],
         },
       ],

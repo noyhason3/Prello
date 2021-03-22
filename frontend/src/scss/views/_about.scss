@@ -4,47 +4,72 @@
     .bio{
         margin:0 auto;
         width:300px;
-        .name{
-            width:fit-content;
+        position:relative;
+        img{
+            height:300px;
+            width:300px;
+            border-radius: 50%;
+            object-fit: cover;
+            position:relative;
         }
-
-    }
-    h1{
+        h1{
         font-family:'Pacifico', cursive ;
         font-size: rem(48px);
         color:#2e2e2e;
         margin-block-end: 0;
         line-height:1.2;
         word-spacing:100vw;
-    }
-    .info{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        width:fit-content;
+        }
+    
+        .info{
+        position:absolute;
         width:300px;
         margin-block-start:5px;
-        .social{
-            display: flex;
-            flex-grow: 1;
-            justify-content: flex-end;
-            margin-inline-end:5px;
-            text-decoration: none;
-            .social-icon{
-                background: #a3a3a3;
-                border-radius: 50%;
+            .body{// ALl info other than name and img
+            display:flex;
+            justify-content:space-between;
+            h2{
+                align-self: flex-end;
+                margin:0;
+                padding-inline-start: 8px;
+                padding-block: 15px;
+                border-left: 5px solid $clr5;
                 color:$clr5;
-                font-family:'fa-brands';
-                font-size:36px;
-                align-self: flex-start;
+                p{
+                    font-size: rem(18px);
+                    margin-block-end: 2px;
+                }
+                small{
+                    font-size:rem(12px);
+                    font-style: italic;
+                }
+            }
+            //SOCIAL
+                .social{
+                    display: flex;
+                    flex-grow: 1;
+                    justify-content: flex-end;
+                    margin-inline-end:5px;
+                    text-decoration: none;
+                    margin:0;
+                    padding:0;
+                    .social-icon{
+                        border-radius: 10px;
+                        font-family:'fa-brands';
+                        font-size:36px;
+                        align-self: flex-start;
+                        padding:3px;
+                        margin:3px;
+                        transition: filter .25s ease-out;
+                        &:hover{
+                            filter:brightness(2) contrast(0.75) opacity(0.8);
+                            transition: filter .25s ease-in;
+                        }
+                    }
+                }
             }
         }
-        h2{
-            align-self: flex-end;
-            margin:0;
-            padding-inline-start: 8px;
-            padding-block: 15px;
-            border-left: 5px solid $clr5;
-            color:$clr5;
-        }
     }
+    
 }
