@@ -1,7 +1,7 @@
 <template>
   <section class="board-list-container">
     <h2><span class="starred"></span>Starred boards</h2>
-     <ul v-if="boardList" class="clean-list board-list">
+    <ul v-if="boardList" class="clean-list board-list">
       <li
         v-for="board in starredBoards"
         :key="board._id"
@@ -9,12 +9,12 @@
         @click="openBoard(board._id)"
         :style="boardStyle(board)"
       >
-        {{ board.title }}
-        <button class="board-options" @click.stop="toggleOptionsMenu"></button>
+        <h3>{{ board.title }}</h3>
+        <button class="toggle-starred" @click.stop="toggleStarred(board._id)"></button>
         <!-- <button @click.stop="removeBoard(board._id)">X</button> -->
       </li>
     </ul>
-    <h2 ><span class="recent"></span>Recently viewed</h2>
+    <h2><span class="recent"></span>Recently viewed</h2>
     <ul v-if="boardList" class="clean-list board-list">
       <li
         v-for="board in boardList"
@@ -23,8 +23,11 @@
         @click="openBoard(board._id)"
         :style="boardStyle(board)"
       >
-        {{ board.title }}
+        <h3>{{ board.title }}</h3>
         <button class="board-options"></button>
+        <div v-if="isOptionsOpen" class="nav-board-options">
+          <button>Remove board</button>
+        </div>
         <!-- <button @click.stop="removeBoard(board._id)">X</button> -->
       </li>
       <li>
@@ -86,6 +89,7 @@ export default {
       boardToEdit: null,
       boardList: null,
       selectedStyle: null,
+      isOptionsOpen:false,
       imgs: [
         { id: "i101", name: "1.jpg" },
         { id: "i102", name: "2.jpg" },
@@ -101,9 +105,8 @@ export default {
       ],
     };
   },
-  async created() { 
+  async created() {
     this.boardList = await this.$store.dispatch({ type: "loadBoards" });
-
   },
   methods: {
     async openBoardPopup() {
@@ -149,8 +152,11 @@ export default {
       style = this.colors.find(({ id }) => id === styleId);
       return style;
     },
-    toggleOptionsMenu(){
-      this.isOptionsOpen = !this.isOptionsOpen
+    toggleOptionsMenu() {
+      this.isOptionsOpen = !this.isOptionsOpen;
+    },
+    toggleStarred(id){
+      
     }
   },
   computed: {
@@ -165,9 +171,9 @@ export default {
       const styles = imgStyles.concat(colorStyles);
       return styles;
     },
-    starredBoards(){
-      return this.boardList.filter(({isStarred}) => isStarred)
-    }
+    starredBoards() {
+      return this.boardList.filter(({ isStarred }) => isStarred);
+    },
   },
   components: {
     popup,

@@ -46,6 +46,17 @@
             border:none;
             // transition:0.2s;
         }
+        .toggle-starred{
+            position:absolute;
+            bottom:3px;
+            right:0px;
+            background-color: transparent;
+            color:rgba(255, 255, 255, 0.705);
+        }
+        .toggle-starred::before{
+            font-family: 'fa-brands';
+            content: "\f005"
+        }
         .board-options:hover{
             opacity:1;
         }
@@ -54,6 +65,7 @@
             font-family:'fa-solid';
             content:"\f142";
         }
+    
 
     }
 
