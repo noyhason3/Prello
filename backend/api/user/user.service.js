@@ -1,7 +1,6 @@
 
 const dbService = require('../../services/db.service')
 // const logger = require('../../services/logger.service')
-const reviewService = require('../review/review.service')
 const ObjectId = require('mongodb').ObjectId
 
 module.exports = {
@@ -50,6 +49,7 @@ async function getById(userId) {
         throw err
     }
 }
+
 async function getByUsername(username) {
     try {
         const collection = await dbService.getCollection('user')
@@ -76,9 +76,10 @@ async function update(user) {
         // peek only updatable fields!
         const userToSave = {
             _id: ObjectId(user._id),
-            username: user.username,
             fullname: user.fullname,
-            score: user.score
+            username: user.username,
+            imgUrl: user.imgUrl,
+            mentions: user.mentions
         }
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ '_id': userToSave._id }, { $set: userToSave })
@@ -93,10 +94,9 @@ async function add(user) {
     try {
         // peek only updatable fields!
         const userToAdd = {
-            username: user.username,
-            password: user.password,
             fullname: user.fullname,
-            score: user.score || 0
+            username: user.username,
+            imgUrl: user.imgUrl,
         }
         const collection = await dbService.getCollection('user')
         await collection.insertOne(userToAdd)
