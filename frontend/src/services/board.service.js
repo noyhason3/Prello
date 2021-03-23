@@ -25,11 +25,13 @@ function remove(id) {
   return httpService.delete(BOARD_URL + id);
 }
 
-function save(board) {
+async function save(board) {
   if (board._id) {
-    return httpService.put(BOARD_URL + board._id, board);
+    var savedBoard = await httpService.put(BOARD_URL + board._id, board);
+    console.log("file: board.service.js - line 31 - save - savedBoard", savedBoard)
+    return savedBoard
   } else {
-    return httpService.post(BOARD_URL, board);
+    return await httpService.post(BOARD_URL, board);
   }
 }
 

@@ -81,7 +81,6 @@ export const boardStore = {
       }
     },
     async removeBoard({ commit }, { boardId }) {
-      console.log('boardId:', boardId);
       try {
         await boardService.remove(boardId);
         console.log('board deleted:', boardId);
@@ -107,7 +106,7 @@ export const boardStore = {
       }
 
       await boardService.save(board);
-      commit({ type: 'setBoard', board });
+      commit({ type: 'setBoard', currBoard: board });
     },
     async removeGroup({ commit, state }, { groupId }) {
       const board = JSON.parse(JSON.stringify(state.board));
@@ -116,7 +115,7 @@ export const boardStore = {
       board.groups.splice(groupIdx, 1);
 
       await boardService.save(board);
-      commit({ type: 'setBoard', board });
+      commit({ type: 'setBoard', currBoard: board });
     },
     async saveTask({ commit, state }, { groupId, task }) {
       const board = JSON.parse(JSON.stringify(state.board));
@@ -143,7 +142,7 @@ export const boardStore = {
       await boardService.save(board);
 
       commit({ type: 'setCurrTask', task });
-      commit({ type: 'setBoard', board });
+      commit({ type: 'setBoard', currBoard: board });
     },
     async removeTask({ state, commit }, { taskId }) {
       console.log('hi');
@@ -157,7 +156,7 @@ export const boardStore = {
       if (taskIdx < 0) return;
       group.tasks.splice(taskIdx, 1);
       await boardService.save(board);
-      commit({ type: 'setBoard', board });
+      commit({ type: 'setBoard', currBoard: board });
       //   return Promise.resolve({ group, board });
     },
 
@@ -166,7 +165,7 @@ export const boardStore = {
       board.labels = labels;
 
       await boardService.save(board);
-      commit({ type: 'setBoard', board });
+      commit({ type: 'setBoard', currBoard: board });
     },
 
     // FOR ADVANCED STEPS- WITH WEB SOCKETS *****************************************
