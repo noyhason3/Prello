@@ -3,11 +3,17 @@ const ObjectId = require('mongodb').ObjectId;
 const asyncLocalStorage = require('../../services/als.service');
 const logger = require('../../services/logger.service');
 
+const DEMO_BOARD = require('../../data/demo_board.json')
 
 async function query(filterBy = {}) {
   try {
     const criteria = _buildCriteria(filterBy);
     const collection = await dbService.getCollection('board');
+    const store = asyncLocalStorage.getStore()
+    const { username } = store
+    if (username === 'Guest') {
+      console.log('Hello' + username + '!')
+    }
     const boards = await collection.find({}).toArray();
     // var reviews = await collection.aggregate([
     //     {
@@ -57,7 +63,11 @@ async function getById(boardId) {
   try {
     const collection = await dbService.getCollection('board');
     if (boardId.startsWith('demo')) {
-      return await collection.findOne({ _id: boardId });
+      var board = await collection.findOne({ _id: boardId });
+      if (board.groups && !board.groups.length) {
+        board.groups = await DEMO_BOARD.groups
+      }
+      return board
     }
     return await collection.findOne({ _id: ObjectId(boardId) });
   } catch (err) {
