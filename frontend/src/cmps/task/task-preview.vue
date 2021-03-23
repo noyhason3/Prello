@@ -1,9 +1,10 @@
 <template>
   <section class="task-preview" v-if="task">
-    <button @click="removeTask" class="btn close">X</button>
+    <!-- <button @click="removeTask" class="btn close">X</button> -->
     <!-- <img v-if="isTaskCover" src="task.coverUrl"> -->
     <!-- If cover image- show image, if cover color set section background-color-->
 
+      <button @click="removeTask" class="btn close">X</button>
     <task-label-preview
       v-if="taskLabelIds"
       :taskLabelIds="taskLabelIds"

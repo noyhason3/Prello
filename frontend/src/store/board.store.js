@@ -73,6 +73,7 @@ export const boardStore = {
       try {
         const newBoard = await boardService.saveBoard(board);
         commit({ type: 'setBoard', newBoard });
+// socket comes here
         return newBoard;
       } catch (err) {
         console.log('err:', err);
@@ -94,7 +95,7 @@ export const boardStore = {
       });
       return group;
     },
-    async saveGroup({state, commit }, { group }) {
+    async saveGroup({ state, commit }, { group }) {
       const board = JSON.parse(JSON.stringify(state.board));
       const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
       if (group.id) {
@@ -216,3 +217,7 @@ export const boardStore = {
     //     },
   },
 };
+
+// ********** Activity
+
+const activity = {};
