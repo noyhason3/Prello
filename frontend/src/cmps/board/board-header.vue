@@ -29,7 +29,11 @@ export default {
       return str;
     },
     saveBoard(val) {
-      console.log("file: board-header.vue - line 35 - saveBoard - val", val);
+      console.log(
+        "file: board-header.vue - line 35 - saveBoard - val",
+        this.board.title
+      );
+      this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
   },
   components: { editableTitle, memberList },
