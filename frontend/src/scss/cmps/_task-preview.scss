@@ -12,14 +12,21 @@
   cursor: pointer;
   border-radius: 5px;
   box-shadow: $subtle-shadow;
-  padding: 6px 8px 2px;
   text-align: start;
+
+  .task-cover-preview {
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .task-preview-main {
+    padding: 6px 8px 2px;
+  }
 
   &:hover {
     background-color: rgb(248, 248, 248);
     .btn.close {
       opacity: 1;
-      &:hover{
+      &:hover {
         border-radius: 4px;
         background-color: #e4e4e365;
       }
@@ -31,6 +38,11 @@
     align-self: flex-end;
     opacity: 0;
     position: absolute;
+  }
+
+  .task-cover-preview {
+    width: 100%;
+    height: 32px;
   }
 
   .task-info-preview {
