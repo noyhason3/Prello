@@ -1,0 +1,7 @@
+.editable-title{
+    width:100%;
+    max-width: 300px;
+    &:focus{
+        background: #ebecf0;
+    }
+}

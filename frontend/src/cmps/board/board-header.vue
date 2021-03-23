@@ -6,7 +6,7 @@
     <div class="board-header-members">
       <member-list :members="board.members" :isTaskRelated="false" />
     </div>
-    <div>Show Menu</div>
+    <div class="menu-btn">Show Menu</div>
   </section>
 </template>
 <script>
