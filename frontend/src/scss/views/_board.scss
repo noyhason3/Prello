@@ -19,6 +19,7 @@
 
         .editable-title{
             border:0;
+            font-weight: bold;
         }
 
 
@@ -43,6 +44,13 @@
             &:focus{
                 border-color:darken($starColor,25);
             }
+        }
+
+        .menu-btn{
+            border:2.5px solid $clr5;
+            font-weight: bold;
+            color:$clr5;
+            padding-inline: 5px;
         }
     }
     
