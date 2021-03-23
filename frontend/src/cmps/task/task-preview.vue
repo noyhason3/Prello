@@ -3,8 +3,9 @@
     <!-- <button @click="removeTask" class="btn close">X</button> -->
     <!-- <img v-if="isTaskCover" src="task.coverUrl"> -->
     <!-- If cover image- show image, if cover color set section background-color-->
+    <button @click="removeTask" class="btn close">X</button>
+    <task-cover-preview v-if="isTaskCover" />
 
-      <button @click="removeTask" class="btn close">X</button>
     <task-label-preview
       v-if="taskLabelIds"
       :taskLabelIds="taskLabelIds"
@@ -57,17 +58,15 @@ export default {
     },
   },
   computed: {
-    // isTaskCover() {
-    //   return this.task.cover;
-    // },
-
+    isTaskCover() {
+      return this.task.cover;
+    },
     isTaskDescription() {
       return this.task.description;
     },
     attachmentCount() {
       return this.task.attachment?.length;
     },
-
     isTaskDuedate() {
       return false;
       //return this.task.duedate;

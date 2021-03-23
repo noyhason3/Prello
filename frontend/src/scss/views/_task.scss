@@ -18,7 +18,7 @@
     flex-direction: row-reverse;
     justify-content: space-between;
     font-size: 22px;
-    padding: 10px 10px 10px 15px;
+    // padding: 10px 10px 10px 15px;
     //margin-top: 100px;
     display: flex;
     flex-direction: column;
@@ -27,6 +27,7 @@
 
     .header {
       // margin-bottom: 10px;
+      margin: 12px 40px 8px 10px;
       .task-title{
         line-height: 0.875;
         width:fit-content;
@@ -47,6 +48,7 @@
     }
     .task-content {
       display: flex;
+      padding: 0px 8px 8px 16px;
       flex-direction: row-reverse;
       justify-content: space-between;
     }

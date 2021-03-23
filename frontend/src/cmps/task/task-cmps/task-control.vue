@@ -2,6 +2,13 @@
   <section class="task-control">
     <!-- SUGGESTED                       ******TODO********
       <button>Join</button> -->
+    <button @click="togglePopup('Cover')" class="control-btn">Cover</button>
+    <popup-cover
+      v-if="isCoverOpen"
+      @close-popup="isCoverOpen = false"
+      @toggle-popup="togglePopup"
+      @set-cover-color="setCoverColor"
+    />
 
     <h6 class="add-to-card-btn">ADD TO CARD</h6>
     <button @click="togglePopup('Member')" class="control-btn">Members</button>
@@ -20,7 +27,7 @@
       v-if="isChecklistOpen"
       @add-checklist="setChecklist"
       @toggle-popup="togglePopup"
-    ></popup-checklist>
+    />
 
     <button @click="toggleGeneralPopup($event, 'Label')" class="control-btn">
       Labels
@@ -36,11 +43,11 @@
       @toggle-popup="togglePopup"
       :attachments="attachments"
     />
-    <!-- <button>Cover</button> -->
   </section>
 </template>
 
 <script>
+import popupCover from "@/cmps/task/popup/popup-cover.vue";
 import popupMember from "@/cmps/task/popup/popup-member";
 import popupChecklist from "@/cmps/task/popup/popup-checklist.vue";
 import popupAttachment from "@/cmps/task/popup/popup-attachment.vue";
@@ -51,6 +58,7 @@ export default {
   },
   data() {
     return {
+      isCoverOpen: false,
       isMemberOpen: false,
       isLabelOpen: false,
       isChecklistOpen: false,
@@ -67,6 +75,10 @@ export default {
       const targetRect = ev.target.getBoundingClientRect();
       const buttonLeftPos = targetRect.left;
       this.$emit("toggle-popup", { str, buttonLeftPos });
+    },
+    setCoverColor(color){
+      console.log(color);
+      this.$emit("set-cover-color", color)
     },
     assignTaskMember(member) {
       this.$emit("assign-task-member", member);
@@ -87,6 +99,7 @@ export default {
     },
   },
   components: {
+    popupCover,
     popupMember,
     popupChecklist,
     popupAttachment,
