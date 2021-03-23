@@ -66,10 +66,10 @@ export default {
     computedClass() {
       var str = "editable-text";
       str += this.isEditing ? " open" : " closed";
-      console.log(
-        "file: editable-text.vue - line 69 - computedClass - str",
-        str
-      );
+      // console.log(
+      //   "file: editable-text.vue - line 69 - computedClass - str",
+      //   str
+      // );
       return str;
     },
   },

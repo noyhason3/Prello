@@ -28,7 +28,7 @@ function remove(id) {
 async function save(board) {
   if (board._id) {
     var savedBoard = await httpService.put(BOARD_URL + board._id, board);
-    console.log("file: board.service.js - line 31 - save - savedBoard", savedBoard)
+    // console.log("file: board.service.js - line 31 - save - savedBoard", savedBoard)
     return savedBoard
   } else {
     return await httpService.post(BOARD_URL, board);

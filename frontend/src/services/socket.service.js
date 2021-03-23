@@ -19,7 +19,6 @@ function createSocketService() {
       socket = io(baseUrl)
     },
     on(eventName, cb) {
-      
       if (!socket) socketService.setup();
       socket.on(eventName, cb)
     },
