@@ -124,7 +124,7 @@ import taskLabel from "@/cmps/task/task-cmps/task-label.vue";
 import popupLabel from "@/cmps/task/popup/popup-label.vue";
 import taskAttachment from "@/cmps/task/task-cmps/task-attachment.vue";
 import fileDragUploader from "@/cmps/common/file-drag-uploader.vue";
-import boardService from "../services/board.service";
+import { boardService } from "../services/board.service";
 
 export default {
   data() {

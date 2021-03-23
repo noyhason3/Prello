@@ -66,9 +66,9 @@
 
 
 <script>
+import { boardService } from "../services/board.service";
 import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
-import boardService from "../services/board.service";
 import editableText from "@/cmps/common/editable-text.vue";
 import draggable from "vuedraggable";
 
@@ -92,7 +92,9 @@ export default {
       if (!this.newGroup.title) return;
       this.newGroup.board = { id: this.board._id };
       await this.$store.dispatch({ type: "saveGroup", group: this.newGroup });
-      this.newGroup = JSON.parse(JSON.stringify(this.$store.getters.getEmptyGroup));
+      this.newGroup = JSON.parse(
+        JSON.stringify(this.$store.getters.getEmptyGroup)
+      );
       this.isAddNewGroup = false;
     },
     saveBoard() {

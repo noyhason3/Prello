@@ -22,9 +22,11 @@
             ></button>
           </li>
         </ul>
-        <div class="btn-container">   
-        <button @click="saveLabel" class="btn action-color">Save</button>
-        <button @click="toggleIsDelete" class="btn warning-color">Delete</button>
+        <div class="btn-container">
+          <button @click="saveLabel" class="btn action-color">Save</button>
+          <button @click="toggleIsDelete" class="btn warning-color">
+            Delete
+          </button>
         </div>
       </div>
     </pop-up>
@@ -48,6 +50,7 @@
 
 <script>
 import popUp from "@/cmps/common/pop-up.vue";
+import utilService from "../../../services/util.service";
 export default {
   props: {
     label: Object,
@@ -69,7 +72,7 @@ export default {
   },
   created() {
     this.labelToEdit = { ...this.label } || {
-      id: null,
+      id: utilService.makeId(),
       color: this.colors[0].color,
       title: "",
     };
@@ -89,7 +92,11 @@ export default {
       );
     },
     saveLabel() {
-      console.log(this.labelToEdit);
+      this.labelToEdit.id = utilService.makeId();
+      console.log(
+        "file: popup-label-edit.vue - line 96 - saveLabel - this.labelToEdit",
+        this.labelToEdit
+      );
       this.$emit("save-label", this.labelToEdit);
     },
     toggleIsDelete() {

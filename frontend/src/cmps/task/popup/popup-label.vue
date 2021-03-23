@@ -19,19 +19,26 @@
             class="flex align-center label-preview"
           >
             <!-- <div class="label-color"> -->
-              <button
-                @click="toggleSelectLabel(label.id)"
-                :style="'background-color:' + label.color + ';color:$clr1;'"
-                :class="{ 'label-in-use': isUsed(label.id) }"
-                class="btn label label-color"
-              >
-                {{ label.title }}
-              </button>
+            <button
+              @click="toggleSelectLabel(label.id)"
+              :style="'background-color:' + label.color + ';color:$clr1;'"
+              :class="{ 'label-in-use': isUsed(label.id) }"
+              class="btn label label-color"
+            >
+              {{ label.title }}
+            </button>
             <!-- </div> -->
-            <button @click="openLabelEdit('Change', label)" class="btn edit-label">🖋</button>
+            <button
+              @click="openLabelEdit('Change', label)"
+              class="btn edit-label"
+            >
+              🖋
+            </button>
           </li>
         </ul>
-        <button @click="openLabelEdit('Create')" class="btn wide">Create a new label</button>
+        <button @click="openLabelEdit('Create')" class="btn wide">
+          Create a new label
+        </button>
       </div>
     </pop-up>
     <popup-label-edit
@@ -91,18 +98,25 @@ export default {
       this.$emit("toggle-popup", { str: "Label", buttonLeftPos: 0 });
     },
     async saveLabel(label) {
+      console.log("file: popup-label.vue - line 94 - saveLabel - label", label);
       if (this.selectedLabel) {
         const { color, title } = label;
         this.selectedLabel.color = color;
         this.selectedLabel.title = title;
       } else this.boardLabels.push(label);
-      await this.$store.dispatch({ type: "saveBoardLabels", labels: this.boardLabels });
+      await this.$store.dispatch({
+        type: "saveBoardLabels",
+        labels: this.boardLabels,
+      });
       this.closeLabelEdit();
     },
     async removeBoardLabel(id) {
       const labelIdx = this.boardLabels.findIndex((label) => label.id === id);
       if (labelIdx >= 0) this.boardLabels.splice(labelIdx, 1);
-      await this.$store.dispatch({ type: "saveBoardLabels", labels: this.boardLabels });
+      await this.$store.dispatch({
+        type: "saveBoardLabels",
+        labels: this.boardLabels,
+      });
     },
   },
   computed: {
