@@ -1,26 +1,15 @@
 <template>
   <section class="login-page">
     <h1>Log in :</h1>
-    <userForm @submit="logIn" />
+    <userForm @submit="logIn" :type="'login'" />
     <h1>Sign Up :</h1>
-    <input
-      type="text"
-      placeholder="Full Name..."
-      v-model="fullname"
-      class="fullname"
-    />
-    <userForm @submit="signUp" />
+    <userForm @submit="signUp" :type="'signup'" />
   </section>
 </template>
 
 <script>
 import userForm from "@/cmps/user-form.vue";
 export default {
-  data() {
-    return {
-      fullname: "",
-    };
-  },
   components: { userForm },
   methods: {
     async logIn(userCred) {
@@ -28,7 +17,6 @@ export default {
       this.$router.push("/board");
     },
     async signUp(userCred) {
-      userCred.fullname = this.fullname;
       await this.$store.dispatch({ type: "signup", userCred });
       this.$router.push("/board");
     },
