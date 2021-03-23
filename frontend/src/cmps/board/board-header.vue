@@ -1,7 +1,7 @@
 <template>
   <section class="board-header">
     <!-- <div class="board-title">{{ board.title }}</div> -->
-    <editableTitle v-model="board.title" @input="saveBoard"></editableTitle>
+    <editableTitle v-model="board.title"></editableTitle>
     <button @click="toggleStarred" :class="starredClass">&#xf005;</button>
     <div class="board-header-members">
       <member-list :members="board.members" :isTaskRelated="false" />
@@ -29,7 +29,16 @@ export default {
       return str;
     },
     saveBoard(val) {
-      // console.log("file: board-header.vue - line 35 - saveBoard - val", val);
+      console.log(
+        "file: board-header.vue - line 35 - saveBoard - val",
+        this.board.title
+      );
+      this.$store.dispatch({ type: "saveBoard", board: this.board });
+    },
+  },
+  watch: {
+    "board.title"() {
+      this.saveBoard;
     },
   },
   components: { editableTitle, memberList },

@@ -83,7 +83,11 @@
                     "attachments": [],
                     "labelIds": [
                         "important"
-                    ]
+                    ],
+                    "style": {
+                        "coverColor":"",
+                        "coverImg" : ""
+                    }
                 },
                 {
                     "id": "c102",
@@ -117,7 +121,11 @@
                             "url": "https://www.smartsheet.com/sites/default/files/IC-Project-Timeline-Template.jpg",
                             "createdAt": "1615155239874"
                         }
-                    ]
+                    ],
+                    "style": {
+                        "coverColor":"",
+                        "coverImg" : ""
+                    }
                 },
                 {
                     "id": "c103",
@@ -189,7 +197,11 @@
                             "fullname": "Tal Tarablus",
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
-                    ]
+                    ],
+                    "style": {
+                        "coverColor":"",
+                        "coverImg" : ""
+                    }
                 }
             ],
             "style": {}
@@ -206,7 +218,11 @@
                     "attachments": [],
                     "labelIds": [
                         "done"
-                    ]
+                    ],
+                    "style": {
+                        "coverColor":"",
+                        "coverImg" : ""
+                    }
                 },
                 {
                     "id": "c105",
@@ -285,7 +301,8 @@
                         "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                     },
                     "style": {
-                        "bgColor": "#26de81"
+                        "coverColor":"",
+                        "coverImg" : ""
                     }
                 }
             ],
@@ -341,7 +358,11 @@
                             "fullname": "Tal Tarablus",
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
-                    ]
+                    ],
+                    "style": {
+                        "coverColor":"",
+                        "coverImg" : ""
+                    }
                 },
                 {
                     "id": "GDSJKM",
@@ -350,7 +371,11 @@
                     "attachments": [],
                     "labelIds": [
                         "hold"
-                    ]
+                    ],
+                    "style": {
+                        "coverColor":"",
+                        "coverImg" : ""
+                    }
                 }
             ],
             "style": {}
@@ -366,7 +391,11 @@
                     "attachments": [],
                     "labelIds": [
                         "progress"
-                    ]
+                    ],
+                    "style": {
+                        "coverColor":"",
+                        "coverImg" : ""
+                    }
                 },
                 {
                     "id": "GDSJKL",
@@ -383,7 +412,11 @@
                             "fullname": "Anna Avraham",
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
-                    ]
+                    ],
+                    "style": {
+                        "coverColor":"",
+                        "coverImg" : ""
+                    }
                 },
                 {
                     "id": "GDSJKP",
@@ -405,7 +438,11 @@
                             "_id": "u102",
                             "fullname": "Noam Ben Yosef"
                         }
-                    ]
+                    ],
+                    "style": {
+                        "coverColor":"",
+                        "coverImg" : ""
+                    }
                 }
             ],
             "style": {}
@@ -468,7 +505,11 @@
                             "fullname": "Keshet Sheshet",
                             "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
                         }
-                    ]
+                    ],
+                    "style": {
+                        "coverColor":"",
+                        "coverImg" : ""
+                    }
                 }
             ],
             "style": {}

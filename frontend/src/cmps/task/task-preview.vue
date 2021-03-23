@@ -6,9 +6,9 @@
     <!-- <div class="task-preview-header"> -->
       <button @click="removeTask" class="btn close">X</button>
       <div
-        v-if="task.cover"
+        v-if="task.style.coverColor"
         class="task-cover-preview"
-        :style="`background-color: ${task.cover}`"
+        :style="`background-color: ${task.style.coverColor}`"
       />
     <!-- </div> -->
 
@@ -66,9 +66,9 @@ export default {
     },
   },
   computed: {
-    isTaskCover() {
-      return this.task.cover;
-    },
+    // isTaskCover() {
+    //   return this.task.style.coverColor;
+    // },
     isTaskDescription() {
       return this.task.description;
     },

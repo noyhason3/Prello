@@ -6,7 +6,7 @@
     @click.stop="closeTask"
   >
     <div class="task" :style="`top:${initialHeight}px;`" @click.stop>
-      <div v-if="task.cover" class="task-cover" :style="`background-color: ${task.cover}`"/>
+      <div v-if="task.style.coverColor" class="task-cover" :style="`background-color: ${task.style.coverColor}`"/>
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
         <task-title
@@ -185,7 +185,8 @@ export default {
     },
     setCoverColor(color){
       // this.coverColor = color
-      this.task.cover = color
+      console.log(this.task);
+      this.task.style.coverColor = color
       this.saveTask(this.task);
 
     },
