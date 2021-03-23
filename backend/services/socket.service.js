@@ -17,7 +17,7 @@ function connectSockets(http, session) {
     gIo.on('connection', socket => {
         console.log('New socket - socket.handshake.sessionID', socket.handshake.sessionID)
         gSocketBySessionIdMap[socket.handshake.sessionID] = socket
-        console.log(socket.handshake?.session?.user);
+        console.log('session user:',socket.handshake?.session?.user);
         // TODO: emitToUser feature - need to tested for CaJan21
         // if (socket.handshake?.session?.user) socket.join(socket.handshake.session.user._id)
         socket.on('disconnect', socket => {
@@ -36,7 +36,6 @@ function connectSockets(http, session) {
             socket.currBoard = boardId
         })
         socket.on('save-board', board => {
-            console.log('saving board');
             socket.to(board._id).emit('board-update', board)
         })
         socket.on('join-task', taskId => {

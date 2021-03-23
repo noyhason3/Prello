@@ -4,7 +4,7 @@
         "title": "Web Dev. Prello Management",
         "style": {
             "bgImg": {
-                "id": "i102",
+                "id": "i110",
                 "value": "blueNorange.jpg"
             },
             "bgColor": ""
@@ -57,11 +57,11 @@
         "_id": "demo104",
         "title": "MrToy frontend",
         "style": {
-            "bgImg": "",
-            "bgColor": {
-                "id": "c101",
-                "value": "#C10BB3"
-            }
+            "bgImg": {
+                "id": "i110",
+                "value": "5.jpg"
+            },
+            "bgColor": {}
         },
         "createdAt": 1265678789800,
         "lastViewedAt": 1585678789800,
