@@ -3,17 +3,18 @@ const ObjectId = require('mongodb').ObjectId;
 const asyncLocalStorage = require('../../services/als.service');
 const logger = require('../../services/logger.service');
 
+const DEMO_BOARDS = require('../../data/demo_boards.json')
 const DEMO_BOARD = require('../../data/demo_board.json')
 
 async function query(filterBy = {}) {
   try {
-    const criteria = _buildCriteria(filterBy);
-    const collection = await dbService.getCollection('board');
     const store = asyncLocalStorage.getStore()
     const { username } = store
     if (username === 'Guest') {
-      console.log('Hello' + username + '!')
+      return await DEMO_BOARDS
     }
+    const criteria = _buildCriteria(filterBy);
+    const collection = await dbService.getCollection('board');
     const boards = await collection.find({}).toArray();
     // var reviews = await collection.aggregate([
     //     {
@@ -65,7 +66,7 @@ async function getById(boardId) {
     if (boardId.startsWith('demo')) {
       var board = await collection.findOne({ _id: boardId });
       if (board.groups && !board.groups.length) {
-        board.groups = await DEMO_BOARD.groups
+        populateDemoData(board)
       }
       return board
     }
@@ -124,6 +125,13 @@ function _buildCriteria(filterBy) {
   // }
 
   return criteria;
+}
+
+function populateDemoData(board) {
+  board.groups = DEMO_BOARD.groups
+  board.members = DEMO_BOARD.members
+  board.labels = DEMO_BOARD.labels
+  board.activities = DEMO_BOARD.activities
 }
 
 module.exports = {
