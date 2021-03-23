@@ -1,9 +1,13 @@
 <template>
   <section class="login-page">
-    <h1>Log in :</h1>
-    <userForm @submit="logIn" :type="'login'" />
-    <h1>Sign Up :</h1>
-    <userForm @submit="signUp" :type="'signup'" />
+    <div class="login">
+      <h1>Log in :</h1>
+      <userForm @submit="logIn" :type="'login'" />
+    </div>
+    <div class="signup">
+      <h1>Sign Up :</h1>
+      <userForm @submit="signUp" :type="'signup'" />
+    </div>
   </section>
 </template>
 

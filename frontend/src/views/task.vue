@@ -6,7 +6,11 @@
     @click.stop="closeTask"
   >
     <div class="task" :style="`top:${initialHeight}px;`" @click.stop>
-      <div v-if="coverColor" class="task-cover" :style="`background-color: ${coverColor}`"/>
+      <div
+        v-if="coverColor"
+        class="task-cover"
+        :style="`background-color: ${coverColor}`"
+      />
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
         <task-title
@@ -130,7 +134,7 @@ import { boardService } from "../services/board.service";
 export default {
   data() {
     return {
-      coverColor:null,
+      coverColor: null,
       isLabelOpen: false,
       isDragOver: false,
       drag: false,
@@ -184,8 +188,8 @@ export default {
     setDescription() {
       this.saveTask(this.task);
     },
-    setCoverColor(color){
-      this.coverColor = color
+    setCoverColor(color) {
+      this.coverColor = color;
       // this.task.cover = cover
     },
     assignTaskMember(member) {

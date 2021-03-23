@@ -5,7 +5,7 @@
         "style": {
             "bgImg": {
                 "id": "i102",
-                "name": "2.jpg"
+                "value": "2.jpg"
             },
             "bgColor": ""
         },
@@ -23,7 +23,7 @@
         "style": {
             "bgImg": {
                 "id": "i102",
-                "name": "2.jpg"
+                "value": "2.jpg"
             },
             "bgColor": ""
         },
@@ -41,7 +41,7 @@
         "style": {
             "bgImg": {
                 "id": "i104",
-                "name": "4.jpg"
+                "value": "4.jpg"
             },
             "bgColor": ""
         },
@@ -60,7 +60,7 @@
             "bgImg": "",
             "bgColor": {
                 "id": "c101",
-                "name": "#C10BB3"
+                "value": "#C10BB3"
             }
         },
         "createdAt": 1265678789800,
@@ -77,7 +77,7 @@
         "style": {
             "bgImg": {
                 "id": "i103",
-                "name": "3.jpg"
+                "value": "3.jpg"
             },
             "bgColor": ""
         },
@@ -96,7 +96,7 @@
             "bgImg": "",
             "bgColor": {
                 "id": "c103",
-                "name": "#003152"
+                "value": "#003152"
             }
         },
         "createdAt": 1566678789800,

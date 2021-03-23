@@ -120,7 +120,7 @@ export default {
   methods: {
     openBoardPopup() {
       this.boardToEdit = this.$store.getters.emptyBoard;
-      console.log('this.boardToEdit:', this.boardToEdit)
+      console.log("this.boardToEdit:", this.boardToEdit);
       this.selectedStyle = this.bgStyles[0];
       this.isAddBoard = true;
     },

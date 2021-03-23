@@ -16,6 +16,34 @@
             border-radius: 6px;
             border: 2px solid $clr4;
         }
+
+        .editable-title{
+            border:0;
+        }
+
+
+        .is-starred{
+            $starColor:goldenrod;
+            color:$starColor;
+            font-family: 'fa-reg';
+            &.active{
+                font-family:'fa-solid'
+            }
+            padding:2px;
+
+            outline:none;
+            background: transparent;
+            border: 3px solid $starColor;
+            transition:color .25s linear border .25s linear;
+            &:active{
+                border-color:darken( $starColor ,15);
+                color:darken($starColor,15);
+                transition:color .25s linear border .25s linear;
+            }
+            &:focus{
+                border-color:darken($starColor,25);
+            }
+        }
     }
     
     .main{
