@@ -29,7 +29,7 @@ export default {
       return str;
     },
     saveBoard(val) {
-      console.log("file: board-header.vue - line 35 - saveBoard - val", val);
+      // console.log("file: board-header.vue - line 35 - saveBoard - val", val);
     },
   },
   components: { editableTitle, memberList },

@@ -35,6 +35,7 @@
         </transition>
         <button
           class="toggle-starred"
+          :class="{starred:isBoardStarred(board._id)}"
           @click.stop="toggleStarred(board)"
         ></button>
       </li>
@@ -51,35 +52,35 @@
         :class="{ 'add-board': isAddBoard }"
       ></div>
       <div v-if="isAddBoard" class="popup-create-board">
-          <form @submit.prevent="createNewBoard">
-            <div class="new-board-info">
-              <div class="title-container" :style="selectedStyle.style">
-                <input
-                  type="text"
-                  placeholder="Add board title"
-                  v-model="boardToEdit.title"
-                  class="title"
-                />
-                <button @click="closeBoardPopup" class="btn close">X</button>
-              </div>
-              <ul class="clean-list bgStyle-list">
-                <li
-                  v-for="(style, idx) in bgStyles"
-                  @click="selectStyle(style)"
-                  :key="'style' + idx"
-                  class="bgStyle"
-                  :class="{ selected: isSelected(style.id) }"
-                  :style="style.style"
-                ></li>
-              </ul>
+        <form @submit.prevent="createNewBoard">
+          <div class="new-board-info">
+            <div class="title-container" :style="selectedStyle.style">
+              <input
+                type="text"
+                placeholder="Add board title"
+                v-model="boardToEdit.title"
+                class="title"
+              />
+              <button @click="closeBoardPopup" class="btn close">X</button>
             </div>
-            <button
-              class="btn create-board"
-              :class="{ gray: !boardToEdit.title }"
-            >
-              Create board
-            </button>
-          </form>
+            <ul class="clean-list bgStyle-list">
+              <li
+                v-for="(style, idx) in bgStyles"
+                @click="selectStyle(style)"
+                :key="'style' + idx"
+                class="bgStyle"
+                :class="{ selected: isSelected(style.id) }"
+                :style="style.style"
+              ></li>
+            </ul>
+          </div>
+          <button
+            class="btn create-board"
+            :class="{ gray: !boardToEdit.title }"
+          >
+            Create board
+          </button>
+        </form>
       </div>
     </div>
   </section>
@@ -115,7 +116,7 @@ export default {
   },
   async created() {
     this.boardList = await this.$store.dispatch({ type: "loadBoards" });
-    console.log('this.boardList:', this.boardList)
+    this.$store.commit('setBoard', {currBoard:null})
   },
   methods: {
     openBoardPopup() {
@@ -130,15 +131,23 @@ export default {
     },
     async createNewBoard() {
       if (!this.boardToEdit.title) return;
-      this.boardToEdit.style = this.getSelectedStyle(this.selectedStyle.id);
+      const style = this.getSelectedStyle(this.selectedStyle.id);;
+      if(style.value.startsWith('#')){
+        this.boardToEdit.style.bgColor = style
+      }else{
+        this.boardToEdit.style.bgImg = style
+      }
+
       const board = await this.$store.dispatch({
         type: "saveBoard",
         board: this.boardToEdit,
       });
       this.openBoard(board._id);
     },
-    openBoard(id) {
-      this.$router.push("/board/" + id);
+    async openBoard(boardId) {
+      console.log('id:', boardId)
+      await this.$store.dispatch({ type: "getBoard", boardId });
+      this.$router.push("/board/" + boardId);
     },
     selectStyle(style) {
       this.selectedStyle = style;
@@ -170,16 +179,17 @@ export default {
       return this.boardToEdit?._id === id;
     },
     async removeBoard() {
-      console.log("removing!", this.boardToEdit);
-      // return;
-      // this.$store.dispatch({ type: "removeBoard", boardId });
+      // console.log("removing!", this.boardToEdit);
+      this.$store.dispatch({ type: "removeBoard", boardId });
     },
     toggleStarred(board) {
       this.boardToEdit = board
       this.boardToEdit.isStarred = !this.boardToEdit.isStarred
       this.$store.dispatch('saveBoard', {board:this.boardToEdit})
-      //TODO: save board
     },
+    isBoardStarred(id){
+      return this.starredBoards.some(({_id}) => _id===id)
+    }
   },
   computed: {
     bgStyles() {
