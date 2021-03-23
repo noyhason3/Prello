@@ -79,7 +79,7 @@ export default {
   },
   data() {
     return {
-      newTask: boardService.getEmptyTask(),
+      newTask: JSON.parse(JSON.stringify(this.$store.getters.getEmptyTask)) ,
       isAddNewTask: false,
       ghostRect: null,
       emptyList: [],
@@ -100,7 +100,7 @@ export default {
         groupId: this.group.id,
         task: this.newTask,
       });
-      this.newTask = boardService.getEmptyTask();
+      this.newTask = JSON.parse(JSON.stringify(this.$store.getters.getEmptyTask));
       this.isAddNewTask = false;
       console.log("Group component - line 49 - this.newTask", this.newTask);
       console.log("Group component - line 50 - this.group", this.group);
