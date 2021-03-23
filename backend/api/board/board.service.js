@@ -9,8 +9,8 @@ const DEMO_BOARD = require('../../data/demo_board.json')
 async function query(filterBy = {}) {
   try {
     const store = asyncLocalStorage.getStore()
-    const { username } = store
-    if (username === 'Guest') {
+    const { userId } = store
+    if (userId === 'demo') {
       return await DEMO_BOARDS
     }
     const criteria = _buildCriteria(filterBy);
