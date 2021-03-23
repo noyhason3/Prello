@@ -1,6 +1,8 @@
 <template>
-  <section class="about">
-    <bio :user="users[0]"></bio>
+  <section  >
+    <div v-for="(user, idx) in users" :key="idx" class="about">
+    <bio :user="user"></bio>
+    </div>
   </section>
 </template>
 
@@ -17,6 +19,20 @@ export default {
           imgUrl: "creator/anton.jpg",
           social: [{ type: "git", url: "https://github.com/SQUlD13" }],
         },
+        {
+          name: "Ifat Braslavi",
+          description:
+            "<p>\n Formerly a senior BIM model manager in the construction industry. Started coding out of interest and the need for efficiency and better tools. On the way fell inlove with code.",
+          imgUrl: "creator/ifat.jpg",
+          social: [{ type: "git", url: "https://github.com/ifatBR" }],
+        },
+        {
+          name: "Noy Hason",
+          description:
+            "<p>\n ",
+          imgUrl: "creator/noy.jpg",
+          social: [{ type: "git", url: "https://github.com/" }],
+        },
       ],
     };
   },
@@ -26,3 +42,6 @@ export default {
 
 <style>
 </style>
+
+
+                 
