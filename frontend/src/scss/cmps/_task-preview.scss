@@ -15,7 +15,15 @@
   text-align: start;
 
   .task-cover-preview {
+    width: 100%;
+    height: 32px;
     border-radius: 5px 5px 0px 0px;
+  }
+
+  .task-cover-img-preview {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
   }
 
   .task-preview-main {
@@ -38,11 +46,6 @@
     align-self: flex-end;
     opacity: 0;
     position: absolute;
-  }
-
-  .task-cover-preview {
-    width: 100%;
-    height: 32px;
   }
 
   .task-info-preview {

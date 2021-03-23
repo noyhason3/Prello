@@ -16,6 +16,14 @@
         </li>
       </ul>
       <h3>ATTACHMENTS</h3>
+      <!-- <ul v-if="task.style.coverImg">
+        <li v-for="img in ">
+          <img
+            class="task-cover-img"
+            :style="`background-image: url(${task.style.coverImg})`"
+          />
+        </li>
+      </ul> -->
       <button class="btn">
         Upload a cover image
         <img
