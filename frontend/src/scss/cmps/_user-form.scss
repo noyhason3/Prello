@@ -1,0 +1,59 @@
+.user-form{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    input{
+        width:100%;
+        height:100%;
+        border:5px solid transparent;
+        background: #ebecf0;
+    }
+    .fullname{
+        margin-block-end: 5px;
+    }
+    .username{
+        margin-block-end: 5px;
+        border-radius: 5px;
+        &:hover{
+          background:#e4e4e3;
+        }
+        &:active{
+            background:#cfcfcc ;
+        }        
+    }
+    .password{
+        width:100%;
+        position:relative;
+        & :first-child{
+            border-radius: 5px;
+            &:hover{
+                background:#e4e4e3;
+            }
+            &:active{
+                background:#cfcfcc ;
+            }
+        }
+        .toggle-show-password{
+            font-family: 'fa-reg';
+            position:absolute;
+            right:0;
+            margin:0;
+            border-radius: 0 5px 5px 0;
+            background: $clr5;
+            color:$clr1;
+            padding-block: 0;
+            height:100%;
+        }
+    }
+    .submit{
+        width:85%;
+        border-radius: 5px;
+        &:hover{
+          background:#e4e4e3;
+        }
+        &:active{
+            background:#cfcfcc ;
+        }
+    }
+}

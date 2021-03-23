@@ -1,0 +1,19 @@
+.login-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    flex-flow: column;
+    .fullname{
+        background: #ebecf0;
+        margin-block-end: 5px;
+        border-radius: 5px;
+        border:5px solid transparent;
+        &:hover{
+          background:#e4e4e3;
+        }
+        &:active{
+            background:#cfcfcc ;
+        }   
+    }
+}
