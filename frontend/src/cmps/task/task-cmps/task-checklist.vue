@@ -19,7 +19,9 @@
         />
       </div>
 
-      <button @click="deleteChecklist" v-if="!isEditTitleOpen" class="btn">Delete</button>
+      <button @click="deleteChecklist" v-if="!isEditTitleOpen" class="btn">
+        Delete
+      </button>
     </div>
 
     <div class="progress-bar-container">
@@ -30,18 +32,9 @@
           <span class="progress"></span>
         </span>
       </div>
-      <!-- <progress
-        id="file"
-        :value="progressPercentage"
-        max="100"
-        class="progress-bar"
-      /> -->
     </div>
 
     <form>
-      <!-- <ul class="todos clean-list"> -->
-      <!-- :move="updateTask" -->
-      <!-- :list="checklist.todos" -->
       <draggable
         v-model="checklist.todos"
         @start="setDrag(true)"
@@ -53,7 +46,6 @@
         tag="ul"
         class="todos clean-list"
       >
-        <!-- <li v-for="todo in checklist.todos" :key="todo.id">{{ todo.txt }}</li> -->
         <li
           v-for="todo in checklist.todos"
           :key="todo.id"
@@ -67,9 +59,7 @@
             @click="toggleChecked(todo)"
             :checked="todo.isDone"
           />
-          <!-- <label :for="todo.id"  @click="openEditTodo(todo.id)">
-            {{ todo.txt }}
-          </label> -->
+
           <label
             :for="todo.id"
             v-if="todo.id !== currTodoId"
@@ -91,8 +81,7 @@
           </editable-text>
         </li>
       </draggable>
-      <!-- </ul> -->
-      <!-- <input type="text" :name="todo.id" :id="todo.id" v-model="todo.txt" /> -->
+
       <button v-if="!isAddTodoOpen" @click="openAddTodo" class="btn">
         Add an item
       </button>
@@ -113,12 +102,11 @@
 <script>
 import draggable from "vuedraggable";
 import editableText from "@/cmps/common/editable-text.vue";
-// import editableTitle from '../../common/editable-title.vue'
+import utilService from "../../../services/util.service";
 
 export default {
   props: {
     checklist: Object,
-    // progressPercentage: Number,
   },
   data() {
     return {
@@ -159,13 +147,13 @@ export default {
     editTitle() {
       this.checklist.title = this.checklistTitle;
       this.saveChecklist();
-      //  this.$emit("save-todo", { ...this.checklist });
     },
     addTodo() {
       if (!this.checklist.todos) this.checklist.todos = [];
+      this.todo.id = utilService.makeId();
       this.checklist.todos.push({ ...this.todo });
       this.saveChecklist();
-      // this.$emit("save-todo", { ...this.checklist });
+      console.log(this.checklist);
       this.todo = {
         txt: "",
         isDone: false,
@@ -175,7 +163,6 @@ export default {
       const idx = this.checklist.todos.findIndex(({ id }) => id === todo.id);
       this.checklist.todos.splice(idx, 1, todo);
       this.saveChecklist();
-      // this.$emit("save-todo", { ...this.checklist });
     },
     toggleChecked(todo) {
       const checkBox = document.getElementById(todo.id);

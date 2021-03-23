@@ -97,8 +97,9 @@ export default {
       );
       this.isAddNewGroup = false;
     },
-    saveBoard() {
-      boardService.saveBoard(this.$store.getters.currBoard);
+    async saveBoard() {
+      // boardService.saveBoard(this.$store.getters.currBoard);
+      await this.$store.dispatch({type:'saveBoard', board:this.board});
     },
   },
   computed: {
