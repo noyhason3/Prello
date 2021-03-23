@@ -1,6 +1,17 @@
-.editable-title{
-    padding:0;
-    &:focus{
-        background: #ebecf0;
+.editable-title-wrapper{
+    border-radius: 5px;
+    height:1.3rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    &.focus{
+        background: darken(#ebecf0,5);
+    }
+    width: 100%;
+    .editable-title{
+        outline: none;
+        padding:0;
+        margin:0;
+        position:relative;
     }
 }
