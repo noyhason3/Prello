@@ -17,9 +17,9 @@ async function getBoards(req, res) {
 async function getBoard(req, res) {
   try {
     const boardId = req.params.boardId;
-    console.log('boardId', boardId);
+    // console.log('boardId', boardId);
     const board = await boardService.getById(boardId);
-    console.log('board', board);
+    // console.log('board', board);
     res.json(board);
   } catch (err) {
     logger.error('Failed to get board', err);
@@ -69,10 +69,10 @@ async function addBoard(req, res) {
 async function updateBoard(req, res) {
   try {
     const board = req.body;
-    console.log(
-      'file: board.controller.js - line 80 - updateBoard - board',
-      board
-    );
+    // console.log(
+    //   'file: board.controller.js - line 80 - updateBoard - board',
+    //   board
+    // );
     const savedBoard = await boardService.update(board);
     res.send(savedBoard);
   } catch (err) {

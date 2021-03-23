@@ -17,6 +17,7 @@ function connectSockets(http, session) {
     gIo.on('connection', socket => {
         console.log('New socket - socket.handshake.sessionID', socket.handshake.sessionID)
         gSocketBySessionIdMap[socket.handshake.sessionID] = socket
+        console.log(socket.handshake?.session?.user);
         // TODO: emitToUser feature - need to tested for CaJan21
         // if (socket.handshake?.session?.user) socket.join(socket.handshake.session.user._id)
         socket.on('disconnect', socket => {
@@ -25,20 +26,25 @@ function connectSockets(http, session) {
                 gSocketBySessionIdMap[socket.handshake.sessionID] = null
             }
         })
-        socket.on('chat topic', topic => {
-            if (socket.myTopic === topic) return;
-            if (socket.myTopic) {
-                socket.leave(socket.myTopic)
+        socket.on('join-board', boardId => {
+            if (socket.currBoard === boardId) return;
+            if (socket.currBoard) {
+                socket.leave(socket.currBoard)
             }
-            socket.join(topic)
+            socket.join(boardId)
             // logger.debug('Session ID is', socket.handshake.sessionID)
-            socket.myTopic = topic
+            socket.currBoard = boardId
         })
-        socket.on('chat newMsg', msg => {
-            // emits to all sockets:
-            // gIo.emit('chat addMsg', msg)
-            // emits only to sockets in the same room
-            gIo.to(socket.myTopic).emit('chat addMsg', msg)
+        socket.on('save-board', board => {
+            console.log('saving board');
+            socket.to(board._id).emit('board-update', board)
+        })
+        socket.on('join-task', taskId => {
+            socket.join(taskId)
+            socket.leave(taskId)
+        })
+        socket.on('leave-task', taskId => {
+            socket.leave(taskId)
         })
         socket.on('user-watch', userId => {
             socket.join(userId)
