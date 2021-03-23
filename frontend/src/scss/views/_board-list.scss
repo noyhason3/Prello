@@ -10,12 +10,12 @@
     }
 
     .starred::before {
-        font-family: 'fa-brands';
+        font-family: 'fa-reg';
         content: "\f005"
     }
     
     .recent::before {
-        font-family: 'fa-brands';
+        font-family: 'fa-reg';
         content: "\f017"
     }
 
@@ -115,7 +115,7 @@
         }
         .toggle-starred::before,
         .starred::before{
-            font-family: 'fa-brands';
+            font-family: 'fa-reg';
             content: "\f005";
         }
         .toggle-starred{

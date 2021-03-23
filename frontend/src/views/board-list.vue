@@ -10,7 +10,7 @@
         :style="boardStyle(board)"
       >
         <h3>{{ board.title }}</h3>
-        <button class="starred" @click.stop="toggleStarred(board._id)"></button>
+        <button class="starred" @click.stop="toggleStarred(board)"></button>
       </li>
     </ul>
     <h2><span class="recent"></span>Recently viewed</h2>
@@ -35,7 +35,7 @@
         </transition>
         <button
           class="toggle-starred"
-          @click.stop="toggleStarred(board._id)"
+          @click.stop="toggleStarred(board)"
         ></button>
       </li>
       <li>
@@ -171,11 +171,14 @@ export default {
     },
     async removeBoard() {
       console.log("removing!", this.boardToEdit);
-      return;
-      this.$store.dispatch({ type: "removeBoard", boardId });
+      // return;
+      // this.$store.dispatch({ type: "removeBoard", boardId });
     },
-    toggleStarred(id) {
-      //TODO: finish and save boardList at the end;
+    toggleStarred(board) {
+      this.boardToEdit = board
+      this.boardToEdit.isStarred = !this.boardToEdit.isStarred
+      
+      //TODO: save board
     },
   },
   computed: {
