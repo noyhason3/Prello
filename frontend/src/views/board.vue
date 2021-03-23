@@ -91,7 +91,7 @@ export default {
       return this.$store.getters.currBoard;
     },
     background() {
-      console.log("currBoard", this.$store.getters.currBoard);
+      console.log("currBoard", this.$store.getters.currBoard.style.bgColor);
       const style = this.$store.getters.currBoard.style;
       if (style.bgImg) {
         return {
@@ -100,6 +100,10 @@ export default {
             require("@/assets/img/background/" + style.bgImg.name) +
             ")",
           "background-size": "cover",
+        };
+      } else if (style.bgColor) {
+        return {
+          background: style.bgColor.name,
         };
       }
     },
