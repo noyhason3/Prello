@@ -159,7 +159,8 @@
     width: 450px;
     background-color: transparent;
     box-shadow: none;
-    top: 35px;
+    position: fixed;
+    top: 50px;
     left: 50%;
     transform: translate(-50%);
 
@@ -173,12 +174,26 @@
         justify-content: space-between;
         margin-bottom: 10px;
         height: 100px;
-
+        .title{
+            height: 30px;
+            border-radius: 3px;
+            outline:none;
+            border:none;
+            padding-left:8px;
+            background-color: transparent;
+            font-weight: bold;
+            color:#fff;
+        }
+        .title:hover,
+        .title:focus{
+            background-color: rgba(255, 255, 255, 0.3);
+        }
         .title-container {
             width: 290px;
             padding: 10px 10px 10px 10px;
             border-radius: 3px;
             background-size: cover;
+            justify-content: space-between;
             display: flex;
             margin-inline-end: 10px;
 
@@ -202,6 +217,9 @@
             margin-bottom: 5px;
             cursor: pointer;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .bgStyle.selected::before {

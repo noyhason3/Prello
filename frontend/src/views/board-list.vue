@@ -50,8 +50,8 @@
         class="create-board-screen"
         :class="{ 'add-board': isAddBoard }"
       ></div>
-      <popup v-if="isAddBoard" class="popup-create-board">
-        <div slot="main">
+      <div v-if="isAddBoard" class="popup-create-board">
+        <!-- <div slot="main"> -->
           <form @submit.prevent="createNewBoard">
             <div class="new-board-info">
               <div class="title-container" :style="selectedStyle.style">
@@ -81,8 +81,8 @@
               Create board
             </button>
           </form>
-        </div>
-      </popup>
+        <!-- </div> -->
+      </div>
     </div>
   </section>
 </template>
@@ -119,8 +119,9 @@ export default {
     this.boardList = await this.$store.dispatch({ type: "loadBoards" });
   },
   methods: {
-    async openBoardPopup() {
-      this.boardToEdit = await this.$store.dispatch({ type: "getEmptyBoard" });
+    openBoardPopup() {
+      this.boardToEdit = this.$store.getters.emptyBoard;
+      console.log('this.boardToEdit:', this.boardToEdit)
       this.selectedStyle = this.bgStyles[0];
       this.isAddBoard = true;
     },
@@ -145,7 +146,7 @@ export default {
     },
     boardStyle(board) {
       if (board.style.bgImg) {
-        const img = require("@/assets/img/" + board.style.bgImg.name);
+        const img = require("@/assets/img/background/" + board.style.bgImg.name);
         return { backgroundImage: `url(${img})` };
       }
       return { backgroundColor: board.style.bgColor.name };
@@ -184,7 +185,7 @@ export default {
   computed: {
     bgStyles() {
       const imgStyles = this.imgs.map((currImg) => {
-        const img = require("@/assets/img/" + currImg.name);
+        const img = require("@/assets/img/background/" + currImg.name);
         return { id: currImg.id, style: { backgroundImage: `url(${img})` } };
       });
       const colorStyles = this.colors.map((currColor) => {

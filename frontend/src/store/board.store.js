@@ -15,6 +15,9 @@ export const boardStore = {
     currTask(state) {
       return state.task;
     },
+    emptyBoard(){
+      return boardService.getEmptyBoard();
+    }
   },
   mutations: {
     setBoard(state, { board }) {
@@ -36,9 +39,7 @@ export const boardStore = {
       if (boardIdx < 0) return;
       state.boardList.splice(boardIdx, 1);
     },
-    getEmptyBoard() {
-      return boardService.getEmptyBoard();
-    },
+
     getEmptyGroup() {
       return boardService.getEmptyGroup();
     },
