@@ -7,6 +7,7 @@
   >
     <div class="task" :style="`top:${initialHeight}px;`" @click.stop>
       <div v-if="task.style.coverColor" class="task-cover" :style="`background-color: ${task.style.coverColor}`"/>
+      <img v-if="task.style.coverImg" class="task-cover-img" :src= task.style.coverImg />
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
         <task-title
@@ -27,6 +28,7 @@
         </popup-label>
         <task-control
           @set-cover-color="setCoverColor"
+          @save-cover-img="saveCoverImg"
           @assign-task-member="assignTaskMember"
           @remove-task-member="removeTaskMember"
           @set-checklist="saveChecklist"
@@ -184,11 +186,14 @@ export default {
       this.saveTask(this.task);
     },
     setCoverColor(color){
-      // this.coverColor = color
-      console.log(this.task);
+      this.task.style.coverImg = '';
       this.task.style.coverColor = color
       this.saveTask(this.task);
-
+    },
+    saveCoverImg(img){
+      this.task.style.coverColor='';
+      this.task.style.coverImg = img.url;
+      this.saveTask(this.task)
     },
     assignTaskMember(member) {
       if (!this.task.members) this.task.members = [];

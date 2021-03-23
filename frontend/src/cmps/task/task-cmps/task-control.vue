@@ -8,6 +8,7 @@
       @close-popup="isCoverOpen = false"
       @toggle-popup="togglePopup"
       @set-cover-color="setCoverColor"
+      @save-cover-img="saveCoverImg"
     />
 
     <h6 class="add-to-card-btn">ADD TO CARD</h6>
@@ -76,8 +77,12 @@ export default {
       const buttonLeftPos = targetRect.left;
       this.$emit("toggle-popup", { str, buttonLeftPos });
     },
-    setCoverColor(color){
-      this.$emit("set-cover-color", color)
+    setCoverColor(color) {
+      this.$emit("set-cover-color", color);
+    },
+    saveCoverImg(img) {
+      this.$emit("save-cover-img", img);
+      this.togglePopup("Cover");
     },
     assignTaskMember(member) {
       this.$emit("assign-task-member", member);
