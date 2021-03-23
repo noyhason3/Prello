@@ -16,8 +16,8 @@ router.post('/', addBoard);
 router.put('/:boardId', updateBoard);
 // router.put('/:boardId', requireAuth, requireAdmin, updateBoard);
 
-router.delete('/:boardId' , deleteBoard);
-// router.delete('/:boardId', requireAuth, requireAdmin, deleteBoard);
+// router.delete('/:boardId' , deleteBoard);
+router.delete('/:boardId', requireAuth, requireAdmin, deleteBoard);
 
 
 
