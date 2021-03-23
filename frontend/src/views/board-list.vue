@@ -45,6 +45,7 @@
         </button>
       </li>
     </ul>
+    <!-- <popup-create-board :boardToEdit="boardToEdit"/> -->
     <div>
       <div
         @click="closeBoardPopup"
@@ -88,7 +89,7 @@
 
 <script>
 import popup from "@/cmps/common/pop-up.vue";
-
+import popupCreateBoard from '@/cmps/board/popup-create-board.vue'
 export default {
   data() {
     return {
@@ -96,9 +97,6 @@ export default {
       boardToEdit: null,
       boardList: null,
       selectedStyle: null,
-      // isOptionsOpen: false,
-      // optionsRightPos: null,
-      // optionsTopPos: null,
       imgs: [
         { id: "i101", value: "1.jpg" },
         { id: "i102", value: "2.jpg" },
@@ -214,6 +212,7 @@ export default {
   },
   components: {
     popup,
+    popupCreateBoard
   },
 };
 </script>
