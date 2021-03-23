@@ -2,6 +2,11 @@
     {
         "_id": "demo101",
         "title": "Web Dev. Prello Management",
+        "createdBy" : {
+            "_id" : "6058c7e466f1b15614c40bad",
+            "fullname" : "Gabi Amsalem",
+            "imgUrl" : "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        },
         "style": {
             "bgImg": {
                 "id": "i110",
@@ -20,6 +25,11 @@
     {
         "_id": "demo102",
         "title": "Apsus upgrade",
+        "createdBy" : {
+            "_id" : "6058c7e466f1b15614c40baf",
+            "fullname" : "Dov Menashe",
+            "imgUrl" : "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        },
         "style": {
             "bgImg": {
                 "id": "i102",
@@ -38,6 +48,11 @@
     {
         "_id": "demo103",
         "title": "MegoTap web",
+        "createdBy" : {
+            "_id" : "6058c7e466f1b15614c40bad",
+            "fullname" : "Gabi Amsalem",
+            "imgUrl" : "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        },
         "style": {
             "bgImg": {
                 "id": "i104",
@@ -56,6 +71,11 @@
     {
         "_id": "demo104",
         "title": "MrToy frontend",
+        "createdBy" : {
+            "_id" : "6058c7e466f1b15614c40bb3",
+            "fullname" : "Keshet Sheshet",
+            "imgUrl" : "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        },
         "style": {
             "bgImg": {
                 "id": "i110",
@@ -75,6 +95,11 @@
     {
         "_id": "demo105",
         "title": "Getro ",
+        "createdBy" : {
+            "_id" : "6059f6fec36c4722e48c082b",
+            "fullname" : "Moshe ha meleh",
+            "imgUrl" : ""
+        },
         "style": {
             "bgImg": {
                 "id": "i103",
@@ -93,6 +118,11 @@
     {
         "_id": "demo106",
         "title": "Web Dev. MiniMoney",
+        "createdBy" : {
+            "_id" : "6058c7e466f1b15614c40baf",
+            "fullname" : "Dov Menashe",
+            "imgUrl" : "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+        },
         "style": {
             "bgImg": "",
             "bgColor": {
