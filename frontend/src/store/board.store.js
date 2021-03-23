@@ -69,7 +69,7 @@ export const boardStore = {
                 socketService.emit('join-board', boardId);
                 socketService.on('board-update', (board) => {
                     console.log('socket emitted- board update');
-                    commit({ type: 'setBoard', currBoard:board });
+                    commit({ type: 'setBoard', currBoard: board });
                 });
                 // socketService.on('task-update', (task) => {
                 //   context.commit({ type: 'updateTask', task });
