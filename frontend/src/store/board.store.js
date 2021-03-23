@@ -52,7 +52,6 @@ export const boardStore = {
         async loadBoards({ commit }) {
             try {
                 const boards = await boardService.query();
-                // console.log('boards:', boards);
                 commit({ type: 'setBoards', boards });
                 return boards;
             } catch (err) {
@@ -82,7 +81,7 @@ export const boardStore = {
         async saveBoard({ commit }, { board }) {
             try {
                 const currBoard = await boardService.save(board);
-                // commit({ type: 'setBoard', currBoard });
+                commit({ type: 'setBoard', currBoard });
                 await socketService.emit('save-board', currBoard);
                 return currBoard;
             } catch (err) {
