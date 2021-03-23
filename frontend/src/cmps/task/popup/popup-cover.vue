@@ -50,7 +50,6 @@ export default {
   computed: {},
   methods: {
     setCover(color) {
-        console.log(color);
         this.$emit('set-cover-color', color)
     },
     upload() {},
