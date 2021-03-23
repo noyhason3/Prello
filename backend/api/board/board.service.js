@@ -11,7 +11,7 @@ async function query(filterBy = {}) {
     const store = asyncLocalStorage.getStore()
     const { userId } = store
     if (userId === 'demo') {
-      filterBy = { _id: { $regex: ".*demo.*" } }
+      //filterBy = { _id: { $regex: ".*demo.*" } }
       return await DEMO_BOARDS
     }
     const criteria = _buildCriteria(filterBy);
