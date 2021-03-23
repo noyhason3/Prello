@@ -10,25 +10,33 @@
         :style="boardStyle(board)"
       >
         <h3>{{ board.title }}</h3>
-        <button class="toggle-starred" @click.stop="toggleStarred(board._id)"></button>
-        <!-- <button @click.stop="removeBoard(board._id)">X</button> -->
+        <button class="starred" @click.stop="toggleStarred(board._id)"></button>
       </li>
     </ul>
     <h2><span class="recent"></span>Recently viewed</h2>
     <ul v-if="boardList" class="clean-list board-list">
       <li
-        v-for="board in boardList"
+        v-for="board in recentBoards"
         :key="board._id"
         class="board-preview"
         @click="openBoard(board._id)"
+        @mouseleave="closeOptionsMenu()"
         :style="boardStyle(board)"
       >
         <h3>{{ board.title }}</h3>
-        <button class="board-options"></button>
-        <div v-if="isOptionsOpen" class="nav-board-options">
-          <button>Remove board</button>
-        </div>
-        <!-- <button @click.stop="removeBoard(board._id)">X</button> -->
+        <button
+          class="board-options"
+          @click.stop="toggleOptionsMenu(board)"
+        ></button>
+        <transition name="slide">
+          <div v-if="isBoardSelected(board._id)" class="nav-board-options">
+            <button @click.stop="removeBoard()">Remove board</button>
+          </div>
+        </transition>
+        <button
+          class="toggle-starred"
+          @click.stop="toggleStarred(board._id)"
+        ></button>
       </li>
       <li>
         <button @click="openBoardPopup" class="btn add-board">
@@ -89,7 +97,9 @@ export default {
       boardToEdit: null,
       boardList: null,
       selectedStyle: null,
-      isOptionsOpen:false,
+      // isOptionsOpen: false,
+      // optionsRightPos: null,
+      // optionsTopPos: null,
       imgs: [
         { id: "i101", name: "1.jpg" },
         { id: "i102", name: "2.jpg" },
@@ -130,9 +140,6 @@ export default {
     openBoard(id) {
       this.$router.push("/board/" + id);
     },
-    async removeBoard(boardId) {
-      this.$store.dispatch({ type: "removeBoard", boardId });
-    },
     selectStyle(style) {
       this.selectedStyle = style;
     },
@@ -152,12 +159,24 @@ export default {
       style = this.colors.find(({ id }) => id === styleId);
       return style;
     },
-    toggleOptionsMenu() {
-      this.isOptionsOpen = !this.isOptionsOpen;
+    toggleOptionsMenu(board) {
+      if (this.boardToEdit?._id === board._id) return (this.boardToEdit = null);
+      this.boardToEdit = board;
     },
-    toggleStarred(id){
-      
-    }
+    closeOptionsMenu() {
+      this.boardToEdit = null;
+    },
+    isBoardSelected(id) {
+      return this.boardToEdit?._id === id;
+    },
+    async removeBoard() {
+      console.log("removing!", this.boardToEdit);
+      return;
+      this.$store.dispatch({ type: "removeBoard", boardId });
+    },
+    toggleStarred(id) {
+      //TODO: finish and save boardList at the end;
+    },
   },
   computed: {
     bgStyles() {
@@ -173,6 +192,11 @@ export default {
     },
     starredBoards() {
       return this.boardList.filter(({ isStarred }) => isStarred);
+    },
+    recentBoards() {
+      return this.boardList.sort(
+        (board1, board2) => board1.lastViewedAt - board2.lastViewedAt
+      );
     },
   },
   components: {

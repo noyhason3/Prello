@@ -1,11 +1,14 @@
 .board-list-container {
     margin: 80px auto;
-    width: 830px;
-
+    width: 800px;
+    h2{
+        font-size: 1.2rem;;
+    }
     .starred,
     .recent{
-        margin-inline-end: 20px;;
+        margin-inline-end: 10px;
     }
+
     .starred::before {
         font-family: 'fa-brands';
         content: "\f005"
@@ -19,53 +22,7 @@
     .board-list {
         display: flex;
         flex-wrap: wrap;
-        
-        .board-preview {
-            width: 180px;
-            height: 95px;
-            margin-inline-end: 20px;
-            border-radius: 3px;
-            padding: 8px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #fff;
-            background-size: cover;
-            margin-bottom: 30px;
-            position:relative;
-        }
-
-        .board-options{
-            color:grey;
-            background-color: transparent;
-            position:absolute;
-            top:0px;
-            right: 0px;
-            width: 5px;
-            opacity:0;
-            outline:none;
-            border:none;
-            // transition:0.2s;
-        }
-        .toggle-starred{
-            position:absolute;
-            bottom:3px;
-            right:0px;
-            background-color: transparent;
-            color:rgba(255, 255, 255, 0.705);
-        }
-        .toggle-starred::before{
-            font-family: 'fa-brands';
-            content: "\f005"
-        }
-        .board-options:hover{
-            opacity:1;
-        }
-        .board-options::before{
-            font-size: 1rem;
-            font-family:'fa-solid';
-            content:"\f142";
-        }
-    
+        margin-bottom: 20px;
 
     }
 
@@ -77,24 +34,116 @@
         border-radius: 5px;
         font-size: 0.9rem;
     }
-
+    
     .btn.add-board:hover {
-        filter: brightness(98%)
+        filter: brightness(98%);
     }
-
+    
     .btn.create-board {
         background-color: $clr1;
         border: 2px solid $clr7;
         color: $clr7;
         font-weight: 600;
-
+        
         &.gray {
             color: rgb(177, 177, 177);
             border-color: rgb(177, 177, 177);
             filter: none;
         }
     }
+    
+    .board-preview {
+        position:relative;
+        width: 180px;
+        height: 95px;
+        margin-inline-end: 20px;
+        border-radius: 3px;
+        padding: 8px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #fff;
+        background-size: cover;
+        position:relative;
+        margin-bottom: 30px;
+        cursor: pointer;
+        .nav-board-options{
+            position:absolute;
+            width:fit-content;
+            top:30px;
+            right:5px;
+            
+        }
+        .nav-board-options button{
+            background-color: rgba(255, 255, 255, 0.8);
+            font-weight: bold;
+        }
+        .nav-board-options button:hover{
+            background-color: rgba(255, 255, 255, 0.9);
 
+        }
+        .board-options{
+            color:rgba(255, 255, 255, 0.822);
+            background-color: transparent;
+            position:absolute;
+            top:-30px;
+            right: 4px;
+            width: 5px;
+            opacity:0;
+            outline:none;
+            border:none;
+            transition:top 0.5s, opacity 0.5s, transform 0.2s;
+            font-size: 0.9rem;
+        }
+        
+        .board-options::before{
+            font-family:'fa-solid';
+            content:"\f142";
+        }
+
+        .toggle-starred,
+        .starred{
+            outline:none;
+            border:none;
+            background-color: transparent;
+            position:absolute;
+            bottom:5px;
+            right:3px;
+            margin:0;
+            background-color: transparent;
+            transition: 0.2s;
+            color:rgba(255, 210, 86, 0.842);
+        }
+        .toggle-starred::before,
+        .starred::before{
+            font-family: 'fa-brands';
+            content: "\f005";
+        }
+        .toggle-starred{
+            right:-30px;
+            opacity:0;
+            color:rgba(255, 255, 255, 0.6);
+        }
+        .starred:hover{
+            transform: scale(1.2);
+
+        }
+        .toggle-starred:hover,
+        .board-options:hover{
+            transform: scale(1.2);
+            color:rgba(255, 255, 255, 1);
+        }
+        &:hover{
+            filter:brightness(85%);
+            .toggle-starred{
+                right:0;
+                opacity:1;
+            }
+            .board-options{
+                opacity:1;
+                top:5px;
+            }
+        }
+    }
 }
 
 .create-board-screen.add-board {

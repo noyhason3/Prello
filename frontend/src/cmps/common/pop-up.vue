@@ -30,7 +30,7 @@ export default {
       const top = prev.y + prev.height;
       this.maxHeight = window.innerHeight - prev.y;
 
-      //this.top = top;
+      this.top = top;
     }
   },
   components: {},
