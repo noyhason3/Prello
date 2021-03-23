@@ -52,35 +52,35 @@
       ></div>
       <div v-if="isAddBoard" class="popup-create-board">
         <!-- <div slot="main"> -->
-          <form @submit.prevent="createNewBoard">
-            <div class="new-board-info">
-              <div class="title-container" :style="selectedStyle.style">
-                <input
-                  type="text"
-                  placeholder="Add board title"
-                  v-model="boardToEdit.title"
-                  class="title"
-                />
-                <button @click="closeBoardPopup" class="btn close">X</button>
-              </div>
-              <ul class="clean-list bgStyle-list">
-                <li
-                  v-for="(style, idx) in bgStyles"
-                  @click="selectStyle(style)"
-                  :key="'style' + idx"
-                  class="bgStyle"
-                  :class="{ selected: isSelected(style.id) }"
-                  :style="style.style"
-                ></li>
-              </ul>
+        <form @submit.prevent="createNewBoard">
+          <div class="new-board-info">
+            <div class="title-container" :style="selectedStyle.style">
+              <input
+                type="text"
+                placeholder="Add board title"
+                v-model="boardToEdit.title"
+                class="title"
+              />
+              <button @click="closeBoardPopup" class="btn close">X</button>
             </div>
-            <button
-              class="btn create-board"
-              :class="{ gray: !boardToEdit.title }"
-            >
-              Create board
-            </button>
-          </form>
+            <ul class="clean-list bgStyle-list">
+              <li
+                v-for="(style, idx) in bgStyles"
+                @click="selectStyle(style)"
+                :key="'style' + idx"
+                class="bgStyle"
+                :class="{ selected: isSelected(style.id) }"
+                :style="style.style"
+              ></li>
+            </ul>
+          </div>
+          <button
+            class="btn create-board"
+            :class="{ gray: !boardToEdit.title }"
+          >
+            Create board
+          </button>
+        </form>
         <!-- </div> -->
       </div>
     </div>
@@ -121,7 +121,7 @@ export default {
   methods: {
     openBoardPopup() {
       this.boardToEdit = this.$store.getters.emptyBoard;
-      console.log('this.boardToEdit:', this.boardToEdit)
+      console.log("this.boardToEdit:", this.boardToEdit);
       this.selectedStyle = this.bgStyles[0];
       this.isAddBoard = true;
     },
@@ -146,10 +146,11 @@ export default {
     },
     boardStyle(board) {
       if (board.style.bgImg) {
-        const img = require("@/assets/img/background/" + board.style.bgImg.name);
+        const img = require("@/assets/img/background/" +
+          board.style.bgImg.value);
         return { backgroundImage: `url(${img})` };
       }
-      return { backgroundColor: board.style.bgColor.name };
+      return { backgroundColor: board.style.bgColor.value };
     },
     isSelected(id) {
       return this.selectedStyle.id === id;
@@ -176,9 +177,9 @@ export default {
       // this.$store.dispatch({ type: "removeBoard", boardId });
     },
     toggleStarred(board) {
-      this.boardToEdit = board
-      this.boardToEdit.isStarred = !this.boardToEdit.isStarred
-      
+      this.boardToEdit = board;
+      this.boardToEdit.isStarred = !this.boardToEdit.isStarred;
+
       //TODO: save board
     },
   },

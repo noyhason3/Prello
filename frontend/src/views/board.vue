@@ -97,13 +97,13 @@ export default {
         return {
           "background-image":
             "url(" +
-            require("@/assets/img/background/" + style.bgImg.name) +
+            require("@/assets/img/background/" + style.bgImg.value) +
             ")",
           "background-size": "cover",
         };
       } else if (style.bgColor) {
         return {
-          background: style.bgColor.name,
+          background: style.bgColor.value,
         };
       }
     },

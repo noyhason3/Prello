@@ -1,7 +1,7 @@
 <template>
   <h2
     v-if="value"
-    class="task-title"
+    class="editable-title"
     contenteditable="true"
     @blur="onBlur"
     ref="title"
