@@ -31,12 +31,12 @@
         required
       />
       <button
-        @click="showPassword = !showPassword"
+        @click.prevent="showPassword = !showPassword"
         class="toggle-show-password"
         v-html="showPassContent"
       ></button>
     </div>
-    <button type="submit" class="submit">Submit</button>
+    <button type="submit" :class="'submit ' + type">{{ type }}</button>
   </form>
 </template>
 

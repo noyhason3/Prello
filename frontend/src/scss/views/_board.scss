@@ -55,7 +55,7 @@
                         background: #EBECF0;
                         border-radius: 5px;
                         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-                        box-shadow:0px 2px 0px #0000002e;
+                        box-shadow:$subtle-shadow;
                     }
                     textarea:hover{
                         background: #e4e4e3;
