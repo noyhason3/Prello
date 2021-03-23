@@ -26,8 +26,9 @@ export const boardStore = {
     },
   },
   mutations: {
-    setBoard(state, { board }) {
-      state.board = board;
+    setBoard(state, { currBoard }) {
+      console.log('board:', currBoard)
+      state.board = currBoard;
       console.log('state board', state.board);
     },
     setBoards(state, { boards }) {
@@ -63,18 +64,18 @@ export const boardStore = {
     },
     async getBoard({ commit }, { boardId }) {
       try {
-        const board = await boardService.getById(boardId);
-        commit({ type: 'setBoard', board });
+        const currBoard = await boardService.getById(boardId);
+        commit({ type: 'setBoard', currBoard });
       } catch (err) {
         console.log('err', err);
       }
     },
     async saveBoard({ commit }, { board }) {
       try {
-        const newBoard = await boardService.saveBoard(board);
-        commit({ type: 'setBoard', newBoard });
+        const currBoard = await boardService.save(board);
+        commit({ type: 'setBoard', currBoard });
         // socket comes here
-        return newBoard;
+        return currBoard;
       } catch (err) {
         console.log('err:', err);
       }
@@ -215,6 +216,35 @@ export const boardStore = {
     //         throw err;
     //       }
     //     },
+
+    //correct ones
+    // async getBoard({ commit }, { boardId }) {
+    //   try {
+    //     const board = await boardService.getById(boardId);
+    //     commit({ type: 'setBoard', currBoard });
+
+    //     socketService.off('board-update');
+    //     socketService.emit('join-board', board._id);
+    //     socketService.on('board-update', (board) => {
+    //       context.commit({ type: 'setBoard', board });
+    //     });
+    //     // socketService.on('task-update', (task) => {
+    //     //   context.commit({ type: 'updateTask', task });
+    //     // });
+    //   } catch (err) {
+    //     console.log('err', err);
+    //   }
+    // },
+    // async saveBoard({ commit }, { board }) {
+    //   try {
+    //     const currBoard = await boardService.saveBoard(board);
+    //     commit({ type: 'setBoard', newBoard });
+    //     await socketService.emit('save-board', currBoard);
+    //     return newBoard;
+    //   } catch (err) {
+    //     console.log('err:', err);
+    //   }
+    // },
   },
 };
 

@@ -95,8 +95,9 @@ export default {
       this.newGroup = JSON.parse(JSON.stringify(this.$store.getters.getEmptyGroup));
       this.isAddNewGroup = false;
     },
-    saveBoard() {
-      boardService.saveBoard(this.$store.getters.currBoard);
+    async saveBoard() {
+      // boardService.saveBoard(this.$store.getters.currBoard);
+      await this.$store.dispatch({type:'saveBoard', board:this.board});
     },
   },
   computed: {
