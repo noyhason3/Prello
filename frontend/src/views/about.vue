@@ -1,7 +1,7 @@
 <template>
-  <section  >
-    <div v-for="(user, idx) in users" :key="idx" class="about">
-    <bio :user="user"></bio>
+  <section class="about">
+    <div v-for="(user, idx) in users" :key="idx" class="creator">
+      <bio :user="user"></bio>
     </div>
   </section>
 </template>
@@ -28,8 +28,7 @@ export default {
         },
         {
           name: "Noy Hason",
-          description:
-            "<p>\n ",
+          description: "<p>\n ",
           imgUrl: "creator/noy.jpg",
           social: [{ type: "git", url: "https://github.com/" }],
         },

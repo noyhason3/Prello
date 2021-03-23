@@ -1,6 +1,11 @@
 .about{
-    height:100vh;
-    width:100vw;
+    .creator{
+        position:relative;
+        &:not(:first-child){
+            top:-60px;
+        }
+        height:fit-content;
+    }
     .bio{
         margin:0 auto;
         width:300px;
@@ -23,7 +28,7 @@
         }
     
         .info{
-        position:absolute;
+        position:relative;
         width:300px;
         margin-block-start:5px;
             .body{// ALl info other than name and img

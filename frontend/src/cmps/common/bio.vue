@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     infoStyle() {
-      return this.user.imgUrl ? "top:250px;" : "";
+      return this.user.imgUrl ? "top:-70px;" : "";
     },
   },
 };
