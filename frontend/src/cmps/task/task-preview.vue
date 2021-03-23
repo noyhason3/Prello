@@ -10,6 +10,7 @@
         class="task-cover-preview"
         :style="`background-color: ${task.style.coverColor}`"
       />
+      <img v-if="task.style.coverImg" class="task-cover-img-preview" :style="`background-image: url(${task.style.coverImg})`"  />
     <!-- </div> -->
 
     <div class="task-preview-main">
