@@ -77,7 +77,6 @@ export default {
       this.$emit("toggle-popup", { str, buttonLeftPos });
     },
     setCoverColor(color){
-      console.log(color);
       this.$emit("set-cover-color", color)
     },
     assignTaskMember(member) {

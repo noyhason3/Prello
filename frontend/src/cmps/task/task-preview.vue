@@ -3,33 +3,41 @@
     <!-- <button @click="removeTask" class="btn close">X</button> -->
     <!-- <img v-if="isTaskCover" src="task.coverUrl"> -->
     <!-- If cover image- show image, if cover color set section background-color-->
-    <button @click="removeTask" class="btn close">X</button>
-    <task-cover-preview v-if="isTaskCover" />
+    <!-- <div class="task-preview-header"> -->
+      <button @click="removeTask" class="btn close">X</button>
+      <div
+        v-if="task.cover"
+        class="task-cover-preview"
+        :style="`background-color: ${task.cover}`"
+      />
+    <!-- </div> -->
 
-    <task-label-preview
-      v-if="taskLabelIds"
-      :taskLabelIds="taskLabelIds"
-      class="task-label-preview"
-    />
-    <div>
-      <h2 class="task-title">{{ task.title }}</h2>
-      <!-- <div class="btn task-edit">
+    <div class="task-preview-main">
+      <task-label-preview
+        v-if="taskLabelIds"
+        :taskLabelIds="taskLabelIds"
+        class="task-label-preview"
+      />
+      <div>
+        <h2 class="task-title">{{ task.title }}</h2>
+        <!-- <div class="btn task-edit">
         <span>🖊</span>
       </div> -->
-    </div>
-    <div class="task-info-preview">
-      <div v-if="taskChecklists">
-        ☑ {{ taskChecklists.complete }}/{{ taskChecklists.total }}
       </div>
-      <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
-      <div v-if="isTaskDescription">📄</div>
-      <div v-if="attachmentCount">📎{{ attachmentCount }}</div>
-      <member-list
-        v-if="taskMemebers"
-        :members="taskMemebers"
-        :isTaskRelated="true"
-        @remove-task-member="removeTaskMember"
-      />
+      <div class="task-info-preview">
+        <div v-if="taskChecklists">
+          ☑ {{ taskChecklists.complete }}/{{ taskChecklists.total }}
+        </div>
+        <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
+        <div v-if="isTaskDescription">📄</div>
+        <div v-if="attachmentCount">📎{{ attachmentCount }}</div>
+        <member-list
+          v-if="taskMemebers"
+          :members="taskMemebers"
+          :isTaskRelated="true"
+          @remove-task-member="removeTaskMember"
+        />
+      </div>
     </div>
   </section>
 </template>

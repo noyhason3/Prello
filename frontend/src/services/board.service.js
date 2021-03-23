@@ -65,5 +65,6 @@ function getEmptyTask() {
     //REMEMBER TO
     attachments: [],
     checklists: [],
+    cover: ''
   };
 }
