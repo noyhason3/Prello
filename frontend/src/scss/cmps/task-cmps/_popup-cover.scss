@@ -1,0 +1,18 @@
+.popup-cover {
+  .colors-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 8px;
+    padding: 4px;
+    margin: 0 -4px;
+    //   flex-wrap: wrap;
+    .color-box {
+      margin: 0;
+      border-radius: 3px;
+    //   background-size: cover;
+      width: 50px;
+      height: 32px;
+      cursor: pointer;
+    }
+  }
+}

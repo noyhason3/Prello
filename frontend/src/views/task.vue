@@ -6,6 +6,7 @@
     @click.stop="closeTask"
   >
     <div class="task" :style="`top:${initialHeight}px;`" @click.stop>
+      <div v-if="coverColor" class="task-cover" :style="`background-color: ${coverColor}`"/>
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
         <task-title
@@ -25,6 +26,7 @@
         >
         </popup-label>
         <task-control
+          @set-cover-color="setCoverColor"
           @assign-task-member="assignTaskMember"
           @remove-task-member="removeTaskMember"
           @set-checklist="saveChecklist"
@@ -33,7 +35,6 @@
           @save-attachments="saveAttachments"
           :attachments="attachments"
         />
-        <!-- <task-cover /> -->
 
         <div class="task-main">
           <!-- <task-title v-model="task.title" />
@@ -129,6 +130,7 @@ import { boardService } from "../services/board.service";
 export default {
   data() {
     return {
+      coverColor:null,
       isLabelOpen: false,
       isDragOver: false,
       drag: false,
@@ -181,6 +183,10 @@ export default {
     // },
     setDescription() {
       this.saveTask(this.task);
+    },
+    setCoverColor(color){
+      this.coverColor = color
+      // this.task.cover = cover
     },
     assignTaskMember(member) {
       if (!this.task.members) this.task.members = [];
