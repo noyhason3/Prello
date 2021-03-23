@@ -16,8 +16,16 @@
         </li>
       </ul>
       <h3>ATTACHMENTS</h3>
-      <button @click="upload" class="btn narrow action-color">
+      <button class="btn">
         Upload a cover image
+        <img
+          class="loading"
+          v-if="isLoading"
+          src="https://i.pinimg.com/originals/f6/65/6a/f6656aa6fdb6b8f905dea0bcc2d71dd8.gif"
+          alt=""
+        />
+
+        <input class="cover-upload-input" @change="onUploadCover" type="file" />
       </button>
       <p>Tip:Drag an image on to the card to upload it.</p>
       <h3>UNSPLASH</h3>
@@ -30,9 +38,12 @@
 
 <script>
 import popUp from "../../common/pop-up.vue";
+import { uploadImg } from "@/services/img-upload.service.js";
+
 export default {
   data() {
     return {
+      isLoading: false,
       colorsPalette: [
         "#7bc86c",
         "#f5dd29",
@@ -50,12 +61,18 @@ export default {
   computed: {},
   methods: {
     setCover(color) {
-        this.$emit('set-cover-color', color)
+      this.$emit("set-cover-color", color);
     },
-    upload() {},
     search() {},
     togglePopup() {
       this.$emit("toggle-popup", "Cover");
+    },
+    async onUploadCover(ev) {
+      this.isLoading = true;
+      const res = await uploadImg(ev.target.files[0]);
+      this.$emit("save-cover-img", res);
+      console.log("onUploadImg -> res", res);
+      this.isLoading = false;
     },
   },
 
