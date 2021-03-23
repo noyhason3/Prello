@@ -9,6 +9,15 @@
         border:5px solid transparent;
         background: #ebecf0;
     }
+    .fullname{
+        margin-block-end: 5px;
+        &:hover{
+          background:#e4e4e3;
+        }
+        &:active{
+            background:#cfcfcc ;
+        }   
+    }
     .username{
         margin-block-end: 5px;
         border-radius: 5px;
@@ -46,11 +55,40 @@
     .submit{
         width:85%;
         border-radius: 5px;
+        font-weight: bold;
+        text-transform: uppercase;
+        box-shadow: $subtle-shadow;
         &:hover{
           background:#e4e4e3;
         }
         &:active{
             background:#cfcfcc ;
+        }
+        &.signup{
+            background:$clr9;
+            color: set-color($clr9,63);
+            &:hover{
+                background:lighten( $clr9,15);
+            }
+            &:focus{
+                background:lighten( $clr9,5);
+            }
+            &:active{
+                background:darken($clr9,10);
+            }
+        }
+        &.login{
+            background:$clr7;
+            color: set-color($clr7,63);
+            &:hover{
+                background:lighten( $clr7,15);
+            }
+            &:focus{
+                background:lighten( $clr7,5);
+            }
+            &:active{
+                background:darken($clr7,10);
+            }
         }
     }
 }
