@@ -56,7 +56,7 @@
                 color:$clr1;
                 background: lighten($clr5,18);
                 border-radius: 5px;
-                box-shadow:0px 2px 0px #0000002e;
+                box-shadow:$subtle-shadow;
                 font-size: rem(18px);
                 &:hover{
                     background:lighten($clr5,26);

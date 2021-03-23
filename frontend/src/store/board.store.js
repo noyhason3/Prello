@@ -145,7 +145,6 @@ export const boardStore = {
       commit({ type: 'setBoard', currBoard: board });
     },
     async removeTask({ state, commit }, { taskId }) {
-      console.log('hi');
       const board = JSON.parse(JSON.stringify(state.board));
       const group = board.groups.find((savedGroup) =>
         savedGroup.tasks.some((savedTask) => savedTask.id === taskId)

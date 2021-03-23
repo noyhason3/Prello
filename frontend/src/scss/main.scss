@@ -15,6 +15,7 @@
 @import 'cmps/main-header';
 @import 'cmps/common/member-list';
 @import 'cmps/group';
+@import "cmps/user-form";
 @import 'cmps/editable-text';
 @import 'cmps/task-preview';
 @import 'cmps/task-cmps/task-cover';
@@ -33,8 +34,11 @@
 @import 'cmps/common/popup';
 
 //Views
-@import 'views/home';
-@import 'views/about';
-@import 'views/board-list';
-@import 'views/task';
-@import 'views/board';
+@import "views/home";
+@import "views/about";
+@import "views/login-signup";
+@import "views/board-list";
+@import "views/task";
+@import "views/board";
+
+
