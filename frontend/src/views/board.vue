@@ -16,20 +16,6 @@
       class="clean-list main"
       tag="ul"
     >
-      <!-- <li v-for="group in board.groups" :key="group.id" class="group-container"> -->
-      <!-- <draggable
-        v-for="group in board.groups"
-        :key="group.id"
-        v-model="group.tasks"
-        group="tasks"
-        @start="drag = true"
-        @end="drag = false"
-        @move="console.log('moving')"
-        empty-insert-threshold="5000"
-        draggable=".task-preview"
-        class="clean-list group-container"
-        tag="li"
-      > -->
       <group
         v-for="(group, idx) in board.groups"
         :key="group.id"
@@ -38,8 +24,6 @@
         :idx="idx"
         @save-board="saveBoard"
       />
-      <!-- </draggable> -->
-      <!-- </li> -->
       <div class="add-new-group">
         <button
           v-if="!isAddNewGroup"
@@ -107,10 +91,17 @@ export default {
       return this.$store.getters.currBoard;
     },
     background() {
-      return {
-        "background-image": "url(" + require("../assets/blueNorange.jpg") + ")",
-        "background-size": "cover",
-      };
+      console.log("currBoard", this.$store.getters.currBoard);
+      const style = this.$store.getters.currBoard.style;
+      if (style.bgImg) {
+        return {
+          "background-image":
+            "url(" +
+            require("@/assets/img/background/" + style.bgImg.name) +
+            ")",
+          "background-size": "cover",
+        };
+      }
     },
   },
   components: {
