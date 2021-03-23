@@ -79,7 +79,7 @@ export default {
     return {
       maxHeight: "0px",
       isAddNewGroup: false,
-      newGroup: boardService.getEmptyGroup(),
+      newGroup: JSON.parse(JSON.stringify(this.$store.getters.getEmptyGroup)),
     };
   },
   async created() {
@@ -92,7 +92,7 @@ export default {
       if (!this.newGroup.title) return;
       this.newGroup.board = { id: this.board._id };
       await this.$store.dispatch({ type: "saveGroup", group: this.newGroup });
-      this.newGroup = this.$store.getEmptyGroup();
+      this.newGroup = JSON.parse(JSON.stringify(this.$store.getters.getEmptyGroup));
       this.isAddNewGroup = false;
     },
     saveBoard() {

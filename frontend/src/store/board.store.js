@@ -1,5 +1,5 @@
 // import boardService from '../services/board.service.js';
-import { boardService } from '../services/NEW-board.service.js';
+import { boardService } from '../services/board.service.js';
 
 import utilService from '../services/util.service.js';
 export const boardStore = {
@@ -15,9 +15,15 @@ export const boardStore = {
     currTask(state) {
       return state.task;
     },
-    emptyBoard(){
+    emptyBoard() {
       return boardService.getEmptyBoard();
-    }
+    },
+    getEmptyGroup() {
+      return boardService.getEmptyGroup();
+    },
+    getEmptyTask() {
+      return boardService.getEmptyTask();
+    },
   },
   mutations: {
     setBoard(state, { board }) {
@@ -38,13 +44,6 @@ export const boardStore = {
       console.log(boardIdx);
       if (boardIdx < 0) return;
       state.boardList.splice(boardIdx, 1);
-    },
-
-    getEmptyGroup() {
-      return boardService.getEmptyGroup();
-    },
-    getEmptyTask() {
-      return boardService.getEmptyTask();
     },
 
     // setBoardList(state, {boards}){
@@ -74,7 +73,7 @@ export const boardStore = {
       try {
         const newBoard = await boardService.saveBoard(board);
         commit({ type: 'setBoard', newBoard });
-// socket comes here
+        // socket comes here
         return newBoard;
       } catch (err) {
         console.log('err:', err);
