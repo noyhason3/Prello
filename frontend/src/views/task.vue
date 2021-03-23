@@ -185,7 +185,7 @@ export default {
     },
     setCoverColor(color){
       // this.coverColor = color
-      this.task.cover = color
+      this.task.style.color = color
       this.saveTask(this.task);
 
     },
