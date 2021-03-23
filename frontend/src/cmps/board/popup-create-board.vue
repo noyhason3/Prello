@@ -60,6 +60,30 @@ export default {
       ],
     };
   },
+  methods:{
+          isSelected(id) {
+      return this.selectedStyle.id === id;
+    },
+    getSelectedStyle(styleId) {
+      let style = this.imgs.find(({ id }) => id === styleId);
+      if (style) return style;
+      style = this.colors.find(({ id }) => id === styleId);
+      return style;
+    },
+  },
+    computed: {
+    bgStyles() {
+      const imgStyles = this.imgs.map((currImg) => {
+        const img = require("@/assets/img/background/" + currImg.value);
+        return { id: currImg.id, style: { backgroundImage: `url(${img})` } };
+      });
+      const colorStyles = this.colors.map((currColor) => {
+        return { id: currColor.id, style: { backgroundColor: currColor.value } };
+      });
+      const styles = imgStyles.concat(colorStyles);
+      return styles;
+    },
+    }
 };
 </script>
 

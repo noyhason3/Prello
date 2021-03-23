@@ -45,7 +45,7 @@
         </button>
       </li>
     </ul>
-    <!-- <popup-create-board :boardToEdit="boardToEdit"/> -->
+    <!-- <popup-create-board v-if="isAddBoard" :isAddBoard="isAddBoard" :boardToEdit="boardToEdit" @close-board-popup="closeBoardPopup" @create-new-board="createNewBoard"/> -->
     <div>
       <div
         @click="closeBoardPopup"
@@ -157,15 +157,15 @@ export default {
       }
       return { backgroundColor: board.style.bgColor.value };
     },
-    isSelected(id) {
-      return this.selectedStyle.id === id;
-    },
-    getSelectedStyle(styleId) {
-      let style = this.imgs.find(({ id }) => id === styleId);
-      if (style) return style;
-      style = this.colors.find(({ id }) => id === styleId);
-      return style;
-    },
+    // isSelected(id) {
+    //   return this.selectedStyle.id === id;
+    // },
+    // getSelectedStyle(styleId) {
+    //   let style = this.imgs.find(({ id }) => id === styleId);
+    //   if (style) return style;
+    //   style = this.colors.find(({ id }) => id === styleId);
+    //   return style;
+    // },
     toggleOptionsMenu(board) {
       if (this.boardToEdit?._id === board._id) return (this.boardToEdit = null);
       this.boardToEdit = board;
