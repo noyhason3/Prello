@@ -5,7 +5,7 @@
       class="create-board-screen"
       :class="{ 'add-board': isAddBoard }"
     ></div>
-    <div v-if="isAddBoard" class="popup-create-board">
+    <div class="popup-create-board">
       <form @submit.prevent="createNewBoard">
         <div class="new-board-info">
           <div class="title-container" :style="selectedStyle.style">
@@ -38,13 +38,13 @@
 
 <script>
 export default {
-    props:{
-        boardToEdit:Object,
-    },
+  props: {
+    isAddBoard: Boolean,
+  },
   data() {
     return {
       selectedStyle: null,
-
+      boardToEdit: null,
       imgs: [
         { id: "i101", value: "1.jpg" },
         { id: "i102", value: "2.jpg" },
@@ -59,6 +59,66 @@ export default {
         { id: "c104", value: "#8BCB8A" },
       ],
     };
+  },
+  created() {
+      this.boardToEdit = {...this.$store.getters.emptyBoard};
+    this.selectedStyle = this.bgStyles[0];
+  },
+  methods: {
+    isSelected(id) {
+      return this.selectedStyle.id === id;
+    },
+    getSelectedStyle(styleId) {
+      let style = this.imgs.find(({ id }) => id === styleId);
+      if (style) return style;
+      style = this.colors.find(({ id }) => id === styleId);
+      return style;
+    },
+    async createNewBoard() {
+      if (!this.boardToEdit.title) return;
+      const style = this.getSelectedStyle(this.selectedStyle.id);
+      if (style.value.startsWith("#")) {
+        this.boardToEdit.style.bgColor = style;
+      } else {
+        this.boardToEdit.style.bgImg = style;
+      }
+
+      const board = await this.$store.dispatch({
+        type: "saveBoard",
+        board: this.boardToEdit,
+      });
+    this.$emit('open-board', board._id)
+    },
+    boardStyle(board) {
+      if (board.style.bgImg) {
+        const img = require("@/assets/img/background/" +
+          board.style.bgImg.value);
+        return { backgroundImage: `url(${img})` };
+      }
+      return { backgroundColor: board.style.bgColor.value };
+    },
+    selectStyle(style) {
+      this.selectedStyle = style;
+    },
+    closeBoardPopup() {
+      this.$emit("close-board-popup");
+    },
+  },
+  computed: {
+    bgStyles() {
+      const imgStyles = this.imgs.map((currImg) => {
+        const img = require("@/assets/img/background/" + currImg.value);
+        return { id: currImg.id, style: { backgroundImage: `url(${img})` } };
+      });
+      const colorStyles = this.colors.map((currColor) => {
+        return {
+          id: currColor.id,
+          style: { backgroundColor: currColor.value },
+        };
+      });
+      const styles = imgStyles.concat(colorStyles);
+      return styles;
+    },
   },
 };
 </script>

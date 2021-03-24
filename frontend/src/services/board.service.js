@@ -11,6 +11,7 @@ export const boardService = {
   getEmptyBoard,
   getEmptyGroup,
   getEmptyTask,
+  getEmptyTemplate
 };
 
 function getById(boardId) {
@@ -68,3 +69,64 @@ function getEmptyTask() {
     cover: ''
   };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function getEmptyTemplate() {
+  }
