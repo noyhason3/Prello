@@ -5,12 +5,12 @@ const boardService = require('./board.service');
 
 async function getBoards(req, res) {
   try {
-    const userId= req.session.user._id;
+    const userId = req.session.user._id;
     // const filterBy = req.body
     const boards = await boardService.query();
     let userBoards = boards;
-    if(userId !== 'demo'){
-      userBoards = boards.filter(({createdBy}) => createdBy._id === userId)
+    if (userId !== 'demo') {
+      userBoards = boards.filter(({ createdBy }) => createdBy._id === userId);
     }
     res.send(userBoards);
   } catch (err) {
@@ -22,9 +22,7 @@ async function getBoards(req, res) {
 async function getBoard(req, res) {
   try {
     const boardId = req.params.boardId;
-    // console.log('boardId', boardId);
     const board = await boardService.getById(boardId);
-    // console.log('board', board);
     res.json(board);
   } catch (err) {
     logger.error('Failed to get board', err);
@@ -51,8 +49,8 @@ async function addBoard(req, res) {
     };
     board = await boardService.add(board);
 
-    board.createdBy.fullname = req.session.user.fullname
-    board.createdBy.imgUrl = req.session.user.imgUrl
+    board.createdBy.fullname = req.session.user.fullname;
+    board.createdBy.imgUrl = req.session.user.imgUrl;
 
     ///////////////////////// BELOW IS CODE FOR ADVANCED STEPS WITH WEB SOCKETS ////////////////////
     // console.log('CTRL SessionId:', req.sessionID);
@@ -74,10 +72,6 @@ async function addBoard(req, res) {
 async function updateBoard(req, res) {
   try {
     const board = req.body;
-    // console.log(
-    //   'file: board.controller.js - line 80 - updateBoard - board',
-    //   board
-    // );
     const savedBoard = await boardService.update(board);
     res.send(savedBoard);
   } catch (err) {
