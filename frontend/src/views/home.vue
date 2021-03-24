@@ -24,7 +24,11 @@ export default {
   name: "home",
   methods: {
     async enterAsGuest() {
-      await userService.login({ username: "Guest", password: "guest" });
+      const userCred = {
+        username: "Guest",
+        password: "guest",
+      };
+      const user = await this.$store.dispatch({ type: "login", userCred });
       this.$router.push("/board");
     },
   },
