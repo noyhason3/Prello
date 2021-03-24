@@ -16,7 +16,6 @@ async function query(filterBy = {}) {
     const criteria = _buildCriteria(filterBy)
     try {
         const collection = await dbService.getCollection('user')
-        // console.log("file: user.service.js - line 19 - query - collection", collection)
         var users = await collection.find({}).toArray()
         users = users.map(user => {
             delete user.password
@@ -37,13 +36,6 @@ async function getById(userId) {
         const collection = await dbService.getCollection('user')
         const user = await collection.findOne({ '_id': ObjectId(userId) })
         delete user.password
-
-        // user.givenReviews = await reviewService.query({ byUserId: ObjectId(user._id) })
-        // user.givenReviews = user.givenReviews.map(review => {
-        //     delete review.byUser
-        //     return review
-        // })
-
         return user
     } catch (err) {
         logger.error(`while finding user ${userId}`, err)
@@ -54,8 +46,7 @@ async function getById(userId) {
 async function getByUsername(username) {
     try {
         const collection = await dbService.getCollection('user')
-        // const user = await collection.findOne({ username })
-        const user = await collection.findOne({ "username":{$regex : new RegExp(username, "i")} })
+        const user = await collection.findOne({ username })
         return user
     } catch (err) {
         logger.error(`while finding user ${username}`, err)

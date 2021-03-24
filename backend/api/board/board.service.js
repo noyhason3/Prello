@@ -15,50 +15,14 @@ async function query(filterBy = {}) {
     const boards = await collection.find({}).toArray();
     if (userId === 'demo') {
       //return await DEMO_BOARDS
+      //TODO - Add a more sophisticated board population function - in case a board isn't found populate it with the data from the DEMO_BOARDS
       const demoBoards = await collection.find({ _id: { $regex: "demo" } }).toArray()
       return demoBoards
     } else {
-      const memberInBoards = await collection.find({ groups: { $elemMatch: { members: { id: userId } } } }).toArray()
+      const memberInBoards = await collection.find({}).toArray()
       console.log("file: board.service.js - line 22 - query - memberInBoards", memberInBoards.length)
       return memberInBoards
     }
-    // var reviews = await collection.aggregate([
-    //     {
-    //         $match: filterBy
-    //     },
-    //     {
-    //         $lookup:
-    //         {
-    //             localField: 'byUserId',
-    //             from: 'user',
-    //             foreignField: '_id',
-    //             as: 'byUser'
-    //         }
-    //     },
-    //     {
-    //         $unwind: '$byUser'
-    //     },
-    //     {
-    //         $lookup:
-    //         {
-    //             localField: 'aboutUserId',
-    //             from: 'user',
-    //             foreignField: '_id',
-    //             as: 'aboutUser'
-    //         }
-    //     },
-    //     {
-    //         $unwind: '$aboutUser'
-    //     }
-    // ]).toArray()
-    // reviews = reviews.map(review => {
-    //     review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
-    //     review.aboutUser = { _id: review.aboutUser._id, fullname: review.aboutUser.fullname }
-    //     delete review.byUserId
-    //     delete review.aboutUserId
-    //     return review
-    // })
-
     return boards;
   } catch (err) {
     logger.error('cannot find boards', err);
@@ -75,6 +39,7 @@ async function getById(boardId) {
         populateDemoData(board)
       }
       return board
+
     }
     return await collection.findOne({ _id: ObjectId(boardId) });
   } catch (err) {
