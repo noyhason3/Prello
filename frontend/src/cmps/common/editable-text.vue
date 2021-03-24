@@ -23,8 +23,6 @@
 <script>
 export default {
   props: {
-    // currTaskDescription: String,
-    // task: Object,
     isEditFirst: Boolean,
     type: "",
     value: String,
@@ -32,44 +30,28 @@ export default {
   },
   data() {
     return {
-      // isEditDescription: false,
-      // taskDescriptionPreview: this.currTaskDescription,
-      // taskDescriptionEdit: null,
       isEditing: false,
     };
   },
   created() {
-    console.log();
     if (this.isEditFirst) this.isEditing = this.isEditFirst;
   },
   methods: {
     editDescription() {
-      //this.taskDescriptionEdit = this.taskDescriptionPreview;
-      // this.isEditDescription = true;
-
       this.isEditing = true;
     },
     setText() {
-      // this.taskDescriptionPreview = this.taskDescriptionEdit;
-      // this.$emit("setText", this.taskDescriptionPreview);
-      // this.closeTextarea();
-
       const val = this.$refs.input.value;
       this.$emit("input", val);
       this.closeTextarea();
     },
     closeTextarea() {
-      //this.taskDescriptionEdit = null;
       this.isEditing = false;
       this.$emit("close-textarea");
     },
     computedClass() {
       var str = "editable-text";
       str += this.isEditing ? " open" : " closed";
-      // console.log(
-      //   "file: editable-text.vue - line 69 - computedClass - str",
-      //   str
-      // );
       return str;
     },
   },

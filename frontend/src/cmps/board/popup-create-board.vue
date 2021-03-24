@@ -87,10 +87,8 @@ export default {
       } else {
         this.boardToEdit.style.bgImg = style;
       }
-      console.log('template',this.isUseTemplate);
 
       if(this.isUseTemplate) this.boardToEdit.groups = {...boardService.getEmptyTemplate()}
-      console.log('board',this.boardToEdit);
       const board = await this.$store.dispatch({
         type: "saveBoard",
         board: this.boardToEdit,

@@ -1,9 +1,5 @@
 <template>
   <section class="task-preview" v-if="task">
-    <!-- <button @click="removeTask" class="btn close">X</button> -->
-    <!-- <img v-if="isTaskCover" src="task.coverUrl"> -->
-    <!-- If cover image- show image, if cover color set section background-color-->
-    <!-- <div class="task-preview-header"> -->
       <button @click="removeTask" class="btn close">X</button>
       <div
         v-if="task.style.coverColor"
@@ -11,7 +7,7 @@
         :style="`background-color: ${task.style.coverColor}`"
       />
       <img v-if="task.style.coverImg" class="task-cover-img-preview" :style="`background-image: url(${task.style.coverImg})`"  />
-    <!-- </div> -->
+
 
     <div class="task-preview-main">
       <task-label-preview
@@ -21,7 +17,7 @@
       />
       <div>
         <h2 class="task-title">{{ task.title }}</h2>
-        <!-- <div class="btn task-edit">
+        <!-- TODO: <div class="btn task-edit">
         <span>🖊</span>
       </div> -->
       </div>
@@ -29,7 +25,7 @@
         <div v-if="taskChecklists" class="checklist-info">
           <span></span>{{ taskChecklists.complete }}/{{ taskChecklists.total }}
         </div>
-        <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
+        <!-- TODO: <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
         <div v-if="isTaskDescription" class="description-icon"></div>
         <div v-if="attachmentCount" class="attachment-info"><span></span>{{ attachmentCount }}</div>
         <member-list
@@ -67,7 +63,7 @@ export default {
     },
   },
   computed: {
-    // isTaskCover() {
+    //TODO:// isTaskCover() {
     //   return this.task.style.coverColor;
     // },
     isTaskDescription() {
@@ -78,7 +74,7 @@ export default {
     },
     isTaskDuedate() {
       return false;
-      //return this.task.duedate;
+      //TODO: return this.task.duedate;
     },
     taskMemebers() {
       if (!this.task.members?.length) return false;

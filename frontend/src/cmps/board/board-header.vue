@@ -1,6 +1,5 @@
 <template>
   <section class="board-header">
-    <!-- <div class="board-title">{{ board.title }}</div> -->
     <editableTitle v-model="board.title" />
     <button @click="toggleStarred" :class="starredClass">&#xf005;</button>
     <div class="board-header-members">

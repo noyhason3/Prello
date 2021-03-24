@@ -3,7 +3,7 @@
     <a class="flex center member-preview" :class="colorClassByInitials">
       {{ memberInitials }}
     </a>
-    <!-- <img
+    <!--TODO: <img
         v-if="member.imgUrl"
         :src="member.imgUrl"
         height="120px"
