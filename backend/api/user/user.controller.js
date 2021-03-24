@@ -16,7 +16,6 @@ async function getUsers(req, res) {
     try {
         const filterBy = {
             txt: req.query?.txt || '',
-            // minBalance: +req.query?.minBalance || 0
         }
         const users = await userService.query(filterBy)
         res.send(users)
@@ -38,8 +37,7 @@ async function deleteUser(req, res) {
 
 async function updateUser(req, res) {
     try {
-        const {user} = req.body
-        // const user = req.body
+        const { user } = req.body
         const savedUser = await userService.update(user)
         res.send(savedUser)
         // socketService.broadcast({type: 'user-updated', data: review, to:savedUser._id})
