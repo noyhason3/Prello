@@ -10,6 +10,7 @@
         top:0;
     }
     .main{
+        z-index: 1;
         display: flex;
         overflow-y:hidden;
         overflow-x: auto;
