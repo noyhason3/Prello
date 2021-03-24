@@ -1,12 +1,11 @@
 const logger = require('../../services/logger.service');
-// const userService = require('../user/user.service')
-// const socketService = require('../../services/socket.service')
+
 const boardService = require('./board.service');
 
 async function getBoards(req, res) {
   try {
     const userId = req.session.user._id;
-    // const filterBy = req.body
+    //TODO: const filterBy = req.body
     const boards = await boardService.query();
     let userBoards = boards;
     if (userId !== 'demo') {

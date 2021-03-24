@@ -10,18 +10,13 @@ async function query(filterBy = {}) {
   try {
     const store = asyncLocalStorage.getStore()
     const { userId } = store
+    if (userId === 'demo') {
+      //filterBy = { _id: { $regex: ".*demo.*" } }
+      return await DEMO_BOARDS
+    }
     const criteria = _buildCriteria(filterBy);
     const collection = await dbService.getCollection('board');
     const boards = await collection.find({}).toArray();
-    if (userId === 'demo') {
-      //return await DEMO_BOARDS
-      const demoBoards = await collection.find({ _id: { $regex: "demo" } }).toArray()
-      return demoBoards
-    } else {
-      const memberInBoards = await collection.find({ groups: { $elemMatch: { members: { id: userId } } } }).toArray()
-      console.log("file: board.service.js - line 22 - query - memberInBoards", memberInBoards.length)
-      return memberInBoards
-    }
     // var reviews = await collection.aggregate([
     //     {
     //         $match: filterBy
