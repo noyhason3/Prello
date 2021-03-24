@@ -6,16 +6,19 @@
     @click.stop="closeTask"
   >
     <div class="task" :style="`top:${initialHeight}px;`" @click.stop>
-      <div
-        v-if="task.style.coverColor"
-        class="task-cover"
-        :style="`background-color: ${task.style.coverColor}`"
-      />
-      <img
-        v-if="task.style.coverImg"
-        class="task-cover-img"
-        :style="`background-image: url(${task.style.coverImg})`"
-      />
+      <div class="task-cover">
+        <div
+          v-if="task.style.coverColor"
+          class="task-cover-color"
+          :style="`background-color: ${task.style.coverColor}`"
+        />
+        <img
+          v-if="task.style.coverImg"
+          class="task-cover-img"
+          :src="task.style.coverImg"
+        />
+        <!-- :style="`background-image: url(${task.style.coverImg})`" -->
+      </div>
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
         <task-title

@@ -24,6 +24,13 @@
     flex-direction: column;
     // margin-top: 300px;
     position: absolute;
+    
+    .task-cover{
+      display: flex;
+      justify-content: center;
+      border-radius: 5px 5px 0px 0px;
+      background-color: $clr5;
+    }
 
     .header {
       // margin-bottom: 10px;

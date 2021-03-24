@@ -10,6 +10,10 @@ async function query(filterBy = {}) {
   try {
     const store = asyncLocalStorage.getStore()
     const { userId } = store
+    if (userId === 'demo') {
+      //filterBy = { _id: { $regex: ".*demo.*" } }
+      return await DEMO_BOARDS
+    }
     const criteria = _buildCriteria(filterBy);
     const collection = await dbService.getCollection('board');
     const boards = await collection.find({}).toArray();
