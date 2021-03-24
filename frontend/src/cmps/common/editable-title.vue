@@ -7,8 +7,8 @@
       @blur="onBlur"
       @focus="toggleWrapperFocus"
       ref="title"
+      spellcheck="false"
     >
-      <!-- <h3>💬</h3> -->
       {{ str }}
     </h2>
   </div>

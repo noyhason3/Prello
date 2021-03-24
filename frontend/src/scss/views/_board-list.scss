@@ -130,13 +130,13 @@
             transition: 0.2s;
             color: rgba(255, 210, 86, 0.842);
         }
-
+        
         .toggle-starred::before,
         .starred::before {
             font-family: 'fa-reg';
             content: "\f005";
         }
-
+        
         .toggle-starred {
             right: -30px;
             opacity: 0;
@@ -145,6 +145,7 @@
         .toggle-starred.starred{
             right: 0;
             opacity: 1;
+            color: rgba(255, 210, 86, 0.842);
         }
         .starred:hover {
             transform: scale(1.2);
