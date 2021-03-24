@@ -1,7 +1,12 @@
 .board{
+    &.img-bg .board-header{
+        background: transparent;
+        //box-shadow: 2px -2px 6px 0px #00000085;
+
+    }
     .board-header{
-            background:$clr1;
             position:relative;
+            background:$clr1;
             &>*:not(.board-header-members){
                 margin: 10px;
                 padding: 3px 10px;
@@ -10,17 +15,14 @@
                 border-radius: 6px;
                 border: 2px solid $clr4;
             }
-    
             .editable-title-wrapper{
                 border:0;
                 font-weight: bold;
+                min-width: 250px;
                 max-width: 500px;
                 width: fit-content;
                 display: inline-flex;
                 margin-inline-end: 0;
-                .editable-title{
-                    max-width: 500px;
-                }
             }
     
     
@@ -50,6 +52,10 @@
             }
             .board-header-members{
                 display: inline-flex;
+                position: absolute;
+                top: 10px;
+                right: 50%;
+                transform: translateX(50%)
             }
             .menu-btn{
                 border:1.5px solid $clr5;
