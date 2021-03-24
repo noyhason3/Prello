@@ -90,7 +90,6 @@ export default {
       this.isAddBoard = false;
     },
     async openBoard(boardId) {
-      console.log("id:", boardId);
       await this.$store.dispatch({ type: "getBoard", boardId });
       this.$router.push("/board/" + boardId);
     },

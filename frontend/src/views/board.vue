@@ -56,8 +56,6 @@ import group from "../cmps/board/group.vue";
 import editableText from "@/cmps/common/editable-text.vue";
 import draggable from "vuedraggable";
 
-// require './assets/blueNorange.jpg'
-
 export default {
   data() {
     return {
@@ -67,7 +65,6 @@ export default {
     };
   },
   async created() {
-    ////DONT FORGET TO LOAD PROPERLY - not that we will
     if (!this.$store.getters.board) {
       const boardId = this.$route.params.boardId;
       await this.$store.dispatch({ type: "getBoard", boardId });
@@ -84,7 +81,6 @@ export default {
       this.isAddNewGroup = false;
     },
     async saveBoard() {
-      // boardService.saveBoard(this.$store.getters.currBoard);
       await this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
   },
@@ -93,7 +89,6 @@ export default {
       return this.$store.getters.currBoard;
     },
     background() {
-      console.log("currBoard", this.$store.getters.currBoard.style.bgColor);
       const style = this.$store.getters.currBoard.style;
       if (style.bgImg) {
         return {
@@ -118,6 +113,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

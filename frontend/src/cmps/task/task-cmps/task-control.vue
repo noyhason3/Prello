@@ -1,6 +1,6 @@
 <template>
   <section class="task-control">
-    <!-- SUGGESTED                       ******TODO********
+    <!--  ******TODO********
       <button>Join</button> -->
     <button @click="togglePopup('Cover')" class="control-btn">Cover</button>
     <popup-cover
@@ -68,7 +68,6 @@ export default {
   },
   methods: {
     togglePopup(str) {
-      //this.$emit(`toggle-${str}`);
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
     },

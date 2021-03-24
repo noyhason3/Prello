@@ -18,7 +18,6 @@
             :key="label.id"
             class="flex align-center label-preview"
           >
-            <!-- <div class="label-color"> -->
             <button
               @click="toggleSelectLabel(label.id)"
               :style="'background-color:' + label.color + ';color:$clr1;'"
@@ -27,7 +26,6 @@
             >
               {{ label.title }}
             </button>
-            <!-- </div> -->
             <button
               @click="openLabelEdit('Change', label)"
               class="btn edit-label"
@@ -62,7 +60,6 @@ export default {
   },
   data() {
     return {
-      // labels: this.$store.getters.currBoard.labels,
       isPopupEdit: false,
       action: "",
       selectedLabel: null,
@@ -98,7 +95,6 @@ export default {
       this.$emit("toggle-popup", { str: "Label", buttonLeftPos: 0 });
     },
     async saveLabel(label) {
-      console.log("file: popup-label.vue - line 94 - saveLabel - label", label);
       if (this.selectedLabel) {
         const { color, title } = label;
         this.selectedLabel.color = color;
@@ -131,7 +127,6 @@ export default {
       return [...taskLabels];
     },
     leftPos() {
-      console.log(this.popupLeftPos);
       return `${this.popupLeftPos}px`;
     },
   },

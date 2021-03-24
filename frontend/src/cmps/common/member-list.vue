@@ -1,17 +1,5 @@
 <template>
-   <div v-if="members && members.length">
-    <!-- <div class="member-img" v-for="member in members" :key="member.id">
-      <img
-        v-if="member.imgUrl"
-        :src="member.imgUrl"
-        height="120px"
-        width="120px"
-      />
-      <div v-else style="height:120px,width:120px">
-        {{ member.fullname.charAt(0) }}
-      </div> -->
-
-    <!-- </div> -->
+  <div v-if="members && members.length">
     <ul class="clean-list flex member-list">
       <li
         v-for="(member, idx) in members"
@@ -40,7 +28,7 @@ import popupMemberDetails from "../task/popup/popup-member-details.vue";
 export default {
   props: {
     members: Array,
-    isTaskRelated:Boolean
+    isTaskRelated: Boolean,
   },
   data() {
     return {
@@ -58,10 +46,10 @@ export default {
       this.selectedMember = null;
       this.isShowMemberDetails = false;
     },
-    removeTaskMember(id){
-      this.$emit('remove-task-member',id)
-      this.closeMemberDetails()
-    }
+    removeTaskMember(id) {
+      this.$emit("remove-task-member", id);
+      this.closeMemberDetails();
+    },
   },
 
   components: {
