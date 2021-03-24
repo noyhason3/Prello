@@ -5,7 +5,7 @@
     right: 0;
     bottom: 0;
 
-    background-color:$clr5;
+    background-color:lighten($clr5,18);
 }
 .board-list-container {
     position:relative;

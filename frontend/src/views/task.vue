@@ -21,11 +21,14 @@
       </div>
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
-        <task-title
-          v-model="task.title"
-          @click.prevent
-          @input="saveTask(task)"
-        />
+        <div class="task-title">
+          <div class="icon"></div>
+          <task-title
+            v-model="task.title"
+            @click.prevent
+            @input="saveTask(task)"
+          />
+        </div>
         <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
       </div>
       <div class="task-content" @click.stop>
@@ -64,7 +67,7 @@
             <!-- <task-duedate /> -->
           </div>
 
-          <h4 class="description"><span></span> Description</h4>
+          <h4 class="description title-icon"><span></span> Description</h4>
           <editable-text
             v-model="task.description"
             :type="'description'"

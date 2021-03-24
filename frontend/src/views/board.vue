@@ -1,5 +1,10 @@
 <template>
-  <section class="board" v-if="board" :style="background">
+  <section class="board" v-if="board" ref="board">
+    <img
+      class="board-bg"
+      :src="require('@/assets/img/background/' + board.style.bgImg.value)"
+      alt=""
+    />
     <board-header :board="board" />
     <draggable
       v-model="board.groups"
@@ -68,7 +73,12 @@ export default {
     if (!this.$store.getters.board) {
       const boardId = this.$route.params.boardId;
       await this.$store.dispatch({ type: "getBoard", boardId });
+      this.assignClasses();
     }
+  },
+  destroyed() {
+    const header = this.$store.getters.mainHeader;
+    header.classList.remove("img-bg");
   },
   methods: {
     async addGroup() {
@@ -82,6 +92,17 @@ export default {
     },
     async saveBoard() {
       await this.$store.dispatch({ type: "saveBoard", board: this.board });
+    },
+    assignClasses() {
+      const header = this.$store.getters.mainHeader;
+      const body = this.$refs.board;
+      if (this.board.style.bgImg) {
+        header.classList.add("img-bg");
+        body.classList.add("img-bg");
+      } else {
+        header.classList.remove("img-bg");
+        body.classList.remove("img-bg");
+      }
     },
   },
   computed: {
