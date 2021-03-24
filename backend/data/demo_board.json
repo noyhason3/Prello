@@ -85,7 +85,7 @@
                         "important"
                     ],
                     "style": {
-                        "coverColor":"",
+                        "coverColor":"#7bc86c",
                         "coverImg" : ""
                     }
                 },
@@ -123,7 +123,7 @@
                         }
                     ],
                     "style": {
-                        "coverColor":"",
+                        "coverColor":"#f5dd29",
                         "coverImg" : ""
                     }
                 },
@@ -200,7 +200,7 @@
                     ],
                     "style": {
                         "coverColor":"",
-                        "coverImg" : ""
+                        "coverImg" : "http://res.cloudinary.com/ifats-cloud/image/upload/v1616580346/4_vpb45p.jpg"
                     }
                 }
             ],
@@ -220,7 +220,7 @@
                         "done"
                     ],
                     "style": {
-                        "coverColor":"",
+                        "coverColor":"#172b4d",
                         "coverImg" : ""
                     }
                 },
@@ -302,7 +302,7 @@
                     },
                     "style": {
                         "coverColor":"",
-                        "coverImg" : ""
+                        "coverImg" : "http://res.cloudinary.com/ifats-cloud/image/upload/v1616571363/1_tfwlpt.jpg"
                     }
                 }
             ],
@@ -393,7 +393,7 @@
                         "progress"
                     ],
                     "style": {
-                        "coverColor":"",
+                        "coverColor":"#29cce5",
                         "coverImg" : ""
                     }
                 },
@@ -415,7 +415,7 @@
                     ],
                     "style": {
                         "coverColor":"",
-                        "coverImg" : ""
+                        "coverImg" : "http://res.cloudinary.com/ifats-cloud/image/upload/v1616571478/3_vmibxg.jpg"
                     }
                 },
                 {
@@ -440,7 +440,7 @@
                         }
                     ],
                     "style": {
-                        "coverColor":"",
+                        "coverColor":"#ffaf3f",
                         "coverImg" : ""
                     }
                 }
