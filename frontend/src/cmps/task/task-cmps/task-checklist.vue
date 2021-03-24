@@ -1,10 +1,10 @@
 <template>
   <li class="task-checklist">
-    <div class="header">
+    <div class="checklist-header">
       <div class="main-checklist-header">
-        <div class="checklist-icon"></div>
-        <h4 v-if="!isEditTitleOpen" @click="openEditTitle">
-          {{ checklist.title }}
+        <div ></div>
+        <h4 v-if="!isEditTitleOpen" @click="openEditTitle" class="checklist-title title-icon">
+          <span></span>{{ checklist.title }}
         </h4>
         <editable-text
           v-else
