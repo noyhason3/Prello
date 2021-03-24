@@ -1,13 +1,16 @@
 <template>
   <section class="task-preview" v-if="task">
-      <button @click="removeTask" class="btn close">X</button>
-      <div
-        v-if="task.style.coverColor"
-        class="task-cover-preview"
-        :style="`background-color: ${task.style.coverColor}`"
-      />
-      <img v-if="task.style.coverImg" class="task-cover-img-preview" :style="`background-image: url(${task.style.coverImg})`"  />
-
+    <button @click="removeTask" class="btn close">X</button>
+    <div
+      v-if="task.style.coverColor"
+      class="task-cover-preview"
+      :style="`background-color: ${task.style.coverColor}`"
+    />
+    <img
+      v-if="task.style.coverImg"
+      class="task-cover-img-preview"
+      :style="`background-image: url(${task.style.coverImg})`"
+    />
 
     <div class="task-preview-main">
       <task-label-preview
@@ -22,18 +25,27 @@
       </div> -->
       </div>
       <div class="task-info-preview">
-        <div v-if="taskChecklists" class="checklist-info">
-          <span></span>{{ taskChecklists.complete }}/{{ taskChecklists.total }}
+        <div class="main-info-task-preview">
+          <div v-if="taskChecklists" class="checklist-info">
+            <span></span>{{ taskChecklists.complete }}/{{
+              taskChecklists.total
+            }}
+          </div>
+          <!-- TODO: <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
+          <div v-if="isTaskDescription" class="description-icon"></div>
+          <div v-if="attachmentCount" class="attachment-info">
+            <span></span>{{ attachmentCount }}
+          </div>
         </div>
-        <!-- TODO: <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
-        <div v-if="isTaskDescription" class="description-icon"></div>
-        <div v-if="attachmentCount" class="attachment-info"><span></span>{{ attachmentCount }}</div>
-        <member-list
-          v-if="taskMemebers"
-          :members="taskMemebers"
-          :isTaskRelated="true"
-          @remove-task-member="removeTaskMember"
-        />
+
+        <div class="members-task-preview">
+          <member-list
+            v-if="taskMemebers"
+            :members="taskMemebers"
+            :isTaskRelated="true"
+            @remove-task-member="removeTaskMember"
+          />
+        </div>
       </div>
     </div>
   </section>

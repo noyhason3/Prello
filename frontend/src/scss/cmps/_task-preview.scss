@@ -19,7 +19,7 @@
     height: 32px;
     border-radius: 5px 5px 0px 0px;
   }
-  
+
   .task-cover-img-preview {
     width: 100%;
     height: 200px;
@@ -50,27 +50,54 @@
   }
 
   .task-info-preview {
-    > *:not(:last-child) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // padding: 6px 8px 2px;
+    .main-info-task-preview {
+      display: flex;
+      justify-content: space-between;
+      max-width: 100%;
+      // min-width: 30%;
+      margin-left: -2px;
       float: left;
-      margin-inline-end: 20px;
+      > *:not(:last-child) {
+        // float: left;
+        margin-inline-end: 20px;
+        padding: 2px;
+      }
     }
-    .description-icon:before{
+
+    .members-preview {
+      > *:not(:last-child) {
+        // float: left;
+        // margin-inline-end: 20px;
+        padding: 2px;
+        margin: 0 0 4px 4px;
+      }
+    }
+
+    > *:not(:last-child) {
+      // float: left;
+      // margin-inline-end: 20px;
+    }
+    .description-icon:before {
       font-family: 'fa-solid';
-      content:"\f036"
+      content: '\f036';
     }
-    .checklist-info span{
+    .checklist-info span {
       margin-inline-end: 5px;
     }
-    .checklist-info span:before{
+    .checklist-info span:before {
       font-family: 'fa-reg';
-      content:"\f14a"
+      content: '\f14a';
     }
-    .attachment-info span{
+    .attachment-info span {
       margin-inline-end: 5px;
     }
-    .attachment-info span:before{
+    .attachment-info span:before {
       font-family: 'fa-solid';
-      content:"\f0c6"
+      content: '\f0c6';
     }
   }
 
