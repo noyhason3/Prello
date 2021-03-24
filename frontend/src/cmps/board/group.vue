@@ -120,6 +120,9 @@ export default {
         return false;
       }
     },
+    startDrag(ev){
+      //TODO
+    },
     endDrag(ev) {
       this.$emit("save-board");
     },
