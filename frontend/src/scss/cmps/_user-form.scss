@@ -4,95 +4,85 @@
     justify-content: center;
     align-items: center;
     margin-block-end: 20px;
+    & :not(:nth-last-child(2)){
+        margin-block-end: 10px;
+    }
     input{
         width:100%;
         height:100%;
-        border:5px solid transparent;
-        background: #ebecf0;
-        border-radius: 5px;
+        border:0;
+        border-radius: 0;
+        border-bottom:2px solid $clr5;
+        margin-block-end: 5px;
     }
-    .fullname{
-        margin-block-end: 15px;
-        &:hover{
-            background:#e4e4e3;
-        }
-        &:active{
-            background:#cfcfcc ;
-        }   
-    }
-    .username{
-        margin-block-end: 15px;
-        &:hover{
-            background:#e4e4e3;
-        }
-        &:active{
-            background:#cfcfcc ;
-        }        
+    ::-webkit-input-placeholder{
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color:lighten($clr5,25);
+        font-style: italic;
     }
     .password{
         width:100%;
         position:relative;
         margin-block-end: 5px;
-        & :first-child{
-            &:hover{
-                background:#e4e4e3;
-            }
-            &:active{
-                background:#cfcfcc ;
-            }
-        }
         .toggle-show-password{
             font-family: 'fa-reg';
             position:absolute;
             right:0;
             margin:0;
-            border-radius: 0 5px 5px 0;
-            background: $clr5;
-            color:$clr1;
-            padding-block: 0;
+            padding:0;
+            //border-radius: 0 5px 5px 0;
+            background: transparent;
+            padding-block-end:5px;
+            color:$clr5;
             height:100%;
+            font-size: 16px;
+            outline:none;
+            &:focus{
+                color:lighten($clr5,35);
+            }
         }
     }
     .submit{
-        width:85%;
+        width:100%;
         border-radius: 5px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        font-weight: 900;
-        letter-spacing: 1.2px;
         text-transform: uppercase;
+        font-size:rem(16px);
         box-shadow: $subtle-shadow;
+        background: $clr5;
+        color:$clr1;
         &:hover{
-          background:#e4e4e3;
+          background:lighten($clr5,15);
         }
         &:active{
-            background:#cfcfcc ;
+            background:$clr5,10 ;
         }
-        &.signup{
-            background:$clr9;
-            color: set-color($clr9,60);
-            &:hover{
-                background:lighten( $clr9,15);
-            }
-            &:focus{
-                background:lighten( $clr9,5);
-            }
-            &:active{
-                background:darken($clr9,10);
-                color: set-color(darken($clr9,10),60);
-            }
-        }
-        &.login{
-            background:$clr7;
-            color: set-color($clr7,63);
-            &:hover{
-                background:lighten( $clr7,15);
-            }
-            &:focus{
-                background:lighten( $clr7,5);
-            }
-            &:active{
-                background:darken($clr7,10);
-            }
-        }
+        // &.signup{
+        //     background:$clr9;
+        //     color: set-color($clr9,60);
+        //     &:hover{
+        //         background:lighten( $clr9,15);
+        //     }
+        //     &:focus{
+        //         background:lighten( $clr9,5);
+        //     }
+        //     &:active{
+        //         background:darken($clr9,10);
+        //         color: set-color(darken($clr9,10),60);
+        //     }
+        // }
+        // &.login{
+        //     background:$clr7;
+        //     color: set-color($clr7,63);
+        //     &:hover{
+        //         background:lighten( $clr7,15);
+        //     }
+        //     &:focus{
+        //         background:lighten( $clr7,5);
+        //     }
+        //     &:active{
+        //         background:darken($clr7,10);
+        //     }
+        // }
     }
 }
