@@ -1,7 +1,15 @@
 <template>
-  <a class="flex center member-preview" :class="colorClassByInitials">
-    {{memberInitials}}
-  </a>
+  <div>
+    <a class="flex center member-preview" :class="colorClassByInitials">
+      {{ memberInitials }}
+    </a>
+    <!-- <img
+        v-if="member.imgUrl"
+        :src="member.imgUrl"
+        height="120px"
+        width="120px"
+      /> -->
+  </div>
 </template>
 
 <script>

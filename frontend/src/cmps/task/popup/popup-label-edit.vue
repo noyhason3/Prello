@@ -93,10 +93,6 @@ export default {
     },
     saveLabel() {
       this.labelToEdit.id = utilService.makeId();
-      console.log(
-        "file: popup-label-edit.vue - line 96 - saveLabel - this.labelToEdit",
-        this.labelToEdit
-      );
       this.$emit("save-label", this.labelToEdit);
     },
     toggleIsDelete() {

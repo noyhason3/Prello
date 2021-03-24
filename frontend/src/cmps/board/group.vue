@@ -1,16 +1,12 @@
 <template>
-  <!-- <li class="group-container"> -->
-  <!-- <ul class="clean-list"> -->
-  <!-- <pre>{{ group }}</pre> -->
   <section class="group">
     <div class="flex jcc aic space-between group-header">
-      <!-- <div>{{ group.title }}</div> -->
       <editableTitle
         v-model="group.title"
         @input="saveGroup(group)"
       ></editableTitle>
 
-      <button @click="removeGroup" >X</button>
+      <button @click="removeGroup">X</button>
     </div>
     <div class="tasks-wrapper">
       <draggable
@@ -58,8 +54,6 @@
       :move="updateBoard"
       :drop="updateBoard"
     >
-      <!-- @start="drag = true"
-      @end="drag = false" -->
     </draggable>
   </section>
 </template>
@@ -79,7 +73,7 @@ export default {
   },
   data() {
     return {
-      newTask: JSON.parse(JSON.stringify(this.$store.getters.getEmptyTask)) ,
+      newTask: JSON.parse(JSON.stringify(this.$store.getters.getEmptyTask)),
       isAddNewTask: false,
       ghostRect: null,
       emptyList: [],
@@ -88,22 +82,20 @@ export default {
   methods: {
     openTask(task) {
       task = JSON.parse(JSON.stringify(task));
-      // task.group = { id: this.group.id, title: this.group.title };
       this.$store.commit({ type: "setCurrTask", task });
       this.$router.push(`/board/${this.boardId}/${task.id}`);
     },
     async addTask() {
       if (!this.newTask.title) return;
-      // this.newTask.group = { id: this.group.id, title: this.group.title };
       await this.$store.dispatch({
         type: "saveTask",
         groupId: this.group.id,
         task: this.newTask,
       });
-      this.newTask = JSON.parse(JSON.stringify(this.$store.getters.getEmptyTask));
+      this.newTask = JSON.parse(
+        JSON.stringify(this.$store.getters.getEmptyTask)
+      );
       this.isAddNewTask = false;
-      console.log("Group component - line 49 - this.newTask", this.newTask);
-      console.log("Group component - line 50 - this.group", this.group);
     },
     async removeTask(taskId) {
       await this.$store.dispatch({ type: "removeTask", taskId });
@@ -117,20 +109,8 @@ export default {
         groupId: this.group.id,
       });
     },
-    // onDrag(evt) {
-    //   console.log("🚀 ~ file: group.vue ~ line 88 ~ onDrag ~ evt", evt);
-    //   const dragRect = evt.draggedRect;
-    // },
-    // startDrag(ev, drag) {
-    //   const rect = ev.item.getBoundingClientRect();
-    //   this.ghostRect = ev.item.getBoundingClientRect();
-    //   drag = true;
-    // },
     updateBoard(ev) {
-      // console.log("file: group.vue - line 118 - updateBoard - ev", ev);
-      //const { draggedContext, relatedContext } = ev;
       if (ev.to.classList.contains("egt")) {
-        //console.log("Dragging to empty group tasks list");
         const classes = Array.from(ev.to.classList);
         var toIndex = classes.find((savedClass) => savedClass.includes("egt-"));
         toIndex = toIndex.charAt(toIndex.length - 1);
@@ -139,15 +119,6 @@ export default {
         correspondingList.appendChild(ev.dragged);
         return false;
       }
-    },
-    startDrag(ev, ui) {
-      //console.log("file: group.vue - line 144 - startDrag - ui", ui);
-      //console.log("file: group.vue - line 144 - startDrag - ev", ev);
-      //const el = document.querySelector(".drag");
-      //console.log("file: group.vue - line 147 - startDrag - el", el);
-      //el.classList.add("tilted");
-      //ev.item.classList.add("tilted");
-      //ev.clone.classList.add("tilted");
     },
     endDrag(ev) {
       this.$emit("save-board");

@@ -9,7 +9,6 @@
         Computer
         <input class="file-upload-input" @change="onUploadImg" type="file" />
       </button>
-      <!-- <button>Trello(?)</button> -->
       <form @submit.prevent="saveAttachment">
         <h3>Attach a link</h3>
         <input
@@ -20,13 +19,12 @@
           class="url-input"
         />
         <div v-if="url">
-        <h3>Link name (optional)</h3>
-        <input
-          type="text"
-          v-model="newAttachment.title"
-          class="url-name-input"
-
-        />
+          <h3>Link name (optional)</h3>
+          <input
+            type="text"
+            v-model="newAttachment.title"
+            class="url-name-input"
+          />
         </div>
         <button class="btn narrow">Attach</button>
       </form>
@@ -45,7 +43,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      // isLinkUrl:false,
+
       url: null,
       newAttachment: {
         id: null,
@@ -61,7 +59,6 @@ export default {
         this.isLoading = true;
         const file = ev.target.files[0];
         const res = await uploadImg(file);
-        // console.log("res:", res);
         this.isLoading = false;
         this.saveAttachment(res);
       } catch (err) {
@@ -96,9 +93,9 @@ export default {
     togglePopup() {
       this.$emit("toggle-popup", "Attachment");
     },
-    toggleAddName(){
-    //   this.isLinkUrl = !!this.url;
-    }
+    toggleAddName() {
+      //   this.isLinkUrl = !!this.url;
+    },
   },
   components: { popUp },
 };
