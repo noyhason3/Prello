@@ -35,10 +35,10 @@
         <input class="cover-upload-input" @change="onUploadCover" type="file" />
       </button>
       <p>Tip:Drag an image on to the card to upload it.</p>
-      <h3>UNSPLASH</h3>
+      <!-- <h3>UNSPLASH</h3>
       <button @click="search" class="btn narrow action-color">
         Search for photos
-      </button>
+      </button> -->
     </div>
   </pop-up>
 </template>

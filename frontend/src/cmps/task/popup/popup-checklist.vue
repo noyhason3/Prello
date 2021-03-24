@@ -1,7 +1,7 @@
 <template>
   <pop-up class="popup-checklist">
     <div slot="header" class="task-popup-header">
-      <h2 >Add Checklist</h2>
+      <h2>Add Checklist</h2>
       <button @click="togglePopup" class="btn close">X</button>
     </div>
     <div slot="main">
