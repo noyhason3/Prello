@@ -9,7 +9,6 @@
         height:100%;
         border:5px solid transparent;
         background: #ebecf0;
-        box-shadow: $subtle-shadow;
         border-radius: 5px;
     }
     .fullname{
@@ -58,6 +57,7 @@
         border-radius: 5px;
         font-weight: 900;
         text-transform: uppercase;
+        box-shadow: $subtle-shadow;
         &:hover{
           background:#e4e4e3;
         }
