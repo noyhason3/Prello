@@ -68,9 +68,9 @@ export default {
   },
   async created() {
     ////DONT FORGET TO LOAD PROPERLY - not that we will
-    if(!this.$store.getters.board){
-    const boardId = this.$route.params.boardId;
-    await this.$store.dispatch({ type: "getBoard", boardId });
+    if (!this.$store.getters.board) {
+      const boardId = this.$route.params.boardId;
+      await this.$store.dispatch({ type: "getBoard", boardId });
     }
   },
   methods: {

@@ -28,7 +28,6 @@ export const boardStore = {
     mutations: {
         setBoard(state, { currBoard }) {
             state.board = currBoard;
-            // console.log('state board', state.board);
         },
         setBoards(state, { boards }) {
             state.boards = boards;
@@ -41,10 +40,6 @@ export const boardStore = {
             if (boardIdx < 0) return;
             state.boards.splice(boardIdx, 1);
         },
-
-        // setBoardList(state, {boards}){
-        //     state.boards = boards;
-        // }
     },
     actions: {
         async loadBoards({ commit }) {
@@ -77,7 +72,6 @@ export const boardStore = {
             }
         },
         async saveBoard({ commit }, { board }) {
-            console.log("file: board.store.js - line 82 - saveBoard - board", board)
             try {
                 const currBoard = await boardService.save(board);
                 commit({ type: 'setBoard', currBoard: board });
@@ -90,7 +84,6 @@ export const boardStore = {
 
         async removeBoard({ commit }, { boardId }) {
             try {
-                console.log('boardId:', boardId)
                 await boardService.remove(boardId);
                 console.log('board deleted:', boardId);
                 commit({ type: 'removeBoard', boardId });
@@ -113,7 +106,6 @@ export const boardStore = {
                 group.id = utilService.makeId();
                 board.groups.push(group);
             }
-
             await boardService.save(board);
             commit({ type: 'setBoard', currBoard: board });
         },
@@ -122,7 +114,6 @@ export const boardStore = {
             const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
             if (groupIdx < 0) return;
             board.groups.splice(groupIdx, 1);
-
             await boardService.save(board);
             commit({ type: 'setBoard', currBoard: board });
         },
@@ -161,13 +152,11 @@ export const boardStore = {
             } catch (err) {
                 console.log('err:', err);
             }
-            //   return Promise.resolve({ group, board });
         },
 
         async saveBoardLabels({ state, commit }, { labels }) {
             const board = JSON.parse(JSON.stringify(state.board));
             board.labels = labels;
-
             await boardService.save(board);
             commit({ type: 'setBoard', currBoard: board });
         },
@@ -219,26 +208,6 @@ export const boardStore = {
         //         throw err;
         //       }
         //     },
-
-        //old ones
-        // async getBoard({ commit }, { boardId }) {
-        //   try {
-        //     const currBoard = await boardService.getById(boardId);
-        //     commit({ type: 'setBoard', currBoard });
-        //   } catch (err) {
-        //     console.log('err', err);
-        //   }
-        // },
-        // async saveBoard({ commit }, { board }) {
-        //   try {
-        //     const currBoard = await boardService.save(board);
-        //     commit({ type: 'setBoard', currBoard });
-        //     // socket comes here
-        //     return currBoard;
-        //   } catch (err) {
-        //     console.log('err:', err);
-        //   }
-        // },
     },
 };
 
