@@ -6,7 +6,7 @@ import { userService } from '../services/user.service.js'
 
 export const userStore = {
     state: {
-        loggedinUser: userService.getLoggedinUser(),
+        loggedinUser: JSON.parse(sessionStorage.getItem('loggedinUser')) || {},
         users: [],
         watchedUser: null
     },

@@ -26,12 +26,12 @@
       </div> -->
       </div>
       <div class="task-info-preview">
-        <div v-if="taskChecklists">
-          ☑ {{ taskChecklists.complete }}/{{ taskChecklists.total }}
+        <div v-if="taskChecklists" class="checklist-info">
+          <span></span>{{ taskChecklists.complete }}/{{ taskChecklists.total }}
         </div>
         <!-- <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
-        <div v-if="isTaskDescription">📄</div>
-        <div v-if="attachmentCount">📎{{ attachmentCount }}</div>
+        <div v-if="isTaskDescription" class="description-icon"></div>
+        <div v-if="attachmentCount" class="attachment-info"><span></span>{{ attachmentCount }}</div>
         <member-list
           v-if="taskMemebers"
           :members="taskMemebers"

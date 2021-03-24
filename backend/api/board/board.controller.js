@@ -6,15 +6,12 @@ const boardService = require('./board.service');
 async function getBoards(req, res) {
   try {
     const userId= req.session.user._id;
-    console.log('userId:', userId)
     // const filterBy = req.body
     const boards = await boardService.query();
-    console.log('boards:', boards)
     let userBoards = boards;
     if(userId !== 'demo'){
       userBoards = boards.filter(({createdBy}) => createdBy._id === userId)
     }
-    console.log('userBoards',userBoards);
     res.send(userBoards);
   } catch (err) {
     logger.error('Cannot get boards', err);

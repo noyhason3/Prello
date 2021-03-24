@@ -53,6 +53,24 @@
       float: left;
       margin-inline-end: 20px;
     }
+    .description-icon:before{
+      font-family: 'fa-solid';
+      content:"\f036"
+    }
+    .checklist-info span{
+      margin-inline-end: 5px;
+    }
+    .checklist-info span:before{
+      font-family: 'fa-reg';
+      content:"\f14a"
+    }
+    .attachment-info span{
+      margin-inline-end: 5px;
+    }
+    .attachment-info span:before{
+      font-family: 'fa-solid';
+      content:"\f0c6"
+    }
   }
 
   .member-list {
