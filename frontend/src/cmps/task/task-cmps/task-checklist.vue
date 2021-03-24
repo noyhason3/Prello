@@ -82,7 +82,7 @@
         </li>
       </draggable>
 
-      <button v-if="!isAddTodoOpen" @click="openAddTodo" class="btn">
+      <button v-if="!isAddTodoOpen" @click="openAddTodo" class="btn add-item">
         Add an item
       </button>
       <editable-text
