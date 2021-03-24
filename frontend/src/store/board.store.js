@@ -77,9 +77,10 @@ export const boardStore = {
             }
         },
         async saveBoard({ commit }, { board }) {
+            console.log("file: board.store.js - line 82 - saveBoard - board", board)
             try {
                 const currBoard = await boardService.save(board);
-                commit({ type: 'setBoard', currBoard });
+                commit({ type: 'setBoard', currBoard: board });
                 await socketService.emit('save-board', currBoard);
                 return currBoard;
             } catch (err) {

@@ -1,14 +1,17 @@
 <template>
-  <h2
-    v-if="value"
-    class="editable-title"
-    contenteditable="true"
-    @blur="onBlur"
-    ref="title"
-  >
-    <!-- <h3>💬</h3> -->
-    {{ str }}
-  </h2>
+  <div class="editable-title-wrapper" ref="wrapper">
+    <h2
+      v-if="value"
+      class="editable-title"
+      contenteditable="true"
+      @blur="onBlur"
+      @focus="toggleWrapperFocus"
+      ref="title"
+      spellcheck="false"
+    >
+      {{ str }}
+    </h2>
+  </div>
 </template>
 
 <script>
@@ -29,6 +32,10 @@ export default {
         this.$emit("input", this.value);
         ev.target.innerText = this.value;
       }
+      this.toggleWrapperFocus();
+    },
+    toggleWrapperFocus() {
+      this.$refs.wrapper.classList.toggle("focus");
     },
   },
 };

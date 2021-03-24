@@ -1,6 +1,11 @@
 .about{
-    height:100vh;
-    width:100vw;
+    display: flex;
+    justify-content: center;
+    .creator{
+        position:relative;
+        height:fit-content;
+        margin-inline-end: 45px;
+    }
     .bio{
         margin:0 auto;
         width:300px;
@@ -11,11 +16,13 @@
             border-radius: 50%;
             object-fit: cover;
             position:relative;
+            box-shadow: $subtle-shadow;
         }
         h1{
         font-family:'Pacifico', cursive ;
         font-size: rem(48px);
-        color:#2e2e2e;
+        color:lighten($clr5,23);
+        text-shadow: $subtle-shadow;
         margin-block-end: 0;
         line-height:1.2;
         word-spacing:100vw;
@@ -23,7 +30,7 @@
         }
     
         .info{
-        position:absolute;
+        position:relative;
         width:300px;
         margin-block-start:5px;
             .body{// ALl info other than name and img
@@ -62,6 +69,7 @@
                         padding:3px;
                         margin:3px;
                         transition: filter .25s ease-out;
+                        box-shadow: $subtle-shadow;
                         &:hover{
                             filter:brightness(2) contrast(0.75) opacity(0.8);
                             transition: filter .25s ease-in;
