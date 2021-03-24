@@ -49,14 +49,14 @@
         &.action-color{
             // background-color: #A1FD9D;
             background-color: $clr1;
-            border:2px solid $clr7;
+            border:2px solid $clr-ok-btns;
             color:$clr7;
             font-weight:600;
         }
         &.warning-color{
             // background-color: $clr4;
             background-color: $clr1;
-            border:2px solid $clr4;
+            border:2px solid $clr-alarm-btns;
             color:$clr4;
             font-weight:600;
         }

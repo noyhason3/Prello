@@ -9,7 +9,18 @@
         font-size: 1.2rem;
         ;
     }
-
+    h2 input{
+        margin-inline-start:28px;
+        width: 180px;
+        transition: 0.3s ease-in-out;
+        height: 25px;
+        border-radius: 3px;
+        border:1px solid grey;
+        padding-left:8px;
+    }
+    h2 input:hover{
+        width: 382px;
+    }
     .starred,
     .recent {
         margin-inline-end: 10px;
@@ -50,8 +61,8 @@
 
     .btn.create-board {
         background-color: $clr1;
-        border: 2px solid $clr7;
-        color: $clr7;
+        border: 2px solid $clr-ok-btns;
+        color: $clr-ok-btns;
         font-weight: 600;
         outline:none;
         &.gray {

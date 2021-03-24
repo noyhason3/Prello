@@ -37,11 +37,9 @@ export const boardStore = {
             state.task = task;
         },
         removeBoard(state, { boardId }) {
-            console.log('boardId:', boardId);
-            const boardIdx = state.boardList.findIndex((board) => board._id === boardId);
-            console.log(boardIdx);
+            const boardIdx = state.boards.findIndex((board) => board._id === boardId);
             if (boardIdx < 0) return;
-            state.boardList.splice(boardIdx, 1);
+            state.boards.splice(boardIdx, 1);
         },
 
         // setBoardList(state, {boards}){
@@ -91,6 +89,7 @@ export const boardStore = {
 
         async removeBoard({ commit }, { boardId }) {
             try {
+                console.log('boardId:', boardId)
                 await boardService.remove(boardId);
                 console.log('board deleted:', boardId);
                 commit({ type: 'removeBoard', boardId });
@@ -149,7 +148,7 @@ export const boardStore = {
                 console.log('err:', err);
             }
         },
-        async removeTask({ state, commit }, { taskId }) {
+        async removeTask({ state, commit, dispatch }, { taskId }) {
             console.log('hi');
             const board = JSON.parse(JSON.stringify(state.board));
             const group = board.groups.find((savedGroup) => savedGroup.tasks.some((savedTask) => savedTask.id === taskId));
