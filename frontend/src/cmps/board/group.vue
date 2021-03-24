@@ -31,7 +31,7 @@
         />
       </draggable>
     </div>
-
+  
     <div class="add-task">
       <button v-if="!isAddNewTask" @click="isAddNewTask = true">
         Add a new task
