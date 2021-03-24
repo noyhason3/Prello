@@ -1,5 +1,6 @@
 const logger = require('../../services/logger.service');
-
+// const userService = require('../user/user.service')
+const socketService = require('../../services/socket.service')
 const boardService = require('./board.service');
 
 async function getBoards(req, res) {
@@ -72,6 +73,7 @@ async function updateBoard(req, res) {
   try {
     const board = req.body;
     const savedBoard = await boardService.update(board);
+    // socketService.broadcast({type:'board-update', data:board, room:savedBoard._id })
     res.send(savedBoard);
   } catch (err) {
     logger.error('Failed to update board', err);

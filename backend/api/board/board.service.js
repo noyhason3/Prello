@@ -23,7 +23,7 @@ async function query(filterBy = {}) {
       const demoBoards = await collection.find({ _id: { $regex: "demo" } }).toArray()
       return demoBoards
     } else {
-      const memberInBoards = await collection.find({}).toArray()
+      const memberInBoards = await collection.find({ members: { $elemMatch: { _id: userId } } })
       console.log("file: board.service.js - line 22 - query - memberInBoards", memberInBoards.length)
       return memberInBoards
     }

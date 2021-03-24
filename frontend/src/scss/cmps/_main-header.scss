@@ -20,6 +20,7 @@
             border-radius: 5px;
             font-size: 14px;
             padding:5px;
+            box-shadow: $subtle-shadow;
         }
         a.icon{
             min-width:30px;
@@ -28,7 +29,6 @@
             align-items: center;
         }
         a:not(:first-child) {
-            // border-top: 1px solid $clr4;
             margin-inline: 10px;
         }
         a:hover{
