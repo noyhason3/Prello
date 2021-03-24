@@ -18,7 +18,7 @@
 
 <script>
 // @ is an alias to /src
-import { userService } from "../services/NEW-user.service.js";
+import { userService } from "../services/user.service.js";
 import about from "./about.vue";
 export default {
   name: "home",

@@ -1,10 +1,10 @@
 .about{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    margin-inline: 150px;
     .creator{
         position:relative;
         height:fit-content;
-        margin-inline-end: 105px;
     }
     .bio{
         margin:0 auto;

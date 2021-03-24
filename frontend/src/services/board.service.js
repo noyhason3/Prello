@@ -29,7 +29,6 @@ function remove(id) {
 async function save(board) {
     if (board._id) {
         var savedBoard = await httpService.put(BOARD_URL + board._id, board);
-        // console.log("file: board.service.js - line 31 - save - savedBoard", savedBoard)
         return savedBoard;
     } else {
         return await httpService.post(BOARD_URL, board);
@@ -74,11 +73,6 @@ function getEmptyTemplate() {
     const groups = [];
     for (var i = 0; i < 5; i++) {
         let group = getEmptyGroup();
-        // for (var j = 0; j < 3; j++) {
-        //   const task = getEmptyTask();
-        //   task.id = utilService.makeId()
-        //   group.tasks.push(task);
-        // }
         group.id = utilService.makeId()
         groups.push(group);
     }
