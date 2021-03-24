@@ -9,7 +9,7 @@
     <img
       v-if="task.style.coverImg"
       class="task-cover-img-preview"
-      :style="`background-image: url(${task.style.coverImg})`"
+      :src="task.style.coverImg"
     />
 
     <div class="task-preview-main">
@@ -26,15 +26,16 @@
       </div>
       <div class="task-info-preview">
         <div class="main-info-task-preview">
-          <div v-if="taskChecklists" class="checklist-info">
-            <span></span>{{ taskChecklists.complete }}/{{
-              taskChecklists.total
-            }}
-          </div>
           <!-- TODO: <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
           <div v-if="isTaskDescription" class="description-icon"></div>
           <div v-if="attachmentCount" class="attachment-info">
             <span></span>{{ attachmentCount }}
+          </div>
+
+          <div v-if="taskChecklists" class="checklist-info">
+            <span></span>{{ taskChecklists.complete }}/{{
+              taskChecklists.total
+            }}
           </div>
         </div>
 

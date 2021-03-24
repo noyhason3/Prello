@@ -29,6 +29,12 @@
 
   .task-preview-main {
     padding: 6px 8px 2px;
+
+    .task-title {
+      font-size: rem(14px);
+      color: #172b4d;
+      font-weight: 400;
+    }
   }
 
   &:hover {
@@ -68,19 +74,12 @@
       }
     }
 
-    .members-preview {
-      > *:not(:last-child) {
-        // float: left;
-        // margin-inline-end: 20px;
-        padding: 2px;
+    .members-task-preview {
+      .member-preview {
         margin: 0 0 4px 4px;
       }
     }
 
-    > *:not(:last-child) {
-      // float: left;
-      // margin-inline-end: 20px;
-    }
     .description-icon:before {
       font-family: 'fa-solid';
       content: '\f036';
@@ -146,12 +145,6 @@
     &:hover {
       background-color: rgba(240, 239, 239, 0.623);
     }
-  }
-
-  .task-title {
-    font-size: rem(14px);
-    color: #172b4d;
-    font-weight: 400;
   }
 
   .task-control {
