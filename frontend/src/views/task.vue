@@ -6,8 +6,16 @@
     @click.stop="closeTask"
   >
     <div class="task" :style="`top:${initialHeight}px;`" @click.stop>
-      <div v-if="task.style.coverColor" class="task-cover" :style="`background-color: ${task.style.coverColor}`"/>
-      <img v-if="task.style.coverImg" class="task-cover-img" :style="`background-image: url(${task.style.coverImg})`"  />
+      <div
+        v-if="task.style.coverColor"
+        class="task-cover"
+        :style="`background-color: ${task.style.coverColor}`"
+      />
+      <img
+        v-if="task.style.coverImg"
+        class="task-cover-img"
+        :style="`background-image: url(${task.style.coverImg})`"
+      />
       <div class="header">
         <button @click.stop="closeTask" class="btn close">X</button>
         <task-title
@@ -18,7 +26,6 @@
         <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
       </div>
       <div class="task-content" @click.stop>
-        <!-- <pre>{{ task.attachments }}</pre> -->
         <popup-label
           v-if="isLabelOpen"
           :popupLeftPos="popupLeftPos"
@@ -39,10 +46,6 @@
         />
 
         <div class="task-main">
-          <!-- <task-title v-model="task.title" />
-
-          <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6> -->
-
           <div v-if="task" class="task-info">
             <member-list
               :members="task.members"
@@ -81,7 +84,6 @@
             class="drag-uploader"
           />
 
-          <!-- <ul class="clean-list"> -->
           <draggable
             v-model="task.checklists"
             group="checklists"
@@ -107,7 +109,6 @@
               @update-task="saveTask(task)"
             />
           </draggable>
-          <!-- </ul> -->
         </div>
         <!-- <task-comment /> -->
         <!-- <activity-list /> -->
@@ -138,73 +139,41 @@ export default {
       popupLeftPos: null,
       groupTitle: null,
       initialHeight: null,
-      // task: null,
     };
   },
   async created() {
     await this.group();
-    //   this.loadTask();
     const body = document.querySelector(".main").getBoundingClientRect();
     this.initialHeight = body.top + 5;
   },
   computed: {
-    // taskId() {
-    //   return this.$router.parmas.taskId;
-    // },
     task() {
-      return JSON.parse(JSON.stringify(this.$store.getters.currTask)); //Should we copy the task here? not inside methods.
+      return JSON.parse(JSON.stringify(this.$store.getters.currTask));
     },
     attachments() {
       return this.task.attachments;
     },
-    // id() {
-    //   return this.$route.params.taskId;
-    // },
-    // boardId() {
-    //   return this.$route.params.boardId;
-    // },
   },
   methods: {
     async group() {
       const group = await this.$store.dispatch({ type: "getGroup" });
       this.groupTitle = group.title;
     },
-    // setTitle(title) {
-    //   this.task.title = title;
-    // },
-    // async loadTask() {
-    //   this.task = await boardService.getTask({
-    //     board: this.$store.getters.currBoard,
-    //     taskId: this.id,
-    //   });
-    //   console.log(
-    //     "file: task.vue - line 138 - loadTask - this.task",
-    //     this.task
-    //   );
-    // },
     setDescription() {
       this.saveTask(this.task);
     },
-    setCoverColor(color){
-      this.task.style.coverImg = '';
-      this.task.style.coverColor = color
+    setCoverColor(color) {
+      this.task.style.coverImg = "";
+      this.task.style.coverColor = color;
       this.saveTask(this.task);
     },
-    saveCoverImg(img){
-      this.task.style.coverColor='';
+    saveCoverImg(img) {
+      this.task.style.coverColor = "";
       this.task.style.coverImg = img.url;
-      this.saveTask(this.task)
+      this.saveTask(this.task);
     },
     assignTaskMember(member) {
       if (!this.task.members) this.task.members = [];
-
-      // if (
-      //   task.members.some((assignedMember) => assignedMember._id === member._id)
-      // ) {
-      //   // throw new Error('User already assigned to task')
-      //   console.log("User already assigned to task");
-      //   return;
-      // }
       this.task.members.push(member);
       this.saveTask(this.task);
     },
@@ -218,15 +187,12 @@ export default {
       this.task.labelIds = labelIds;
       this.saveTask(this.task);
     },
-
-    // TODO - MAYBE WE CAN MERGE THESE TWO TO ONE FUNCTION??
-
     saveChecklist(checklist) {
       const task = this.task;
-      // if (!task.checklists.todos) task.checklists = [];
       task.checklists.push(checklist);
       this.saveTask(task);
     },
+    // TODO - MAYBE WE CAN MERGE THESE TWO TO ONE FUNCTION??
     deleteChecklist(checklistId) {
       const idx = this.task.checklists.findIndex(
         ({ id }) => id === checklistId
@@ -286,11 +252,6 @@ export default {
       this.saveTask(this.task);
     },
   },
-  // watch: {
-  //   id() {
-  //     this.loadTask();
-  //   },
-  // },
   components: {
     draggable,
     taskControl,
