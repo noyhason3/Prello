@@ -129,6 +129,11 @@
       cursor: pointer;
       border-radius: 5px;
     }
+    .attachment-title span:before{
+      font-size: 1.1rem;
+      font-family: 'fa-solid';
+      content: '\f0c6';
+    }
     .checklist-title span{
       &:before{
         font-family: 'fa-reg';
