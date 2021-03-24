@@ -42,12 +42,12 @@
                 border: 2px solid $starColor;
                 transition:color .25s linear border .25s linear;
                 &:active{
-                    border-color:darken( $starColor ,8);
+                    border-color:darken( $starColor ,2);
                     color:darken($starColor,8);
                     transition:color .25s linear border .25s linear;
                 }
                 &:focus{
-                    border-color:darken($starColor,12);
+                    border-color:darken($starColor,5);
                 }
             }
             .board-header-members{
