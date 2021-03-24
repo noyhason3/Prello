@@ -10,6 +10,7 @@
         top:0;
     }
     .main{
+        z-index: 1;
         display: flex;
         overflow-y:hidden;
         overflow-x: auto;
@@ -30,12 +31,20 @@
             .preview-label{
                 background: $clr5!important;
             }
+            img{
+                visibility:hidden;
+            }
             .member-preview{
                 background: $clr5!important;
                 color:$clr5!important;
             }
             background: $clr5;
-            color:$clr5;
+            .task-title{
+                color:$clr5;
+            }
+        }
+        .task-cover-img-preview,.task-cover-preview{
+            visibility: hidden!important;
         }
     }
     .dragging{
