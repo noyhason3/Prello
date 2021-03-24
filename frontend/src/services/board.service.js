@@ -11,7 +11,7 @@ export const boardService = {
   getEmptyBoard,
   getEmptyGroup,
   getEmptyTask,
-  getEmptyBoardTemplate
+  getEmptyTemplate
 };
 
 function getById(boardId) {
