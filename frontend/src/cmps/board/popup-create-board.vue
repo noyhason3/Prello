@@ -9,6 +9,7 @@
       <form @submit.prevent="createNewBoard">
         <div class="new-board-info">
           <div class="title-container" :style="selectedStyle.style">
+            <div class="top">
             <input
               type="text"
               placeholder="Add board title"
@@ -16,6 +17,8 @@
               class="title"
             />
             <button @click="closeBoardPopup" class="btn close">X</button>
+            </div>
+            <label for=""><input type="checkbox" name="checkbox" v-model="isUseTemplate">Use template</label>
           </div>
           <ul class="clean-list bgStyle-list">
             <li
@@ -37,6 +40,7 @@
 </template>
 
 <script>
+import { boardService } from '../../services/board.service';
 export default {
   props: {
     isAddBoard: Boolean,
@@ -45,6 +49,7 @@ export default {
     return {
       selectedStyle: null,
       boardToEdit: null,
+      isUseTemplate:false,
       imgs: [
         { id: "i101", value: "1.jpg" },
         { id: "i102", value: "2.jpg" },
@@ -82,7 +87,10 @@ export default {
       } else {
         this.boardToEdit.style.bgImg = style;
       }
+      console.log('template',this.isUseTemplate);
 
+      if(this.isUseTemplate) this.boardToEdit.groups = {...boardService.getEmptyTemplate()}
+      console.log('board',this.boardToEdit);
       const board = await this.$store.dispatch({
         type: "saveBoard",
         board: this.boardToEdit,
