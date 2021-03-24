@@ -18,7 +18,7 @@
             />
             <button @click="closeBoardPopup" class="btn close">X</button>
             </div>
-            <label for=""><input type="checkbox" name="checkbox" v-model="isUseTemplate">Use template</label>
+            <!-- <label for=""><input type="checkbox" name="checkbox" v-model="isUseTemplate">Use template</label> -->
           </div>
           <ul class="clean-list bgStyle-list">
             <li

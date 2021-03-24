@@ -1,60 +1,66 @@
 <template>
-  <section class="board-list-container">
-    <h2><span class="starred"></span>Starred boards</h2>
-    <ul v-if="boardList" class="clean-list board-list">
-      <li
-        v-for="board in starredBoards"
-        :key="board._id"
-        class="board-preview"
-        @click="openBoard(board._id)"
-        :style="boardStyle(board)"
-      >
-        <h3>{{ board.title }}</h3>
-        <button class="starred" @click.stop="toggleStarred(board)"></button>
-      </li>
-    </ul>
-    <h2>
-      <span class="recent"></span>Recently viewed 
-      <input type="text" @input="setFilter" v-model="filterBy.txt" placeholder="Search boards..."/>
+  <section class="board-list-page">
+    <div class="board-list-container">
+      <h2 class="hello">Hello Guest</h2>
+      <h2><span class="starred"></span>Starred boards</h2>
+      <ul v-if="boardList" class="clean-list board-list">
+        <li
+          v-for="board in starredBoards"
+          :key="board._id"
+          class="board-preview"
+          @click="openBoard(board._id)"
+          :style="boardStyle(board)"
+        >
+          <h3>{{ board.title }}</h3>
+          <button class="starred" @click.stop="toggleStarred(board)"></button>
+        </li>
+      </ul>
+      <h2>
+        <span class="recent"></span>Recently viewed
+        <input
+          type="text"
+          @input="setFilter"
+          v-model="filterBy.txt"
+          placeholder="Search boards..."
+        />
       </h2>
-    
-    <ul v-if="boardList" class="clean-list board-list">
-      <li
-        v-for="board in recentBoards"
-        :key="board._id"
-        class="board-preview"
-        @click="openBoard(board._id)"
-        @mouseleave="closeOptionsMenu()"
-        :style="boardStyle(board)"
-      >
-        <h3>{{ board.title }}</h3>
-        <button
-          class="board-options"
-          @click.stop="toggleOptionsMenu(board)"
-        ></button>
-        <transition name="slide">
+
+      <ul v-if="boardList" class="clean-list board-list">
+        <li
+          v-for="board in recentBoards"
+          :key="board._id"
+          class="board-preview"
+          @click="openBoard(board._id)"
+          @mouseleave="closeOptionsMenu()"
+          :style="boardStyle(board)"
+        >
+          <h3>{{ board.title }}</h3>
+          <button
+            class="board-options"
+            @click.stop="toggleOptionsMenu(board)"
+          ></button>
           <div v-if="isBoardSelected(board._id)" class="nav-board-options">
             <button @click.stop="removeBoard()">Remove board</button>
           </div>
-        </transition>
-        <button
-          class="toggle-starred"
-          :class="{ starred: isBoardStarred(board._id) }"
-          @click.stop="toggleStarred(board)"
-        ></button>
-      </li>
-      <li>
-        <button @click="openBoardPopup" class="btn add-board">
-          Create new board
-        </button>
-      </li>
-    </ul>
-    <popup-create-board
-      v-if="isAddBoard"
-      :isAddBoard="isAddBoard"
-      @close-board-popup="closeBoardPopup"
-      @open-board="openBoard"
-    />
+          <button
+            class="toggle-starred"
+            :class="{ starred: isBoardStarred(board._id) }"
+            @click.stop="toggleStarred(board)"
+          ></button>
+        </li>
+        <li>
+          <button @click="openBoardPopup" class="btn add-board">
+            Create new board
+          </button>
+        </li>
+      </ul>
+      <popup-create-board
+        v-if="isAddBoard"
+        :isAddBoard="isAddBoard"
+        @close-board-popup="closeBoardPopup"
+        @open-board="openBoard"
+      />
+    </div>
   </section>
 </template>
 
@@ -65,6 +71,7 @@ export default {
   data() {
     return {
       isAddBoard: false,
+      isOpenOptions: false,
       boardList: null,
       selectedStyle: null,
       selectedBoard: null,
@@ -82,7 +89,6 @@ export default {
     closeBoardPopup() {
       this.isAddBoard = false;
     },
-
     async openBoard(boardId) {
       console.log("id:", boardId);
       await this.$store.dispatch({ type: "getBoard", boardId });
@@ -118,9 +124,9 @@ export default {
       });
     },
     toggleStarred(board) {
-      this.selectedBoard = { ...board };
-      this.selectedBoard.isStarred = !this.selectedBoard.isStarred;
-      this.$store.dispatch("saveBoard", { board: this.selectedBoard });
+      const currBoard = board;
+      currBoard.isStarred = !currBoard.isStarred;
+      this.$store.dispatch("saveBoard", { board: currBoard });
     },
     isBoardStarred(id) {
       return this.starredBoards.some(({ _id }) => _id === id);
@@ -148,6 +154,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

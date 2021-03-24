@@ -1,9 +1,25 @@
+.board-list-page{
+    position:absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color:$clr5;
+}
 .board-list-container {
-    margin: 80px auto;
-    width: 900px;
-    padding: 50px;
-    border-right: 1px solid rgb(187, 187, 187);
-    border-left: 1px solid rgb(187, 187, 187);
+    position:relative;
+    background-color:$clr1;
+    margin: 0px auto;
+    width: 1060px;
+    padding: 80px 80px;
+    height: 100%;
+    // border-right: 1px solid rgb(187, 187, 187);
+    // border-left: 1px solid rgb(187, 187, 187);
+    .hello{
+        font-size: 1.4rem;
+        margin-bottom: 40px;
+    }
 
     h2 {
         font-size: 1.2rem;
@@ -46,19 +62,6 @@
         margin-bottom:35px;
     }
 
-    .btn.add-board {
-        margin: auto;
-        width: 180px;
-        height: 95px;
-        background-color: #E7E9ED;
-        border-radius: 3px;
-        font-size: 0.9rem;
-    }
-
-    .btn.add-board:hover {
-        filter: brightness(98%);
-    }
-
     .btn.create-board {
         background-color: $clr1;
         border: 2px solid $clr-ok-btns;
@@ -73,10 +76,23 @@
         }
     }
 
+    .btn.add-board {
+        margin: auto;
+        background-color: #E7E9ED;
+        border-radius: 3px;
+        font-size: 0.9rem;
+    }
+    .btn.add-board,
+    .board-preview{
+        width: 200px;
+        height: 105px;
+    }
+    .btn.add-board:hover {
+        filter: brightness(98%);
+    }
+
     .board-preview {
         position: relative;
-        width: 180px;
-        height: 95px;
         margin:auto;
         // margin-inline-end: 20px;
         border-radius: 3px;
