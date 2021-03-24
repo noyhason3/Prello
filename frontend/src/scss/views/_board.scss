@@ -31,12 +31,20 @@
             .preview-label{
                 background: $clr5!important;
             }
+            img{
+                visibility:hidden;
+            }
             .member-preview{
                 background: $clr5!important;
                 color:$clr5!important;
             }
             background: $clr5;
-            color:$clr5;
+            .task-title{
+                color:$clr5;
+            }
+        }
+        .task-cover-img-preview{
+            visibility: hidden!important;
         }
     }
     .dragging{
