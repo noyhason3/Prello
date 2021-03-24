@@ -5,7 +5,7 @@
       :src="require('@/assets/img/' + this.user.imgUrl)"
       :alt="user.name + '\'s Picture'"
     />
-    <div class="info" :style="infoStyle">
+    <div class="info">
       <h1 class="name">{{ user.name }}</h1>
 
       <div class="body">
@@ -22,7 +22,7 @@
           ></button>
         </a>
 
-        <h2 class="description" v-html="user.description"></h2>
+        <div class="description" v-html="user.description"></div>
       </div>
     </div>
   </div>
