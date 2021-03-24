@@ -4,7 +4,7 @@
     .creator{
         position:relative;
         height:fit-content;
-        margin-inline-end: 45px;
+        margin-inline-end: 105px;
     }
     .bio{
         margin:0 auto;
@@ -38,11 +38,15 @@
             justify-content:space-between;
             h2{
                 align-self: flex-end;
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
                 margin:0;
                 padding-inline-start: 8px;
                 padding-block: 15px;
                 border-left: 5px solid $clr5;
                 color:$clr5;
+                min-height: 200px;
                 p{
                     font-size: rem(18px);
                     margin-block-end: 2px;
@@ -50,6 +54,7 @@
                 small{
                     font-size:rem(12px);
                     font-style: italic;
+                    align-self: flex-end;
                 }
             }
             //SOCIAL
