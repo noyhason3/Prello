@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <main-header />
+    <main-header ref="mainHeader" />
     <router-view />
   </div>
 </template>
@@ -15,6 +15,12 @@ export default {
   },
   components: {
     mainHeader,
+  },
+  mounted() {
+    this.$store.commit({
+      type: "setMainHeader",
+      mainHeader: this.$refs.mainHeader.$el,
+    });
   },
 };
 </script>

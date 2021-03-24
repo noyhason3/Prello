@@ -7,6 +7,7 @@ export const boardStore = {
     board: null,
     boards: null,
     task: null,
+    mainHeader: null,
   },
   getters: {
     currBoard(state) {
@@ -14,6 +15,9 @@ export const boardStore = {
     },
     currTask(state) {
       return state.task;
+    },
+    mainHeader(state) {
+      return state.mainHeader
     },
     emptyBoard() {
       return boardService.getEmptyBoard();
@@ -23,7 +27,7 @@ export const boardStore = {
     },
     getEmptyTask() {
       return boardService.getEmptyTask();
-    },
+    }
   },
   mutations: {
     setBoard(state, { currBoard }) {
@@ -40,6 +44,9 @@ export const boardStore = {
       if (boardIdx < 0) return;
       state.boards.splice(boardIdx, 1);
     },
+    setMainHeader(state, { mainHeader }) {
+      state.mainHeader = mainHeader
+    }
   },
   actions: {
     async loadBoards({ commit }) {
