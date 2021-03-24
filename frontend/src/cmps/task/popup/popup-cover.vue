@@ -24,13 +24,12 @@
           />
         </li>
       </ul> -->
-      <button class="btn">
+      <button class="btn upload-cover-btn">
         Upload a cover image
         <img
           class="loading"
           v-if="isLoading"
-          src="https://i.pinimg.com/originals/f6/65/6a/f6656aa6fdb6b8f905dea0bcc2d71dd8.gif"
-          alt=""
+          src="https://raw.githubusercontent.com/SamHerbert/SVG-Loaders/5deed925369e57e9c58ba576ce303466984db501/svg-loaders/oval.svg"
         />
 
         <input class="cover-upload-input" @change="onUploadCover" type="file" />

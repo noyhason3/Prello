@@ -5,17 +5,23 @@
     gap: 8px;
     padding: 4px;
     margin: 0 -4px;
-    //   flex-wrap: wrap;
     .color-box {
       margin: 0;
       border-radius: 3px;
-    //   background-size: cover;
       width: 50px;
       height: 32px;
       cursor: pointer;
     }
   }
-  .cover-upload-input{
+
+  .upload-cover-btn{
+    font-size: 22px;
+    // margin-top: 30px;
+  }
+
+
+  .cover-upload-input {
     cursor: pointer;
+    visibility: hidden;
   }
 }
