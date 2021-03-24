@@ -64,7 +64,7 @@
             <!-- <task-duedate /> -->
           </div>
 
-          <h4>📄 Description</h4>
+          <h4 class="description"><span></span> Description</h4>
           <editable-text
             v-model="task.description"
             :type="'description'"

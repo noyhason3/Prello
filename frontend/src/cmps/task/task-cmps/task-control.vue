@@ -2,7 +2,7 @@
   <section class="task-control">
     <!--  ******TODO********
       <button>Join</button> -->
-    <button @click="togglePopup('Cover')" class="control-btn">Cover</button>
+    <button @click="togglePopup('Cover')" class="control-btn cover"><span></span>Cover</button>
     <popup-cover
       v-if="isCoverOpen"
       @close-popup="isCoverOpen = false"
@@ -12,7 +12,7 @@
     />
 
     <h6 class="add-to-card-btn">ADD TO CARD</h6>
-    <button @click="togglePopup('Member')" class="control-btn">Members</button>
+    <button @click="togglePopup('Member')" class="control-btn member"><span></span>Members</button>
     <popup-member
       v-if="isMemberOpen"
       @close-popup="isMemberOpen = false"
@@ -21,8 +21,8 @@
       @remove-task-member="removeTaskMember"
     ></popup-member>
     <!-- <button>Labels</button> -->
-    <button @click="togglePopup('Checklist')" class="control-btn">
-      Checklist
+    <button @click="togglePopup('Checklist')" class="control-btn checklist">
+      <span></span>Checklist
     </button>
     <popup-checklist
       v-if="isChecklistOpen"
@@ -30,13 +30,13 @@
       @toggle-popup="togglePopup"
     />
 
-    <button @click="toggleGeneralPopup($event, 'Label')" class="control-btn">
-      Labels
+    <button @click="toggleGeneralPopup($event, 'Label')" class="control-btn label">
+      <span></span>Labels
     </button>
 
     <!-- <button>Due date</button> -->
-    <button @click="togglePopup('Attachment')" class="control-btn">
-      Attachement
+    <button @click="togglePopup('Attachment')" class="control-btn attachment">
+      <span></span>Attachement
     </button>
     <popup-attachment
       v-if="isAttachmentOpen"

@@ -64,7 +64,6 @@
       display: flex;
       flex-direction: column;
       .control-btn {
-
         position:relative;
 
         display: flex;
@@ -84,7 +83,36 @@
         margin: 5px;
         // margin-bottom: 20px;
       }
+      .control-btn span{
+        margin-inline-end:10px;
+      }
+   
+      .control-btn.cover span:before{
+        font-family:"fa-solid";
+        content:"\f09d";
+      }
+      .control-btn.member span:before{
+        font-family:"fa-reg";
+        content:"\f007";
+      }
+      .control-btn.checklist span:before{
+        font-family:"fa-reg";
+        content:"\f14a";
+      }
+      .control-btn.label span{
+        transform: rotate(270deg);
+      }
+      .control-btn.label span:before{
+        font-family:"fa-solid";
+        content:"\f02b";
+      }
+      .control-btn.attachment span:before{
+        font-family:"fa-solid";
+        content:"\f0c6";
+      }
+
     }
+
 
     .task-main {
       display: flex;
@@ -129,6 +157,10 @@
       margin-bottom: 30px;
       // background-color: #eaecf0;
       padding: 5px;
+    }
+    .description span:before{
+      font-family: 'fa-solid';
+      content:"\f036"
     }
     .task-description-content.closed:hover{
       background-color: #e4e4e3;
