@@ -35,7 +35,7 @@
           @click="isAddNewGroup = true"
           class="group-addition"
         >
-          + Add an additional list
+          + Add another list
         </button>
         <editable-text
           v-else
