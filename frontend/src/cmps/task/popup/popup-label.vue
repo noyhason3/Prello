@@ -8,6 +8,7 @@
       <div slot="main">
         <input
           type="search"
+          v-model="searchStr"
           @input="searchLabel"
           placeholder="Search labels..."
           class="search-label"
@@ -63,6 +64,7 @@ export default {
       isPopupEdit: false,
       action: "",
       selectedLabel: null,
+      searchStr: "",
     };
   },
   methods: {
@@ -118,8 +120,9 @@ export default {
   computed: {
     boardLabels() {
       const boardLabels = this.$store.getters.currBoard.labels;
-      if (!boardLabels) return [];
-      return boardLabels;
+      return boardLabels.filter((label) => {
+        return label.title.toLowerCase().includes(this.searchStr.toLowerCase());
+      });
     },
     taskLabelIdEdit() {
       const taskLabels = this.$store.getters.currTask.labelIds;

@@ -69,8 +69,8 @@ export default {
   },
   computed: {
     memberList() {
-      const board = this.$store.getters.currBoard;
-      return board.members.filter((member) => {
+      const members = this.$store.getters.currBoard.members;
+      return members.filter((member) => {
         return member.fullname
           .toLowerCase()
           .includes(this.searchStr.toLowerCase());

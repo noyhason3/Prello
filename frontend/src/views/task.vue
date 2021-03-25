@@ -40,13 +40,14 @@
         >
         </popup-label>
         <task-control
+          @toggle-popup="togglePopup"
           @set-cover-color="setCoverColor"
           @save-cover-img="saveCoverImg"
           @assign-task-member="assignTaskMember"
           @remove-task-member="removeTaskMember"
           @set-checklist="saveChecklist"
           @set-task-labels="setTaskLabels"
-          @toggle-popup="togglePopup"
+          @save-date="saveDate"
           @save-attachments="saveAttachments"
           :attachments="attachments"
         />
@@ -65,6 +66,10 @@
               @open-label-popup="openLabelPopup"
             />
             <!-- <task-duedate /> -->
+            <div class="task-duedate" v-if="task.duedate">
+              <input type="checkbox" />
+              {{ date.day }} at {{ date.hour }}
+            </div>
           </div>
           <div class="task-main-layout headline">
           <div class="icon description"></div>
@@ -137,6 +142,7 @@ import popupLabel from "@/cmps/task/popup/popup-label.vue";
 import taskAttachment from "@/cmps/task/task-cmps/task-attachment.vue";
 import fileDragUploader from "@/cmps/common/file-drag-uploader.vue";
 import { boardService } from "../services/board.service";
+import moment from "moment";
 
 export default {
   data() {
@@ -160,6 +166,16 @@ export default {
     },
     attachments() {
       return this.task.attachments;
+    },
+    date() {
+      const timestamp = this.task.duedate;
+      const day = moment.unix(timestamp).format("MMM D");
+      const hour = moment.unix(timestamp).format("hh:mm A");
+      const date = {
+        day,
+        hour,
+      };
+      return date;
     },
   },
   methods: {
@@ -233,6 +249,12 @@ export default {
       this.popupLeftPos = buttonLeftPos;
       this.isLabelOpen = true;
     },
+    saveDate(timestamp) {
+      // const timestamp = moment(date, "M/D/YYYY hh:mm a").format("X");
+      this.task.duedate = timestamp;
+      this.saveTask(this.task);
+    },
+
     saveAttachments(attachments) {
       this.task.attachments = attachments;
       console.log(attachments);
