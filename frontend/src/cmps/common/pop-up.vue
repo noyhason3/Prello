@@ -28,7 +28,11 @@ export default {
     const prev = this.$refs.container.previousElementSibling?.getBoundingClientRect();
     if (prev) {
       const top = prev.y + prev.height;
-      this.maxHeight = window.innerHeight - prev.y;
+      this.maxHeight = window.innerHeight - top - 20;
+      console.log(
+        "file: pop-up.vue - line 32 - mounted - this.maxHeight",
+        this.maxHeight
+      );
 
       this.top = top;
     }
