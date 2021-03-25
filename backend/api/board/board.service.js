@@ -16,7 +16,7 @@ async function query(filterBy = {}) {
     if (userId === 'demo') {
       //return await DEMO_BOARDS
       //TODO - Add a more sophisticated board population function - in case a board isn't found populate it with the data from the DEMO_BOARDS
-      return await DEMO_BOARDS
+      // return await DEMO_BOARDS
       const demoBoards = await collection.find({ _id: { $regex: "demo" } }).toArray()
       return demoBoards
     } else {

@@ -1,86 +1,87 @@
 //HIDDEN D&D COMPONENT
-  .egt{
-    display: flex;
-    flex-grow: 1;
-    visibility: hidden;
+.egt {
+  display: flex;
+  flex-grow: 1;
+  visibility: hidden;
+}
+
+.group {
+  display: flex;
+  flex-flow: column;
+  max-height: 100%;
+  min-width: 272px;
+  border-radius: 3px;
+  //ADD-TASK
+  .add-task {
+    box-shadow: $subtle-shadow;
+    border-radius: 0 0 3px 3px;
+    padding: 8px;
+    padding-block-start: 0;
+    button {
+      color: #5e6c84;
+      border-radius: 0 0 3px 3px;
+      text-align: start;
+      font-size: 13.5px;
+      margin: 0;
+      padding: 5px;
+      width: 100%;
+      &:hover {
+        background: #e4e4e3;
+      }
+    }
+    span {
+      margin-inline-end: 5px;
+      font-size: 1rem;
+    }
+    .btn-add-task {
+      width: 100%;
+    }
+    .btn-add-task:before {
+      font-family: 'fa-solid';
+      content: '\f067';
+    }
   }
 
-  .group {
-    display: flex;
-    flex-flow: column;
-    max-height: 100%;
-    min-width: 270px;
-    border-radius: 4px;
-    //ADD-TASK
-    .add-task{
-      box-shadow:$subtle-shadow;
-      border-radius:0 0 5px 5px;
-      padding: 8px;
-      padding-block-start:0;
-      button{
-        color: #5e6c84;
-        border-radius:0 0 5px 5px;
-        text-align: start;
-        font-size: 13.5px;
-        margin:0;
-        padding:5px;
-        width:100%;
-        &:hover{
-          background:#e4e4e3;
-        }
-      }
-      span{
-        margin-inline-end: 5px;
-        font-size:1rem;
-      }
-      .btn-add-task{
-        width:100%;
-      }
-      .btn-add-task:before{
-        font-family:'fa-solid';
-        content:"\f067"
-      }
+  //HEADER
+  .group-header {
+    border-radius: 3px 3px 0 0;
+    font-size: 20px;
+    // padding-inline-start: 10px;
+    padding: 10px 8px;
+    min-height: 20px;
+    .editable-title {
+      color: #172b4d;
+      font-size: 14px;
+      line-height: 20px;
+      margin-left: 6px;
     }
-
-    //HEADER
-    .group-header {
-      border-radius: 5px 5px 0 0 ;
-      font-size: 20px;
-      // padding-inline-start: 10px;
-      padding: 14px 8px;
-      min-height: 20px;
-      .editable-title{
-        color: #172b4d;
-        font-size: 0.875rem;
-        line-height: 20px;
-      }
-    }
-    //FOOTER
-    .group-footer{
+  }
+  //FOOTER
+  .group-footer {
     //background: rgba(255, 0, 0, 0.322);
-    background:$clr5;
+    background: $clr5;
     display: flex;
     flex-grow: 1;
   }
-    //BACKGROUND
-    & > *:not(.egt){
-      background-color: #ebecf0;
-    }
-    &>*{
-      width:100%;
-      margin:0 auto;
-    }
-    //TASKS
-    .tasks-wrapper{
-      max-height:100%;
+  //BACKGROUND
+  & > *:not(.egt) {
+    background-color: #ebecf0;
+  }
+  & > * {
+    width: 100%;
+    margin: 0 auto;
+  }
+  //TASKS
+  .tasks-wrapper {
+    max-height: 100%;
+    overflow-y: auto;
+    .group-tasks {
+      height: 100%;
       overflow-y: auto;
-      .group-tasks{
-        height:100%;
-        overflow-y: auto;
-        margin-inline: 4px;
-        :first-child{
-          margin-block-start: 0;
-        }
+      margin-inline: 4px;
+      :first-child {
+        margin-block-start: 0;
       }
     }
   }
+}
