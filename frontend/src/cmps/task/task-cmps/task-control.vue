@@ -2,8 +2,9 @@
   <section class="task-control">
     <!--  ******TODO********
       <button>Join</button> -->
-    <button @click="togglePopup('Cover')" class="control-btn cover">
-      <span></span>Cover
+    <!-- <button @click="togglePopup('Cover')" class="control-btn cover"><span></span>Cover</button> -->
+    <button @click="togglePopup('Cover')" class="btn neutral left-align">
+      <span class="icon cover"></span>Cover
     </button>
     <popup-cover
       v-if="isCoverOpen"
@@ -13,9 +14,9 @@
       @save-cover-img="saveCoverImg"
     />
 
-    <h6 class="add-to-card-btn">ADD TO CARD</h6>
-    <button @click="togglePopup('Member')" class="control-btn member">
-      <span></span>Members
+    <h6 class="add-to-card">ADD TO CARD</h6>
+    <button @click="togglePopup('Member')" class="btn neutral left-align">
+      <span class="icon member"></span>Members
     </button>
     <popup-member
       v-if="isMemberOpen"
@@ -25,8 +26,8 @@
       @remove-task-member="removeTaskMember"
     ></popup-member>
     <!-- <button>Labels</button> -->
-    <button @click="togglePopup('Checklist')" class="control-btn checklist">
-      <span></span>Checklist
+    <button @click="togglePopup('Checklist')" class="btn neutral left-align">
+      <span class="icon checklist"></span>Checklist
     </button>
     <popup-checklist
       v-if="isChecklistOpen"
@@ -36,14 +37,14 @@
 
     <button
       @click="toggleGeneralPopup($event, 'Label')"
-      class="control-btn label"
+      class="btn neutral left-align"
     >
-      <span></span>Labels
+      <span class="icon label"></span>Labels
     </button>
 
     <!-- <button>Due date</button> -->
-    <button @click="togglePopup('Duedate')" class="control-btn duedate">
-      <span></span>Due date
+    <button @click="togglePopup('Duedate')" class="btn neutral left-align">
+      <span class="icon clock"></span>Due date
     </button>
     <popup-duedate
       v-if="isDuedateOpen"
@@ -51,8 +52,8 @@
       @save-date="saveDate"
     />
 
-    <button @click="togglePopup('Attachment')" class="control-btn attachment">
-      <span></span>Attachement
+    <button @click="togglePopup('Attachment')" class="btn neutral left-align">
+      <span class="icon attachment"></span>Attachement
     </button>
     <popup-attachment
       v-if="isAttachmentOpen"

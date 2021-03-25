@@ -15,10 +15,13 @@
         text-align: center;
         color:$clr1;
         white-space: nowrap;
-
+        cursor: pointer;
         
         &.is-selected::before {
             content: "✔";
+        }
+        &:hover{
+            filter:brightness(110%)
         }
     }
 }

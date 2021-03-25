@@ -3,7 +3,7 @@
     <pop-up v-if="!isDelete" :style="{ left: leftPos }">
       <div slot="header" class="task-popup-header">
         <h2>{{ action }} label</h2>
-        <button @click="closeLabelEdit" class="btn close">X</button>
+        <button @click="closeLabelEdit" class="btn close icon x"></button>
       </div>
       <div slot="main">
         <h3>Name</h3>
@@ -23,8 +23,8 @@
           </li>
         </ul>
         <div class="btn-container">
-          <button @click="saveLabel" class="btn action-color">Save</button>
-          <button @click="toggleIsDelete" class="btn warning-color">
+          <button @click="saveLabel" class="btn action narrow">Save</button>
+          <button @click="toggleIsDelete" class="btn warning narrow">
             Delete
           </button>
         </div>
@@ -33,14 +33,14 @@
     <pop-up v-else :style="{ left: leftPos }">
       <div slot="header" class="task-popup-header">
         <h2>Delete Label?</h2>
-        <button @click="toggleIsDelete" class="btn close">x</button>
+        <button @click="toggleIsDelete" class="btn close icon x"></button>
       </div>
       <div slot="main">
         <p>
           Do you really want to remove this label for good? It will be removed
           from all cards.
         </p>
-        <button @click="removeBoardLabel" class="btn warning-color">
+        <button @click="removeBoardLabel" class="btn warning narrow">
           Delete
         </button>
       </div>

@@ -23,14 +23,22 @@
         text-align: start;
         font-size: 13.5px;
         margin:0;
-        // padding-block:8px;
+        padding:5px;
         width:100%;
         &:hover{
           background:#e4e4e3;
         }
       }
+      span{
+        margin-inline-end: 5px;
+        font-size:1rem;
+      }
       .btn-add-task{
         width:100%;
+      }
+      .btn-add-task:before{
+        font-family:'fa-solid';
+        content:"\f067"
       }
     }
 
@@ -39,7 +47,7 @@
       border-radius: 5px 5px 0 0 ;
       font-size: 20px;
       // padding-inline-start: 10px;
-      padding: 4px 8px;
+      padding: 14px 8px;
       min-height: 20px;
       .editable-title{
         color: #172b4d;

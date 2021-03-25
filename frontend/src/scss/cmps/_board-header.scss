@@ -7,6 +7,7 @@
     .board-header{
             position:relative;
             background:$clr1;
+            z-index: 2;
             &>*:not(.board-header-members){
                 margin: 10px;
                 padding: 3px 10px;

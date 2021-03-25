@@ -3,7 +3,7 @@
     <pop-up v-if="!isPopupEdit" :style="{ left: leftPos }">
       <div slot="header" class="task-popup-header">
         <h2>Labels</h2>
-        <button @click="togglePopupLabel()" class="btn close">X</button>
+        <button @click="togglePopupLabel()" class="btn close icon x"></button>
       </div>
       <div slot="main">
         <input
@@ -35,7 +35,7 @@
             </button>
           </li>
         </ul>
-        <button @click="openLabelEdit('Create')" class="btn wide">
+        <button @click="openLabelEdit('Create')" class="btn neutral wide">
           Create a new label
         </button>
       </div>

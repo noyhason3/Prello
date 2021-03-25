@@ -51,6 +51,7 @@
         box-shadow: $subtle-shadow;
         background: $clr5;
         color:$clr1;
+        padding: 5px;
         &:hover{
           background:lighten($clr5,15);
         }

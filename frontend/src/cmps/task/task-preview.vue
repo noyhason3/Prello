@@ -27,13 +27,13 @@
       <div class="task-info-preview">
         <div class="main-info-task-preview">
           <!-- TODO: <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
-          <div v-if="isTaskDescription" class="description-icon"></div>
+          <div v-if="isTaskDescription" class="icon description preview"></div>
           <div v-if="attachmentCount" class="attachment-info">
-            <span></span>{{ attachmentCount }}
+            <span class="icon attachment preview"></span>{{ attachmentCount }}
           </div>
 
           <div v-if="taskChecklists" class="checklist-info">
-            <span></span>{{ taskChecklists.complete }}/{{
+            <span class="icon checklist preview"></span>{{ taskChecklists.complete }}/{{
               taskChecklists.total
             }}
           </div>
