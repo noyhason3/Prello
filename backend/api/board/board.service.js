@@ -24,10 +24,11 @@ async function query(filterBy = {}) {
       return demoBoards
     } else {
       const memberInBoards = await collection.find({ members: { $elemMatch: { _id: userId } } })
+      const memberCreatedBoards = await collection.find({ createdBy:  { _id: userId } })
       console.log("file: board.service.js - line 22 - query - memberInBoards", memberInBoards.length)
       return memberInBoards
+      return boards;
     }
-    return boards;
   } catch (err) {
     logger.error('cannot find boards', err);
     throw err;
