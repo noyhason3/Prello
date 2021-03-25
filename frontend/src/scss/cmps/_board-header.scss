@@ -1,71 +1,105 @@
-.board{
-    &.img-bg .board-header{
+.board {
+    &.img-bg .board-header {
         background: transparent;
         //box-shadow: 2px -2px 6px 0px #00000085;
-
     }
-    .board-header{
-            position:relative;
-            background:$clr1;
-            z-index: 2;
-            &>*:not(.board-header-members){
-                margin: 10px;
-                padding: 3px 10px;
-                font-size: 22px;
-                color: $clr5;
-                border-radius: 6px;
-                border: 2px solid $clr4;
-            }
-            .editable-title-wrapper{
-                border:0;
-                font-weight: bold;
-                min-width: 250px;
-                max-width: 500px;
-                width: fit-content;
-                display: inline-flex;
-                margin-inline-end: 0;
-            }
     
-    
-            .is-starred{
-                $starColor:#f2d600;
-                color:$starColor;
-                font-family: 'fa-reg';
-                margin-inline-end: 20px;
-                margin-inline-start:10px;
-                &.active{
-                    font-family:'fa-solid'
-                }
-                font-size: rem(18px);
-                padding:2px;
-                outline:none;
-                background: transparent;
-                border: 2px solid $starColor;
-                transition:color .25s linear border .25s linear;
-                &:active{
-                    border-color:darken( $starColor ,2);
-                    color:darken($starColor,8);
-                    transition:color .25s linear border .25s linear;
-                }
-                &:focus{
-                    border-color:darken($starColor,5);
-                }
-            }
-            .board-header-members{
-                display: inline-flex;
-                position: absolute;
-                top: 10px;
-                right: 50%;
-                transform: translateX(50%)
-            }
-            .menu-btn{
-                border:1.5px solid $clr5;
-                //font-weight: bold;
-                color:$clr5;
-                padding-inline: 5px;
-                display: inline-flex;
-                position:absolute;
-                right:8px;
-            }
+    .board-header {
+        padding: 10px;
+        display:flex;
+        align-items: center;
+        position: relative;
+        background: $clr1;
+        z-index: 2;
+
+        // .board-title{
+        //     margin-inline-end: 4px;
+
+        // }
+        .board-title h2{
+            color: $clr1;
+            opacity: 0.9;
+            font-size: 1.2rem;
+            padding: 5px;
+
         }
+
+        &>*:not(.board-header-members) {
+            font-size: 0.9rem;
+            color: $clr1;
+            border-radius: 6px;
+            // border: 2px solid $clr1;
+            background-color: rgba(rgb(235, 235, 235), 0.3);
+            height: 30px;
+            min-width:30px;
+        }
+
+        .editable-title-wrapper {
+            border: 0;
+            font-weight: bold;
+            min-width: 250px;
+            max-width: 500px;
+            width: fit-content;
+            display: inline-flex;
+            margin-inline-end: 4px;
+            padding: 0 12px;
+        }
+        .icon.star{
+            color:rgba($clr1, 0.7);
+            font-size: 0.8rem;
+            
+        }
+        .icon.star.is-starred{
+            color:$clr1;
+        }
+
+        // .is-starred {
+        //     $starColor: #f2d600;
+        //     color: $starColor;
+        //     font-family: 'fa-reg';
+        //     margin-inline-end: 20px;
+        //     margin-inline-start: 10px;
+
+        //     &.active {
+        //         font-family: 'fa-solid'
+        //     }
+
+        //     font-size: rem(18px);
+        //     padding:2px;
+        //     outline:none;
+        //     background: transparent;
+        //     border: 2px solid $starColor;
+        //     transition:color .25s linear border .25s linear;
+
+        //     &:active {
+        //         border-color: darken($starColor, 2);
+        //         color: darken($starColor, 8);
+        //         transition: color .25s linear border .25s linear;
+        //     }
+
+        //     &:focus {
+        //         border-color: darken($starColor, 5);
+        //     }
+        // }
+
+        .board-header-members {
+            display: inline-flex;
+            position: absolute;
+            top: 10px;
+            right: 50%;
+            transform: translateX(50%)
+        }
+        span.icon {
+            margin-inline-end: 4px;
+        }
+        .menu-btn {
+            // font-weight: bold;
+            font-size:1rem;
+            padding: 5px 12px;
+            position: absolute;
+            right: 8px;
+        }
+        // content:"···";
+        // font-size: bold;;
+    }
 }

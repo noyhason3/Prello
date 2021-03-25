@@ -1,11 +1,13 @@
 <template>
   <section class="board-header">
-    <editableTitle v-model="board.title" />
-    <button @click="toggleStarred" :class="starredClass">&#xf005;</button>
-    <div class="board-header-members">
-      <member-list :members="board.members" :isTaskRelated="false" />
-    </div>
-    <div class="menu-btn">Show Menu</div>
+    <editableTitle v-model="board.title" class="board-title"/>
+    <!-- <button @click="toggleStarred" :class="starredClass">&#xf005;</button> -->
+    <button @click="toggleStarred" v-if="this.board.isStarred" class="icon star" :class="{'is-starred':this.board.isStarred}"></button>
+
+    <!-- <div class="board-header-members"> -->
+      <member-list :members="board.members" :isTaskRelated="false" class="board-header-members"/>
+    <!-- </div> -->
+    <div class="menu-btn"><span class="icon elipsis"></span>Show Menu</div>
   </section>
 </template>
 <script>
@@ -14,6 +16,9 @@ import editableTitle from "@/cmps/common/editable-title.vue";
 export default {
   props: {
     board: Object,
+  },
+  created(){
+    console.log('this.board.isStarred:', this.board.isStarred)
   },
   methods: {
     toggleStarred() {

@@ -74,5 +74,10 @@
         content: "✔";
         color:$clr1;
     }
+    &.board:before{
+        font-family: "fa-solid";
+        content: "\f0db";
+        
+    }
 
 }

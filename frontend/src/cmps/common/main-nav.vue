@@ -9,7 +9,7 @@
     <router-link to="/" style="font-family: fa-solid" class="icon"
       >&#xf015;</router-link
     >
-    <router-link to="/board" v-if="user._id">Boards</router-link>
+    <router-link to="/board" v-if="user._id"><div class="icon board"></div>Boards</router-link>
   </nav>
 </template>
 

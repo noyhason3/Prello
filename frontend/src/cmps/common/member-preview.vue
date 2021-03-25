@@ -24,6 +24,7 @@ export default {
   },
   computed: {
     memberInitials() {
+      if(this.member.username === 'Guest') return 'GU';
       const nameSplit = this.member.fullname.split(" ");
       const initials = (
         nameSplit[0].charAt(0) + nameSplit[1].charAt(0)
