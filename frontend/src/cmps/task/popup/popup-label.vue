@@ -26,12 +26,13 @@
               class="btn label label-color"
             >
               {{ label.title }}
+              <span class="icon v"></span>
             </button>
             <button
               @click="openLabelEdit('Change', label)"
-              class="btn edit-label"
+              class="btn edit-label icon pencil"
             >
-              🖋
+              
             </button>
           </li>
         </ul>

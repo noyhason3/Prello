@@ -1,19 +1,26 @@
 .popup-label {
     position: absolute;
-    .search-label{
-        margin-bottom:20px;
-    }
-    .label-list{
+
+    .search-label {
         margin-bottom: 20px;
     }
+
+    .label-list {
+        margin-bottom: 20px;
+    }
+
     .label-preview {
         height: 30px;
-        margin-bottom:5px;
-    
+        margin-bottom: 5px;
+
 
         .label-color {
             width: 100%;
             height: 100%;
+        }
+
+        .icon.v {
+            float: right;
         }
 
         .btn.label {
@@ -23,50 +30,48 @@
             height: 100%;
             margin: 0;
             border-radius: 3px;
-            margin-inline-end:3px;
+            margin-inline-end: 3px;
         }
 
         .btn.label:hover {
             filter: brightness(90%);
         }
-        .btn.edit-label{
+
+        .btn.edit-label {
             background-color: transparent;
             width: 30px;
             border-radius: 50%;
         }
-        .btn.edit-label:hover{
+
+        .btn.edit-label:hover {
             // background-color:green;
             filter: none;
-            background-color:rgb(245, 245, 245);
+            background-color: rgb(245, 245, 245);
 
         }
-        .label-in-use::after {
-            content: "✔";
-        }
+
+        content: "✔";
     }
 }
 
 .label-edit {
-    position:absolute;
-    left:0;
+    position: absolute;
+    left: 0;
+
     .label-edit-header {
         display: flex;
         justify-content: space-between;
     }
 
     .label-color-list {
-        
+
         width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        .label-color {
-            width: 40px;
-            height: 30px;
-            margin-bottom: 10px;
-            // margin-inline-end: 5px;
-            ;
-        }
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-auto-rows: 35px;
+        gap: 5px;
+
+        margin-bottom: 10px;
 
         .btn.color {
             display: block;
@@ -79,13 +84,16 @@
 
         .color-in-use::after {
             content: "✔";
+            color: $clr1;
         }
     }
-    .btn-container{
-        display:flex;
+
+    .btn-container {
+        display: flex;
         justify-content: space-between;
-        .btn{
-            margin:0
+
+        .btn {
+            margin: 0
         }
     }
 }

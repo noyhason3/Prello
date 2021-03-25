@@ -60,11 +60,17 @@ export default {
   data() {
     return {
       colors: [
-        { color: "#0079BF", selected: false },
         { color: "#00EAFF", selected: false },
-        { color: "#EB5A46", selected: false },
+        { color: "#0079BF", selected: false },
         { color: "#3c4b68", selected: false },
         { color: "#A98EDA", selected: false },
+        { color: "#EB7386", selected: false },
+       
+       { color: "#71d165", selected: false },
+        { color: "#a4fd8e", selected: false },
+        { color: "#fcf050", selected: false },
+        { color: "#ffb342", selected: false },
+        { color: "#EB5A46", selected: false },
       ],
       labelToEdit: null,
       isDelete: false,
