@@ -2,7 +2,7 @@
   <pop-up class="popup-attachment">
     <div slot="header" class="task-popup-header">
       <h2>Attach from...</h2>
-      <button @click="togglePopup" class="btn close">X</button>
+      <button @click="togglePopup" class="btn close icon x"></button>
     </div>
     <div slot="main">
       <button class="btn file-upload">
@@ -26,7 +26,7 @@
             class="url-name-input"
           />
         </div>
-        <button class="btn narrow">Attach</button>
+        <button class="btn neutral narrow">Attach</button>
       </form>
     </div>
   </pop-up>

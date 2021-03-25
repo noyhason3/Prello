@@ -13,6 +13,7 @@
     height: 30px;
     width: 30px;
     text-align: center;
+    box-shadow:-1px 1px #0000004b;
     &:hover{
         filter:brightness(110%)
     }
@@ -36,7 +37,8 @@
     @each $memberColor, $i in $memberColors {
         &.#{$memberColor} {
             background-color: $i;
-            color: set-color($i, 60);
+            color: $clr1;
+            // color: set-color($i, 60);
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             font-weight: 600;
             font-size:0.9rem;

@@ -1,11 +1,14 @@
 <template>
   <section class="task-attachment-container">
-    <h4 class="attachment-title"><span></span> Attachments</h4>
+    <div class="task-main-layout headline">
+    <div class="icon attachment"></div>
+    <h4>Attachments</h4>
+    </div>
     <ul class="clean-list">
       <li
         v-for="attachment in attachmentsToEdit"
         :key="attachment.id"
-        class="task-attachment"
+        class="task-secondary-layout task-attachment"
       >
         <img
           :src="attachment.url"
@@ -33,15 +36,16 @@
               Edit
             </button>
           </div>
-          <!-- <button class="btn attachment-action">🚃 Make cover</button> TODO
-          <button class="btn attachment-action">🚃 Remove cover</button> -->
+          <!-- <button v-if="!isCover()" class="btn attachment-action">🚃 Make cover</button> TODO
+          <button v-else class="btn attachment-action">🚃 Remove cover</button> -->
         </div>
       </li>
     </ul>
-    <popup v-if="selectedAttachment" class="attachment-edit">
+    <button class="btn neutral task-secondary-layout">Add an attachment</button>
+    <popup v-if="selectedAttachment" class="attachment-edit" :style="{'max-height':'fit-content', top:'500px'}">
       <div slot="header" class="task-popup-header">
         <h2>Edit attachment</h2>
-        <button @click="closeEditAttachment" class="btn close">X</button>
+        <button @click="closeEditAttachment" class="btn close icon x"></button>
       </div>
       <div slot="main" class="attachment-edit-main">
         <h3>Link name</h3>

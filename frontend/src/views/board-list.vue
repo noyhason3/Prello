@@ -3,7 +3,7 @@
     <div class="board-list-container">
       <h2 class="hello">Hello Guest</h2>
       <h2><span class="starred"></span>Starred boards</h2>
-      <ul v-if="boardList" class="clean-list board-list">
+      <ul v-if="boardList" class="clean-list board-list-layout">
         <li
           v-for="board in starredBoards"
           :key="board._id"
@@ -15,17 +15,20 @@
           <button class="starred" @click.stop="toggleStarred(board)"></button>
         </li>
       </ul>
+      <div class="board-list-layout headline">
       <h2>
         <span class="recent"></span>Recently viewed
+        </h2>
         <input
           type="text"
           @input="setFilter"
           v-model="filterBy.txt"
           placeholder="Search boards..."
         />
-      </h2>
+      
+      </div>
 
-      <ul v-if="boardList" class="clean-list board-list">
+      <ul v-if="boardList" class="clean-list board-list-layout">
         <li
           v-for="board in recentBoards"
           :key="board._id"
@@ -36,10 +39,10 @@
         >
           <h3>{{ board.title }}</h3>
           <button
-            class="board-options"
+            class="btn options"
             @click.stop="toggleOptionsMenu(board)"
           ></button>
-          <div v-if="isBoardSelected(board._id)" class="nav-board-options">
+          <div v-if="isBoardSelected(board._id)" class="nav-small">
             <button @click.stop="removeBoard()">Remove board</button>
           </div>
           <button
@@ -49,8 +52,8 @@
           ></button>
         </li>
         <li>
-          <button @click="openBoardPopup" class="btn add-board">
-            Create new board
+          <button @click="openBoardPopup" class="btn add-board icon plus">
+            <!-- Create new board -->
           </button>
         </li>
       </ul>

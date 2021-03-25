@@ -1,0 +1,78 @@
+.icon{
+    font-size: 1rem;
+    &.preview{
+        font-size:0.9rem;
+    }
+    &.checklist:before{
+        font-family: 'fa-reg';
+        content:"\f14a"
+    }
+    &.member:before{
+        font-family: "fa-reg";
+        content: "\f007";
+    }
+    &.attachment:before{
+        font-family: 'fa-solid';
+        content: '\f0c6';
+    }
+    &.cover:before{
+        font-family: "fa-solid";
+        content: "\f09d";
+    }
+    &.description:before{
+        font-family: 'fa-solid';
+        content:"\f036"
+    }
+    &.title{
+        // margin-inline-end: 10px;
+      transform: scaleY(1.3);
+    }
+    &.title:before{
+        font-family: 'fa-solid';
+        content:"\f566"
+    }
+    &.label{
+        transform: rotate(270deg);
+    }
+
+    &.label:before {
+        font-family: "fa-solid";
+        content: "\f02b";
+    }
+    &.plus:before {
+        font-family: "fa-solid";
+        content: "\f067";
+    }
+    &.x:before {
+        font-family: "fa-solid";
+        content: "\f00d";
+    }
+    &.elipsis:before {
+        font-family: "fa-solid";
+        content: "\f141";
+    }
+    &.comment:before {
+        font-family: "fa-reg";
+        content: "\f075";
+        // content: "\f27a";
+    }
+    &.pencil:before {
+        font-family: "fa-solid";
+        content: "\f303";
+        color:rgb(124, 124, 124);
+        // content:"🖋"
+    }
+    &.clock:before {
+        font-family: 'fa-reg';
+        content: "\f017"
+    }
+    &.star:before {
+        font-family: 'fa-reg';
+        content: "\f005"
+    }
+    &.v:before{
+        content: "✔";
+        color:$clr1;
+    }
+
+}

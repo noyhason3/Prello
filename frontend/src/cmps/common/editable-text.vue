@@ -7,8 +7,8 @@
         :placeholder="placeholder"
       ></textarea>
       <div class="editable-text-controls">
-        <button class="save-btn">Save</button>
-        <button type="button" @click.stop="closeTextarea">X</button>
+        <button class="btn action">Save</button>
+        <button type="button" @click.stop="closeTextarea" class="icon x"></button>
       </div>
     </form>
     <template v-else>

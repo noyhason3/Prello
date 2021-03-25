@@ -2,7 +2,7 @@
   <pop-up class="popup-member">
     <div slot="header" class="task-popup-header">
       <h2>Members</h2>
-      <button @click="togglePopup" class="btn close">X</button>
+      <button @click="togglePopup" class="btn close icon x"></button>
     </div>
     <div slot="main" class="task-popup-main">
       <input
@@ -69,8 +69,8 @@ export default {
   },
   computed: {
     memberList() {
-      const board = this.$store.getters.currBoard;
-      return board.members.filter((member) => {
+      const members = this.$store.getters.currBoard.members;
+      return members.filter((member) => {
         return member.fullname
           .toLowerCase()
           .includes(this.searchStr.toLowerCase());

@@ -6,7 +6,7 @@
         @input="saveGroup(group)"
       ></editableTitle>
 
-      <button @click="removeGroup">X</button>
+      <button @click="removeGroup" class="icon elipsis preview"></button>
     </div>
     <div class="tasks-wrapper">
       <draggable
@@ -34,6 +34,7 @@
   
     <div class="add-task">
       <button v-if="!isAddNewTask" @click="isAddNewTask = true">
+        <span>+</span>
         Add another card
       </button>
       <editable-text

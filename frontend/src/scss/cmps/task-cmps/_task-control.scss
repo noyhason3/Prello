@@ -1,60 +1,33 @@
 .task-control {
     display: flex;
     flex-direction: column;
-
-    .add-to-card-btn {
-        margin: 5px;
+    min-width: 160px;
+    // .add-to-card {
+        // margin: 5px;
+    // }
+    >*{
+        margin-bottom:8px;
     }
-
-    .control-btn {
-        position: relative;
-
-        display: flex;
-        justify-content: flex-start;
-        outline: none;
-        background-color: #eaecf0;
-        width: 150px;
-        padding: 10px;
-        margin-bottom: 10px;
-        letter-spacing: 0.3px;
-
-
-        &:hover {
-            background-color: #e4e4e3;
-        }
-
-        & span {
-            margin-inline-end: 10px;
-
-        }
-
-        &.cover span:before {
-            font-family: "fa-solid";
-            content: "\f09d";
-        }
-        &.member span:before {
-            font-family: "fa-reg";
-            content: "\f007";
-        }
-
-        &.checklist span:before {
-            font-family: "fa-reg";
-            content: "\f14a";
-        }
-
-        &.label span {
-            transform: rotate(270deg);
-        }
-
-        &.label span:before {
-            font-family: "fa-solid";
-            content: "\f02b";
-        }
-
-        &.attachment span:before {
-            font-family: "fa-solid";
-            content: "\f0c6";
-        }
+    & span {
+        margin-inline-end: 10px;
 
     }
+    // .control-btn {
+    //     position: relative;
+
+    //     display: flex;
+    //     justify-content: flex-start;
+    //     outline: none;
+    //     background-color: #eaecf0;
+    //     width: 150px;
+    //     padding: 10px;
+    //     margin-bottom: 10px;
+    //     letter-spacing: 0.3px;
+
+
+    //     &:hover {
+    //         background-color: #e4e4e3;
+    //     }
+
+    // }
 }
