@@ -26,16 +26,19 @@
       </div>
       <div class="task-info-preview">
         <div class="main-info-task-preview">
-          <!-- TODO: <div v-if="isTaskDuedate">{{taskDueDate}}</div> -->
+          <div v-if="task.duedate" class="task-duedate-preview">
+            <span class="icon clock preview" />
+            {{ date.day }}
+          </div>
+
           <div v-if="isTaskDescription" class="icon description preview"></div>
           <div v-if="attachmentCount" class="attachment-info">
             <span class="icon attachment preview"></span>{{ attachmentCount }}
           </div>
 
           <div v-if="taskChecklists" class="checklist-info">
-            <span class="icon checklist preview"></span>{{ taskChecklists.complete }}/{{
-              taskChecklists.total
-            }}
+            <span class="icon checklist preview"></span
+            >{{ taskChecklists.complete }}/{{ taskChecklists.total }}
           </div>
         </div>
 
@@ -56,6 +59,7 @@
 import memberList from "@/cmps/common/member-list.vue";
 import taskLabelPreview from "@/cmps/task/task-cmps/task-label-preview.vue";
 import editableTitle from "@/cmps/common/editable-text.vue";
+import moment from "moment";
 
 export default {
   props: {
@@ -85,10 +89,19 @@ export default {
     attachmentCount() {
       return this.task.attachment?.length;
     },
-    isTaskDuedate() {
-      return false;
-      //TODO: return this.task.duedate;
+    date() {
+      const timestamp = this.task.duedate;
+      const day = moment.unix(timestamp).format("MMM D");
+      // const hour = moment.unix(timestamp).format("hh:mm A");
+      const date = {
+        day,
+        // hour,
+      };
+      return date;
     },
+    // isTaskDuedate() {
+    //   return this.task.duedate;
+    // },
     taskMemebers() {
       if (!this.task.members?.length) return false;
       return this.task.members;

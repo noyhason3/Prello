@@ -117,6 +117,7 @@ export default {
     },
     saveDate(timestamp) {
       this.$emit("save-date", timestamp);
+      this.togglePopup("Duedate");
     },
     saveAttachments(attachments) {
       this.$emit("save-attachments", attachments);
