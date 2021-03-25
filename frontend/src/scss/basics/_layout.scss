@@ -110,8 +110,8 @@
 .board-list-layout {
     display: grid;
     grid-template-columns: repeat(4, 230px);
-    grid-auto-rows: 230px;
-    gap: 5px;
+    grid-auto-rows: 160px;
+    gap: 10px;
     justify-content: center;
     margin-bottom:45px;
     &.headline{
