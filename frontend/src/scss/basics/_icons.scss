@@ -48,8 +48,10 @@
         content: "\f00d";
     }
     &.elipsis:before {
-        font-family: "fa-solid";
-        content: "\f141";
+        // font-family: "fa-solid";
+        // content: "\f141";
+        content:"···";
+        font-size: bold;;
     }
     &.comment:before {
         font-family: "fa-reg";
@@ -76,8 +78,15 @@
     }
     &.board:before{
         font-family: "fa-solid";
-        content: "\f0db";
-        
+        content: "\f0db";       
+    }
+    &.house:before{
+        font-family: "fa-solid";
+        content: "\f015";       
+    }
+    &.search:after{
+        font-family: "fa-solid";
+        content: "\f002";       
     }
 
 }

@@ -6,15 +6,45 @@
       <router-link to="/dashboard">dashboard</router-link> |
       <router-link to="/board">board list</router-link> |
       <router-link to="/board/demo101">board</router-link> -->
-    <router-link to="/" style="font-family: fa-solid" class="icon"
-      >&#xf015;</router-link
+    <router-link
+      to="/"
+      style="font-family: fa-solid"
+      class="icon house"
+    ></router-link>
+    <router-link to="/board" v-if="user._id" class="boards"
+      ><div class="icon board"></div>
+      Boards</router-link
     >
-    <router-link to="/board" v-if="user._id"><div class="icon board"></div>Boards</router-link>
+    <div
+      class="search-container"
+      @click="openSearch"
+      :class="{ active: isActive }"
+    >
+      <input type="text" :placeholder="placeholder" />
+      <span v-if="!isActive" class="icon search"></span>
+      <span v-else  @click.stop="closeSearch" class="icon x"></span>
+    </div>
   </nav>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      isActive: false,
+      placeholder:'Jump to...'
+    };
+  },
+  methods: {
+    openSearch() {
+      this.isActive = true;
+      this.placeholder = "Search..."
+    },
+    closeSearch() {
+      this.isActive = false;
+      this.placeholder = "Jump to..."
+    },
+  },
   computed: {
     user() {
       console.log(
