@@ -19,7 +19,7 @@
           <div>
 
           <h5>{{ attachment.title }}</h5>
-          <p>{{ date(attachment.createdAt) }}</p>
+          <p>Added {{ date(attachment.createdAt) }}</p>
           <!-- <button class="btn attachment-action">Comment</button> -->
           </div>
           <div>

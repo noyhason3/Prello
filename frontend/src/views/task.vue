@@ -29,7 +29,7 @@
             @input="saveTask(task)"
           />
         </div>
-        <p v-if="groupTitle" class="task-secondary-layout">
+        <p v-if="groupTitle" class="task-secondary-layout group-title">
           in list: {{ groupTitle }}
         </p>
       </div>
@@ -160,7 +160,7 @@ export default {
   },
   async created() {
     await this.group();
-    const body = document.querySelector(".board").getBoundingClientRect();
+    const body = document.querySelector(".main").getBoundingClientRect();
     this.initialHeight = body.top + 5;
   },
   computed: {

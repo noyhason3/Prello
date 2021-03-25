@@ -60,29 +60,30 @@ export default {
   data() {
     return {
       colors: [
-        { color: "#00EAFF", selected: false },
-        { color: "#0079BF", selected: false },
-        { color: "#3c4b68", selected: false },
-        { color: "#A98EDA", selected: false },
-        { color: "#EB7386", selected: false },
-       
-       { color: "#71d165", selected: false },
-        { color: "#a4fd8e", selected: false },
-        { color: "#fcf050", selected: false },
-        { color: "#ffb342", selected: false },
-        { color: "#EB5A46", selected: false },
+        { color: "#61bd4f", selected: false },
+        { color: "#f2d600", selected: false },
+        { color: "#ff9f1a", selected: false },
+        { color: "#eb5a46", selected: false },
+        { color: "#c377e0", selected: false },
+
+        { color: "#0079bf", selected: false },
+        { color: "#00c2e0", selected: false },
+        { color: "#51e898", selected: false },
+        { color: "#ff78cb", selected: false },
+        { color: "#344563", selected: false },
       ],
       labelToEdit: null,
       isDelete: false,
     };
   },
   created() {
-    if(this.label ) this.labelToEdit = { ...this.label }
-    else this.labelToEdit= {
-      id: utilService.makeId(),
-      color: this.colors[0].color,
-      title: "",
-    };
+    if (this.label) this.labelToEdit = { ...this.label };
+    else
+      this.labelToEdit = {
+        id: utilService.makeId(),
+        color: this.colors[0].color,
+        title: "",
+      };
     if (this.label) this.setSelectedColor(this.label.color);
   },
   methods: {
