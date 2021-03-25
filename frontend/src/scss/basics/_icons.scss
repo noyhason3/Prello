@@ -1,7 +1,7 @@
 .icon{
     font-size: 1rem;
     &.preview{
-        font-size:0.9rem;
+        font-size:rem(12px);
     }
     &.checklist:before{
         font-family: 'fa-reg';
