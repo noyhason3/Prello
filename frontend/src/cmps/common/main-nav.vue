@@ -24,6 +24,10 @@
       <span v-if="!isActive" class="icon search"></span>
       <span v-else  @click.stop="closeSearch" class="icon x"></span>
     </div>
+    <div>
+    <!-- TODO: ADD Board Menue -->
+
+    </div>
   </nav>
 </template>
 

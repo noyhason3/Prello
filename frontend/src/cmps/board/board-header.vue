@@ -1,14 +1,22 @@
 <template>
   <section class="board-header">
     <div class="board-title">
-    <editableTitle v-model="board.title"/>
-    <!-- <button @click="toggleStarred" :class="starredClass">&#xf005;</button> -->
-    <button @click="toggleStarred" class="icon star" :class="{'is-starred':this.board.isStarred}"></button>
+      <editableTitle v-model="board.title" />
+      <!-- <button @click="toggleStarred" :class="starredClass">&#xf005;</button> -->
+      <button
+        @click="toggleStarred"
+        class="icon star"
+        :class="{ 'is-starred': this.board.isStarred }"
+      ></button>
     </div>
+    <member-list
+      :members="board.members"
+      :isTaskRelated="false"
+      class="board-header-members"
+    />
     <!-- <div class="board-header-members"> -->
-      <member-list :members="board.members" :isTaskRelated="false" class="board-header-members"/>
     <!-- </div> -->
-    <div class="menu-btn"><span class="icon elipsis"></span>Show Menu</div>
+    <button class="menu-btn"><span class="icon elipsis"></span>Show Menu</button>
   </section>
 </template>
 <script>
@@ -18,8 +26,8 @@ export default {
   props: {
     board: Object,
   },
-  created(){
-    console.log('this.board.isStarred:', this.board.isStarred)
+  created() {
+    console.log("this.board.isStarred:", this.board.isStarred);
   },
   methods: {
     toggleStarred() {
