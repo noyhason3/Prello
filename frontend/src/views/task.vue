@@ -29,7 +29,9 @@
             @input="saveTask(task)"
           />
         </div>
-        <p v-if="groupTitle" class="task-secondary-layout">in list: {{ groupTitle }}</p>
+        <p v-if="groupTitle" class="task-secondary-layout">
+          in list: {{ groupTitle }}
+        </p>
       </div>
       <div class="task-content" @click.stop>
         <popup-label
@@ -72,8 +74,8 @@
             </div>
           </div>
           <div class="task-main-layout headline">
-          <div class="icon description"></div>
-          <h4 class="description"> Description</h4>
+            <div class="icon description"></div>
+            <h4 class="description">Description</h4>
           </div>
           <editable-text
             v-model="task.description"

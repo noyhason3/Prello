@@ -27,6 +27,13 @@
     border-radius: 5px 5px 0px 0px;
   }
 
+  .task-duedate-preview {
+    display: flex;
+    background-color: $clr2;
+    color: $clr1;
+    border-radius: 3px;
+  }
+
   .task-preview-main {
     padding: 6px 8px 2px;
 
@@ -56,7 +63,8 @@
   }
 
   .task-info-preview {
-    display: flex;
+    // display: flex;
+    // flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     // padding: 6px 8px 2px;
@@ -69,7 +77,8 @@
       float: left;
       > * {
         // float: left;
-        margin-inline-end: 20px;
+        // margin-inline-end: 10px;
+        margin: 0 10px 4px 0;
         padding: 2px;
       }
     }
@@ -80,10 +89,9 @@
       }
     }
 
-    span.icon  {
+    span.icon {
       margin-inline-end: 5px;
     }
-
   }
 
   .member-list {
