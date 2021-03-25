@@ -77,7 +77,8 @@ export default {
     };
   },
   created() {
-    this.labelToEdit = { ...this.label } || {
+    if(this.label ) this.labelToEdit = { ...this.label }
+    else this.labelToEdit= {
       id: utilService.makeId(),
       color: this.colors[0].color,
       title: "",

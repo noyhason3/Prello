@@ -122,6 +122,7 @@ export default {
     boardLabels() {
       const boardLabels = this.$store.getters.currBoard.labels;
       return boardLabels.filter((label) => {
+        console.log('label:', label)
         return label.title.toLowerCase().includes(this.searchStr.toLowerCase());
       });
     },
