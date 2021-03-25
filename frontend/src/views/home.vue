@@ -19,6 +19,7 @@
 <script>
 // @ is an alias to /src
 import { userService } from "../services/user.service.js";
+import { getImgColors } from "../services/img-upload.service.js";
 import about from "./about.vue";
 export default {
   name: "home",
@@ -31,6 +32,9 @@ export default {
       const user = await this.$store.dispatch({ type: "login", userCred });
       this.$router.push("/board");
     },
+  },
+  mounted() {
+    //getImgColors(".hero-img");
   },
   components: { about },
 };

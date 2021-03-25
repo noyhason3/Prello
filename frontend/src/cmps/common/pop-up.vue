@@ -30,12 +30,22 @@ export default {
     console.log('curr:', curr)
     if (prev) {
       const top = prev.y + prev.height;
+<<<<<<< HEAD
       // this.maxHeight = window.innerHeight - prev.y - 120;
       this.maxHeigh = window.innerHeight - 70;
       const height = window.innerHeight - prev.y - 120;
       if(top+curr.height > window.innerHeight) this.top = 45;
       else this.top = top;
       // this.top = top;
+=======
+      this.maxHeight = window.innerHeight - top - 20;
+      console.log(
+        "file: pop-up.vue - line 32 - mounted - this.maxHeight",
+        this.maxHeight
+      );
+
+      this.top = top;
+>>>>>>> e2b02d36f036fe65b83aa3f8a7458072737e0fcd
     }
     // if (prev) {
     //   const top = prev.y + prev.height;
