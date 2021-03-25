@@ -60,5 +60,13 @@
         font-family: "fa-solid";
         content: "\f303";
     }
+    &.clock:before {
+        font-family: 'fa-reg';
+        content: "\f017"
+    }
+    &.star:before {
+        font-family: 'fa-reg';
+        content: "\f005"
+    }
 
 }
