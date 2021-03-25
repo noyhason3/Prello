@@ -80,6 +80,7 @@
                     "title": "REMINDER!",
                     "description": "Please refrain from editing other people's work. \n Reviewed every 2nd sunday",
                     "checklists": [],
+                    "duedate":"",
                     "attachments": [],
                     "labelIds": [
                         "important"
@@ -122,6 +123,7 @@
                             "createdAt": "1615155239874"
                         }
                     ],
+                    "duedate":"",
                     "style": {
                         "coverColor":"#f5dd29",
                         "coverImg" : ""
@@ -181,6 +183,7 @@
                         }
                     ],
                     "attachments": [],
+                    "duedate":"",
                     "labelIds": [
                         "important"
                     ],
@@ -216,6 +219,7 @@
                     "description": "Enable picture customzation in addition to color",
                     "checklists": [],
                     "attachments": [],
+                    "duedate":"",
                     "labelIds": [
                         "done"
                     ],
@@ -268,6 +272,7 @@
                         }
                     ],
                     "attachments": [],
+                    "duedate":"",
                     "members": [
                         {
                             "_id": "u101",
@@ -342,6 +347,7 @@
                             "createdAt": "1616152734274"
                         }
                     ],
+                    "duedate":"",
                     "labelIds": [
                         "progress"
                     ],
@@ -369,6 +375,7 @@
                     "title": "D&D Feature customization",
                     "checklists": [],
                     "attachments": [],
+                    "duedate":"",
                     "labelIds": [
                         "hold"
                     ],
@@ -389,6 +396,7 @@
                     "title": "User login from different sources",
                     "checklists": [],
                     "attachments": [],
+                    "duedate":"",
                     "labelIds": [
                         "progress"
                     ],
@@ -402,6 +410,7 @@
                     "title": "Better dashboard implementation for 3rd party software",
                     "checklists": [],
                     "attachments": [],
+                    "duedate":"",
                     "labelIds": [
                         "hold"
                     ],
@@ -423,6 +432,7 @@
                     "title": "User satiabillity and experience tests",
                     "checklists": [],
                     "attachments": [],
+                    "duedate":"",
                     "labelIds": [
                         "hold",
                         "important"
@@ -498,6 +508,7 @@
                         "important"
                     ],
                     "attachments": [],
+                    "duedate":"",
                     "members": [
                         {
                             "_id": "u108",

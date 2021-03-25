@@ -2,7 +2,9 @@
   <section class="task-control">
     <!--  ******TODO********
       <button>Join</button> -->
-    <button @click="togglePopup('Cover')" class="control-btn cover"><span></span>Cover</button>
+    <button @click="togglePopup('Cover')" class="control-btn cover">
+      <span></span>Cover
+    </button>
     <popup-cover
       v-if="isCoverOpen"
       @close-popup="isCoverOpen = false"
@@ -12,7 +14,9 @@
     />
 
     <h6 class="add-to-card-btn">ADD TO CARD</h6>
-    <button @click="togglePopup('Member')" class="control-btn member"><span></span>Members</button>
+    <button @click="togglePopup('Member')" class="control-btn member">
+      <span></span>Members
+    </button>
     <popup-member
       v-if="isMemberOpen"
       @close-popup="isMemberOpen = false"
@@ -30,11 +34,23 @@
       @toggle-popup="togglePopup"
     />
 
-    <button @click="toggleGeneralPopup($event, 'Label')" class="control-btn label">
+    <button
+      @click="toggleGeneralPopup($event, 'Label')"
+      class="control-btn label"
+    >
       <span></span>Labels
     </button>
 
     <!-- <button>Due date</button> -->
+    <button @click="togglePopup('Duedate')" class="control-btn duedate">
+      <span></span>Due date
+    </button>
+    <popup-duedate
+      v-if="isDuedateOpen"
+      @toggle-popup="togglePopup"
+      @save-date="saveDate"
+    />
+
     <button @click="togglePopup('Attachment')" class="control-btn attachment">
       <span></span>Attachement
     </button>
@@ -52,6 +68,7 @@ import popupCover from "@/cmps/task/popup/popup-cover.vue";
 import popupMember from "@/cmps/task/popup/popup-member";
 import popupChecklist from "@/cmps/task/popup/popup-checklist.vue";
 import popupAttachment from "@/cmps/task/popup/popup-attachment.vue";
+import popupDuedate from "@/cmps/task/popup/popup-duedate.vue";
 
 export default {
   props: {
@@ -64,6 +81,7 @@ export default {
       isLabelOpen: false,
       isChecklistOpen: false,
       isAttachmentOpen: false,
+      isDuedateOpen: false,
     };
   },
   methods: {
@@ -96,6 +114,9 @@ export default {
     setTaskLabels(labelIds) {
       this.$emit("set-task-labels", labelIds);
     },
+    saveDate(timestamp) {
+      this.$emit("save-date", timestamp);
+    },
     saveAttachments(attachments) {
       this.$emit("save-attachments", attachments);
       this.togglePopup("Attachment");
@@ -106,6 +127,7 @@ export default {
     popupMember,
     popupChecklist,
     popupAttachment,
+    popupDuedate,
   },
 };
 </script>
