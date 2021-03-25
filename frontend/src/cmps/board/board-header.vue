@@ -1,9 +1,10 @@
 <template>
   <section class="board-header">
-    <editableTitle v-model="board.title" class="board-title"/>
+    <div class="board-title">
+    <editableTitle v-model="board.title"/>
     <!-- <button @click="toggleStarred" :class="starredClass">&#xf005;</button> -->
-    <button @click="toggleStarred" v-if="this.board.isStarred" class="icon star" :class="{'is-starred':this.board.isStarred}"></button>
-
+    <button @click="toggleStarred" class="icon star" :class="{'is-starred':this.board.isStarred}"></button>
+    </div>
     <!-- <div class="board-header-members"> -->
       <member-list :members="board.members" :isTaskRelated="false" class="board-header-members"/>
     <!-- </div> -->
