@@ -1,6 +1,5 @@
 .popup{
     position:fixed;
-    // top:30px;
     z-index:1;
     background-color: $clr1;
     border-radius: 5px;
@@ -34,39 +33,10 @@
         }
     }
     .btn{
-        margin: auto;
+        margin: 0;
         margin-bottom:10px;
-        border-radius: 5px;
-        &:hover {
-            filter: brightness(90%);
+        font-size: 0.9rem;
         }
-        &.narrow{
-            width: 60px;
-        }
-        &.wide{
-            width: 100%;
-        }
-        &.action-color{
-            // background-color: #A1FD9D;
-            background-color: $clr1;
-            border:2px solid $clr-ok-btns;
-            color:$clr7;
-            font-weight:600;
-        }
-        &.warning-color{
-            // background-color: $clr4;
-            background-color: $clr1;
-            border:2px solid $clr-alarm-btns;
-            color:$clr4;
-            font-weight:600;
-        }
-        &.warning-color:hover,
-        &.action-color:hover{
-            filter:none;
-            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.267);
-        }
-    
-    }
     .task-popup-header {
         display: flex;
         justify-content: space-between;

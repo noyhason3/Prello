@@ -2,7 +2,7 @@
   <pop-up class="popup-cover">
     <div slot="header" class="task-popup-header">
       <h2>Cover</h2>
-      <button @click="togglePopup" class="btn close">X</button>
+      <button @click="togglePopup" class="btn close icon x"></button>
     </div>
     <div slot="main">
       <h3>COLORS</h3>
@@ -24,7 +24,7 @@
           />
         </li>
       </ul> -->
-      <button class="btn upload-cover-btn">
+      <button class="btn neutral wide upload-cover-btn">
         Upload a cover image
         <img
           class="loading"

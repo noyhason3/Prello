@@ -19,20 +19,24 @@
         }
         .editable-text-controls{
             display: flex;
+            align-items: center;
             width:fit-content;
             button{border-radius: 5px;}
             button:hover{background:#e4e4e3;}
             button:active{background:#6b768b; color: #e4e4e3;}
             
         }
-        .save-btn{
-            border-radius: 4px;
-            margin-inline-start: 0;
-            background-color: $clr1;
-            border:2px solid $clr7;
-            color:$clr7;
-            font-weight:600;
+        .btn{
+            margin-inline-end:10px;
         }
+        // .save-btn{
+        //     border-radius: 4px;
+        //     margin-inline-start: 0;
+        //     background-color: $clr1;
+        //     border:2px solid $clr7;
+        //     color:$clr7;
+        //     font-weight:600;
+        // }
     }
 }
 

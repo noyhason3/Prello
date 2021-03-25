@@ -1,10 +1,14 @@
 <template>
   <li class="task-checklist">
     <div class="checklist-header">
-      <div class="main-checklist-header">
-        <div ></div>
-        <h4 v-if="!isEditTitleOpen" @click="openEditTitle" class="checklist-title title-icon">
-          <span></span>{{ checklist.title }}
+      <!-- <div class="main-checklist-header task-main-layout headline"> -->
+      <div class="task-main-layout headline">
+        <div class="icon checklist"></div>
+        <h4
+          v-if="!isEditTitleOpen"
+          @click="openEditTitle"
+        >
+          {{ checklist.title }}
         </h4>
         <editable-text
           v-else
@@ -24,8 +28,8 @@
       </button>
     </div>
 
-    <div class="progress-bar-container">
-      {{ progressPercentage }}%
+    <div class="task-main-layout progress-bar-container">
+      <p>{{ progressPercentage }}%</p>
 
       <div class="meter">
         <span :style="'width:' + progressPercentage + '%'">
@@ -44,12 +48,12 @@
         empty-insert-threshold="50"
         draggable="li"
         tag="ul"
-        class="todos clean-list"
+        class="clean-list todos"
       >
         <li
           v-for="todo in checklist.todos"
           :key="todo.id"
-          class="todo-container"
+          class="task-main-layout todo-container"
         >
           <input
             type="checkbox"
@@ -59,30 +63,31 @@
             @click="toggleChecked(todo)"
             :checked="todo.isDone"
           />
+          <div>
+            <label
+              :for="todo.id"
+              v-if="todo.id !== currTodoId"
+              @click="setCurrTodo(todo.id)"
+            >
+              {{ todo.txt }}
+            </label>
 
-          <label
-            :for="todo.id"
-            v-if="todo.id !== currTodoId"
-            @click="setCurrTodo(todo.id)"
-          >
-            {{ todo.txt }}
-          </label>
-
-          <editable-text
-            v-else
-            v-model="todo.txt"
-            :type="todo.id"
-            :value="todo.id"
-            :isEditFirst="todo.id === currTodoId"
-            @close-textarea="isEditTodoOpen = false"
-            @input="editTodo(todo)"
-            class="editable-todo"
-          >
-          </editable-text>
+            <editable-text
+              v-else
+              v-model="todo.txt"
+              :type="todo.id"
+              :value="todo.id"
+              :isEditFirst="todo.id === currTodoId"
+              @close-textarea="isEditTodoOpen = false"
+              @input="editTodo(todo)"
+              class="editable-todo"
+            >
+            </editable-text>
+          </div>
         </li>
       </draggable>
 
-      <button v-if="!isAddTodoOpen" @click="openAddTodo" class="btn add-item">
+      <button v-if="!isAddTodoOpen" @click="openAddTodo" class="btn task-secondary-layout">
         Add an item
       </button>
       <editable-text

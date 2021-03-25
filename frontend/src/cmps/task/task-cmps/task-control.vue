@@ -2,7 +2,10 @@
   <section class="task-control">
     <!--  ******TODO********
       <button>Join</button> -->
-    <button @click="togglePopup('Cover')" class="control-btn cover"><span></span>Cover</button>
+    <!-- <button @click="togglePopup('Cover')" class="control-btn cover"><span></span>Cover</button> -->
+    <button @click="togglePopup('Cover')" class="btn neutral left-align">
+      <span class="icon cover"></span>Cover
+      </button>
     <popup-cover
       v-if="isCoverOpen"
       @close-popup="isCoverOpen = false"
@@ -11,8 +14,10 @@
       @save-cover-img="saveCoverImg"
     />
 
-    <h6 class="add-to-card-btn">ADD TO CARD</h6>
-    <button @click="togglePopup('Member')" class="control-btn member"><span></span>Members</button>
+    <h6 class="add-to-card">ADD TO CARD</h6>
+    <button @click="togglePopup('Member')" class="btn neutral left-align">
+      <span class="icon member"></span>Members
+      </button>
     <popup-member
       v-if="isMemberOpen"
       @close-popup="isMemberOpen = false"
@@ -21,8 +26,8 @@
       @remove-task-member="removeTaskMember"
     ></popup-member>
     <!-- <button>Labels</button> -->
-    <button @click="togglePopup('Checklist')" class="control-btn checklist">
-      <span></span>Checklist
+    <button @click="togglePopup('Checklist')" class="btn neutral left-align">
+      <span class="icon checklist"></span>Checklist
     </button>
     <popup-checklist
       v-if="isChecklistOpen"
@@ -30,13 +35,13 @@
       @toggle-popup="togglePopup"
     />
 
-    <button @click="toggleGeneralPopup($event, 'Label')" class="control-btn label">
-      <span></span>Labels
+    <button @click="toggleGeneralPopup($event, 'Label')" class="btn neutral left-align">
+      <span class="icon label"></span>Labels
     </button>
 
     <!-- <button>Due date</button> -->
-    <button @click="togglePopup('Attachment')" class="control-btn attachment">
-      <span></span>Attachement
+    <button @click="togglePopup('Attachment')" class="btn neutral left-align">
+      <span class="icon attachment"></span>Attachement
     </button>
     <popup-attachment
       v-if="isAttachmentOpen"

@@ -2,12 +2,12 @@
   <pop-up class="popup-checklist">
     <div slot="header" class="task-popup-header">
       <h2>Add Checklist</h2>
-      <button @click="togglePopup" class="btn close">X</button>
+      <button @click="togglePopup" class="btn close icon x"></button>
     </div>
     <div slot="main">
       <h3>Title</h3>
       <input type="text" name="title" id="title" v-model="checklist.title" />
-      <button @click="addChecklist" class="btn narrow action-color">Add</button>
+      <button @click="addChecklist" class="btn action narrow">Add</button>
       <!-- <h3>Copy Items From...</h3>
       <input type="text" name="" id="" /> -->
     </div>

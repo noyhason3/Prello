@@ -20,16 +20,16 @@
         <!-- :style="`background-image: url(${task.style.coverImg})`" -->
       </div>
       <div class="header">
-        <button @click.stop="closeTask" class="btn close">X</button>
-        <div class="task-title">
-          <div class="icon"></div>
+        <button @click.stop="closeTask" class="btn close icon x"></button>
+        <div class="task-main-layout headline">
+          <div class="icon title"></div>
           <task-title
             v-model="task.title"
             @click.prevent
             @input="saveTask(task)"
           />
         </div>
-        <h6 v-if="groupTitle">In list: {{ groupTitle }}</h6>
+        <p v-if="groupTitle" class="task-secondary-layout">in list: {{ groupTitle }}</p>
       </div>
       <div class="task-content" @click.stop>
         <popup-label
@@ -52,7 +52,7 @@
         />
 
         <div class="task-main">
-          <div v-if="task" class="task-info">
+          <div v-if="task" class="task-info task-secondary-layout">
             <member-list
               :members="task.members"
               :isTaskRelated="true"
@@ -66,14 +66,16 @@
             />
             <!-- <task-duedate /> -->
           </div>
-
-          <h4 class="description title-icon"><span></span> Description</h4>
+          <div class="task-main-layout headline">
+          <div class="icon description"></div>
+          <h4 class="description"> Description</h4>
+          </div>
           <editable-text
             v-model="task.description"
             :type="'description'"
             :elementType="'task'"
             @input="setDescription"
-            class="task-description-content"
+            class="task-secondary-layout task-description-content"
           />
 
           <task-attachment

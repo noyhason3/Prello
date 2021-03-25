@@ -59,6 +59,7 @@
                 border-radius: 5px;
                 box-shadow:$subtle-shadow;
                 font-size: rem(18px);
+                padding: 5px;
                 &:hover{
                     background:lighten($clr5,26);
                 }

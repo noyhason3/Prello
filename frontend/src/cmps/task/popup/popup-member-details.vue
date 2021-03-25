@@ -1,7 +1,7 @@
 <template>
   <pop-up class="member-details">
     <div slot="main">
-      <button @click="closeMemberDetails" class="btn close">X</button>
+      <button @click="closeMemberDetails" class="btn close icon x"></button>
       <div class="member-details-container">
         <member-preview :member="member" />
         <div>
