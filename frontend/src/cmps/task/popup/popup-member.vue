@@ -1,5 +1,5 @@
 <template>
-  <pop-up class="popup-member" style="overflow-y: auto">
+  <pop-up class="popup-member">
     <div slot="header" class="task-popup-header">
       <h2>Members</h2>
       <button @click="togglePopup" class="btn close icon x"></button>
