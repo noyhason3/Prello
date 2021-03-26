@@ -1,11 +1,17 @@
 <template>
   <section class="board" v-if="board" ref="board">
-    <img
+    <div :style="boardStyle(board)" class="board-bg"></div>
+    <!-- <img
       class="board-bg"
       :src="require('@/assets/img/background/' + board.style.bgImg.value)"
       alt=""
+<<<<<<< HEAD
+    /> -->
+    <board-header :board="board" />
+=======
     />
     <board-header :board="board" ref="boardHeader" />
+>>>>>>> 11e77cb7f856c18c6f722c4cdec3d1be06e52c6b
     <draggable
       v-model="board.groups"
       group="group"
@@ -72,23 +78,23 @@ export default {
   async created() {
     if (!this.$store.getters.board) {
       const boardId = this.$route.params.boardId;
-      this.loadBoard(boardId);
+      await this.loadBoard(boardId);
       this.assignClasses();
     }
+    console.log("style.bgImg.value", this.board.style);
   },
   mounted() {
-    this.$store.commit({
-      type: "setBoardHeader",
-      boardHeader: this.$refs.boardHeader,
-    });
+    const boardHeader = this.$refs.boardHeader;
+    if (boardHeader) {
+      this.$store.commit({
+        type: "setBoardHeader",
+        boardHeader,
+      });
+    }
   },
   destroyed() {
-    const header = this.$store.getters.mainHeader;
-    const boardHeader = this.$store.commit({
-      type: "setBoardHeader",
-      boardHeader: null,
-    });
-    header.classList.remove("img-bg");
+    // const header = this.$store.getters.mainHeader;
+    // header.classList.remove("img-bg");
   },
   methods: {
     async loadBoard(boardId) {
@@ -109,13 +115,21 @@ export default {
     assignClasses() {
       const header = this.$store.getters.mainHeader;
       const body = this.$refs.board;
-      if (this.board.style.bgImg) {
+      if (this.board.style.bgImg || this.board.style.bgColor) {
         header.classList.add("img-bg");
         body.classList.add("img-bg");
       } else {
         header.classList.remove("img-bg");
         body.classList.remove("img-bg");
       }
+    },
+    boardStyle(board) {
+      if (board.style.bgImg) {
+        const img = require("@/assets/img/background/" +
+          board.style.bgImg.value);
+        return { backgroundImage: `url(${img})` };
+      }
+      return { backgroundColor: board.style.bgColor.value };
     },
   },
   computed: {
@@ -140,7 +154,7 @@ export default {
     },
   },
   watch: {
-    '$route.params.boardId'(boardId) {
+    "$route.params.boardId"(boardId) {
       this.loadBoard(boardId);
     },
   },

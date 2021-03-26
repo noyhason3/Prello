@@ -37,8 +37,8 @@ export const boardStore = {
     }
   },
   mutations: {
-    setBoard(state, { currBoard }) {
-      state.board = currBoard;
+    setBoard(state, { board }) {
+      state.board = board;
     },
     setBoards(state, { boards }) {
       state.boards = boards;
@@ -71,15 +71,14 @@ export const boardStore = {
 
     async getBoard({ commit }, { boardId }) {
       try {
-        const currBoard = await boardService.getById(boardId);
-        commit({ type: 'setBoard', currBoard });
+        const board = await boardService.getById(boardId);
+        commit({ type: 'setBoard', board });
         // socketService.setup();//Not sure if needed, happens in the service anyway
         socketService.off('board-update');
         socketService.emit('join-board', boardId);
         socketService.on('board-update', (board, msg) => {
           console.log('socket emitted- board update');
-          console.log(msg);
-          commit({ type: 'setBoard', currBoard: board });
+          commit({ type: 'setBoard', board: board });
         });
         // socketService.on('task-update', (task) => {
         //   context.commit({ type: 'updateTask', task });
@@ -93,9 +92,9 @@ export const boardStore = {
       try {
         console.log(msg);
         const currBoard = await boardService.save(board);
-        commit({ type: 'setBoard', currBoard: board });
-        await socketService.emit('save-board', currBoard);
-        return currBoard;
+        commit({ type: 'setBoard', board:currBoard });
+        await socketService.emit('save-board', board);
+        return board;
       } catch (err) {
         console.log('err:', err);
       }

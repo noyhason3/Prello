@@ -15,6 +15,14 @@
         border-radius: 3px;
         margin-inline-end: 5px;
         width: 100%;
+        background-size: cover;
+        cursor:pointer;
+        &:hover{
+            .nav-board-preview{
+                background-color: rgba(235, 235, 235, 0.7);
+            }
+    
+        }
     }
 
     .nav-board-preview {
@@ -28,9 +36,5 @@
         padding-inline-start: 10px;
         margin-inline-start: 36px;
         background-color: rgba(235, 235, 235, 0.85);
-        &:hover{
-            background-color: rgba(235, 235, 235, 0.7);
-
-        }
     }
 }

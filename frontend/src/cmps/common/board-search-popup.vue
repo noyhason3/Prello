@@ -1,10 +1,15 @@
 <template>
   <ul class="clean-list board-search">
-    <li v-for="board in boards" :key="board._id" :style="boardStyle(board)">
-      <router-link class="nav-board-preview" :to="'/board/' + board._id">
-        <!-- <div class="thumbnail" ></div> -->
+    <li
+      v-for="board in boards"
+      :key="board._id"
+      :style="boardStyle(board)"
+      @click.stop="openBoard(board._id)"
+      
+    >
+      <a class="nav-board-preview">
         {{ board.title }}
-      </router-link>
+      </a>
     </li>
   </ul>
 </template>
@@ -22,6 +27,14 @@ export default {
         return { backgroundImage: `url(${img})` };
       }
       return { backgroundColor: board.style.bgColor.value };
+    },
+    openBoard(boardId) {
+      this.$router.push("/board/" + boardId);
+      console.log("[close search");
+      this.$emit("close-search");
+    },
+    logHi() {
+      console.log("hI! :)");
     },
   },
 };

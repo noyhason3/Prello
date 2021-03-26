@@ -3,7 +3,11 @@
     <!--  ******TODO********
       <button>Join</button> -->
     <!-- <button @click="togglePopup('Cover')" class="control-btn cover"><span></span>Cover</button> -->
-    <button @click="togglePopup('Cover')" class="btn neutral left-align">
+    <button
+      @click="togglePopup('Cover', $event)"
+      class="btn neutral left-align"
+    >
+      <!-- @blur="togglePopup('Cover', $event)" -->
       <span class="icon cover"></span>Cover
     </button>
     <popup-cover
@@ -15,7 +19,11 @@
     />
 
     <h6 class="add-to-card">ADD TO CARD</h6>
-    <button @click="togglePopup('Member')" class="btn neutral left-align">
+    <button
+      @click="togglePopup('Member', $event)"
+      class="btn neutral left-align"
+    >
+      <!-- @blur="togglePopup('Member', $event)" -->
       <span class="icon member"></span>Members
     </button>
     <popup-member
@@ -26,7 +34,11 @@
       @remove-task-member="removeTaskMember"
     ></popup-member>
     <!-- <button>Labels</button> -->
-        <button @click="togglePopup('Duedate')" class="btn neutral left-align">
+    <button
+      @click="togglePopup('Duedate', $event)"
+      class="btn neutral left-align"
+    >
+      <!-- @blur="togglePopup('Duedate', $event)" -->
       <span class="icon clock"></span>Due date
     </button>
     <popup-duedate
@@ -34,8 +46,12 @@
       @toggle-popup="togglePopup"
       @save-date="saveDate"
     />
-    
-    <button @click="togglePopup('Checklist')" class="btn neutral left-align">
+
+    <button
+      @click="togglePopup('Checklist', $event)"
+      class="btn neutral left-align"
+    >
+      <!-- @blur="togglePopup('Checklist', $event)" -->
       <span class="icon checklist"></span>Checklist
     </button>
     <popup-checklist
@@ -45,11 +61,19 @@
     />
 
     <button
-      @click="toggleGeneralPopup($event, 'Label')"
+      @click="togglePopup('Label', $event)"
       class="btn neutral left-align"
     >
+      <!-- @blur="togglePopup('Label', $event)" -->
+      <!-- @click="toggleGeneralPopup($event, 'Label')" -->
       <span class="icon label"></span>Labels
     </button>
+    <popup-label
+      v-if="isLabelOpen"
+      @set-task-labels="setTaskLabels"
+      @toggle-popup="togglePopup"
+    >
+    </popup-label>
 
     <!-- <button>Due date</button> -->
     <!-- <button @click="togglePopup('Duedate')" class="btn neutral left-align">
@@ -61,7 +85,10 @@
       @save-date="saveDate"
     /> -->
 
-    <button @click="togglePopup('Attachment')" class="btn neutral left-align">
+    <button
+      @click="togglePopup('Attachment', $event)"
+      class="btn neutral left-align"
+    >
       <span class="icon attachment"></span>Attachement
     </button>
     <popup-attachment
@@ -79,6 +106,7 @@ import popupMember from "@/cmps/task/popup/popup-member";
 import popupChecklist from "@/cmps/task/popup/popup-checklist.vue";
 import popupAttachment from "@/cmps/task/popup/popup-attachment.vue";
 import popupDuedate from "@/cmps/task/popup/popup-duedate.vue";
+import popupLabel from "@/cmps/task/popup/popup-label.vue";
 
 export default {
   props: {
@@ -95,15 +123,36 @@ export default {
     };
   },
   methods: {
-    togglePopup(str) {
+    togglePopup(str, ev) {
+      console.log("file: task-control.vue - line 128 - togglePopup - str", str);
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
+      if (ev) {
+        const targetRect = ev.target.getBoundingClientRect();
+        const maxHeight = window.innerHeight - targetRect.bottom - 5;
+        const top = targetRect.bottom + 3;
+        const left = targetRect.left;
+        this.$nextTick(() => {
+          const selector = ".popup-" + str.toLowerCase();
+          const popup = document.querySelector(selector);
+          if (popup) {
+            popup.style.left = left + "px";
+            popup.style.top = top + "px";
+            popup.style.maxHeight = maxHeight + "px";
+          }
+        });
+      }
     },
-    toggleGeneralPopup(ev, str) {
-      const targetRect = ev.target.getBoundingClientRect();
-      const buttonLeftPos = targetRect.left;
-      this.$emit("toggle-popup", { str, buttonLeftPos });
-    },
+    // toggleGeneralPopup(ev, str) {
+    //   const targetRect = ev.target.getBoundingClientRect();
+    //   console.log(
+    //     "file: task-control.vue - line 104 - toggleGeneralPopup - targetRect",
+    //     targetRect
+    //   );
+    //   const buttonLeftPos = targetRect.left;
+    //   const buttonBottomPos = targetRect.bottom;
+    //   this.$emit("toggle-popup", { str, buttonLeftPos, buttonBottomPos });
+    // },
     setCoverColor(color) {
       this.$emit("set-cover-color", color);
     },
@@ -139,6 +188,7 @@ export default {
     popupChecklist,
     popupAttachment,
     popupDuedate,
+    popupLabel,
   },
 };
 </script>

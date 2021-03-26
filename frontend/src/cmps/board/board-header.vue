@@ -27,14 +27,17 @@ import editableTitle from "@/cmps/common/editable-title.vue";
 export default {
   props: {
     board: Object,
-    isBoardOpen: false,
+  },
+  data() {
+    return {
+      isBoardOpen: false,
+    };
   },
   created() {
-      const boardId = this.$route.params.boardId
-      console.log("boardId:", boardId);
-      if (boardId) return (this.isBoardOpen = true);
-      this.isBoardOpen = false;
-    // console.log("this.board.isStarred:", this.board.isStarred);
+    const boardId = this.$route.params.boardId;
+    if (boardId) return (this.isBoardOpen = true);
+    this.isBoardOpen = false;
+;
   },
   methods: {
     toggleStarred() {
@@ -49,10 +52,6 @@ export default {
       return str;
     },
     saveBoard(val) {
-      // console.log(
-      //   "file: board-header.vue - line 35 - saveBoard - val",
-      //   this.board.title
-      // );
       this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
   },
@@ -60,11 +59,11 @@ export default {
     "board.title"() {
       this.saveBoard;
     },
-    // "$route.params.boardId"(boardId) {
-    //   console.log("boardId:", boardId);
-    //   if (boardId) return (this.isBoardOpen = true);
-    //   this.isBoardOpen = false;
-    // },
+    async "$route.params.boardId"(boardId) {
+      if (!boardId) return this.isBoardOpen = false;
+      this.isBoardOpen = true;
+      this.$store.commit('setBoard', this.board)
+    },
   },
   components: { editableTitle, memberList },
 };

@@ -34,14 +34,15 @@
         </p>
       </div>
       <div class="task-content" @click.stop>
-        <popup-label
+        <!-- <popup-label
           v-if="isLabelOpen"
           :popupLeftPos="popupLeftPos"
           @set-task-labels="setTaskLabels"
           @toggle-popup="togglePopup"
         >
-        </popup-label>
+        </popup-label> -->
         <task-control
+          ref="taskControls"
           @toggle-popup="togglePopup"
           @set-cover-color="setCoverColor"
           @save-cover-img="saveCoverImg"
@@ -140,7 +141,7 @@ import editableText from "@/cmps/common/editable-text.vue";
 import memberList from "@/cmps/common/member-list.vue";
 import taskChecklist from "@/cmps/task/task-cmps/task-checklist.vue";
 import taskLabel from "@/cmps/task/task-cmps/task-label.vue";
-import popupLabel from "@/cmps/task/popup/popup-label.vue";
+//import popupLabel from "@/cmps/task/popup/popup-label.vue";
 import taskAttachment from "@/cmps/task/task-cmps/task-attachment.vue";
 import fileDragUploader from "@/cmps/common/file-drag-uploader.vue";
 import { boardService } from "../services/board.service";
@@ -238,7 +239,6 @@ export default {
       this.saveTask(this.task);
     },
     async saveTask(task) {
-      console.log("file: task.vue - line 165 - saveTask - task", task);
       await this.$store.dispatch({ type: "saveTask", task });
     },
     closeTask() {
@@ -248,12 +248,13 @@ export default {
     togglePopup({ str, buttonLeftPos }) {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
-      if (!this[dataStr]) this.popupLeftPos = 0;
-      else this.popupLeftPos = buttonLeftPos;
+      // if (!this[dataStr]) this.popupLeftPos = 0;
+      // else this.popupLeftPos = buttonLeftPos;
     },
-    openLabelPopup(buttonLeftPos) {
-      this.popupLeftPos = buttonLeftPos;
-      this.isLabelOpen = true;
+    openLabelPopup(ev) {
+      //this.popupLeftPos = buttonLeftPos;
+      //this.isLabelOpen = true;
+      this.$refs.taskControls.togglePopup("Label", ev);
     },
     saveDate(timestamp) {
       // const timestamp = moment(date, "M/D/YYYY hh:mm a").format("X");
@@ -296,7 +297,7 @@ export default {
     taskChecklist,
     editableText,
     taskLabel,
-    popupLabel,
+    // popupLabel,
     taskAttachment,
     fileDragUploader,
     boardService,
