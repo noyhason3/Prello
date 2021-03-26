@@ -35,8 +35,10 @@ function connectSockets(http, session) {
       socket.join(boardId);
       socket.currBoard = boardId;
     });
-    socket.on('save-board', (board) => {
-      socket.to(board._id).emit('board-update', board);
+    socket.on('save-board', (board, msg) => {
+      console.log('msg',msg);
+      socket.to(board._id).emit('board-update', board, msg);
+      // socket.to(board._id).emit('notification', msg);
     });
     socket.on('join-task', (taskId) => {
       socket.join(taskId);

@@ -76,8 +76,9 @@ export const boardStore = {
         // socketService.setup();//Not sure if needed, happens in the service anyway
         socketService.off('board-update');
         socketService.emit('join-board', boardId);
-        socketService.on('board-update', (board) => {
+        socketService.on('board-update', (board, msg) => {
           console.log('socket emitted- board update');
+          console.log(msg);
           commit({ type: 'setBoard', currBoard: board });
         });
         // socketService.on('task-update', (task) => {
@@ -88,8 +89,9 @@ export const boardStore = {
         console.log('err', err);
       }
     },
-    async saveBoard({ commit }, { board }) {
+    async saveBoard({ commit }, { board, msg }) {
       try {
+        console.log(msg);
         const currBoard = await boardService.save(board);
         commit({ type: 'setBoard', currBoard: board });
         await socketService.emit('save-board', currBoard);
@@ -156,7 +158,9 @@ export const boardStore = {
         group.tasks.push(task);
       }
       try {
-        await dispatch('saveBoard', { board });
+        await dispatch('saveBoard', { board , msg:'task saved'});
+        // await dispatch({type:"saveBoard", board ,msg});
+
         commit({ type: 'setCurrTask', task });
       } catch (err) {
         console.log('err:', err);
