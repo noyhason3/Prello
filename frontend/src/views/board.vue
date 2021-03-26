@@ -5,7 +5,7 @@
       :src="require('@/assets/img/background/' + board.style.bgImg.value)"
       alt=""
     />
-    <board-header :board="board" />
+    <board-header :board="board" ref="boardHeader" />
     <draggable
       v-model="board.groups"
       group="group"
@@ -76,8 +76,18 @@ export default {
       this.assignClasses();
     }
   },
+  mounted() {
+    this.$store.commit({
+      type: "setBoardHeader",
+      boardHeader: this.$refs.boardHeader,
+    });
+  },
   destroyed() {
     const header = this.$store.getters.mainHeader;
+    const boardHeader = this.$store.commit({
+      type: "setBoardHeader",
+      boardHeader: null,
+    });
     header.classList.remove("img-bg");
   },
   methods: {

@@ -145,7 +145,7 @@ import taskAttachment from "@/cmps/task/task-cmps/task-attachment.vue";
 import fileDragUploader from "@/cmps/common/file-drag-uploader.vue";
 import { boardService } from "../services/board.service";
 import moment from "moment";
-import utilService from '../services/util.service';
+import utilService from "../services/util.service";
 
 export default {
   data() {
@@ -160,8 +160,10 @@ export default {
   },
   async created() {
     await this.group();
-    const body = document.querySelector(".main").getBoundingClientRect();
-    this.initialHeight = body.top + 5;
+    const header = document
+      .querySelector(".board-header")
+      .getBoundingClientRect();
+    this.initialHeight = header.top;
   },
   computed: {
     task() {

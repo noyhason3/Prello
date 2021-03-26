@@ -8,6 +8,7 @@ export const boardStore = {
     boards: null,
     task: null,
     mainHeader: null,
+    boardHeader: null,
   },
   getters: {
     currBoard(state) {
@@ -18,6 +19,9 @@ export const boardStore = {
     },
     mainHeader(state) {
       return state.mainHeader
+    },
+    boardHeader(state) {
+      return state.boardHeader
     },
     emptyBoard() {
       return boardService.getEmptyBoard();
@@ -46,6 +50,9 @@ export const boardStore = {
     },
     setMainHeader(state, { mainHeader }) {
       state.mainHeader = mainHeader
+    },
+    setBoardHeader(state, { boardHeader }) {
+      state.boardHeader = boardHeader
     }
   },
   actions: {
