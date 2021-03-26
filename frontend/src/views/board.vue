@@ -88,8 +88,8 @@ export default {
     }
   },
   destroyed() {
-    // const header = this.$store.getters.mainHeader;
-    // header.classList.remove("img-bg");
+    const header = this.$store.getters.mainHeader;
+    header.classList.remove("img-bg");
   },
   methods: {
     async loadBoard(boardId) {
@@ -148,11 +148,11 @@ export default {
       }
     },
   },
-  watch: {
-    "$route.params.boardId"(boardId) {
-      this.loadBoard(boardId);
-    },
-  },
+  // watch: {
+  //   "$route.params.boardId"(boardId) {
+  //     this.loadBoard(boardId);
+  //   },
+  // },
   components: {
     boardHeader,
     group,

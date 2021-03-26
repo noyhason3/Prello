@@ -5,7 +5,6 @@
       :key="board._id"
       :style="boardStyle(board)"
       @click.stop="openBoard(board._id)"
-      
     >
       <a class="nav-board-preview">
         {{ board.title }}

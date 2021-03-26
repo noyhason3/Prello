@@ -59,6 +59,8 @@
       //   }
       // }
       .btn.close {
+        margin-block-start: 5px;
+        margin-inline-end: 5px;
         position: absolute;
         display: flex;
         justify-content: center;
