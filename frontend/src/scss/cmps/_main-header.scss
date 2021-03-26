@@ -85,6 +85,7 @@
             font-size: 14px;
             border: none;
             padding: 5px;
+            margin-inline-end:4px;
         }
 
         a.icon {
@@ -94,9 +95,9 @@
             align-items: center;
         }
 
-        a:not(:first-child) {
-            margin-inline: 4px;
-        }
+        // a:not(:first-child) {
+        //     margin-inline: 4px;
+        // }
 
         .search-container:hover,
         a:hover {

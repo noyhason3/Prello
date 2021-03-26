@@ -1,28 +1,34 @@
 <template>
   <header class="main-header">
     <main-nav />
-    <img src="@/assets/img/logo.png" class="logo"/>
-    <member-preview  :member="member"/>
+    <img src="@/assets/img/logo.png" class="logo" />
+    <member-preview v-if="memberFullname" :member="member" />
   </header>
 </template>
 
 <script>
 import mainNav from "@/cmps/common/main-nav";
-import memberPreview from '@/cmps/common/member-preview.vue'
+import memberPreview from "@/cmps/common/member-preview.vue";
 
 export default {
   data() {
     return {
-      member:null,
+      member: null,
     };
   },
-    created(){
-    this.member= this.$store.getters.loggedinUser;
-    console.log('this.member:', this.member)
+  // created() {
+  //   this.member = this.$store.getters.loggedinUser;
+  //   console.log("this.member:", this.member);
+  // },
+  computed: {
+    memberFullname() {
+      this.member = this.$store.getters.loggedinUser;
+      return this.member.fullname;
+    },
   },
   components: {
     mainNav,
-    memberPreview
+    memberPreview,
   },
 };
 </script>
