@@ -5,13 +5,8 @@
       class="board-bg"
       :src="require('@/assets/img/background/' + board.style.bgImg.value)"
       alt=""
-<<<<<<< HEAD
     /> -->
     <board-header :board="board" />
-=======
-    />
-    <board-header :board="board" ref="boardHeader" />
->>>>>>> 11e77cb7f856c18c6f722c4cdec3d1be06e52c6b
     <draggable
       v-model="board.groups"
       group="group"
