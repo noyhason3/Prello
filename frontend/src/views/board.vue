@@ -77,18 +77,21 @@ export default {
     }
   },
   mounted() {
-    this.$store.commit({
-      type: "setBoardHeader",
-      boardHeader: this.$refs.boardHeader,
-    });
+    const boardHeader = this.$refs.boardHeader;
+    if (boardHeader) {
+      this.$store.commit({
+        type: "setBoardHeader",
+        boardHeader,
+      });
+    }
   },
   destroyed() {
     const header = this.$store.getters.mainHeader;
+    header.classList.remove("img-bg");
     const boardHeader = this.$store.commit({
       type: "setBoardHeader",
       boardHeader: null,
     });
-    header.classList.remove("img-bg");
   },
   methods: {
     async loadBoard(boardId) {
@@ -140,7 +143,7 @@ export default {
     },
   },
   watch: {
-    '$route.params.boardId'(boardId) {
+    "$route.params.boardId"(boardId) {
       this.loadBoard(boardId);
     },
   },

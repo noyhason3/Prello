@@ -19,10 +19,11 @@ export default {
   },
   methods: {
     openLabelPopup(ev) {
-      const targetRect = ev.target.getBoundingClientRect();
-      const buttonLeftPos = targetRect.left
-      console.log('buttonLeftPos:', buttonLeftPos)
-      this.$emit("open-label-popup", buttonLeftPos);
+      //const targetRect = ev.target.getBoundingClientRect();
+      //const buttonLeftPos = targetRect.left
+      //console.log('buttonLeftPos:', buttonLeftPos)
+      //this.$emit("open-label-popup", buttonLeftPos);
+      this.$emit("open-label-popup", ev);
     },
   },
   computed: {
@@ -30,7 +31,7 @@ export default {
       return this.$store.getters.currBoard.labels;
     },
     taskLabels() {
-      if(!this.taskLabelIds) return;
+      if (!this.taskLabelIds) return;
       const labels = this.boardLabels.filter((label) =>
         this.taskLabelIds.includes(label.id)
       );
