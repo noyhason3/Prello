@@ -26,6 +26,15 @@
       @remove-task-member="removeTaskMember"
     ></popup-member>
     <!-- <button>Labels</button> -->
+        <button @click="togglePopup('Duedate')" class="btn neutral left-align">
+      <span class="icon clock"></span>Due date
+    </button>
+    <popup-duedate
+      v-if="isDuedateOpen"
+      @toggle-popup="togglePopup"
+      @save-date="saveDate"
+    />
+    
     <button @click="togglePopup('Checklist')" class="btn neutral left-align">
       <span class="icon checklist"></span>Checklist
     </button>
@@ -43,14 +52,14 @@
     </button>
 
     <!-- <button>Due date</button> -->
-    <button @click="togglePopup('Duedate')" class="btn neutral left-align">
+    <!-- <button @click="togglePopup('Duedate')" class="btn neutral left-align">
       <span class="icon clock"></span>Due date
     </button>
     <popup-duedate
       v-if="isDuedateOpen"
       @toggle-popup="togglePopup"
       @save-date="saveDate"
-    />
+    /> -->
 
     <button @click="togglePopup('Attachment')" class="btn neutral left-align">
       <span class="icon attachment"></span>Attachement

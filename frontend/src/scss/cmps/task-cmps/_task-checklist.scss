@@ -1,7 +1,8 @@
 .task-checklist {
   margin-bottom: 30px;
-  .todos{
-    margin-bottom:8px;
+  .todos {
+    margin-bottom: 8px;
+    color: #172b4dc7;
   }
   .checklist-header {
     display: flex;
@@ -38,7 +39,6 @@
       width: 0.9rem;
       height: 0.9rem;
     }
-  
 
     form {
       width: 100%;
@@ -57,17 +57,17 @@
     }
 
     // .editable-todo-title  {
-      // width: 100%;
-      
-      // width: 200px;
+    // width: 100%;
+
+    // width: 200px;
     // }
- 
+
     .editable-todo,
     // .editable-todo-add,
     .editable-todo p,
     .editable-todo-title p,
     .editable-todo-add p {
-      font-size:0.9rem;
+      font-size: 0.9rem;
       // font-size: 18px;
       // display: flex;
       // align-items: center;
@@ -77,13 +77,13 @@
     }
   }
 
-  .todo-container:hover{
+  .todo-container:hover {
     background-color: #eaecf0;
   }
 
   .btn {
     background-color: #eaecf0;
-    padding: 10px;
+    padding: 8px 10px;
 
     &:hover {
       background-color: #e4e4e3;
@@ -94,7 +94,7 @@
     width: 100%;
     form {
       // width: 100%;
-      .save-btn:hover{
+      .save-btn:hover {
         background-color: #e4e4e3;
       }
     }
@@ -107,8 +107,8 @@
 }
 
 .progress-bar-container {
-  p{
-    font-size:0.8rem;
+  p {
+    font-size: 0.8rem;
   }
   // display: flex;
   // align-items: center;
@@ -133,12 +133,12 @@
   .meter span {
     display: block;
     height: 100%;
-    transition:width .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .progress {
     background-color: $clr7;
-    animation: progressBar .75s ease-in-out;
+    animation: progressBar 0.75s ease-in-out;
     animation-fill-mode: both;
   }
 

@@ -1,7 +1,7 @@
 .icon{
     font-size: 1rem;
     &.preview{
-        font-size:0.9rem;
+        font-size:rem(12px);
     }
     &.checklist:before{
         font-family: 'fa-reg';
@@ -48,8 +48,11 @@
         content: "\f00d";
     }
     &.elipsis:before {
-        font-family: "fa-solid";
-        content: "\f141";
+        // font-family: "fa-solid";
+        // content: "\f141";
+        content:"···";
+        font-size: bold;
+        font-size: 1rem;
     }
     &.comment:before {
         font-family: "fa-reg";
@@ -73,6 +76,18 @@
     &.v:before{
         content: "✔";
         color:$clr1;
+    }
+    &.board:before{
+        font-family: "fa-solid";
+        content: "\f0db";       
+    }
+    &.house:before{
+        font-family: "fa-solid";
+        content: "\f015";       
+    }
+    &.search:after{
+        font-family: "fa-solid";
+        content: "\f002";       
     }
 
 }

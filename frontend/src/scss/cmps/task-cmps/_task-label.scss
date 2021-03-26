@@ -1,8 +1,8 @@
 .task-label {
     //margin-bottom: 30px;
+    margin: 0 8px 8px 0;
     >*:not(:last-child) {
         margin-inline-end: 6px;
-        ;
     }
 
     .label-color {
@@ -10,7 +10,7 @@
         min-width: 30px;
         max-width: fit-content;
         padding:5px 10px;
-        border-radius: 5px;
+        border-radius: 3px;
         font-size: 0.7em;
         text-align: center;
         color:$clr1;

@@ -23,7 +23,7 @@
         />
       </div>
 
-      <button @click="deleteChecklist" v-if="!isEditTitleOpen" class="btn">
+      <button @click="deleteChecklist" v-if="!isEditTitleOpen" class="btn delete-checklist-btn">
         Delete
       </button>
     </div>

@@ -1,71 +1,128 @@
-.board{
-    &.img-bg .board-header{
+.board {
+    &.img-bg .board-header {
         background: transparent;
         //box-shadow: 2px -2px 6px 0px #00000085;
+    }
+
+    .board-header {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        background: $clr1;
+        z-index: 2;
+
+        &>*:not(.board-header-members) {
+            color: $clr1;
+            height: 100%;
+        }
+
+        // &>*:not(.board-header-members):hover {
+        //     // background-color: rgba(235, 235, 235, 0.5);
+        // }
+
+        .board-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .board-title>* {
+            border-radius: 3px;
+            background-color: rgba(rgb(235, 235, 235), 0.3);
+            height: 100%;
+
+        }
+        .board-title>*:hover{
+            background-color: rgba(235, 235, 235, 0.5);
+
+        }
+
+        .editable-title-wrapper {
+            border: 0;
+            font-weight: bold;
+            min-width: 250px;
+            max-width: 500px;
+            width: fit-content;
+            padding: 0 12px;
+            margin-inline-end: 4px;
+
+        }
+
+        .editable-title-wrapper h2 {
+            color: $clr1;
+            opacity: 0.9;
+            font-size: 1.2rem;
+            padding: 5px;
+        }
+
+        .editable-title-wrapper h2:focus {
+            color: $clr5;
+        }
+
+        .icon.star {
+            color: rgba($clr1, 0.6);
+            font-size: 0.8rem;
+            min-width: 30px;
+
+        }
+
+        .icon.star.is-starred {
+            color: $clr1;
+        }
+
+        span.icon {
+            margin-inline-end: 4px;
+        }
+
+        .menu-btn {
+            font-size: 1rem;
+            padding: 5px 12px;
+            border-radius: 3px;
+            background-color: rgba(rgb(235, 235, 235), 0.3);
+            right: 8px;
+        }
+        .menu-btn:hover {
+            background-color: rgba(235, 235, 235, 0.5);
+
+        }
+
+        // .is-starred {
+        //     $starColor: #f2d600;
+        //     color: $starColor;
+        //     font-family: 'fa-reg';
+        //     margin-inline-end: 20px;
+        //     margin-inline-start: 10px;
+
+        //     &.active {
+        //         font-family: 'fa-solid'
+        //     }
+
+        //     font-size: rem(18px);
+        //     padding:2px;
+        //     outline:none;
+        //     background: transparent;
+        //     border: 2px solid $starColor;
+        //     transition:color .25s linear border .25s linear;
+
+        //     &:active {
+        //         border-color: darken($starColor, 2);
+        //         color: darken($starColor, 8);
+        //         transition: color .25s linear border .25s linear;
+        //     }
+
+        //     &:focus {
+        //         border-color: darken($starColor, 5);
+        //     }
+        // }
+
+        .board-header-members {
+        // display: inline-flex;
+        position: absolute;
+        // top: 10px;
+        right: 50%;
+        transform: translateX(50%)
+        }
 
     }
-    .board-header{
-            position:relative;
-            background:$clr1;
-            z-index: 2;
-            &>*:not(.board-header-members){
-                margin: 10px;
-                padding: 3px 10px;
-                font-size: 22px;
-                color: $clr5;
-                border-radius: 6px;
-                border: 2px solid $clr4;
-            }
-            .editable-title-wrapper{
-                border:0;
-                font-weight: bold;
-                min-width: 250px;
-                max-width: 500px;
-                width: fit-content;
-                display: inline-flex;
-                margin-inline-end: 0;
-            }
-    
-    
-            .is-starred{
-                $starColor:#f2d600;
-                color:$starColor;
-                font-family: 'fa-reg';
-                margin-inline-end: 20px;
-                margin-inline-start:10px;
-                &.active{
-                    font-family:'fa-solid'
-                }
-                font-size: rem(18px);
-                padding:2px;
-                outline:none;
-                background: transparent;
-                border: 2px solid $starColor;
-                transition:color .25s linear border .25s linear;
-                &:active{
-                    border-color:darken( $starColor ,2);
-                    color:darken($starColor,8);
-                    transition:color .25s linear border .25s linear;
-                }
-                &:focus{
-                    border-color:darken($starColor,5);
-                }
-            }
-            .board-header-members{
-                display: inline-flex;
-                position: absolute;
-                top: 10px;
-                right: 50%;
-                transform: translateX(50%)
-            }
-            .menu-btn{
-                border:1.5px solid $clr5;
-                //font-weight: bold;
-                color:$clr5;
-                padding-inline: 5px;
-                display: inline-flex;
-                position:absolute;
-                right:8px;
-            }
-        }
 }

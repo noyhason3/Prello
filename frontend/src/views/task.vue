@@ -29,7 +29,7 @@
             @input="saveTask(task)"
           />
         </div>
-        <p v-if="groupTitle" class="task-secondary-layout">
+        <p v-if="groupTitle" class="task-secondary-layout group-title">
           in list: {{ groupTitle }}
         </p>
       </div>
@@ -145,6 +145,7 @@ import taskAttachment from "@/cmps/task/task-cmps/task-attachment.vue";
 import fileDragUploader from "@/cmps/common/file-drag-uploader.vue";
 import { boardService } from "../services/board.service";
 import moment from "moment";
+import utilService from '../services/util.service';
 
 export default {
   data() {
@@ -215,6 +216,7 @@ export default {
     },
     saveChecklist(checklist) {
       const task = this.task;
+      this.checklist.id = utilService.makeId();
       task.checklists.push(checklist);
       this.saveTask(task);
     },

@@ -26,7 +26,7 @@
               class="btn label label-color"
             >
               {{ label.title }}
-              <span class="icon v"></span>
+              <span v-if="isUsed(label.id)" class="icon v"></span>
             </button>
             <button
               @click="openLabelEdit('Change', label)"
@@ -102,7 +102,10 @@ export default {
         const { color, title } = label;
         this.selectedLabel.color = color;
         this.selectedLabel.title = title;
-      } else this.boardLabels.push(label);
+      } else {
+        this.boardLabels.push(label);
+        // toggleSelectLabel(label.id);
+      }
       await this.$store.dispatch({
         type: "saveBoardLabels",
         labels: this.boardLabels,
