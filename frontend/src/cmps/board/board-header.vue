@@ -1,5 +1,5 @@
 <template>
-  <section class="board-header">
+  <section class="board-header" :class="{ 'img-bg': isBoardOpen }">
     <div class="board-title">
       <editableTitle v-model="board.title" />
       <!-- <button @click="toggleStarred" :class="starredClass">&#xf005;</button> -->
@@ -16,7 +16,9 @@
     />
     <!-- <div class="board-header-members"> -->
     <!-- </div> -->
-    <button class="menu-btn"><span class="icon elipsis"></span>Show Menu</button>
+    <button class="menu-btn">
+      <span class="icon elipsis"></span>Show Menu
+    </button>
   </section>
 </template>
 <script>
@@ -25,9 +27,14 @@ import editableTitle from "@/cmps/common/editable-title.vue";
 export default {
   props: {
     board: Object,
+    isBoardOpen: false,
   },
   created() {
-    console.log("this.board.isStarred:", this.board.isStarred);
+      const boardId = this.$route.params.boardId
+      console.log("boardId:", boardId);
+      if (boardId) return (this.isBoardOpen = true);
+      this.isBoardOpen = false;
+    // console.log("this.board.isStarred:", this.board.isStarred);
   },
   methods: {
     toggleStarred() {
@@ -42,10 +49,10 @@ export default {
       return str;
     },
     saveBoard(val) {
-      console.log(
-        "file: board-header.vue - line 35 - saveBoard - val",
-        this.board.title
-      );
+      // console.log(
+      //   "file: board-header.vue - line 35 - saveBoard - val",
+      //   this.board.title
+      // );
       this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
   },
@@ -53,6 +60,11 @@ export default {
     "board.title"() {
       this.saveBoard;
     },
+    // "$route.params.boardId"(boardId) {
+    //   console.log("boardId:", boardId);
+    //   if (boardId) return (this.isBoardOpen = true);
+    //   this.isBoardOpen = false;
+    // },
   },
   components: { editableTitle, memberList },
 };

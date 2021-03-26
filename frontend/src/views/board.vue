@@ -72,7 +72,7 @@ export default {
   async created() {
     if (!this.$store.getters.board) {
       const boardId = this.$route.params.boardId;
-      await this.$store.dispatch({ type: "getBoard", boardId });
+      this.loadBoard(boardId);
       this.assignClasses();
     }
   },
@@ -81,6 +81,9 @@ export default {
     header.classList.remove("img-bg");
   },
   methods: {
+    async loadBoard(boardId) {
+      await this.$store.dispatch({ type: "getBoard", boardId });
+    },
     async addGroup() {
       if (!this.newGroup.title) return;
       this.newGroup.board = { id: this.board._id };
@@ -124,6 +127,11 @@ export default {
           background: style.bgColor.value,
         };
       }
+    },
+  },
+  watch: {
+    '$route.params.boardId'(boardId) {
+      this.loadBoard(boardId);
     },
   },
   components: {

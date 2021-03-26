@@ -1,8 +1,5 @@
 .board {
-    &.img-bg .board-header {
-        background: transparent;
-        //box-shadow: 2px -2px 6px 0px #00000085;
-    }
+
 
     .board-header {
         padding: 10px;
@@ -10,7 +7,6 @@
         align-items: center;
         justify-content: space-between;
         position: relative;
-        background: $clr1;
         z-index: 2;
 
         &>*:not(.board-header-members) {
