@@ -1,56 +1,57 @@
 <template>
-  <section class="popup-label">
-    <pop-up v-if="!isPopupEdit" :style="{ left: leftPos }">
-      <div slot="header" class="task-popup-header">
-        <h2>Labels</h2>
-        <button @click="togglePopupLabel()" class="btn close icon x"></button>
-      </div>
-      <div slot="main">
-        <input
-          type="search"
-          v-model="searchStr"
-          @input="searchLabel"
-          placeholder="Search labels..."
-          class="search-label"
-        />
-        <ul v-if="boardLabels" class="clean-list label-list">
-          <li
-            v-for="label in boardLabels"
-            :key="label.id"
-            class="flex align-center label-preview"
+  <pop-up
+    v-if="!isPopupEdit"
+    :style="{ left: leftPos }"
+    class="popup-label"
+    @blur="console.log('wtf')"
+  >
+    <div slot="header" class="task-popup-header">
+      <h2>Labels</h2>
+      <button @click="togglePopupLabel()" class="btn close icon x"></button>
+    </div>
+    <div slot="main">
+      <input
+        type="search"
+        v-model="searchStr"
+        @input="searchLabel"
+        placeholder="Search labels..."
+        class="search-label"
+      />
+      <ul v-if="boardLabels" class="clean-list label-list">
+        <li
+          v-for="label in boardLabels"
+          :key="label.id"
+          class="flex align-center label-preview"
+        >
+          <button
+            @click="toggleSelectLabel(label.id)"
+            :style="'background-color:' + label.color + ';color:$clr1;'"
+            :class="{ 'label-in-use': isUsed(label.id) }"
+            class="btn label label-color"
           >
-            <button
-              @click="toggleSelectLabel(label.id)"
-              :style="'background-color:' + label.color + ';color:$clr1;'"
-              :class="{ 'label-in-use': isUsed(label.id) }"
-              class="btn label label-color"
-            >
-              {{ label.title }}
-              <span v-if="isUsed(label.id)" class="icon v"></span>
-            </button>
-            <button
-              @click="openLabelEdit('Change', label)"
-              class="btn edit-label icon pencil"
-            >
-              
-            </button>
-          </li>
-        </ul>
-        <button @click="openLabelEdit('Create')" class="btn neutral wide">
-          Create a new label
-        </button>
-      </div>
-    </pop-up>
-    <popup-label-edit
-      v-else
-      :action="action"
-      :label="selectedLabel"
-      :leftPos="leftPos"
-      @save-label="saveLabel"
-      @closeLabelEdit="closeLabelEdit"
-      @remove-board-label="removeBoardLabel"
-    />
-  </section>
+            {{ label.title }}
+            <span v-if="isUsed(label.id)" class="icon v"></span>
+          </button>
+          <button
+            @click="openLabelEdit('Change', label)"
+            class="btn edit-label icon pencil"
+          ></button>
+        </li>
+      </ul>
+      <button @click="openLabelEdit('Create')" class="btn neutral wide">
+        Create a new label
+      </button>
+    </div>
+  </pop-up>
+  <popup-label-edit
+    v-else
+    :action="action"
+    :label="selectedLabel"
+    :leftPos="leftPos"
+    @save-label="saveLabel"
+    @closeLabelEdit="closeLabelEdit"
+    @remove-board-label="removeBoardLabel"
+  />
 </template>
 
 <script>
@@ -95,7 +96,8 @@ export default {
       this.isPopupEdit = !this.isPopupEdit;
     },
     togglePopupLabel() {
-      this.$emit("toggle-popup", { str: "Label", buttonLeftPos: 0 });
+      //this.$emit("toggle-popup", { str: "Label", ev });
+      this.$emit("toggle-popup", "Label");
     },
     async saveLabel(label) {
       if (this.selectedLabel) {
@@ -125,7 +127,7 @@ export default {
     boardLabels() {
       const boardLabels = this.$store.getters.currBoard.labels;
       return boardLabels.filter((label) => {
-        console.log('label:', label)
+        console.log("label:", label);
         return label.title.toLowerCase().includes(this.searchStr.toLowerCase());
       });
     },

@@ -5,8 +5,13 @@
       class="board-bg"
       :src="require('@/assets/img/background/' + board.style.bgImg.value)"
       alt=""
+<<<<<<< HEAD
     /> -->
     <board-header :board="board" />
+=======
+    />
+    <board-header :board="board" ref="boardHeader" />
+>>>>>>> 11e77cb7f856c18c6f722c4cdec3d1be06e52c6b
     <draggable
       v-model="board.groups"
       group="group"
@@ -77,6 +82,15 @@ export default {
       this.assignClasses();
     }
     console.log("style.bgImg.value", this.board.style);
+  },
+  mounted() {
+    const boardHeader = this.$refs.boardHeader;
+    if (boardHeader) {
+      this.$store.commit({
+        type: "setBoardHeader",
+        boardHeader,
+      });
+    }
   },
   destroyed() {
     // const header = this.$store.getters.mainHeader;
