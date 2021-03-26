@@ -1,10 +1,11 @@
 <template>
   <section class="board" v-if="board" ref="board">
-    <img
+    <div :style="boardStyle(board)" class="board-bg"></div>
+    <!-- <img
       class="board-bg"
       :src="require('@/assets/img/background/' + board.style.bgImg.value)"
       alt=""
-    />
+    /> -->
     <board-header :board="board" />
     <draggable
       v-model="board.groups"
@@ -72,13 +73,14 @@ export default {
   async created() {
     if (!this.$store.getters.board) {
       const boardId = this.$route.params.boardId;
-      this.loadBoard(boardId);
+      await this.loadBoard(boardId);
       this.assignClasses();
     }
+    console.log("style.bgImg.value", this.board.style);
   },
   destroyed() {
-    const header = this.$store.getters.mainHeader;
-    header.classList.remove("img-bg");
+    // const header = this.$store.getters.mainHeader;
+    // header.classList.remove("img-bg");
   },
   methods: {
     async loadBoard(boardId) {
@@ -99,13 +101,21 @@ export default {
     assignClasses() {
       const header = this.$store.getters.mainHeader;
       const body = this.$refs.board;
-      if (this.board.style.bgImg) {
+      if (this.board.style.bgImg || this.board.style.bgColor) {
         header.classList.add("img-bg");
         body.classList.add("img-bg");
       } else {
         header.classList.remove("img-bg");
         body.classList.remove("img-bg");
       }
+    },
+    boardStyle(board) {
+      if (board.style.bgImg) {
+        const img = require("@/assets/img/background/" +
+          board.style.bgImg.value);
+        return { backgroundImage: `url(${img})` };
+      }
+      return { backgroundColor: board.style.bgColor.value };
     },
   },
   computed: {
@@ -130,7 +140,7 @@ export default {
     },
   },
   watch: {
-    '$route.params.boardId'(boardId) {
+    "$route.params.boardId"(boardId) {
       this.loadBoard(boardId);
     },
   },

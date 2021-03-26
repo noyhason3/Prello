@@ -9,7 +9,7 @@
     <router-link
       to="/"
       style="font-family: fa-solid"
-      class="nav-link icon house "
+      class="nav-link icon house"
     ></router-link>
     <router-link to="/board" v-if="user._id" class="nav-link boards"
       ><div class="icon board"></div>
@@ -28,8 +28,14 @@
       />
       <span v-if="!isActive" class="icon search"></span>
       <span v-else @click.stop="closeSearch" class="icon x"></span>
-      <board-search-popup v-if="isActive" :boards="boards" />
+      <board-search-popup
+        v-if="isActive"
+        :boards="boards"
+        @close-search="closeSearch"
+         @mousedown.native="logHi"
+      />
     </div>
+        <!-- @mouseleave.native="logHi" -->
 
     <div>
       <!-- TODO: ADD Board Menue -->
@@ -50,7 +56,6 @@ export default {
   },
   async created() {
     this.boards = await this.$store.dispatch({ type: "loadBoards" });
-    console.log(this.boards);
   },
   methods: {
     openSearch() {
@@ -66,13 +71,16 @@ export default {
         title.toLowerCase().includes(this.filterBy.txt.toLowerCase())
       );
     },
+    logHi() {
+      console.log("hI! :)");
+    },
   },
   computed: {
     user() {
-      console.log(
-        "file: main-nav.vue - line 23 - user - this.$store.getters.loggedInUser",
-        this.$store.getters.loggedinUser
-      );
+      // console.log(
+      //   "file: main-nav.vue - line 23 - user - this.$store.getters.loggedInUser",
+      //   this.$store.getters.loggedinUser
+      // );
       return this.$store.getters.loggedinUser;
     },
   },
