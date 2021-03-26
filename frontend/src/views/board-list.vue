@@ -24,8 +24,7 @@
           @input="setFilter"
           v-model="filterBy.txt"
           placeholder="Search boards..."
-        />
-      
+        />   
       </div>
 
       <ul v-if="boardList" class="clean-list board-list-layout">
@@ -82,7 +81,9 @@ export default {
     };
   },
   async created() {
-    this.boardList = await this.$store.dispatch({ type: "loadBoards" });
+    // this.boardList = await this.$store.dispatch({ type: "loadBoards" });
+    this.boardList = this.$store.getters.boards 
+
     this.$store.commit("setBoard", { currBoard: null });
   },
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <header class="main-header">
+  <header class="main-header" :class="{'img-bg': isBoardOpen}">
     <main-nav />
     <img src="@/assets/img/logo.png" class="logo" />
     <member-preview v-if="memberFullname" :member="member" />
@@ -14,16 +14,20 @@ export default {
   data() {
     return {
       member: null,
+      isBoardOpen:false
     };
   },
-  // created() {
-  //   this.member = this.$store.getters.loggedinUser;
-  //   console.log("this.member:", this.member);
-  // },
   computed: {
     memberFullname() {
       this.member = this.$store.getters.loggedinUser;
       return this.member.fullname;
+    },
+  },
+    watch: {
+    '$route.params.boardId'(boardId) {
+      // console.log('boardId:', boardId)
+      if(boardId) return this.isBoardOpen = true;
+      this.isBoardOpen =false;
     },
   },
   components: {

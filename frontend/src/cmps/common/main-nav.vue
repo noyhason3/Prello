@@ -9,9 +9,9 @@
     <router-link
       to="/"
       style="font-family: fa-solid"
-      class="icon house"
+      class="nav-link icon house "
     ></router-link>
-    <router-link to="/board" v-if="user._id" class="boards"
+    <router-link to="/board" v-if="user._id" class="nav-link boards"
       ><div class="icon board"></div>
       Boards</router-link
     >
@@ -20,33 +20,51 @@
       @click="openSearch"
       :class="{ active: isActive }"
     >
-      <input type="text" :placeholder="placeholder" />
+      <input
+        type="text"
+        :placeholder="placeholder"
+        v-model="filterBy.txt"
+        @input="searchBoards"
+      />
       <span v-if="!isActive" class="icon search"></span>
-      <span v-else  @click.stop="closeSearch" class="icon x"></span>
+      <span v-else @click.stop="closeSearch" class="icon x"></span>
+      <board-search-popup v-if="isActive" :boards="boards" />
     </div>
-    <div>
-    <!-- TODO: ADD Board Menue -->
 
+    <div>
+      <!-- TODO: ADD Board Menue -->
     </div>
   </nav>
 </template>
 
 <script>
+import boardSearchPopup from "./board-search-popup.vue";
 export default {
   data() {
     return {
       isActive: false,
-      placeholder:'Jump to...'
+      placeholder: "Jump to...",
+      filterBy: { txt: "" },
+      boards: null,
     };
+  },
+  async created() {
+    this.boards = await this.$store.dispatch({ type: "loadBoards" });
+    console.log(this.boards);
   },
   methods: {
     openSearch() {
       this.isActive = true;
-      this.placeholder = "Search..."
+      this.placeholder = "Search...";
     },
     closeSearch() {
       this.isActive = false;
-      this.placeholder = "Jump to..."
+      this.placeholder = "Jump to...";
+    },
+    searchBoards() {
+      this.boards = this.$store.getters.boards.filter(({ title }) =>
+        title.toLowerCase().includes(this.filterBy.txt.toLowerCase())
+      );
     },
   },
   computed: {
@@ -57,6 +75,9 @@ export default {
       );
       return this.$store.getters.loggedinUser;
     },
+  },
+  components: {
+    boardSearchPopup,
   },
 };
 </script>

@@ -15,12 +15,9 @@
 // Components
 @import 'cmps/main-header';
 @import 'cmps/board-header';
-@import 'cmps/common/member-list';
 @import 'cmps/group';
 @import 'cmps/add-new-group';
 @import "cmps/user-form";
-@import 'cmps/common/editable-text';
-@import 'cmps/common/editable-title';
 @import 'cmps/task-preview';
 @import 'cmps/task-cmps/task-cover';
 @import 'cmps/task-cmps/task-title';
@@ -40,6 +37,10 @@
 
 //Common components
 @import 'cmps/common/popup';
+@import 'cmps/common/board-search-popup';
+@import 'cmps/common/editable-text';
+@import 'cmps/common/editable-title';
+@import 'cmps/common/member-list';
 
 //Views
 @import "views/home";

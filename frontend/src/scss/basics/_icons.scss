@@ -46,6 +46,8 @@
     &.x:before {
         font-family: "fa-solid";
         content: "\f00d";
+        // background: require('../../assets/img/icons/x-icon.png');
+        // background-size:contain;
     }
     &.elipsis:before {
         // font-family: "fa-solid";

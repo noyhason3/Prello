@@ -11,6 +11,9 @@ export const boardStore = {
     boardHeader: null,
   },
   getters: {
+    boards(state){   
+      return state.boards;
+    },
     currBoard(state) {
       return state.board;
     },
