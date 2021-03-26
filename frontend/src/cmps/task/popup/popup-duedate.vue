@@ -1,5 +1,5 @@
 <template>
-  <pop-up class="popup popup-duedate">
+  <pop-up class="popup popup-duedate" style="overflow-y: auto">
     <div slot="header" class="task-popup-header">
       <h2>Change due date</h2>
       <button @click="togglePopup" class="btn close">X</button>

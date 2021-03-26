@@ -1,5 +1,5 @@
 <template>
-  <div class="popup" ref="container" @blur="$emit('close-popup')">
+  <div class="popup" ref="container" style="outline: none">
     <header>
       <slot name="header"></slot>
     </header>

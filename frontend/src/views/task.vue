@@ -34,13 +34,6 @@
         </p>
       </div>
       <div class="task-content" @click.stop>
-        <!-- <popup-label
-          v-if="isLabelOpen"
-          :popupLeftPos="popupLeftPos"
-          @set-task-labels="setTaskLabels"
-          @toggle-popup="togglePopup"
-        >
-        </popup-label> -->
         <task-control
           ref="taskControls"
           @toggle-popup="togglePopup"
@@ -248,8 +241,6 @@ export default {
     togglePopup({ str, buttonLeftPos }) {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
-      // if (!this[dataStr]) this.popupLeftPos = 0;
-      // else this.popupLeftPos = buttonLeftPos;
     },
     openLabelPopup(ev) {
       //this.popupLeftPos = buttonLeftPos;
@@ -297,7 +288,6 @@ export default {
     taskChecklist,
     editableText,
     taskLabel,
-    // popupLabel,
     taskAttachment,
     fileDragUploader,
     boardService,

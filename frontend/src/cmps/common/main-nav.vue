@@ -32,10 +32,10 @@
         v-if="isActive"
         :boards="boards"
         @close-search="closeSearch"
-         @mousedown.native="logHi"
+        @mousedown.native="logHi"
       />
     </div>
-        <!-- @mouseleave.native="logHi" -->
+    <!-- @mouseleave.native="logHi" -->
 
     <div>
       <!-- TODO: ADD Board Menue -->

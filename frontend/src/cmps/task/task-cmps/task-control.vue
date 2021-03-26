@@ -12,10 +12,12 @@
     </button>
     <popup-cover
       v-if="isCoverOpen"
-      @close-popup="isCoverOpen = false"
       @toggle-popup="togglePopup"
       @set-cover-color="setCoverColor"
       @save-cover-img="saveCoverImg"
+      tabindex="0"
+      @blur.native="togglePopup('Cover')"
+      ref="Cover"
     />
 
     <h6 class="add-to-card">ADD TO CARD</h6>
@@ -32,7 +34,10 @@
       @assign-task-member="assignTaskMember"
       @toggle-popup="togglePopup"
       @remove-task-member="removeTaskMember"
+      tabindex="0"
+      ref="Member"
     ></popup-member>
+    <!-- @blur.native="togglePopup('Member')" -->
     <!-- <button>Labels</button> -->
     <button
       @click="togglePopup('Duedate', $event)"
@@ -45,6 +50,9 @@
       v-if="isDuedateOpen"
       @toggle-popup="togglePopup"
       @save-date="saveDate"
+      tabindex="0"
+      @blur.native="togglePopup('Duedate')"
+      ref="Duedate"
     />
 
     <button
@@ -58,6 +66,9 @@
       v-if="isChecklistOpen"
       @add-checklist="setChecklist"
       @toggle-popup="togglePopup"
+      tabindex="0"
+      @blur.native="togglePopup('Checklist')"
+      ref="Checklist"
     />
 
     <button
@@ -72,7 +83,10 @@
       v-if="isLabelOpen"
       @set-task-labels="setTaskLabels"
       @toggle-popup="togglePopup"
+      tabindex="0"
+      ref="Label"
     >
+      <!-- @blur.native="togglePopup('Label')" -->
     </popup-label>
 
     <!-- <button>Due date</button> -->
@@ -96,6 +110,9 @@
       @save-attachments="saveAttachments"
       @toggle-popup="togglePopup"
       :attachments="attachments"
+      tabindex="0"
+      @blur.native="togglePopup('Attachment')"
+      ref="Attachment"
     />
   </section>
 </template>
@@ -124,35 +141,42 @@ export default {
   },
   methods: {
     togglePopup(str, ev) {
-      console.log("file: task-control.vue - line 128 - togglePopup - str", str);
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
       if (ev) {
         const targetRect = ev.target.getBoundingClientRect();
-        const maxHeight = window.innerHeight - targetRect.bottom - 5;
+        var maxHeight = window.innerHeight - targetRect.bottom - 20;
         const top = targetRect.bottom + 3;
         const left = targetRect.left;
         this.$nextTick(() => {
-          const selector = ".popup-" + str.toLowerCase();
-          const popup = document.querySelector(selector);
+          const popup = this.$refs[str].$el;
+          const popupHeight = popup.getBoundingClientRect().height;
           if (popup) {
             popup.style.left = left + "px";
-            popup.style.top = top + "px";
-            popup.style.maxHeight = maxHeight + "px";
+
+            if (popupHeight + top > window.innerHeight) {
+              console.log("Place popup above button");
+              popup.style.bottom = window.innerHeight - targetRect.top + "px";
+              popup.style.maxHeight = targetRect.top - 15 + "px";
+            } else {
+              popup.style.top = top + "px";
+              popup.style.maxHeight = maxHeight + "px";
+            }
+
+            // console.log(
+            //   "file: task-control.vue - line 160 - this.$nextTick - window.innerHeight",
+            //   window.innerHeight
+            // );
+            // console.log(
+            //   "file: task-control.vue - line 160 - this.$nextTick - popup.style.height + top",
+            //   maxHeight + top
+            // );
+
+            popup.focus();
           }
         });
       }
     },
-    // toggleGeneralPopup(ev, str) {
-    //   const targetRect = ev.target.getBoundingClientRect();
-    //   console.log(
-    //     "file: task-control.vue - line 104 - toggleGeneralPopup - targetRect",
-    //     targetRect
-    //   );
-    //   const buttonLeftPos = targetRect.left;
-    //   const buttonBottomPos = targetRect.bottom;
-    //   this.$emit("toggle-popup", { str, buttonLeftPos, buttonBottomPos });
-    // },
     setCoverColor(color) {
       this.$emit("set-cover-color", color);
     },
