@@ -35,10 +35,22 @@ function connectSockets(http, session) {
       socket.join(boardId);
       socket.currBoard = boardId;
     });
-    socket.on('save-board', (board, msg) => {
-      console.log('msg',msg);
-      socket.to(board._id).emit('board-update', board, msg);
-      // socket.to(board._id).emit('notification', msg);
+    socket.on('activity-update', ({userId, activity})=>{
+      socket.to(userId).emit('update-user',activity)
+    })
+    // socket.on('save-board', ({ board, activity, task }) => {
+    //   console.log('msg', activity);
+
+    // task.members.forEach(member => {
+    //   return emitToUser({type:'activity-added', data:activity, userId: member._id})
+    // });
+
+    // socket.to(board._id).emit('board-update', board, activity);
+    // socket.to(board._id).emit('notification', msg);
+    // });
+    socket.on('join-user', (userId) => {
+      console.log(userId, '*****************************************************');
+      socket.join(userId);
     });
     socket.on('join-task', (taskId) => {
       socket.join(taskId);
@@ -79,5 +91,6 @@ function broadcast({ type, data, room = null }) {
 module.exports = {
   connectSockets,
   emitToAll,
+  emitToUser,
   broadcast,
 };

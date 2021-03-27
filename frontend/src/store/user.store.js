@@ -1,5 +1,5 @@
 import { userService } from '../services/user.service.js'
-import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from '../services/socket.service'
+// import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from '../services/socket.service'
 
 // var localLoggedinUser = null;
 // if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user || null);
@@ -36,6 +36,12 @@ export const userStore = {
         async login({ commit }, { userCred }) {
             try {
                 const user = await userService.login(userCred);
+                
+                socketService.off('activity-update');
+                socketService.emit('join-user', user._id);
+                socketService.on('activity-update', (activity) => {
+                  console.log('socket emitted- Activity update', activity);
+                })
                 commit({ type: 'setLoggedinUser', user })
                 return user;
             } catch (err) {

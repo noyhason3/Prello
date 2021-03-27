@@ -72,8 +72,23 @@ async function addBoard(req, res) {
 async function updateBoard(req, res) {
   try {
     const board = req.body;
+    const activity = req.body;
+    const task = req.body;
+    // console.log('board',board);
+    // console.log('activity',activity);
+    // console.log('task',task);
+    task.members.forEach(member => {
+      // console.log(member, '-----------------------------------------------------');
+        socketService.emitToUser({type:'activity-update', data:activity, userId:member._id })
+    });
     const savedBoard = await boardService.update(board);
-    // socketService.broadcast({type:'board-update', data:board, room:savedBoard._id })
+    socketService.broadcast({type:'board-update', data:board, room:savedBoard._id })
+    // socketService.broadcast({type:'task-update', data:board, room:task.id })
+    // socketService.broadcast({type:'board-update', data:activity, room:savedBoard._id })
+
+
+
+    // socketService.emitToUser({type:'user-activity', data:activity, room:savedBoard._id })
     res.send(savedBoard);
   } catch (err) {
     logger.error('Failed to update board', err);

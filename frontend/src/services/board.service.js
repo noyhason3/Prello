@@ -1,5 +1,6 @@
 import { httpService } from './http.service.js';
 import utilService from './util.service.js';
+import { userService } from './user.service.js';
 
 const BOARD_URL = 'board/';
 
@@ -12,6 +13,7 @@ export const boardService = {
   getEmptyGroup,
   getEmptyTask,
   getEmptyTemplate,
+  getEmptyActivity,
 };
 
 function getById(boardId) {
@@ -80,4 +82,22 @@ function getEmptyTemplate() {
     groups.push(group);
   }
   return groups;
+}
+
+function getEmptyActivity({ currTask, txt }) {
+  const loggedinUser = userService.getLoggedinUser();
+  return {
+    id: utilService.makeId(),
+    txt,
+    createdAt: Date.now(),
+    byMember: {
+      _id: loggedinUser._id,
+      fullname: loggedinUser.fullname,
+      // imgUrl: loggedinUser.imgUrl,
+    },
+    task: {
+      id: currTask.id,
+      title: currTask.title,
+    },
+  };
 }

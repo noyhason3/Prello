@@ -11,7 +11,7 @@ export const boardStore = {
     boardHeader: null,
   },
   getters: {
-    boards(state){   
+    boards(state) {
       return state.boards;
     },
     currBoard(state) {
@@ -21,10 +21,10 @@ export const boardStore = {
       return state.task;
     },
     mainHeader(state) {
-      return state.mainHeader
+      return state.mainHeader;
     },
     boardHeader(state) {
-      return state.boardHeader
+      return state.boardHeader;
     },
     emptyBoard() {
       return boardService.getEmptyBoard();
@@ -34,7 +34,7 @@ export const boardStore = {
     },
     getEmptyTask() {
       return boardService.getEmptyTask();
-    }
+    },
   },
   mutations: {
     setBoard(state, { board }) {
@@ -52,11 +52,11 @@ export const boardStore = {
       state.boards.splice(boardIdx, 1);
     },
     setMainHeader(state, { mainHeader }) {
-      state.mainHeader = mainHeader
+      state.mainHeader = mainHeader;
     },
     setBoardHeader(state, { boardHeader }) {
-      state.boardHeader = boardHeader
-    }
+      state.boardHeader = boardHeader;
+    },
   },
   actions: {
     async loadBoards({ commit }) {
@@ -76,9 +76,10 @@ export const boardStore = {
         // socketService.setup();//Not sure if needed, happens in the service anyway
         socketService.off('board-update');
         socketService.emit('join-board', boardId);
-        socketService.on('board-update', (board, msg) => {
-          console.log('socket emitted- board update');
-          commit({ type: 'setBoard', board: board });
+        socketService.on('board-update', (board) => {
+          // console.log('socket emitted- board update');
+          // console.log(board.activities[board.activities.length-1]);
+          commit({ type: 'setBoard', board });
         });
         // socketService.on('task-update', (task) => {
         //   context.commit({ type: 'updateTask', task });
@@ -88,12 +89,12 @@ export const boardStore = {
         console.log('err', err);
       }
     },
-    async saveBoard({ commit }, { board, msg }) {
+    async saveBoard({ commit }, { board, activity }) {
       try {
-        console.log(msg);
+        if (activity) board.activities.push(activity);
         const currBoard = await boardService.save(board);
-        commit({ type: 'setBoard', board:currBoard });
-        await socketService.emit('save-board', board);
+        commit({ type: 'setBoard', board: currBoard });
+        // await socketService.emit('save-board', { board, activity });
         return board;
       } catch (err) {
         console.log('err:', err);
@@ -136,7 +137,10 @@ export const boardStore = {
     },
     async saveTask({ commit, state, dispatch }, { groupId, task }) {
       const board = JSON.parse(JSON.stringify(state.board));
-
+      const activity = boardService.getEmptyActivity({
+        currTask: task,
+        txt: 'Task saved!',
+      });
       if (groupId)
         var group = board.groups.find(
           (savedGroup) => savedGroup.id === groupId
@@ -157,8 +161,13 @@ export const boardStore = {
         group.tasks.push(task);
       }
       try {
-        await dispatch('saveBoard', { board , msg:'task saved'});
-        // await dispatch({type:"saveBoard", board ,msg});
+        board.activities.push(activity)
+        // task.members.forEach(member => {
+        //   console.log(member);
+        //     socketService.emit('activity-update',{userId:member._id, activity})
+        // });
+        await dispatch('saveBoard', { board, activity, task });
+        // await dispatch('saveBoard', { board, activity, task });
 
         commit({ type: 'setCurrTask', task });
       } catch (err) {
