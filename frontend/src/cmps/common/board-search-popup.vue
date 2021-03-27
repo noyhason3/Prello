@@ -32,9 +32,6 @@ export default {
       console.log("[close search");
       this.$emit("close-search");
     },
-    logHi() {
-      console.log("hI! :)");
-    },
   },
 };
 </script>

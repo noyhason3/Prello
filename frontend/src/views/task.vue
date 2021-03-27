@@ -20,7 +20,7 @@
         <!-- :style="`background-image: url(${task.style.coverImg})`" -->
       </div>
       <div class="header">
-        <button @click.stop="closeTask" class="btn close icon x"></button>
+        <button @click.stop="closeTask" class="btn close icon x-bright"></button>
         <div class="task-main-layout headline">
           <div class="icon title"></div>
           <task-title

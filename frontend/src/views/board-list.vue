@@ -83,7 +83,7 @@ export default {
   async created() {
     // this.boardList = await this.$store.dispatch({ type: "loadBoards" });
     this.boardList = this.$store.getters.boards 
-
+    if(!this.boardList) this.boardList = await this.$store.dispatch({ type: "loadBoards" });
     this.$store.commit("setBoard", { currBoard: null });
   },
   methods: {

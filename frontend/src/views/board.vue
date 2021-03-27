@@ -1,12 +1,12 @@
 <template>
-  <section class="board" v-if="board" ref="board">
-    <div :style="boardStyle(board)" class="board-bg"></div>
+  <section class="board-container" v-if="board" ref="board">
+    <div :style="boardStyle" class="board-bg"></div>
     <!-- <img
       class="board-bg"
       :src="require('@/assets/img/background/' + board.style.bgImg.value)"
       alt=""
     /> -->
-    <board-header :board="board" />
+    <board-header :board="board" :boardStyle="boardStyle"/>
     <draggable
       v-model="board.groups"
       group="group"
@@ -118,14 +118,6 @@ export default {
         body.classList.remove("img-bg");
       }
     },
-    boardStyle(board) {
-      if (board.style.bgImg) {
-        const img = require("@/assets/img/background/" +
-          board.style.bgImg.value);
-        return { backgroundImage: `url(${img})` };
-      }
-      return { backgroundColor: board.style.bgColor.value };
-    },
   },
   computed: {
     board() {
@@ -146,6 +138,14 @@ export default {
           background: style.bgColor.value,
         };
       }
+    },
+     boardStyle() {
+      if (this.board.style.bgImg) {
+        const img = require("@/assets/img/background/" +
+          this.board.style.bgImg.value);
+        return { backgroundImage: `url(${img})` };
+      }
+      return { backgroundColor: this.board.style.bgColor.value };
     },
   },
   // watch: {
