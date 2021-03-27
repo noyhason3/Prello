@@ -2,7 +2,6 @@
   <section class="board-header" :class="{ 'img-bg': isBoardOpen }">
     <div class="board-title">
       <editableTitle v-model="board.title" />
-      <!-- <button @click="toggleStarred" :class="starredClass">&#xf005;</button> -->
       <button
         @click="toggleStarred"
         class="icon star"
@@ -18,13 +17,18 @@
       <span class="icon elipsis"></span>
       Show Menu
     </button>
-   <board-menu :boardStyle="boardStyle" :class="{'show-menu':isOpenMenu}" @toggle-board-menu="toggleBoardMenu"/>
+    <board-menu
+      :boardStyle="boardStyle"
+      :board="board"
+      :class="{ 'show-menu': isOpenMenu }"
+      @toggle-board-menu="toggleBoardMenu"
+    />
   </section>
 </template>
 <script>
 import memberList from "../common/member-list.vue";
 import editableTitle from "@/cmps/common/editable-title.vue";
-import boardMenu from './board-menu.vue'
+import boardMenu from "./board-menu.vue";
 export default {
   props: {
     board: Object,
@@ -33,7 +37,7 @@ export default {
   data() {
     return {
       isBoardOpen: false,
-      isOpenMenu:false
+      isOpenMenu: false,
     };
   },
   created() {
@@ -46,9 +50,9 @@ export default {
       this.board.isStarred = !this.board.isStarred;
       this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
-    toggleBoardMenu(){
-      this.isOpenMenu = !this.isOpenMenu 
-    }
+    toggleBoardMenu() {
+      this.isOpenMenu = !this.isOpenMenu;
+    },
   },
   computed: {
     starredClass() {
@@ -70,9 +74,10 @@ export default {
       this.$store.commit("setBoard", this.board);
     },
   },
-  components: { 
-    editableTitle, 
+  components: {
+    editableTitle,
     memberList,
-    boardMenu },
+    boardMenu,
+  },
 };
 </script>

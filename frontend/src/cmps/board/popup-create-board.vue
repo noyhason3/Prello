@@ -10,13 +10,13 @@
         <div class="new-board-info">
           <div class="title-container" :style="selectedStyle.style">
             <div class="top">
-            <input
-              type="text"
-              placeholder="Add board title"
-              v-model="boardToEdit.title"
-              class="title"
-            />
-            <button @click="closeBoardPopup" class="btn close">X</button>
+              <input
+                type="text"
+                placeholder="Add board title"
+                v-model="boardToEdit.title"
+                class="title"
+              />
+              <button @click="closeBoardPopup" class="btn close">X</button>
             </div>
             <!-- <label for=""><input type="checkbox" name="checkbox" v-model="isUseTemplate">Use template</label> -->
           </div>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { boardService } from '../../services/board.service';
+import { boardService } from "../../services/board.service";
 export default {
   props: {
     isAddBoard: Boolean,
@@ -49,7 +49,7 @@ export default {
     return {
       selectedStyle: null,
       boardToEdit: null,
-      isUseTemplate:false,
+      isUseTemplate: false,
       imgs: [
         { id: "i101", value: "1.jpg" },
         { id: "i102", value: "2.jpg" },
@@ -66,7 +66,7 @@ export default {
     };
   },
   created() {
-      this.boardToEdit = {...this.$store.getters.emptyBoard};
+    this.boardToEdit = { ...this.$store.getters.emptyBoard };
     this.selectedStyle = this.bgStyles[0];
   },
   methods: {
@@ -88,12 +88,13 @@ export default {
         this.boardToEdit.style.bgImg = style;
       }
 
-      if(this.isUseTemplate) this.boardToEdit.groups = {...boardService.getEmptyTemplate()}
+      if (this.isUseTemplate)
+        this.boardToEdit.groups = { ...boardService.getEmptyTemplate() };
       const board = await this.$store.dispatch({
         type: "saveBoard",
         board: this.boardToEdit,
       });
-    this.$emit('open-board', board._id)
+      this.$emit("open-board", board._id);
     },
     boardStyle(board) {
       if (board.style.bgImg) {

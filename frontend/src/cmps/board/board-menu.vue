@@ -6,9 +6,9 @@
       </header>
       <main>
         <ul class="clean-list">
-          <li class="board-menu-layout">
+          <li class="board-menu-layout" @click="toggleDashboard">
             <div class="icon dashboard"></div>
-            <button>Dashboard</button>
+            <button >Dashboard</button>
           </li>
           <li class="board-menu-layout">
             <div :style="boardStyle" class="thumbnail"></div>
@@ -26,11 +26,18 @@
 <script>
 export default {
     props:{
-        boardStyle:Object
+        boardStyle:Object,
+        board:Object
     },
     methods:{
         toggleBoardMenu(){
             this.$emit('toggle-board-menu');
+        },
+        toggleDashboard(){
+            const boardId = this.board._id;
+            console.log('toggling');
+            this.$router.push('/board/'+boardId+'/dashboard')
+            // this.toggleBoardMenu();
         }
     }
 }

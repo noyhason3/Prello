@@ -6,7 +6,10 @@
       :src="require('@/assets/img/background/' + board.style.bgImg.value)"
       alt=""
     /> -->
-    <board-header :board="board" :boardStyle="boardStyle"/>
+    <board-header 
+    :board="board" 
+    :boardStyle="boardStyle" 
+    />
     <draggable
       v-model="board.groups"
       group="group"
@@ -56,7 +59,7 @@
 
 
 <script>
-import { boardService } from "../services/board.service";
+// import { boardService } from "../services/board.service";
 import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
 import editableText from "@/cmps/common/editable-text.vue";
@@ -71,13 +74,11 @@ export default {
     };
   },
   async created() {
-    console.log('board opens')
     if (!this.$store.getters.board) {
       const boardId = this.$route.params.boardId;
       await this.loadBoard(boardId);
       this.assignClasses();
     }
-    console.log("style.bgImg.value", this.board.style);
   },
   mounted() {
     const boardHeader = this.$refs.boardHeader;

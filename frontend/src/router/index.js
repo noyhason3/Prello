@@ -21,11 +21,11 @@ const routes = [
         name: 'login-signup',
         component: loginSignup,
     },
-    {
-        path: '/dashboard',
-        name: 'dashboard',
-        component: dashboard,
-    },
+    // {
+    //     path: '/dashboard',
+    //     name: 'dashboard',
+    //     component: dashboard,
+    // },
     {
         path: '/board',
         name: 'board-list',
@@ -36,6 +36,10 @@ const routes = [
         name: 'board',
         component: board,
         children: [
+            {
+                path: 'dashboard',
+                component: dashboard,
+            },
             {
                 path: ':taskId',
                 component: task,

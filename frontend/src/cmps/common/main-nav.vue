@@ -96,10 +96,6 @@ export default {
   },
   computed: {
     user() {
-      // console.log(
-      //   "file: main-nav.vue - line 23 - user - this.$store.getters.loggedInUser",
-      //   this.$store.getters.loggedinUser
-      // );
       return this.$store.getters.loggedinUser;
     },
   },

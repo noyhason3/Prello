@@ -38,9 +38,9 @@ export const boardStore = {
   },
   mutations: {
     setBoard(state, { board }) {
-      console.log("file: board.store.js - line 41 - setBoard - board", board)
+      // console.log("file: board.store.js - line 41 - setBoard - board", board)
       state.board = board;
-      console.log(state.board)
+      // console.log(state.board)
     },
     setBoards(state, { boards }) {
       state.boards = boards;
@@ -133,7 +133,7 @@ export const boardStore = {
       const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
       if (groupIdx < 0) return;
       board.groups.splice(groupIdx, 1);
-      console.log('Remove group - line 134 - board store - board', board)
+      // console.log('Remove group - line 134 - board store - board', board)
       await boardService.save(board);
       commit({ type: 'setBoard', board });
     },
