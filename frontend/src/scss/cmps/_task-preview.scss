@@ -1,5 +1,5 @@
 .task-preview {
-  position: relative;
+  //position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -147,6 +147,9 @@
 
   .task-control {
     position: absolute;
+    z-index:2;
+    right:-15px;
+    top:20px;
     width: 100px;
     height: auto;
     background-color: #efefef;

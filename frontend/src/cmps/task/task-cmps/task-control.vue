@@ -1,5 +1,5 @@
 <template>
-  <section class="task-control">
+  <section class="task-control" @click.stop>
     <!--  ******TODO********
       <button>Join</button> -->
     <!-- <button @click="togglePopup('Cover')" class="control-btn cover"><span></span>Cover</button> -->
@@ -36,14 +36,14 @@
       @remove-task-member="removeTaskMember"
       tabindex="0"
       ref="Member"
+      @blur.native="togglePopup('Member')"
     ></popup-member>
-    <!-- @blur.native="togglePopup('Member')" -->
     <!-- <button>Labels</button> -->
     <button
       @click="togglePopup('Duedate', $event)"
+      @blur="togglePopup('Duedate', $event)"
       class="btn neutral left-align"
     >
-      <!-- @blur="togglePopup('Duedate', $event)" -->
       <span class="icon clock"></span>Due date
     </button>
     <popup-duedate
@@ -67,8 +67,8 @@
       @add-checklist="setChecklist"
       @toggle-popup="togglePopup"
       tabindex="0"
-      @blur.native="togglePopup('Checklist')"
       ref="Checklist"
+      @blur.native="checklistBlurHandler"
     />
 
     <button
@@ -85,6 +85,7 @@
       @toggle-popup="togglePopup"
       tabindex="0"
       ref="Label"
+      :task="task"
     >
       <!-- @blur.native="togglePopup('Label')" -->
     </popup-label>
@@ -128,6 +129,7 @@ import popupLabel from "@/cmps/task/popup/popup-label.vue";
 export default {
   props: {
     attachments: Array,
+    task: Object,
   },
   data() {
     return {
@@ -149,9 +151,9 @@ export default {
         const top = targetRect.bottom + 3;
         const left = targetRect.left;
         this.$nextTick(() => {
-          const popup = this.$refs[str].$el;
-          const popupHeight = popup.getBoundingClientRect().height;
+          const popup = this.$refs[str]?.$el;
           if (popup) {
+            const popupHeight = popup.getBoundingClientRect().height;
             popup.style.left = left + "px";
 
             if (popupHeight + top > window.innerHeight) {
@@ -162,48 +164,99 @@ export default {
               popup.style.top = top + "px";
               popup.style.maxHeight = maxHeight + "px";
             }
-
-            // console.log(
-            //   "file: task-control.vue - line 160 - this.$nextTick - window.innerHeight",
-            //   window.innerHeight
-            // );
-            // console.log(
-            //   "file: task-control.vue - line 160 - this.$nextTick - popup.style.height + top",
-            //   maxHeight + top
-            // );
-
             popup.focus();
           }
         });
       }
     },
+    checklistBlurHandler(ev) {
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (
+          classList.includes("popup-checklist") ||
+          classList.includes("checklist-title")
+        )
+          ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Checklist");
+        }
+      } else this.togglePopup("Checklist");
+    },
+    // setCoverColor(color) {
+    //   this.$emit("set-cover-color", color);
+    // },
+    // saveCoverImg(img) {
+    //   this.$emit("save-cover-img", img);
+    //   this.togglePopup("Cover");
+    // },
+    // assignTaskMember(member) {
+    //   this.$emit("assign-task-member", member);
+    // },
+    // removeTaskMember(id) {
+    //   this.$emit("remove-task-member", id);
+    // },
+    // setChecklist(checklist) {
+    //   this.$emit("set-checklist", checklist);
+    //   this.togglePopup("Checklist");
+    // },
+    // setTaskLabels(labelIds) {
+    //   this.$emit("set-task-labels", labelIds);
+    // },
+    // saveDate(timestamp) {
+    //   this.$emit("save-date", timestamp);
+    //   this.togglePopup("Duedate");
+    // },
+    // saveAttachments(attachments) {
+    //   this.$emit("save-attachments", attachments);
+    //   this.togglePopup("Attachment");
+    // },
+    async saveTask(task) {
+      await this.$store.dispatch({ type: "saveTask", task });
+    },
+    // togglePopup({ str }) {
+    //   var dataStr = `is${str}Open`;
+    //   this[dataStr] = !this[dataStr];
+    // },
     setCoverColor(color) {
-      this.$emit("set-cover-color", color);
+      this.task.style.coverImg = "";
+      this.task.style.coverColor = color;
+      this.saveTask(this.task);
     },
     saveCoverImg(img) {
-      this.$emit("save-cover-img", img);
-      this.togglePopup("Cover");
+      this.task.style.coverColor = "";
+      this.task.style.coverImg = img.url;
+      this.saveTask(this.task);
     },
     assignTaskMember(member) {
-      this.$emit("assign-task-member", member);
+      if (!this.task.members) this.task.members = [];
+      this.task.members.push(member);
+      this.saveTask(this.task);
     },
     removeTaskMember(id) {
-      this.$emit("remove-task-member", id);
+      console.log("memberIdx:");
+      const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
+      if (memberIdx < 0) return;
+      this.task.members.splice(memberIdx, 1);
+      this.saveTask(this.task);
     },
-    setChecklist(checklist) {
-      this.$emit("set-checklist", checklist);
-      this.togglePopup("Checklist");
+    saveChecklist(checklist) {
+      const task = this.task;
+      this.checklist.id = utilService.makeId();
+      task.checklists.push(checklist);
+      this.saveTask(task);
     },
-    setTaskLabels(labelIds) {
-      this.$emit("set-task-labels", labelIds);
+    setTaskLabels({ labelIds }) {
+      this.task.labelIds = labelIds;
+      this.saveTask(this.task);
     },
     saveDate(timestamp) {
-      this.$emit("save-date", timestamp);
-      this.togglePopup("Duedate");
+      this.task.duedate = timestamp;
+      this.saveTask(this.task);
     },
     saveAttachments(attachments) {
-      this.$emit("save-attachments", attachments);
-      this.togglePopup("Attachment");
+      this.task.attachments = attachments;
+      console.log(attachments);
+      this.saveTask(this.task);
     },
   },
   components: {

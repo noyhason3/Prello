@@ -6,7 +6,12 @@
     </div>
     <div slot="main">
       <h3>Title</h3>
-      <input type="text" name="title" id="title" v-model="checklist.title" />
+      <input
+        type="text"
+        name="title"
+        class="checklist-title"
+        v-model="checklist.title"
+      />
       <button @click="addChecklist" class="btn action narrow">Add</button>
       <!-- <h3>Copy Items From...</h3>
       <input type="text" name="" id="" /> -->

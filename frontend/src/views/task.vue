@@ -20,7 +20,10 @@
         <!-- :style="`background-image: url(${task.style.coverImg})`" -->
       </div>
       <div class="header">
-        <button @click.stop="closeTask" class="btn close icon x-bright"></button>
+        <button
+          @click.stop="closeTask"
+          class="btn close icon x-bright"
+        ></button>
         <div class="task-main-layout headline">
           <div class="icon title"></div>
           <task-title
@@ -36,7 +39,10 @@
       <div class="task-content" @click.stop>
         <task-control
           ref="taskControls"
-          @toggle-popup="togglePopup"
+          :task="task"
+          :attachments="attachments"
+        />
+        <!-- @toggle-popup="togglePopup"
           @set-cover-color="setCoverColor"
           @save-cover-img="saveCoverImg"
           @assign-task-member="assignTaskMember"
@@ -44,9 +50,7 @@
           @set-checklist="saveChecklist"
           @set-task-labels="setTaskLabels"
           @save-date="saveDate"
-          @save-attachments="saveAttachments"
-          :attachments="attachments"
-        />
+          @save-attachments="saveAttachments" -->
 
         <div class="task-main">
           <div v-if="task" class="task-info task-secondary-layout">
@@ -238,7 +242,7 @@ export default {
       const boardId = this.$route.params.boardId;
       this.$router.push("/board/" + boardId);
     },
-    togglePopup({ str, buttonLeftPos }) {
+    togglePopup({ str }) {
       var dataStr = `is${str}Open`;
       this[dataStr] = !this[dataStr];
     },

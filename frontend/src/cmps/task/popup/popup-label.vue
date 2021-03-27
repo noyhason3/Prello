@@ -59,7 +59,7 @@ import popUp from "@/cmps/common/pop-up.vue";
 import popupLabelEdit from "@/cmps/task/popup/popup-label-edit.vue";
 export default {
   props: {
-    popupLeftPos: Number,
+    task: Object,
   },
   data() {
     return {
@@ -132,7 +132,8 @@ export default {
       });
     },
     taskLabelIdEdit() {
-      const taskLabels = this.$store.getters.currTask.labelIds;
+      //const taskLabels = this.$store.getters.currTask.labelIds;
+      const taskLabels = this.task.labelIds;
       if (!taskLabels) return [];
       return [...taskLabels];
     },
