@@ -34,6 +34,7 @@
       @assign-task-member="assignTaskMember"
       @toggle-popup="togglePopup"
       @remove-task-member="removeTaskMember"
+      :task="task"
       tabindex="0"
       ref="Member"
       @blur.native="togglePopup('Member')"
@@ -86,8 +87,8 @@
       tabindex="0"
       ref="Label"
       :task="task"
+      @blur.native="togglePopup('Label')"
     >
-      <!-- @blur.native="togglePopup('Label')" -->
     </popup-label>
 
     <!-- <button>Due date</button> -->
@@ -112,13 +113,15 @@
       @toggle-popup="togglePopup"
       :attachments="attachments"
       tabindex="0"
-      @blur.native="togglePopup('Attachment')"
       ref="Attachment"
+      @blur.native="togglePopup('Attachment')"
     />
   </section>
 </template>
 
 <script>
+import utilService from "@/services/util.service";
+
 import popupCover from "@/cmps/task/popup/popup-cover.vue";
 import popupMember from "@/cmps/task/popup/popup-member";
 import popupChecklist from "@/cmps/task/popup/popup-checklist.vue";
@@ -174,7 +177,8 @@ export default {
         const classList = Array.from(ev.relatedTarget.classList);
         if (
           classList.includes("popup-checklist") ||
-          classList.includes("checklist-title")
+          classList.includes("checklist-title") ||
+          classList.includes("checklist-add")
         )
           ev.relatedTarget.focus();
         else {
@@ -195,10 +199,17 @@ export default {
     // removeTaskMember(id) {
     //   this.$emit("remove-task-member", id);
     // },
-    // setChecklist(checklist) {
-    //   this.$emit("set-checklist", checklist);
-    //   this.togglePopup("Checklist");
-    // },
+    setChecklist(checklist) {
+      console.log(
+        "file: task-control.vue - line 200 - setChecklist - checklist",
+        checklist
+      );
+      const task = this.task;
+      checklist.id = utilService.makeId();
+      task.checklists.push(checklist);
+      this.saveTask(task);
+      this.togglePopup("Checklist");
+    },
     // setTaskLabels(labelIds) {
     //   this.$emit("set-task-labels", labelIds);
     // },
@@ -228,6 +239,10 @@ export default {
       this.saveTask(this.task);
     },
     assignTaskMember(member) {
+      console.log(
+        "file: task-control.vue - line 232 - assignTaskMember - this.task",
+        this.task
+      );
       if (!this.task.members) this.task.members = [];
       this.task.members.push(member);
       this.saveTask(this.task);

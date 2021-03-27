@@ -1,5 +1,5 @@
 <template>
-  <div class="popup" ref="container" style="outline: none">
+  <div class="popup" ref="container">
     <header ref="header">
       <slot name="header"></slot>
     </header>

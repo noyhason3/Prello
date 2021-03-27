@@ -214,12 +214,12 @@ export default {
       this.task.labelIds = labelIds;
       this.saveTask(this.task);
     },
-    saveChecklist(checklist) {
-      const task = this.task;
-      this.checklist.id = utilService.makeId();
-      task.checklists.push(checklist);
-      this.saveTask(task);
-    },
+    // saveChecklist(checklist) {
+    //   const task = this.task;
+    //   this.checklist.id = utilService.makeId();
+    //   task.checklists.push(checklist);
+    //   this.saveTask(task);
+    // },
     // TODO - MAYBE WE CAN MERGE THESE TWO TO ONE FUNCTION??
     deleteChecklist(checklistId) {
       const idx = this.task.checklists.findIndex(

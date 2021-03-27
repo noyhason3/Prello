@@ -5,14 +5,18 @@
       class="btn close icon elipsis preview"
     ></button>
 
-    <taskControl
+    <div
       v-if="menuOpen"
-      :attachments="attachments"
-      :task="task"
-      ref="taskControl"
-      tabindex="0"
-      @blur.native="menuOpen = !menuOpen"
-    ></taskControl>
+      class="task-control-screen"
+      @click.stop="menuOpen = false"
+    >
+      <taskControl
+        :attachments="attachments"
+        :task="task"
+        ref="taskControl"
+        tabindex="0"
+      ></taskControl>
+    </div>
     <!-- @toggle-popup="togglePopup"
         @set-cover-color="setCoverColor"
         @save-cover-img="saveCoverImg"
@@ -116,12 +120,21 @@ export default {
           if (targetRect.bottom + elHeight < window.innerHeight) {
             elControl.style.top = targetRect.bottom + "px";
           } else {
-            elControl.style.bottom = window.innerHeight - targetRect.top + "px";
+            elControl.style.top = targetRect.top - elHeight + "px";
+            console.log(
+              "file: task-preview.vue - line 120 - this.$nextTick - elControl.style.bottom",
+              elControl.style.bottom
+            );
           }
           elControl.style.left = targetRect.right + "px";
           elControl.focus();
         }
       });
+    },
+    controlBlurHandler(ev) {
+      if (Array.from(ev.target.classList).includes("task-control")) {
+        ev.target.focus();
+      } else this.menuOpen = false;
     },
   },
   computed: {

@@ -12,7 +12,9 @@
         class="checklist-title"
         v-model="checklist.title"
       />
-      <button @click="addChecklist" class="btn action narrow">Add</button>
+      <button @click="addChecklist" class="btn action narrow checklist-add">
+        Add
+      </button>
       <!-- <h3>Copy Items From...</h3>
       <input type="text" name="" id="" /> -->
     </div>
