@@ -116,6 +116,8 @@
       ref="Attachment"
     />
     <!-- @blur.native="attachmentBlurHandler" -->
+
+    <button class="btn neutral left-align" @click="removeTask">Archive</button>
   </section>
 </template>
 
@@ -298,6 +300,18 @@ export default {
       this.task.attachments = attachments;
       console.log(attachments);
       this.saveTask(this.task);
+    },
+    async removeTask() {
+      await this.$store.dispatch({ type: "removeTask", taskId: this.task.id });
+      const taskId = this.$route.params.taskId;
+      const boardId = this.$route.params.boardId;
+      console.log(
+        "file: task-control.vue - line 307 - removeTask - taskId",
+        this.task
+      );
+      if (taskId) {
+        this.$router.push("/board/" + boardId);
+      }
     },
   },
   components: {

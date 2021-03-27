@@ -1,10 +1,5 @@
 <template>
   <section class="task-preview" v-if="task">
-    <button
-      @click.stop="openControls"
-      class="btn close icon elipsis preview"
-    ></button>
-
     <div
       v-if="menuOpen"
       class="task-control-screen"
@@ -22,16 +17,23 @@
         @save-date="saveDate"
         @save-attachments="saveAttachments" -->
 
-    <div
-      v-if="task.style.coverColor"
-      class="task-cover-preview"
-      :style="`background-color: ${task.style.coverColor}`"
-    />
-    <img
-      v-if="task.style.coverImg"
-      class="task-cover-img-preview"
-      :src="task.style.coverImg"
-    />
+    <header style="position: relative">
+      <div
+        v-if="task.style.coverColor"
+        class="task-cover-preview"
+        :style="`background-color: ${task.style.coverColor}`"
+      />
+      <img
+        v-if="task.style.coverImg"
+        class="task-cover-img-preview"
+        :src="task.style.coverImg"
+      />
+
+      <button
+        @click.stop="openControls"
+        class="btn close icon elipsis preview"
+      ></button>
+    </header>
 
     <div class="task-preview-main">
       <task-label-preview

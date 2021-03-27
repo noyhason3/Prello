@@ -57,9 +57,11 @@
 
   .btn.close {
     margin: 0;
-    align-self: flex-end;
+    //align-self: flex-end;
     opacity: 0;
     position: absolute;
+    right:0;
+    top:0;
   }
 
   .task-info-preview {
