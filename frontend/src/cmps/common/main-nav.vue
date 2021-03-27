@@ -67,8 +67,7 @@ export default {
       this.$refs.boardSearch.focus;
       this.placeholder = "Search...";
     },
-    closeSearch(ev) {
-      console.log("ev:", ev);
+    closeSearch() {
       this.isActive = false;
       this.placeholder = "Jump to...";
     },

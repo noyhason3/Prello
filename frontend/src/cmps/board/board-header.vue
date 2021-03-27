@@ -18,33 +18,13 @@
       <span class="icon elipsis"></span>
       Show Menu
     </button>
-    <div class="board-menu" :class="{'show-menu':isOpenMenu}">
-      <header>
-        <h2 class="headline">Menu</h2>
-        <button @click="toggleBoardMenu" class="btn close icon x"></button>
-      </header>
-      <main>
-        <ul class="clean-list">
-          <li class="board-menu-layout">
-            <div class="icon dashboard"></div>
-            <button>Dashboard</button>
-          </li>
-          <li class="board-menu-layout">
-            <div :style="boardStyle" class="thumbnail"></div>
-            <button>Change background</button>
-          </li>
-        </ul>
-          <div class="board-menu-layout activity-list">
-            <div class="icon list"></div>
-            <h3>Activity</h3>
-          </div>
-      </main>
-    </div>
+   <board-menu :boardStyle="boardStyle" :class="{'show-menu':isOpenMenu}" @toggle-board-menu="toggleBoardMenu"/>
   </section>
 </template>
 <script>
 import memberList from "../common/member-list.vue";
 import editableTitle from "@/cmps/common/editable-title.vue";
+import boardMenu from './board-menu.vue'
 export default {
   props: {
     board: Object,
@@ -76,7 +56,7 @@ export default {
       str += this.board.isStarred ? "active" : "unactive";
       return str;
     },
-    saveBoard(val) {
+    saveBoard() {
       this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
   },
@@ -90,6 +70,9 @@ export default {
       this.$store.commit("setBoard", this.board);
     },
   },
-  components: { editableTitle, memberList },
+  components: { 
+    editableTitle, 
+    memberList,
+    boardMenu },
 };
 </script>

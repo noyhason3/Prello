@@ -40,9 +40,11 @@
         grid-column: 2/3;
         width: 50%;
         
-        &:hover {
+        &:hover,
+        &:active,
+        &:focus {
             width: 100%;
-            
+            outline:none;
         }
     }
     

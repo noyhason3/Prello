@@ -1,0 +1,95 @@
+.board-container {
+    .board-header {
+        padding: 10px 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        z-index: 2;
+
+        &>*:not(.board-header-members) {
+            color: $clr1;
+            height: 100%;
+        }
+
+        // &>*:not(.board-header-members):hover {
+        //     // background-color: rgba(235, 235, 235, 0.5);
+        // }
+
+        .board-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .board-title>* {
+            border-radius: 3px;
+            background-color: rgba(rgb(235, 235, 235), 0.3);
+            height: 100%;
+
+        }
+
+        .board-title>*:hover {
+            background-color: rgba(235, 235, 235, 0.5);
+
+        }
+
+        .editable-title-wrapper {
+            border: 0;
+            font-weight: bold;
+            min-width: 250px;
+            max-width: 500px;
+            width: fit-content;
+            padding: 0 12px;
+            margin-inline-end: 4px;
+
+        }
+
+        .editable-title-wrapper h2 {
+            color: $clr1;
+            opacity: 0.9;
+            font-size: 1.2rem;
+            padding: 5px;
+        }
+
+        .editable-title-wrapper h2:focus {
+            color: $clr5;
+        }
+
+        .icon.star {
+            color: rgba($clr1, 0.6);
+            font-size: 0.8rem;
+            min-width: 30px;
+
+        }
+
+        .icon.star.is-starred {
+            color: $clr1;
+        }
+
+        span.icon {
+            margin-inline-end: 4px;
+        }
+
+        .menu-btn {
+            font-size: 1rem;
+            padding: 5px 12px;
+            border-radius: 3px;
+            background-color: rgba(rgb(235, 235, 235), 0.3);
+            right: 8px;
+        }
+        .menu-btn span.icon {
+            margin-inline-end: 6px;
+        }
+
+        .menu-btn:hover {
+            background-color: rgba(235, 235, 235, 0.5);
+
+        }
+
+        .board-header-members {
+            position: absolute;
+            right: 50%;
+            transform: translateX(50%)
+        }
+    }
+}

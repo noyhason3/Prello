@@ -71,6 +71,7 @@ export default {
     };
   },
   async created() {
+    console.log('board opens')
     if (!this.$store.getters.board) {
       const boardId = this.$route.params.boardId;
       await this.loadBoard(boardId);
@@ -148,11 +149,11 @@ export default {
       return { backgroundColor: this.board.style.bgColor.value };
     },
   },
-  // watch: {
-  //   "$route.params.boardId"(boardId) {
-  //     this.loadBoard(boardId);
-  //   },
-  // },
+  watch: {
+    "$route.params.boardId"(boardId) {
+      this.loadBoard(boardId);
+    },
+  },
   components: {
     boardHeader,
     group,
