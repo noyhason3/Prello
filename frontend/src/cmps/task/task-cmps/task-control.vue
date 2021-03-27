@@ -87,7 +87,7 @@
       tabindex="0"
       ref="Label"
       :task="task"
-      @blur.native="togglePopup('Label')"
+      @blur.native="labelBlurHandler"
     >
     </popup-label>
 
@@ -114,8 +114,8 @@
       :attachments="task.attachments"
       tabindex="0"
       ref="Attachment"
-      @blur.native="attachmentBlurHandler"
     />
+    <!-- @blur.native="attachmentBlurHandler" -->
   </section>
 </template>
 
@@ -197,6 +197,20 @@ export default {
           this.togglePopup("Attachment");
         }
       } else this.togglePopup("Attachment");
+    },
+    labelBlurHandler(ev) {
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (
+          classList.includes("edit-label") ||
+          classList.includes("search-label") ||
+          classList.includes("label-color")
+        )
+          ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Label");
+        }
+      } else this.togglePopup("Label");
     },
     // setCoverColor(color) {
     //   this.$emit("set-cover-color", color);
