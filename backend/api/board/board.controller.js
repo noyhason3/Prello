@@ -5,6 +5,7 @@ const boardService = require('./board.service');
 
 async function getBoards(req, res) {
   try {
+    console.log('getting boards');
     const userId = req.session.user._id;
     //TODO: const filterBy = req.body
     const boards = await boardService.query();

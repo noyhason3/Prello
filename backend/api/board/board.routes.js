@@ -27,6 +27,6 @@ router.put('/:boardId', updateBoard);
 //TODO : Add a push for the board in case a board isn't found in the db router.put('/:boardId', requireAuth, requireAdmin, updateBoard);
 
 //TODO : Add a push for the board in case a board isn't found in the db router.delete('/:boardId' , deleteBoard);
-router.delete('/:boardId', requireAuth, requireAdmin, deleteBoard);
+router.delete('/:boardId', requireAuth, deleteBoard);
 
 module.exports = router;
