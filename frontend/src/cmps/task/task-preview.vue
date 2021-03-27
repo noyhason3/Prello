@@ -1,16 +1,39 @@
 <template>
   <section class="task-preview" v-if="task">
-    <button @click="removeTask" class="btn close">X</button>
     <div
-      v-if="task.style.coverColor"
-      class="task-cover-preview"
-      :style="`background-color: ${task.style.coverColor}`"
-    />
-    <img
-      v-if="task.style.coverImg"
-      class="task-cover-img-preview"
-      :src="task.style.coverImg"
-    />
+      v-if="menuOpen"
+      class="task-control-screen"
+      @click.stop="menuOpen = false"
+    >
+      <taskControl :task="task" ref="taskControl" tabindex="0"></taskControl>
+    </div>
+    <!-- @toggle-popup="togglePopup"
+        @set-cover-color="setCoverColor"
+        @save-cover-img="saveCoverImg"
+        @assign-task-member="assignTaskMember"
+        @remove-task-member="removeTaskMember"
+        @set-checklist="saveChecklist"
+        @set-task-labels="setTaskLabels"
+        @save-date="saveDate"
+        @save-attachments="saveAttachments" -->
+
+    <header style="position: relative">
+      <div
+        v-if="task.style.coverColor"
+        class="task-cover-preview"
+        :style="`background-color: ${task.style.coverColor}`"
+      />
+      <img
+        v-if="task.style.coverImg"
+        class="task-cover-img-preview"
+        :src="task.style.coverImg"
+      />
+
+      <button
+        @click.stop="openControls"
+        class="btn close icon elipsis preview"
+      ></button>
+    </header>
 
     <div class="task-preview-main">
       <task-label-preview
@@ -60,12 +83,18 @@ import memberList from "@/cmps/common/member-list.vue";
 import taskLabelPreview from "@/cmps/task/task-cmps/task-label-preview.vue";
 import editableTitle from "@/cmps/common/editable-text.vue";
 import moment from "moment";
+import taskControl from "@/cmps/task/task-cmps/task-control.vue";
 
 export default {
   props: {
     task: Object,
   },
-
+  data() {
+    return {
+      menuOpen: false,
+      isEditing: false,
+    };
+  },
   methods: {
     removeTask(ev) {
       ev.stopPropagation();
@@ -77,6 +106,32 @@ export default {
       const task = JSON.parse(JSON.stringify(this.task));
       task.members.splice(memberIdx, 1);
       await this.$store.dispatch({ type: "saveTask", task });
+    },
+    openControls(ev) {
+      this.menuOpen = !this.menuOpen;
+      this.$nextTick(() => {
+        const targetRect = ev.target.getBoundingClientRect();
+        const elControl = this.$refs.taskControl?.$el;
+        if (elControl) {
+          const elHeight = elControl.getBoundingClientRect().height;
+          if (targetRect.bottom + elHeight < window.innerHeight) {
+            elControl.style.top = targetRect.bottom + "px";
+          } else {
+            elControl.style.top = targetRect.top - elHeight + "px";
+            console.log(
+              "file: task-preview.vue - line 120 - this.$nextTick - elControl.style.bottom",
+              elControl.style.bottom
+            );
+          }
+          elControl.style.left = targetRect.right + "px";
+          elControl.focus();
+        }
+      });
+    },
+    controlBlurHandler(ev) {
+      if (Array.from(ev.target.classList).includes("task-control")) {
+        ev.target.focus();
+      } else this.menuOpen = false;
     },
   },
   computed: {
@@ -130,6 +185,7 @@ export default {
   components: {
     taskLabelPreview,
     memberList,
+    taskControl,
   },
 };
 </script>
