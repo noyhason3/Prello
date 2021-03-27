@@ -8,17 +8,20 @@
 
       <!-- <button @click="removeGroup" class="icon elipsis preview"></button> -->
       <button
-        @click="isEditing = !isEditing"
+        @click="menuOpen = !menuOpen"
         class="icon elipsis preview"
       ></button>
-      <div v-if="isEditing">
-        <popUp style="display: block; position: unset">
-          <ul class="clean-list" slot="main">
-            <li @click="removeGroup">Archive Group</li>
-          </ul>
-        </popUp>
-      </div>
     </div>
+    <popUp v-if="menuOpen">
+      <ul class="clean-list" slot="main">
+        <li @click="removeGroup">Archive Group</li>
+        <popupCover
+          v-if="isEditing"
+          @toggle-popup="isEditing = !isEditing"
+          @set-cover-color="setCoverColor"
+        ></popupCover>
+      </ul>
+    </popUp>
     <div class="tasks-wrapper">
       <draggable
         v-model="group.tasks"
@@ -77,6 +80,7 @@ import taskPreview from "../task/task-preview.vue";
 import editableText from "../common/editable-text.vue";
 import editableTitle from "../common/editable-title.vue";
 import popUp from "@/cmps/common/pop-up.vue";
+import popupCover from "@/cmps/task/popup/popup-cover.vue";
 
 export default {
   props: {
@@ -90,7 +94,7 @@ export default {
       isAddNewTask: false,
       ghostRect: null,
       emptyList: [],
-      isEditing: false,
+      menuOpen: false,
     };
   },
   methods: {
@@ -141,7 +145,14 @@ export default {
       this.$emit("save-board");
     },
   },
-  components: { taskPreview, editableText, draggable, editableTitle, popUp },
+  components: {
+    taskPreview,
+    editableText,
+    draggable,
+    editableTitle,
+    popUp,
+    popupCover,
+  },
 };
 </script>
 

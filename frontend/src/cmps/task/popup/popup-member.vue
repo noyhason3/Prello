@@ -33,6 +33,9 @@ import popUp from "@/cmps/common/pop-up";
 import memberPreview from "@/cmps/common/member-preview.vue";
 
 export default {
+  props: {
+    task: Object,
+  },
   data() {
     return {
       searchStr: "",
@@ -41,9 +44,10 @@ export default {
     };
   },
   created() {
-    this.taskMembers = JSON.parse(
-      JSON.stringify(this.$store.getters.currTask.members || [])
-    );
+    // this.taskMembers = JSON.parse(
+    //   JSON.stringify(this.$store.getters.currTask.members || [])
+    // );
+    this.taskMembers = JSON.parse(JSON.stringify(this.task.members)) || [];
   },
   methods: {
     togglePopup() {

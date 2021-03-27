@@ -1,5 +1,5 @@
 <template>
-  <section class="task-control">
+  <section class="task-control" @click.stop>
     <!--  ******TODO********
       <button>Join</button> -->
     <!-- <button @click="togglePopup('Cover')" class="control-btn cover"><span></span>Cover</button> -->
@@ -34,16 +34,17 @@
       @assign-task-member="assignTaskMember"
       @toggle-popup="togglePopup"
       @remove-task-member="removeTaskMember"
+      :task="task"
       tabindex="0"
       ref="Member"
+      @blur.native="togglePopup('Member')"
     ></popup-member>
-    <!-- @blur.native="togglePopup('Member')" -->
     <!-- <button>Labels</button> -->
     <button
       @click="togglePopup('Duedate', $event)"
+      @blur="togglePopup('Duedate', $event)"
       class="btn neutral left-align"
     >
-      <!-- @blur="togglePopup('Duedate', $event)" -->
       <span class="icon clock"></span>Due date
     </button>
     <popup-duedate
@@ -67,8 +68,8 @@
       @add-checklist="setChecklist"
       @toggle-popup="togglePopup"
       tabindex="0"
-      @blur.native="togglePopup('Checklist')"
       ref="Checklist"
+      @blur.native="checklistBlurHandler"
     />
 
     <button
@@ -85,8 +86,9 @@
       @toggle-popup="togglePopup"
       tabindex="0"
       ref="Label"
+      :task="task"
+      @blur.native="labelBlurHandler"
     >
-      <!-- @blur.native="togglePopup('Label')" -->
     </popup-label>
 
     <!-- <button>Due date</button> -->
@@ -109,15 +111,19 @@
       v-if="isAttachmentOpen"
       @save-attachments="saveAttachments"
       @toggle-popup="togglePopup"
-      :attachments="attachments"
+      :attachments="task.attachments"
       tabindex="0"
-      @blur.native="togglePopup('Attachment')"
       ref="Attachment"
     />
+    <!-- @blur.native="attachmentBlurHandler" -->
+
+    <button class="btn neutral left-align" @click="removeTask">Archive</button>
   </section>
 </template>
 
 <script>
+import utilService from "@/services/util.service";
+
 import popupCover from "@/cmps/task/popup/popup-cover.vue";
 import popupMember from "@/cmps/task/popup/popup-member";
 import popupChecklist from "@/cmps/task/popup/popup-checklist.vue";
@@ -127,7 +133,7 @@ import popupLabel from "@/cmps/task/popup/popup-label.vue";
 
 export default {
   props: {
-    attachments: Array,
+    task: Object,
   },
   data() {
     return {
@@ -149,9 +155,9 @@ export default {
         const top = targetRect.bottom + 3;
         const left = targetRect.left;
         this.$nextTick(() => {
-          const popup = this.$refs[str].$el;
-          const popupHeight = popup.getBoundingClientRect().height;
+          const popup = this.$refs[str]?.$el;
           if (popup) {
+            const popupHeight = popup.getBoundingClientRect().height;
             popup.style.left = left + "px";
 
             if (popupHeight + top > window.innerHeight) {
@@ -162,48 +168,150 @@ export default {
               popup.style.top = top + "px";
               popup.style.maxHeight = maxHeight + "px";
             }
-
-            // console.log(
-            //   "file: task-control.vue - line 160 - this.$nextTick - window.innerHeight",
-            //   window.innerHeight
-            // );
-            // console.log(
-            //   "file: task-control.vue - line 160 - this.$nextTick - popup.style.height + top",
-            //   maxHeight + top
-            // );
-
             popup.focus();
           }
         });
       }
     },
-    setCoverColor(color) {
-      this.$emit("set-cover-color", color);
+    checklistBlurHandler(ev) {
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (
+          classList.includes("popup-checklist") ||
+          classList.includes("checklist-title") ||
+          classList.includes("checklist-add")
+        )
+          ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Checklist");
+        }
+      } else this.togglePopup("Checklist");
     },
-    saveCoverImg(img) {
-      this.$emit("save-cover-img", img);
-      this.togglePopup("Cover");
+    attachmentBlurHandler(ev) {
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (
+          classList.includes("url-input") ||
+          classList.includes("attachment-add")
+        )
+          ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Attachment");
+        }
+      } else this.togglePopup("Attachment");
     },
-    assignTaskMember(member) {
-      this.$emit("assign-task-member", member);
+    labelBlurHandler(ev) {
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (
+          classList.includes("edit-label") ||
+          classList.includes("search-label") ||
+          classList.includes("label-color")
+        )
+          ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Label");
+        }
+      } else this.togglePopup("Label");
     },
-    removeTaskMember(id) {
-      this.$emit("remove-task-member", id);
-    },
+    // setCoverColor(color) {
+    //   this.$emit("set-cover-color", color);
+    // },
+    // saveCoverImg(img) {
+    //   this.$emit("save-cover-img", img);
+    //   this.togglePopup("Cover");
+    // },
+    // assignTaskMember(member) {
+    //   this.$emit("assign-task-member", member);
+    // },
+    // removeTaskMember(id) {
+    //   this.$emit("remove-task-member", id);
+    // },
     setChecklist(checklist) {
-      this.$emit("set-checklist", checklist);
+      console.log(
+        "file: task-control.vue - line 200 - setChecklist - checklist",
+        checklist
+      );
+      const task = this.task;
+      checklist.id = utilService.makeId();
+      task.checklists.push(checklist);
+      this.saveTask(task);
       this.togglePopup("Checklist");
     },
-    setTaskLabels(labelIds) {
-      this.$emit("set-task-labels", labelIds);
+    // setTaskLabels(labelIds) {
+    //   this.$emit("set-task-labels", labelIds);
+    // },
+    // saveDate(timestamp) {
+    //   this.$emit("save-date", timestamp);
+    //   this.togglePopup("Duedate");
+    // },
+    // saveAttachments(attachments) {
+    //   this.$emit("save-attachments", attachments);
+    //   this.togglePopup("Attachment");
+    // },
+    async saveTask(task) {
+      await this.$store.dispatch({ type: "saveTask", task });
+    },
+    // togglePopup({ str }) {
+    //   var dataStr = `is${str}Open`;
+    //   this[dataStr] = !this[dataStr];
+    // },
+    setCoverColor(color) {
+      this.task.style.coverImg = "";
+      this.task.style.coverColor = color;
+      this.saveTask(this.task);
+    },
+    saveCoverImg(img) {
+      this.task.style.coverColor = "";
+      this.task.style.coverImg = img.url;
+      this.saveTask(this.task);
+    },
+    assignTaskMember(member) {
+      console.log(
+        "file: task-control.vue - line 232 - assignTaskMember - this.task",
+        this.task
+      );
+      if (!this.task.members) this.task.members = [];
+      this.task.members.push(member);
+      this.saveTask(this.task);
+    },
+    removeTaskMember(id) {
+      console.log("memberIdx:");
+      const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
+      if (memberIdx < 0) return;
+      this.task.members.splice(memberIdx, 1);
+      this.saveTask(this.task);
+    },
+    saveChecklist(checklist) {
+      const task = this.task;
+      this.checklist.id = utilService.makeId();
+      task.checklists.push(checklist);
+      this.saveTask(task);
+    },
+    setTaskLabels({ labelIds }) {
+      this.task.labelIds = labelIds;
+      this.saveTask(this.task);
     },
     saveDate(timestamp) {
-      this.$emit("save-date", timestamp);
-      this.togglePopup("Duedate");
+      this.task.duedate = timestamp;
+      this.saveTask(this.task);
     },
     saveAttachments(attachments) {
-      this.$emit("save-attachments", attachments);
-      this.togglePopup("Attachment");
+      this.task.attachments = attachments;
+      console.log(attachments);
+      this.saveTask(this.task);
+    },
+    async removeTask() {
+      await this.$store.dispatch({ type: "removeTask", taskId: this.task.id });
+      const taskId = this.$route.params.taskId;
+      const boardId = this.$route.params.boardId;
+      console.log(
+        "file: task-control.vue - line 307 - removeTask - taskId",
+        this.task
+      );
+      if (taskId) {
+        this.$router.push("/board/" + boardId);
+      }
     },
   },
   components: {
