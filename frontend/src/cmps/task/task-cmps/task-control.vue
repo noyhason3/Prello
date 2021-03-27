@@ -111,10 +111,10 @@
       v-if="isAttachmentOpen"
       @save-attachments="saveAttachments"
       @toggle-popup="togglePopup"
-      :attachments="attachments"
+      :attachments="task.attachments"
       tabindex="0"
       ref="Attachment"
-      @blur.native="togglePopup('Attachment')"
+      @blur.native="attachmentBlurHandler"
     />
   </section>
 </template>
@@ -131,7 +131,6 @@ import popupLabel from "@/cmps/task/popup/popup-label.vue";
 
 export default {
   props: {
-    attachments: Array,
     task: Object,
   },
   data() {
@@ -185,6 +184,19 @@ export default {
           this.togglePopup("Checklist");
         }
       } else this.togglePopup("Checklist");
+    },
+    attachmentBlurHandler(ev) {
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (
+          classList.includes("url-input") ||
+          classList.includes("attachment-add")
+        )
+          ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Attachment");
+        }
+      } else this.togglePopup("Attachment");
     },
     // setCoverColor(color) {
     //   this.$emit("set-cover-color", color);

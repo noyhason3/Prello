@@ -26,7 +26,7 @@
             class="url-name-input"
           />
         </div>
-        <button class="btn neutral narrow">Attach</button>
+        <button class="btn neutral narrow attachment-add">Attach</button>
       </form>
     </div>
   </pop-up>

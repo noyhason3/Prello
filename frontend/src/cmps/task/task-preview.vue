@@ -10,12 +10,7 @@
       class="task-control-screen"
       @click.stop="menuOpen = false"
     >
-      <taskControl
-        :attachments="attachments"
-        :task="task"
-        ref="taskControl"
-        tabindex="0"
-      ></taskControl>
+      <taskControl :task="task" ref="taskControl" tabindex="0"></taskControl>
     </div>
     <!-- @toggle-popup="togglePopup"
         @set-cover-color="setCoverColor"
