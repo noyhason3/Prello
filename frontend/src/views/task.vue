@@ -187,12 +187,12 @@ export default {
       this.groupTitle = group.title;
     },
     setDescription() {
-      this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:'Description was set' });
     },
     setCoverColor(color) {
       this.task.style.coverImg = "";
       this.task.style.coverColor = color;
-      this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:'Cover-color was set' });
     },
     saveCoverImg(img) {
       this.task.style.coverColor = "";
@@ -202,23 +202,24 @@ export default {
     assignTaskMember(member) {
       if (!this.task.members) this.task.members = [];
       this.task.members.push(member);
-      this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:'Member was assigned to task' });
     },
     removeTaskMember(id) {
       const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
       if (memberIdx < 0) return;
       this.task.members.splice(memberIdx, 1);
-      this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:'Member was removed from task' });
+
     },
     setTaskLabels({ labelIds }) {
       this.task.labelIds = labelIds;
-      this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:'Task labels were set' });
     },
     // saveChecklist(checklist) {
     //   const task = this.task;
     //   this.checklist.id = utilService.makeId();
     //   task.checklists.push(checklist);
-    //   this.saveTask(task);
+    //   this.saveTask({task:this.task, activityType:'Checklist was set' });
     // },
     // TODO - MAYBE WE CAN MERGE THESE TWO TO ONE FUNCTION??
     deleteChecklist(checklistId) {
@@ -226,17 +227,17 @@ export default {
         ({ id }) => id === checklistId
       );
       this.task.checklists.splice(idx, 1);
-      this.saveTask(this.task);
+       this.saveTask({task:this.task, activityType:'Checklist was deleted' });
     },
     saveTodo(checklist) {
       const idx = this.task.checklists.findIndex(
         ({ id }) => id === checklist.id
       );
       this.task.checklists.splice(idx, 1, checklist);
-      this.saveTask(this.task);
+       this.saveTask({task:this.task, activityType:'Checklist-todo was saved' });
     },
-    async saveTask(task) {
-      await this.$store.dispatch({ type: "saveTask", task });
+    async saveTask({task, activityType}) {
+      await this.$store.dispatch({ type: "saveTask", task, activityType });
     },
     closeTask() {
       const boardId = this.$route.params.boardId;

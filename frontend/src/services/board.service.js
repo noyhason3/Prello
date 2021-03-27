@@ -1,5 +1,6 @@
 import { httpService } from './http.service.js';
 import utilService from './util.service.js';
+import { userService } from './user.service.js';
 
 const BOARD_URL = 'board/';
 
@@ -12,6 +13,7 @@ export const boardService = {
   getEmptyGroup,
   getEmptyTask,
   getEmptyTemplate,
+  getEmptyActivity,
 };
 
 function getById(boardId) {
@@ -26,14 +28,23 @@ function remove(id) {
   return httpService.delete(BOARD_URL + id);
 }
 
-async function save(board) {
+async function save(data) {
+  const board = data.board;
   if (board._id) {
-    var savedBoard = await httpService.put(BOARD_URL + board._id, board);
+    var savedBoard = await httpService.put(BOARD_URL + board._id, data);
     return savedBoard;
   } else {
     return await httpService.post(BOARD_URL, board);
   }
 }
+// async function save(board) {
+//   if (board._id) {
+//     var savedBoard = await httpService.put(BOARD_URL + board._id, board);
+//     return savedBoard;
+//   } else {
+//     return await httpService.post(BOARD_URL, board);
+//   }
+// }
 
 function getEmptyBoard() {
   return {
@@ -80,4 +91,22 @@ function getEmptyTemplate() {
     groups.push(group);
   }
   return groups;
+}
+
+function getEmptyActivity({ currTask, txt }) {
+  const loggedinUser = userService.getLoggedinUser();
+  return {
+    id: utilService.makeId(),
+    txt,
+    createdAt: Date.now(),
+    byMember: {
+      _id: loggedinUser._id,
+      fullname: loggedinUser.fullname,
+      // imgUrl: loggedinUser.imgUrl,
+    },
+    task: {
+      id: currTask.id,
+      title: currTask.title,
+    },
+  };
 }
