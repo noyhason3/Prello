@@ -9,7 +9,7 @@
     <board-header 
     :board="board" 
     :boardStyle="boardStyle" 
-    />
+    @toggle-board-menu="toggleBoardMenu"/>
     <draggable
       v-model="board.groups"
       group="group"
@@ -52,7 +52,12 @@
         />
       </div>
     </draggable>
-
+    <board-menu
+      :boardStyle="boardStyle"
+      :board="board"
+      :class="{ 'show-menu': isOpenMenu }"
+      @toggle-board-menu="toggleBoardMenu"
+    />
     <router-view />
   </section>
 </template>
@@ -64,6 +69,7 @@ import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
 import editableText from "@/cmps/common/editable-text.vue";
 import draggable from "vuedraggable";
+import boardMenu from "@/cmps/board/board-menu.vue";
 
 export default {
   data() {
@@ -71,6 +77,8 @@ export default {
       maxHeight: "0px",
       isAddNewGroup: false,
       newGroup: JSON.parse(JSON.stringify(this.$store.getters.getEmptyGroup)),
+      isOpenMenu: false,
+
     };
   },
   async created() {
@@ -120,6 +128,9 @@ export default {
         body.classList.remove("img-bg");
       }
     },
+    toggleBoardMenu() {
+      this.isOpenMenu = !this.isOpenMenu;
+    },
   },
   computed: {
     board() {
@@ -141,7 +152,7 @@ export default {
         };
       }
     },
-     boardStyle() {
+    boardStyle() {
       if (this.board.style.bgImg) {
         const img = require("@/assets/img/background/" +
           this.board.style.bgImg.value);
@@ -160,6 +171,7 @@ export default {
     group,
     editableText,
     draggable,
+    boardMenu,
   },
 };
 </script>

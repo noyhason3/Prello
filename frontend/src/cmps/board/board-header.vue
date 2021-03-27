@@ -17,18 +17,11 @@
       <span class="icon elipsis"></span>
       Show Menu
     </button>
-    <board-menu
-      :boardStyle="boardStyle"
-      :board="board"
-      :class="{ 'show-menu': isOpenMenu }"
-      @toggle-board-menu="toggleBoardMenu"
-    />
   </section>
 </template>
 <script>
 import memberList from "../common/member-list.vue";
 import editableTitle from "@/cmps/common/editable-title.vue";
-import boardMenu from "./board-menu.vue";
 export default {
   props: {
     board: Object,
@@ -37,7 +30,6 @@ export default {
   data() {
     return {
       isBoardOpen: false,
-      isOpenMenu: false,
     };
   },
   created() {
@@ -51,7 +43,7 @@ export default {
       this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
     toggleBoardMenu() {
-      this.isOpenMenu = !this.isOpenMenu;
+      this.$emit("toggle-board-menu");
     },
   },
   computed: {
@@ -77,7 +69,6 @@ export default {
   components: {
     editableTitle,
     memberList,
-    boardMenu,
   },
 };
 </script>

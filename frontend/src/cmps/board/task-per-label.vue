@@ -7,19 +7,8 @@ export default {
     labels: Array,
     data: Array,
     colors: Array,
+    options:Object
   },
-  data() {
-    return {
-      Options: {
-        legend: {
-          labels: {
-            fontColor: "#ffffff",
-          },
-        },
-      },
-    };
-  },
-
   mounted() {
     this.renderChart(
       {
@@ -35,7 +24,7 @@ export default {
           },
         ],
       },
-      this.Options
+      this.options
     );
   },
 };

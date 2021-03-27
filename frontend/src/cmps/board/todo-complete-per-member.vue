@@ -3,15 +3,11 @@ import { Line } from "vue-chartjs";
 
 export default {
   extends: Line,
-  data(){
-      return{
-          Options:{legend:{fontColor:blue}}
-      }
-  },
   props: {
     labels: Array,
     data: Array,
-    colors:Array
+    colors:Array,
+    options:Object
   },
   mounted() {
     this.renderChart({
@@ -24,7 +20,7 @@ export default {
           data: this.data,
         },
       ],
-    }, this.Options);
+    }, this.options);
   },
 
 };
