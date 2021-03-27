@@ -14,36 +14,41 @@
       :isTaskRelated="false"
       class="board-header-members"
     />
-    <!-- <div class="board-header-members"> -->
-    <!-- </div> -->
-    <button class="menu-btn">
-      <span class="icon elipsis"></span>Show Menu
+    <button @click="toggleBoardMenu" class="menu-btn">
+      <span class="icon elipsis"></span>
+      Show Menu
     </button>
+   <board-menu :boardStyle="boardStyle" :class="{'show-menu':isOpenMenu}" @toggle-board-menu="toggleBoardMenu"/>
   </section>
 </template>
 <script>
 import memberList from "../common/member-list.vue";
 import editableTitle from "@/cmps/common/editable-title.vue";
+import boardMenu from './board-menu.vue'
 export default {
   props: {
     board: Object,
+    boardStyle: Object,
   },
   data() {
     return {
       isBoardOpen: false,
+      isOpenMenu:false
     };
   },
   created() {
     const boardId = this.$route.params.boardId;
     if (boardId) return (this.isBoardOpen = true);
     this.isBoardOpen = false;
-;
   },
   methods: {
     toggleStarred() {
       this.board.isStarred = !this.board.isStarred;
       this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
+    toggleBoardMenu(){
+      this.isOpenMenu = !this.isOpenMenu 
+    }
   },
   computed: {
     starredClass() {
@@ -51,7 +56,7 @@ export default {
       str += this.board.isStarred ? "active" : "unactive";
       return str;
     },
-    saveBoard(val) {
+    saveBoard() {
       this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
   },
@@ -60,11 +65,14 @@ export default {
       this.saveBoard;
     },
     async "$route.params.boardId"(boardId) {
-      if (!boardId) return this.isBoardOpen = false;
+      if (!boardId) return (this.isBoardOpen = false);
       this.isBoardOpen = true;
-      this.$store.commit('setBoard', this.board)
+      this.$store.commit("setBoard", this.board);
     },
   },
-  components: { editableTitle, memberList },
+  components: { 
+    editableTitle, 
+    memberList,
+    boardMenu },
 };
 </script>

@@ -49,7 +49,6 @@ function connectSockets(http, session) {
     // socket.to(board._id).emit('notification', msg);
     // });
     socket.on('join-user', (userId) => {
-      console.log(userId, '*****************************************************');
       socket.join(userId);
     });
     socket.on('join-task', (taskId) => {

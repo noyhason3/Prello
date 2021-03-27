@@ -28,14 +28,23 @@ function remove(id) {
   return httpService.delete(BOARD_URL + id);
 }
 
-async function save(board) {
+async function save(data) {
+  const board = data.board;
   if (board._id) {
-    var savedBoard = await httpService.put(BOARD_URL + board._id, board);
+    var savedBoard = await httpService.put(BOARD_URL + board._id, data);
     return savedBoard;
   } else {
     return await httpService.post(BOARD_URL, board);
   }
 }
+// async function save(board) {
+//   if (board._id) {
+//     var savedBoard = await httpService.put(BOARD_URL + board._id, board);
+//     return savedBoard;
+//   } else {
+//     return await httpService.post(BOARD_URL, board);
+//   }
+// }
 
 function getEmptyBoard() {
   return {

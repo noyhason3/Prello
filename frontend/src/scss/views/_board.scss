@@ -1,4 +1,4 @@
-.board{
+.board-container{
     display:flex;
     flex-direction: column;
     flex-grow: 1;
@@ -17,7 +17,7 @@
         overflow-x: auto;
         display: flex;
         flex-grow: 1;
-        padding: 5px;
+        padding: 0px 4px 5px;
         margin-block-end:5px;
         .group{
             margin-inline:4px;

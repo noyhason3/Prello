@@ -19,23 +19,27 @@
       class="search-container"
       @click="openSearch"
       :class="{ active: isActive }"
+      ref="boardSearch"
+      tabindex="0;"
+      @blur="closeSearch"
     >
+      <board-search-popup
+        v-if="isActive"
+        :boards="boards"
+        @close-search="closeSearch"
+        tabindex="0"
+        @blur.native="blurHandler"
+      />
       <input
         type="text"
         :placeholder="placeholder"
         v-model="filterBy.txt"
         @input="searchBoards"
+        @blur="blurHandler"
       />
       <span v-if="!isActive" class="icon search"></span>
       <span v-else @click.stop="closeSearch" class="icon x"></span>
-      <board-search-popup
-        v-if="isActive"
-        :boards="boards"
-        @close-search="closeSearch"
-         @mousedown.native="logHi"
-      />
     </div>
-        <!-- @mouseleave.native="logHi" -->
 
     <div>
       <!-- TODO: ADD Board Menue -->
@@ -58,8 +62,9 @@ export default {
     this.boards = await this.$store.dispatch({ type: "loadBoards" });
   },
   methods: {
-    openSearch() {
+    async openSearch() {
       this.isActive = true;
+      this.$refs.boardSearch.focus;
       this.placeholder = "Search...";
     },
     closeSearch() {
@@ -73,6 +78,20 @@ export default {
     },
     logHi() {
       console.log("hI! :)");
+    },
+    blurHandler(ev) {
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (
+          classList.includes("board-search") ||
+          classList.includes("search-container")
+        )
+          ev.target.focus();
+        else {
+          console.log("closeSearch");
+          this.closeSearch();
+        }
+      } else this.closeSearch();
     },
   },
   computed: {

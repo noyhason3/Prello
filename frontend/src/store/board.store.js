@@ -38,7 +38,9 @@ export const boardStore = {
   },
   mutations: {
     setBoard(state, { board }) {
+      console.log('file: board.store.js - line 41 - setBoard - board', board);
       state.board = board;
+      console.log(state.board);
     },
     setBoards(state, { boards }) {
       state.boards = boards;
@@ -77,8 +79,6 @@ export const boardStore = {
         socketService.off('board-update');
         socketService.emit('join-board', boardId);
         socketService.on('board-update', (board) => {
-          // console.log('socket emitted- board update');
-          // console.log(board.activities[board.activities.length-1]);
           commit({ type: 'setBoard', board });
         });
         // socketService.on('task-update', (task) => {
@@ -89,12 +89,10 @@ export const boardStore = {
         console.log('err', err);
       }
     },
-    async saveBoard({ commit }, { board, activity }) {
+    async saveBoard({ commit }, { board, activity, task }) {
       try {
-        if (activity) board.activities.push(activity);
-        const currBoard = await boardService.save(board);
+        const currBoard = await boardService.save({ board, activity, task });
         commit({ type: 'setBoard', board: currBoard });
-        // await socketService.emit('save-board', { board, activity });
         return board;
       } catch (err) {
         console.log('err:', err);
@@ -125,21 +123,23 @@ export const boardStore = {
         board.groups.push(group);
       }
       await boardService.save(board);
-      commit({ type: 'setBoard', currBoard: board });
+      commit({ type: 'setBoard', board });
     },
     async removeGroup({ commit, state }, { groupId }) {
       const board = JSON.parse(JSON.stringify(state.board));
       const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
       if (groupIdx < 0) return;
       board.groups.splice(groupIdx, 1);
+      console.log('Remove group - line 134 - board store - board', board);
       await boardService.save(board);
-      commit({ type: 'setBoard', currBoard: board });
+      commit({ type: 'setBoard', board });
     },
-    async saveTask({ commit, state, dispatch }, { groupId, task }) {
+    async saveTask({ commit, state, dispatch }, { groupId, task, activityType }) {
+      console.log(task,'***********');
       const board = JSON.parse(JSON.stringify(state.board));
       const activity = boardService.getEmptyActivity({
         currTask: task,
-        txt: 'Task saved!',
+        txt: activityType,
       });
       if (groupId)
         var group = board.groups.find(
@@ -161,7 +161,7 @@ export const boardStore = {
         group.tasks.push(task);
       }
       try {
-        board.activities.push(activity)
+        board.activities.push(activity);
         // task.members.forEach(member => {
         //   console.log(member);
         //     socketService.emit('activity-update',{userId:member._id, activity})
@@ -175,8 +175,11 @@ export const boardStore = {
       }
     },
     async removeTask({ state, commit, dispatch }, { taskId }) {
-      console.log('hi');
       const board = JSON.parse(JSON.stringify(state.board));
+      const activity = boardService.getEmptyActivity({
+        currTask: state.task,
+        txt: 'Task removed!',
+      });
       const group = board.groups.find((savedGroup) =>
         savedGroup.tasks.some((savedTask) => savedTask.id === taskId)
       );
@@ -186,6 +189,7 @@ export const boardStore = {
       if (taskIdx < 0) return;
       group.tasks.splice(taskIdx, 1);
       try {
+        board.activities.push(activity);
         await dispatch('saveBoard', { board });
       } catch (err) {
         console.log('err:', err);
@@ -194,9 +198,15 @@ export const boardStore = {
 
     async saveBoardLabels({ state, commit }, { labels }) {
       const board = JSON.parse(JSON.stringify(state.board));
+      
+      const activity = boardService.getEmptyActivity({
+        currTask: state.task,
+        txt: 'Label added!',
+      });
       board.labels = labels;
-      await boardService.save(board);
-      commit({ type: 'setBoard', currBoard: board });
+      board.activities.push(activity);
+      await dispatch('saveBoard', { board });
+      commit({ type: 'setBoard', board });
     },
 
     // FOR ADVANCED STEPS- WITH WEB SOCKETS *****************************************

@@ -1,8 +1,6 @@
-.board {
-
-
+.board-container {
     .board-header {
-        padding: 10px;
+        padding: 10px 8px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -29,7 +27,8 @@
             height: 100%;
 
         }
-        .board-title>*:hover{
+
+        .board-title>*:hover {
             background-color: rgba(235, 235, 235, 0.5);
 
         }
@@ -78,47 +77,19 @@
             background-color: rgba(rgb(235, 235, 235), 0.3);
             right: 8px;
         }
+        .menu-btn span.icon {
+            margin-inline-end: 6px;
+        }
+
         .menu-btn:hover {
             background-color: rgba(235, 235, 235, 0.5);
 
         }
 
-        // .is-starred {
-        //     $starColor: #f2d600;
-        //     color: $starColor;
-        //     font-family: 'fa-reg';
-        //     margin-inline-end: 20px;
-        //     margin-inline-start: 10px;
-
-        //     &.active {
-        //         font-family: 'fa-solid'
-        //     }
-
-        //     font-size: rem(18px);
-        //     padding:2px;
-        //     outline:none;
-        //     background: transparent;
-        //     border: 2px solid $starColor;
-        //     transition:color .25s linear border .25s linear;
-
-        //     &:active {
-        //         border-color: darken($starColor, 2);
-        //         color: darken($starColor, 8);
-        //         transition: color .25s linear border .25s linear;
-        //     }
-
-        //     &:focus {
-        //         border-color: darken($starColor, 5);
-        //     }
-        // }
-
         .board-header-members {
-        // display: inline-flex;
-        position: absolute;
-        // top: 10px;
-        right: 50%;
-        transform: translateX(50%)
+            position: absolute;
+            right: 50%;
+            transform: translateX(50%)
         }
-
     }
 }

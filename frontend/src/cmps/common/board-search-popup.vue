@@ -5,7 +5,6 @@
       :key="board._id"
       :style="boardStyle(board)"
       @click.stop="openBoard(board._id)"
-      
     >
       <a class="nav-board-preview">
         {{ board.title }}
@@ -28,13 +27,9 @@ export default {
       }
       return { backgroundColor: board.style.bgColor.value };
     },
-    openBoard(boardId) {
-      this.$router.push("/board/" + boardId);
-      console.log("[close search");
+    async openBoard(boardId) {
+      await this.$router.push("/board/" + boardId);
       this.$emit("close-search");
-    },
-    logHi() {
-      console.log("hI! :)");
     },
   },
 };

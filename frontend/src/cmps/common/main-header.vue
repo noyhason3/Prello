@@ -25,7 +25,6 @@ export default {
   },
     watch: {
     '$route.params.boardId'(boardId) {
-      // console.log('boardId:', boardId)
       if(boardId) return this.isBoardOpen = true;
       this.isBoardOpen =false;
     },
@@ -36,6 +35,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>

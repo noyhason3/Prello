@@ -1,8 +1,8 @@
 <template>
   <section class="task-attachment-container">
     <div class="task-main-layout headline">
-    <div class="icon attachment"></div>
-    <h4>Attachments</h4>
+      <div class="icon attachment"></div>
+      <h4>Attachments</h4>
     </div>
     <ul class="clean-list">
       <li
@@ -17,20 +17,19 @@
         />
         <div class="attachment-info">
           <div>
-
-          <h5>{{ attachment.title }}</h5>
-          <p>Added {{ date(attachment.createdAt) }}</p>
-          <!-- <button class="btn attachment-action">Comment</button> -->
+            <h5>{{ attachment.title }}</h5>
+            <p>Added {{ date(attachment.createdAt) }}</p>
+            <!-- <button class="btn attachment-action">Comment</button> -->
           </div>
           <div>
             <button
               @click="removeAttachment(attachment.id)"
               class="btn attachment-action"
             >
-              Delete
-            </button>-
+              Delete</button
+            >-
             <button
-              @click="editAttachment(attachment)"
+              @click="editAttachment(attachment, $event)"
               class="btn attachment-action"
             >
               Edit
@@ -42,7 +41,12 @@
       </li>
     </ul>
     <button class="btn neutral task-secondary-layout">Add an attachment</button>
-    <popup v-if="selectedAttachment" class="attachment-edit" :style="{'max-height':'fit-content', top:'500px'}">
+    <popup
+      v-if="selectedAttachment"
+      class="attachment-edit"
+      :style="{ 'max-height': 'fit-content' }"
+      ref="popup"
+    >
       <div slot="header" class="task-popup-header">
         <h2>Edit attachment</h2>
         <button @click="closeEditAttachment" class="btn close icon x"></button>
@@ -83,8 +87,18 @@ export default {
       this.attachmentsToEdit.splice(attachmentIdx, 1);
       this.$emit("save-attachments", this.attachmentsToEdit);
     },
-    editAttachment(attachment) {
+    editAttachment(attachment, ev) {
       this.selectedAttachment = { ...attachment };
+      const rect = ev.target.getBoundingClientRect();
+      console.log(
+        "file: task-attachment.vue - line 93 - editAttachment - rect",
+        rect
+      );
+      this.$nextTick(() => {
+        const element = this.$refs.popup.$el;
+        element.style.top = rect.bottom + "px";
+        element.style.left = rect.left + "px";
+      });
     },
     closeEditAttachment() {
       this.selectedAttachment = null;
