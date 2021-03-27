@@ -6,7 +6,18 @@
         @input="saveGroup(group)"
       ></editableTitle>
 
-      <button @click="removeGroup" class="icon elipsis preview"></button>
+      <!-- <button @click="removeGroup" class="icon elipsis preview"></button> -->
+      <button
+        @click="isEditing = !isEditing"
+        class="icon elipsis preview"
+      ></button>
+      <div v-if="isEditing">
+        <popUp style="display: block; position: unset">
+          <ul class="clean-list" slot="main">
+            <li @click="removeGroup">Archive Group</li>
+          </ul>
+        </popUp>
+      </div>
     </div>
     <div class="tasks-wrapper">
       <draggable
@@ -31,7 +42,7 @@
         />
       </draggable>
     </div>
-  
+
     <div class="add-task">
       <button v-if="!isAddNewTask" @click="isAddNewTask = true">
         <span>+</span>
@@ -65,6 +76,7 @@ import boardService from "@/services/board.service.js";
 import taskPreview from "../task/task-preview.vue";
 import editableText from "../common/editable-text.vue";
 import editableTitle from "../common/editable-title.vue";
+import popUp from "@/cmps/common/pop-up.vue";
 
 export default {
   props: {
@@ -78,6 +90,7 @@ export default {
       isAddNewTask: false,
       ghostRect: null,
       emptyList: [],
+      isEditing: false,
     };
   },
   methods: {
@@ -121,14 +134,14 @@ export default {
         return false;
       }
     },
-    startDrag(ev){
+    startDrag(ev) {
       //TODO
     },
     endDrag(ev) {
       this.$emit("save-board");
     },
   },
-  components: { taskPreview, editableText, draggable, editableTitle },
+  components: { taskPreview, editableText, draggable, editableTitle, popUp },
 };
 </script>
 

@@ -11,7 +11,7 @@ export const boardStore = {
     boardHeader: null,
   },
   getters: {
-    boards(state){   
+    boards(state) {
       return state.boards;
     },
     currBoard(state) {
@@ -38,7 +38,9 @@ export const boardStore = {
   },
   mutations: {
     setBoard(state, { board }) {
+      console.log("file: board.store.js - line 41 - setBoard - board", board)
       state.board = board;
+      console.log(state.board)
     },
     setBoards(state, { boards }) {
       state.boards = boards;
@@ -92,7 +94,7 @@ export const boardStore = {
       try {
         console.log(msg);
         const currBoard = await boardService.save(board);
-        commit({ type: 'setBoard', board:currBoard });
+        commit({ type: 'setBoard', board: currBoard });
         await socketService.emit('save-board', board);
         return board;
       } catch (err) {
@@ -124,15 +126,16 @@ export const boardStore = {
         board.groups.push(group);
       }
       await boardService.save(board);
-      commit({ type: 'setBoard', currBoard: board });
+      commit({ type: 'setBoard', board });
     },
     async removeGroup({ commit, state }, { groupId }) {
       const board = JSON.parse(JSON.stringify(state.board));
       const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
       if (groupIdx < 0) return;
       board.groups.splice(groupIdx, 1);
+      console.log('Remove group - line 134 - board store - board', board)
       await boardService.save(board);
-      commit({ type: 'setBoard', currBoard: board });
+      commit({ type: 'setBoard', board });
     },
     async saveTask({ commit, state, dispatch }, { groupId, task }) {
       const board = JSON.parse(JSON.stringify(state.board));
@@ -157,7 +160,7 @@ export const boardStore = {
         group.tasks.push(task);
       }
       try {
-        await dispatch('saveBoard', { board , msg:'task saved'});
+        await dispatch('saveBoard', { board, msg: 'task saved' });
         // await dispatch({type:"saveBoard", board ,msg});
 
         commit({ type: 'setCurrTask', task });
@@ -187,7 +190,7 @@ export const boardStore = {
       const board = JSON.parse(JSON.stringify(state.board));
       board.labels = labels;
       await boardService.save(board);
-      commit({ type: 'setBoard', currBoard: board });
+      commit({ type: 'setBoard', board });
     },
 
     // FOR ADVANCED STEPS- WITH WEB SOCKETS *****************************************
