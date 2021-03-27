@@ -13,10 +13,7 @@
 @import 'basics/icons';
 
 // Components
-@import 'cmps/main-header';
-@import 'cmps/board-header';
-@import 'cmps/group';
-@import 'cmps/add-new-group';
+@import 'cmps/common/main-header';
 @import "cmps/user-form";
 @import 'cmps/task-preview';
 @import 'cmps/task-cmps/task-cover';
@@ -35,6 +32,11 @@
 @import 'cmps/task-cmps/task-control';
 @import 'cmps/bio';
 
+//Board components
+@import 'cmps/board/board-header';
+@import 'cmps/board/board-menu';
+@import 'cmps/board/group';
+@import 'cmps/board/add-new-group';
 //Common components
 @import 'cmps/common/popup';
 @import 'cmps/common/board-search-popup';
