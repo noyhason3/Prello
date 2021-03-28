@@ -13,8 +13,8 @@
       v-if="menuOpen"
       tabindex="0"
       ref="groupEdit"
+      @blur.native="editBlurHandler"
     >
-      <!-- @blur.native="editBlurHandler" -->
       <template slot="main">
         <button
           @click="isEditing = !isEditing"
