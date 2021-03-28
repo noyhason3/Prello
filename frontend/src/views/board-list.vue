@@ -99,7 +99,8 @@ export default {
     },
 
     boardStyle(board) {
-      if (board.style.bgImg) {
+      if (board.style.bgImg?.value) {
+        console.log('board.style.bgImg:', board.style.bgImg)
         const img = require("@/assets/img/background/" +
           board.style.bgImg.value);
         return { backgroundImage: `url(${img})` };
