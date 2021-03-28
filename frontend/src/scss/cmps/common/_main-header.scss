@@ -3,31 +3,35 @@
     padding: 4px 4px ;
     display: flex;
     justify-content: space-between;
-    background: $clr5;
-    @include for-mobile-layout{
-        flex-flow: column;
+    flex-flow: column;
         align-items: center;
+    background: $clr5;
+    .logo {
+        height: 28px;
+        opacity: .65;
+        object-fit: contain;
+
+        position: absolute;
+        right:0;
+        top:43px;
+    }
+    :last-child{
+        margin-block-start: 5px;
+    }
+    @include for-normal-layout{
+        flex-flow: row;
         .logo{
             position: absolute;
-            right:0;
-            top:43px;
+            left: 50%;
+            top:5px;
+            transform: translate(-50%);
         }
-        :last-child{
-            margin-block-start: 5px;
-        }
+        
     }
     &.img-bg {
         background: rgba(0, 0, 0, 0.075);
     }
 
-    .logo {
-        height: 28px;
-        opacity: .65;
-        object-fit: contain;
-        //position: absolute;
-        //left: 50%;
-        //transform: translate(-50%);
-    }
 
     nav {
         display: flex;
