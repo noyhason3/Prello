@@ -18,16 +18,7 @@
     :last-child{
         margin-block-start: 5px;
     }
-    @include for-normal-layout{
-        flex-flow: row;
-        .logo{
-            position: absolute;
-            left: 50%;
-            top:5px;
-            transform: translate(-50%);
-        }
-        
-    }
+
     &.img-bg {
         background: rgba(0, 0, 0, 0.075);
     }
@@ -38,10 +29,9 @@
         justify-content: center;
         align-items: center;
         width: fit-content;
-
+        height:fit-content;
         .boards {
-            padding-inline-start: 10px;
-            padding-inline-end: 10px;
+            padding-inline: 10px;
         }
         .icon.x,
         .icon.board,
@@ -82,6 +72,7 @@
         .nav-link,
         .search-container {
             // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            height: 100%;
             display: flex;
             font-weight: bold;
             text-decoration: none;
@@ -94,7 +85,6 @@
         }
         .nav-link{
             //padding:5px;
-            height: 100%;
             justify-content: center;
             align-items: center;
         }
@@ -133,5 +123,16 @@
 
         
    
-
+    @include for-normal-layout{
+            flex-flow: row;
+            .logo{
+                position: absolute;
+                left: 50%;
+                top:5px;
+                transform: translate(-50%);
+            }
+            nav{
+                height:100%;
+            }
+    }
 }
