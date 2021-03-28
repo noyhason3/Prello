@@ -55,6 +55,7 @@
     <board-menu
       :boardStyle="boardStyle"
       :board="board"
+      :taskId="this.task._id"
       :class="{ 'show-menu': isOpenMenu }"
       @toggle-board-menu="toggleBoardMenu"
     />
@@ -160,6 +161,9 @@ export default {
       }
       return { backgroundColor: this.board.style.bgColor.value };
     },
+    task(){
+      return this.$store.getters.currTask;
+    }
   },
   watch: {
     "$route.params.boardId"(boardId) {

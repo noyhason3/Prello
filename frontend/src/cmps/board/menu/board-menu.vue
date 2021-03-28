@@ -16,11 +16,14 @@
           </li>
         </ul>
       </div>
-      <div slot="footer" class="board-menu-layout activity-list">
-        <div class="icon list"></div>
-        <h3>Activity</h3>
+      <div slot="footer" class="activity-list">
+        <div class="board-menu-layout">
+          <div class="icon list"></div>
+          <h3>Activity</h3>
+        </div>
       </div>
-        <activity-list />
+      <activity-list :activities="this.activites" />
+      <!-- <activity-list /> -->
     </board-menu-popup>
     <board-menu-style
       v-else
@@ -39,11 +42,23 @@ export default {
   props: {
     boardStyle: Object,
     board: Object,
+    taskId: String,
   },
   data() {
     return {
       isMainMenu: true,
     };
+  },
+  conputed: {
+    activities() {
+      if (taskId) {
+        return this.board.activities.filter((activity) => {
+          return activity.task._id === this.taskId;
+        });
+      } else {
+        return this.board.activities;
+      }
+    },
   },
   methods: {
     toggleBoardMenu() {
