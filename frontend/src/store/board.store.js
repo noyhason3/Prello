@@ -128,13 +128,14 @@ export const boardStore = {
       await dispatch({ type: 'saveBoard', board })
       commit({ type: 'setBoard', board });
     },
-    async removeGroup({ commit, state }, { groupId }) {
+    async removeGroup({ commit, dispatch, state }, { groupId }) {
       const board = JSON.parse(JSON.stringify(state.board));
       const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
       if (groupIdx < 0) return;
       board.groups.splice(groupIdx, 1);
       console.log('Remove group - line 134 - board store - board', board);
-      await boardService.save(board);
+      //await boardService.save(board);
+      await dispatch({ type: 'saveBoard', board })
       commit({ type: 'setBoard', board });
     },
     async saveTask(

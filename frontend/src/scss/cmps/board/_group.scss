@@ -49,11 +49,17 @@
   //EDIT-POPUP
   .group-edit-popup{
     transform: translate(240px,35px);
+    background: #ebecf0!important ;
+    //outline: none;
     main{
       display: flex;
       flex-flow: column;
       max-height: unset!important;
       height: fit-content;
+    }
+    .color-box.active{
+      filter:brightness(1.2);
+      box-shadow:$subtle-shadow;
     }
   }
 
@@ -92,7 +98,8 @@
     overflow-y: auto;
     .group-tasks {
       height: 100%;
-      //overflow-y: auto;
+      overflow-y: auto;
+      //overflow-y: hidden;
       margin-inline: 4px;
       :first-child {
         margin-block-start: 0;

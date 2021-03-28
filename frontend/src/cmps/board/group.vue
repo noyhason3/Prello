@@ -6,23 +6,20 @@
         @input="saveGroup(group)"
       ></editableTitle>
 
-      <!-- <button @click="removeGroup" class="icon elipsis preview"></button> -->
-      <button
-        @click="
-          menuOpen = !menuOpen;
-          refs.groupEdit.focus();
-        "
-        class="icon elipsis preview"
-      ></button>
+      <button @click="toggleEditMenu" class="icon elipsis preview"></button>
     </div>
     <popUp
       class="group-edit-popup"
       v-if="menuOpen"
       tabindex="0"
       ref="groupEdit"
+      @blur.native="editBlurHandler"
     >
       <template slot="main">
-        <button @click="isEditing = !isEditing" class="btn neutral left-align">
+        <button
+          @click="isEditing = !isEditing"
+          class="btn neutral left-align group-edit-btn edit-color"
+        >
           <span class="icon cover" />
           Edit Group Color
         </button>
@@ -30,7 +27,7 @@
           <ul class="colors-list clean-list" slot="main">
             <li v-for="(color, idx) in colorsPalette" :key="idx">
               <div
-                class="color-box btn"
+                :class="getEditColorClass(color)"
                 :style="`background-color: ${color}`"
                 @click="saveGroupColor(color)"
               />
@@ -38,12 +35,18 @@
           </ul>
         </div>
 
-        <button @click="isAddNewTask = true" class="btn neutral left-align">
+        <button
+          class="btn neutral left-align group-edit-btn add-card"
+          @click="isAddNewTask = true"
+        >
           <span class="icon plus" />
           Add another card
         </button>
 
-        <button @click="removeGroup" class="btn neutral left-align">
+        <button
+          @click="removeGroup"
+          class="btn neutral left-align group-edit-btn"
+        >
           <span class="icon archive" />
           Archive Group
         </button>
@@ -193,6 +196,37 @@ export default {
       var group = this.$refs.group;
       const color = this.group.style.bgColor?.value || "#ebecf0";
       group.style.setProperty("--bgColor", color);
+    },
+    toggleEditMenu() {
+      this.menuOpen = !this.menuOpen;
+      if (this.menuOpen) {
+        this.$nextTick(() => {
+          this.$refs.groupEdit.$el.focus();
+        });
+      }
+    },
+    editBlurHandler(ev) {
+      const cb = () => {
+        this.menuOpen = false;
+        this.isEditing = false;
+      };
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (classList.includes("group-edit-btn")) {
+          ev.target.focus();
+          if (classList.includes("add-card")) {
+            this.isAddNewTask = true;
+            cb();
+          } else if (!classList.includes("edit-color")) cb();
+        }
+      } else cb();
+    },
+    getEditColorClass(color) {
+      var str = "color-box btn";
+      if (color === this.group.style.bgColor?.value) {
+        str += " active";
+      }
+      return str;
     },
     endDrag(ev) {
       this.$emit("save-board");

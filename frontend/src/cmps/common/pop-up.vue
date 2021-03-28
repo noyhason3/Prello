@@ -21,10 +21,6 @@ export default {
         .height;
       const diff = beforeHeight - containerHeight;
       const main = this.$refs.main;
-      // const footerHeight = this.$refs.footer.getBoundingClientRect().height;
-      // const headerHeight = this.$refs.header.getBoundingClientRect().height;
-      // main.style.maxHeight =
-      //   containerHeight - (footerHeight + headerHeight) + "px";
       main.style.maxHeight = containerHeight - diff + "px";
     });
   },

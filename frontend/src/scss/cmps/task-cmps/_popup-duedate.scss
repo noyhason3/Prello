@@ -1,5 +1,8 @@
 .popup-duedate {
   // width: 100px;
+  max-height: fit-content!important;
+  left:unset!important;right:unset!important;top:50%!important;bottom:unset!important;
+  transform: translateY(-50%);
   .vdp-datepicker__calendar {
     width: 100%;
     border-style: none;
