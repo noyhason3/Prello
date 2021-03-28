@@ -1,48 +1,44 @@
+.board-menu-popup {
 
-.board-menu {
-    width: 340px;
-    background-color: rgb(250, 250, 250);
-    position: fixed;
-    right:-600px;
-    top: 42px;
-    bottom: 0;
-    height: 100%;
-    transition: 0.2s ease-in-out;
-    z-index:3;
-    header {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        border-bottom: 1px solid rgb(223, 222, 222);
-        margin: 0 6px 0 12px;
+    >* {
         padding: 14px 0;
+        margin: 0px 12px;
 
+    }
+
+    header {
+        border-bottom: 1px solid rgb(223, 222, 222);
+        display:flex;
+        align-items: center;
+        justify-content: center;
         .icon.x {
             float: unset;
             position: absolute;
             right: 8px;
+            width: 12px;
+            height: 12px;
         }
-
-        .headline {
-            text-align: center;
-            color: $clr5;
-            font-size: 1rem;
-            margin: 0 auto;
+        .icon.back{
+            position: absolute;
+            left: 8px;
         }
     }
 
     main {
-        margin: 12px 6px 12px 12px;
-        .clean-list{
-            padding-bottom:15px;
-            border-bottom: 1px solid rgb(223, 222, 222);
-        }
+        overflow-y: auto;
+    }
 
-        li {
-            cursor:pointer;
-        }
+    li {
+        cursor: pointer;
+    }
 
-        .thumbnail,
+    .headline {
+        text-align: center;
+        color: $clr5;
+        font-size: 1rem;
+        margin: 0 auto;
+    }
+    .thumbnail,
         .icon {
             color: $clr5;
             width: 20px;
@@ -51,9 +47,9 @@
             border-radius: 3px;
             text-align: center;
             margin: auto;
-            font-size: 0.8rem;
 
         }
+
         .thumbnail,
         .dashboard.icon {
             margin-top: 8px;
@@ -81,8 +77,57 @@
 
             font-size: 0.92rem;
         }
+
+}
+
+.board-menu {
+    width: 340px;
+    border-radius: 3px;
+    background-color: rgb(250, 250, 250);
+    height: 100%;
+    right: -600px;
+    position: fixed;
+    top: 42px;
+    bottom: 0;
+    transition: 0.2s ease-in-out;
+    z-index: 3;
+    main {
+        border-bottom: 1px solid rgb(223, 222, 222);
+        
     }
-    &.show-menu{
-        right:0;
+
+    &.show-menu {
+        right: 0;
     }
+}
+
+.choose-style-menu{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    flex-wrap: wrap;
+
+    .board-menu-img {
+        width: 153px;
+        height: 96px;
+        border-radius: 5px;
+        background-size: cover;
+        cursor: pointer;
+        margin-bottom:10px;
+        &:hover{
+            opacity: 0.85;
+        }
+    }
+    
+    // .bgStyle{
+    //     width: 153px;
+    //     height: 96px;
+    //     border-radius: 5px;
+    //     background-size: cover;
+    //     cursor: pointer;
+    //     &:hover{
+    //         opacity: 0.85;
+    //     }
+    // }
 }

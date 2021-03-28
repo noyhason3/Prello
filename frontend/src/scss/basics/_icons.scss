@@ -117,5 +117,10 @@
         content: "\f3fd";    
         font-size: 0.9rem;
     }
+    &.back:after{
+        font-family: "fa-solid";
+        content: "\f104";    
+        font-size: 1.2rem;
+    }
 
 }
