@@ -5,12 +5,13 @@
       <h3>Activity</h3>
     </div> -->
     <li v-for="activity in activities" :key="activity.id" class="clean-list board-menu-layout">
-      {{ activity.txt }} {{ activity.created }}
+     <member-preview/> <div>{{ activity.txt }} {{ activity.created }}</div>
     </li>
   </ul>
 </template>
 
 <script>
+  import memberPreview from './member-preview'
 export default {
   props: {
     activities: Array,
@@ -27,5 +28,8 @@ export default {
       return date;
     },
   },
+  component:{
+    memberPreview
+  }
 };
 </script>
