@@ -4,7 +4,7 @@
       <div slot="header">
         <h2 class="headline">Menu</h2>
       </div>
-      <div slot="main">
+      <div slot="main" class="main-part">
         <ul class="clean-list">
           <li class="board-menu-layout" @click="toggleDashboard">
             <div class="icon dashboard"></div>
@@ -21,7 +21,7 @@
           <div class="icon list"></div>
           <h3>Activity</h3>
         </div>
-        <activity-list :activities="activities" />
+        <activity-list :activities="activities" :layoutClass="'board-menu-layout'" class="activity-list"/>
       </div>
       <!-- <activity-list /> -->
     </board-menu-popup>

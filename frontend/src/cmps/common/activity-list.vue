@@ -1,19 +1,31 @@
 <template>
   <ul>
-    <li v-for="activity in activities" :key="activity.id" class="clean-list">
-     <member-preview :member="activity.byMember" />
-      <div>{{ activity.txt }} {{ date(activity.createdAt).day }} at {{date(activity.createdAt).hour}}</div>
+    <li
+      v-for="activity in activities"
+      :key="activity.id"
+      class="clean-list activity-list"
+      :class="layoutClass"
+    >
+      <member-preview :member="activity.byMember" />
+      <div>
+        <p><span>{{activity.byMember.fullname}}</span> {{ activity.txt}}</p>
+        <p>
+          {{ date(activity.createdAt).day }} at
+          {{ date(activity.createdAt).hour }}
+        </p>
+      </div>
     </li>
   </ul>
 </template>
 
 <script>
-  import memberPreview from './member-preview.vue'
-  import moment from "moment";
+import memberPreview from "./member-preview.vue";
+import moment from "moment";
 
 export default {
   props: {
     activities: Array,
+    layoutClass: String,
   },
   methods: {
     date(timestamp) {
@@ -25,9 +37,14 @@ export default {
       };
       return date;
     },
+    activityDescription(txt){
+      console.log('txt:', txt)
+      if(txt) return txt.split('by')[0];
+      return ''
+    }
   },
-  components:{
-    memberPreview
-  }
+  components: {
+    memberPreview,
+  },
 };
 </script>

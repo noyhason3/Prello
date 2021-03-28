@@ -84,7 +84,7 @@
   align-items: center;
   &.headline {
     font-size: 1.3rem;
-    margin: 8px 0;
+    margin: 10px 0;
   }
   h4 {
     font-size: 1.1rem;
@@ -118,11 +118,11 @@
 }
 .board-menu-layout{
   display:grid;
-  grid-template-columns: 20px 1fr;
+  grid-template-columns:30px 1fr;
   grid-template-rows: 40px;
   gap:10px;
   align-items: center;
-  padding-inline-start:12px;
+  padding-inline-start:7px;
   &:hover{
     background-color: rgb(231, 231, 231);;
   }

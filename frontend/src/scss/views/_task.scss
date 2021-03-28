@@ -51,8 +51,7 @@
       & h2 {
         font-size: 1.1rem;
       }
-
-      .group-title {
+       .group-title {
         font-size: 13px;
       }
 
@@ -171,20 +170,26 @@
       cursor: pointer;
       border-radius: 3px;
     }
+    .activity-list{
+      margin-top:15px;
+    }
+    .activity-list li {
+      
+      grid-template-rows: 65px;
+      align-items: flex-start;
+      a{
+        margin-top:0;
+      }
+    }
 
-    // .attachment-title span:before{
-    //   font-size: 1.1rem;
-    //   font-family: 'fa-solid';
-    //   content: '\f0c6';
-    // }
-    // .checklist-title span{
-    //   &:before{
-    //     font-family: 'fa-reg';
-    //     font-size: 1.1rem;
-    //     content:"\f14a"
-    //   }
-    // }
+    .activity-list p {
+      font-size: 0.87rem;
+      margin-bottom: 0;
+    }
 
+    .activity-list span {
+      font-weight: bold;
+    }
 
     @include for-mobile-layout {
 

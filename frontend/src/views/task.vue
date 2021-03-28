@@ -123,11 +123,15 @@
               @toggle-drag="toggleDrag"
               @update-task="saveTask(task)"
             />
-            <div class="board-menu-layout" v-if="activities.length">
+            <div class="task-main-layout headline" v-if="activities.length">
               <div class="icon list"></div>
-              <h3>Activity</h3>
+              <h4>Activity</h4>
             </div>
-              <activity-list :activities="activities" />
+            <activity-list
+              :activities="activities"
+              :layoutClass="'task-main-layout'"
+              class="activity-list"
+            />
           </draggable>
         </div>
         <!-- <task-comment /> -->
