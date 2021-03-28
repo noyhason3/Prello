@@ -180,6 +180,7 @@ export default {
       await this.$store.dispatch({ type: "saveGroup", group });
     },
     async removeGroup() {
+      console.log("removing group");
       await this.$store.dispatch({
         type: "removeGroup",
         groupId: this.group.id,
@@ -228,7 +229,10 @@ export default {
           if (classList.includes("add-card")) {
             this.isAddNewTask = true;
             cb();
-          } else if (!classList.includes("edit-color")) cb();
+          } else if (!classList.includes("edit-color")) {
+            this.removeGroup();
+            cb();
+          }
         }
       } else cb();
     },

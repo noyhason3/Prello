@@ -27,11 +27,8 @@ async function query(filterBy = {}) {
       //return demoBoards
     }
 
-    console.log("file: board.service.js - line 27 - query - demoBoards", demoBoards)
     const memberInBoards = await collection.find({ members: { $elemMatch: { _id: userId } } }).toArray()
-    console.log("file: board.service.js - line 31 - query - memberInBoards", memberInBoards)
     const memberCreatedBoards = await collection.find({ createdBy: { _id: userId } }).toArray();
-    console.log("file: board.service.js - line 33 - query - memberCreatedBoards", memberCreatedBoards)
     const concatinated = memberInBoards.concat(memberCreatedBoards).concat(demoBoards)
     const duplicateLess = concatinated.filter((v, i) => concatinated.indexOf(v) === i)
     return duplicateLess
@@ -79,10 +76,12 @@ async function remove(boardId) {
 }
 
 async function update(board) {
+  console.log("file: board.service.js - line 79 - update - board", board)
   try {
     // board._id = ObjectId(board._id);                      **************************** NEED TO BE UN-COMMENT AFTER CHANGING DEMO-ID
     const collection = await dbService.getCollection('board');
-    await collection.updateOne({ _id: board._id }, { $set: board });
+    await collection.updateOne({ _id: board._id }, { $set: { board } });
+    //await collection.insert({ ...board })
     return board;
   } catch (err) {
     logger.error(`cannot update board ${board._id}`, err);

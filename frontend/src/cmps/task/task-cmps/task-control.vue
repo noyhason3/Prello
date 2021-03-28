@@ -275,14 +275,10 @@ export default {
     //   this.$emit("remove-task-member", id);
     // },
     setChecklist(checklist) {
-      console.log(
-        "file: task-control.vue - line 200 - setChecklist - checklist",
-        checklist
-      );
       const task = this.task;
       checklist.id = utilService.makeId();
       task.checklists.push(checklist);
-      this.saveTask(task);
+      this.saveTask({ task });
       this.togglePopup("Checklist");
     },
     // setTaskLabels(labelIds) {

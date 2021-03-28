@@ -124,14 +124,15 @@ export const boardStore = {
     },
     async saveGroup({ state, commit, dispatch }, { group }) {
       const board = JSON.parse(JSON.stringify(state.board));
-      const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
       if (group.id) {
+        const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
         board.groups.splice(groupIdx, 1, group);
       } else {
         group.id = utilService.makeId();
         board.groups.push(group);
       }
       //await boardService.save(board);
+      console.log('board', board)
       await dispatch({ type: 'saveBoard', board });
       commit({ type: 'setBoard', board });
     },
@@ -155,6 +156,7 @@ export const boardStore = {
       //   txt: activityType,
       // });
       // board.activities.push(activity);
+      console.log("file: board.store.js - line 152 - getBoard - task", task)
       console.log(groupId);
       if (groupId) {
         var group = board.groups.find((savedGroup) => {
@@ -189,6 +191,7 @@ export const boardStore = {
         });
         board.activities.push(activity);
 
+        console.log("file: board.store.js - line 192 - getBoard - board", board)
         console.log('activity', activity);
         // await dispatch('saveBoard', { board, activity, task });
         await dispatch('saveBoard', { board, activity, task });
