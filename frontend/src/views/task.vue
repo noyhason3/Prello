@@ -126,8 +126,8 @@
             <div class="board-menu-layout" v-if="activities.length">
               <div class="icon list"></div>
               <h3>Activity</h3>
+              <activity-list :activities="activities" />
             </div>
-            <activity-list :activities="activities" />
           </draggable>
         </div>
         <!-- <task-comment /> -->
