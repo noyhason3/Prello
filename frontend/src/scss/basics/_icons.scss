@@ -117,5 +117,8 @@
         content: "\f3fd";    
         font-size: 0.9rem;
     }
-
+    &.archive:before{
+        font-family: 'fa-solid';
+        content:'\f187';
+    }
 }

@@ -5,7 +5,11 @@
   visibility: hidden;
 }
 
+
 .group {
+  //Used as a variable to be defined through JS
+  --bgColor:#ebecf0;
+
   display: flex;
   flex-flow: column;
   max-height: 100%;
@@ -42,6 +46,17 @@
     }
   }
 
+  //EDIT-POPUP
+  .group-edit-popup{
+    transform: translate(240px,35px);
+    main{
+      display: flex;
+      flex-flow: column;
+      max-height: unset!important;
+      height: fit-content;
+    }
+  }
+
   //HEADER
   .group-header {
     border-radius: 3px 3px 0 0;
@@ -65,7 +80,7 @@
   }
   //BACKGROUND
   & > *:not(.egt) {
-    background-color: #ebecf0;
+    background-color: var(--bgColor);
   }
   & > * {
     width: 100%;

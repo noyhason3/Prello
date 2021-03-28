@@ -16,8 +16,8 @@
       @set-cover-color="setCoverColor"
       @save-cover-img="saveCoverImg"
       tabindex="0"
-      @blur.native="togglePopup('Cover')"
       ref="Cover"
+      @blur.native="coverBlurHandler"
     />
 
     <h6 class="add-to-card">ADD TO CARD</h6>
@@ -42,7 +42,6 @@
     <!-- <button>Labels</button> -->
     <button
       @click="togglePopup('Duedate', $event)"
-      @blur="togglePopup('Duedate', $event)"
       class="btn neutral left-align"
     >
       <span class="icon clock"></span>Due date
@@ -52,8 +51,8 @@
       @toggle-popup="togglePopup"
       @save-date="saveDate"
       tabindex="0"
-      @blur.native="togglePopup('Duedate')"
       ref="Duedate"
+      @blur.native="duedateBlurHandler"
     />
 
     <button
@@ -114,10 +113,13 @@
       :attachments="task.attachments"
       tabindex="0"
       ref="Attachment"
+      @blur.native="attachmentBlurHandler"
     />
-    <!-- @blur.native="attachmentBlurHandler" -->
 
-    <button class="btn neutral left-align" @click="removeTask">Archive</button>
+    <button class="btn neutral left-align" @click="removeTask">
+      <span class="icon archive" />
+      Archive
+    </button>
   </section>
 </template>
 
@@ -187,7 +189,28 @@ export default {
         }
       } else this.togglePopup("Checklist");
     },
+    coverBlurHandler(ev) {
+      if (Array.from(document.activeElement.classList).includes("popup")) {
+        this.togglePopup("Cover");
+        ev.target.focus();
+      }
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (
+          classList.includes("cover-upload-input") ||
+          classList.includes("popup")
+        )
+          ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Cover");
+        }
+      } else this.togglePopup("Cover");
+    },
     attachmentBlurHandler(ev) {
+      if (Array.from(document.activeElement.classList).includes("popup")) {
+        this.togglePopup("Attachment");
+        ev.target.focus();
+      }
       if (ev.relatedTarget) {
         const classList = Array.from(ev.relatedTarget.classList);
         if (
@@ -213,6 +236,15 @@ export default {
           this.togglePopup("Label");
         }
       } else this.togglePopup("Label");
+    },
+    duedateBlurHandler(ev) {
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (classList.includes("duedate-submit")) ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Duedate");
+        }
+      } else this.togglePopup("Duedate");
     },
     // setCoverColor(color) {
     //   this.$emit("set-cover-color", color);
@@ -294,6 +326,7 @@ export default {
     },
     saveDate(timestamp) {
       this.task.duedate = timestamp;
+      this.togglePopup("Duedate");
       this.saveTask(this.task);
     },
     saveAttachments(attachments) {

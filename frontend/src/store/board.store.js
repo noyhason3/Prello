@@ -113,7 +113,7 @@ export const boardStore = {
       });
       return group;
     },
-    async saveGroup({ state, commit }, { group }) {
+    async saveGroup({ state, commit, dispatch }, { group }) {
       const board = JSON.parse(JSON.stringify(state.board));
       const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
       if (group.id) {
@@ -122,7 +122,8 @@ export const boardStore = {
         group.id = utilService.makeId();
         board.groups.push(group);
       }
-      await boardService.save(board);
+      //await boardService.save(board);
+      await dispatch({ type: 'saveBoard', board })
       commit({ type: 'setBoard', board });
     },
     async removeGroup({ commit, state }, { groupId }) {
@@ -135,7 +136,7 @@ export const boardStore = {
       commit({ type: 'setBoard', board });
     },
     async saveTask({ commit, state, dispatch }, { groupId, task, activityType }) {
-      console.log(task,'***********');
+      console.log(task, '***********');
       const board = JSON.parse(JSON.stringify(state.board));
       const activity = boardService.getEmptyActivity({
         currTask: task,
@@ -198,7 +199,7 @@ export const boardStore = {
 
     async saveBoardLabels({ state, commit }, { labels }) {
       const board = JSON.parse(JSON.stringify(state.board));
-      
+
       const activity = boardService.getEmptyActivity({
         currTask: state.task,
         txt: 'Label added!',

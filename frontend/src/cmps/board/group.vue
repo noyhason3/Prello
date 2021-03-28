@@ -1,5 +1,5 @@
 <template>
-  <section class="group">
+  <section class="group" ref="group">
     <div class="flex jcc aic space-between group-header">
       <editableTitle
         v-model="group.title"
@@ -8,25 +8,52 @@
 
       <!-- <button @click="removeGroup" class="icon elipsis preview"></button> -->
       <button
-        @click="menuOpen = !menuOpen"
+        @click="
+          menuOpen = !menuOpen;
+          this.$refs.groupEdit.focus();
+        "
         class="icon elipsis preview"
       ></button>
     </div>
-    <popUp v-if="menuOpen">
-      <ul class="clean-list" slot="main">
-        <li @click="removeGroup">Archive Group</li>
-        <popupCover
-          v-if="isEditing"
-          @toggle-popup="isEditing = !isEditing"
-          @set-cover-color="setCoverColor"
-        ></popupCover>
-      </ul>
+    <popUp
+      class="group-edit-popup"
+      v-if="menuOpen"
+      tabindex="0"
+      ref="groupEdit"
+    >
+      <template slot="main">
+        <button @click="isEditing = !isEditing" class="btn neutral left-align">
+          <span class="icon cover" />
+          Edit Group Color
+        </button>
+        <div v-if="isEditing">
+          <ul class="colors-list clean-list" slot="main">
+            <li v-for="(color, idx) in colorsPalette" :key="idx">
+              <div
+                class="color-box btn"
+                :style="`background-color: ${color}`"
+                @click="saveGroupColor(color)"
+              />
+            </li>
+          </ul>
+        </div>
+
+        <button @click="isAddNewTask = true" class="btn neutral left-align">
+          <span class="icon plus" />
+          Add another card
+        </button>
+
+        <button @click="removeGroup" class="btn neutral left-align">
+          <span class="icon archive" />
+          Archive Group
+        </button>
+      </template>
     </popUp>
+
     <div class="tasks-wrapper">
       <draggable
         v-model="group.tasks"
         :group="`tasks`"
-        @start="startDrag"
         @end="endDrag"
         :move="updateBoard"
         :empty-insert-threshold="50"
@@ -81,6 +108,7 @@ import editableText from "../common/editable-text.vue";
 import editableTitle from "../common/editable-title.vue";
 import popUp from "@/cmps/common/pop-up.vue";
 import popupCover from "@/cmps/task/popup/popup-cover.vue";
+import utilService from "../../services/util.service";
 
 export default {
   props: {
@@ -95,7 +123,23 @@ export default {
       ghostRect: null,
       emptyList: [],
       menuOpen: false,
+      isEditing: false,
+      colorsPalette: [
+        "#7bc86c",
+        "#f5dd29",
+        "#ffaf3f",
+        "#ef7564",
+        "#cd8de5",
+        "#5ba4cf",
+        "#29cce5",
+        "#6deca9",
+        "#ff8ed4",
+        "#172b4d",
+      ],
     };
+  },
+  mounted() {
+    this.setGroupColor();
   },
   methods: {
     openTask(task) {
@@ -138,8 +182,17 @@ export default {
         return false;
       }
     },
-    startDrag(ev) {
-      //TODO
+    async saveGroupColor(color) {
+      this.group.style = {
+        bgColor: { value: color, id: utilService.makeId() },
+      };
+      await this.saveGroup(this.group);
+      this.setGroupColor();
+    },
+    setGroupColor() {
+      var group = this.$refs.group;
+      const color = this.group.style.bgColor?.value || "#ebecf0";
+      group.style.setProperty("--bgColor", color);
     },
     endDrag(ev) {
       this.$emit("save-board");
