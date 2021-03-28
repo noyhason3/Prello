@@ -7,7 +7,38 @@ export default {
     labels: Array,
     data: Array,
     colors: Array,
-    options:Object
+  },
+  data() {
+    return {
+      options: {
+        scales: {
+          xAxes: [
+            {
+              display: true,
+              gridLines: {
+                display: false,
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Labels",
+              },
+            },
+          ],
+          yAxes: [
+            {
+              display: true,
+              gridLines: {
+                display: false,
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Tasks Count",
+              },
+            },
+          ],
+        },
+      },
+    };
   },
   mounted() {
     this.renderChart(
@@ -16,11 +47,10 @@ export default {
 
         datasets: [
           {
-            label: "Cards by labels",
+            label: "",
             backgroundColor: this.colors,
-
             data: this.data,
-            color:"#ffffff"
+            fontColor: "#2C4068",
           },
         ],
       },

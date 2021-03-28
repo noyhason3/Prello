@@ -1,26 +1,38 @@
 <template>
-  <section v-if="board" class="dashboard-screen" @click.stop="closeDashboard">
-    <button class="close btn icon x-bright"></button>
-    <task-per-label
-      :labels="Object.keys(taskPerLabel)"
-      :data="Object.values(taskPerLabel)"
-      :colors="labelColors"
-      :options="options"
-    />
-    <task-per-member
-      :labels="Object.keys(taskPerMember)"
-      :data="Object.values(taskPerMember)"
-      :colors="labelColors"
-      :options="options"
-    />
-    <todo-per-member
-      :labels1="Object.keys(taskPerLabel)"
-      :data1="Object.values(taskPerLabel)"
-      :labels2="Object.keys(taskPerMember)"
-      :data2="Object.values(taskPerMember)"
-      :colors="labelColors"
-      :options="options"
-    />
+  <section v-if="board" class="dashboard-screen" >
+    <button class="close btn icon x-bright" @click.stop="closeDashboard"></button>
+    <div>
+      <h2>Tasks per label</h2>
+      <task-per-label
+        class="task-per-label chart"
+        :labels="Object.keys(taskPerLabel)"
+        :data="Object.values(taskPerLabel)"
+        :colors="labelColors"
+        :options="options"
+      />
+    </div>
+    <div>
+      <h2>Tasks per member</h2>
+      <task-per-member
+        class="task-per-member chart"
+        :labels="Object.keys(taskPerMember)"
+        :data="Object.values(taskPerMember)"
+        :colors="memberColors"
+        :options="options"
+      />
+    </div>
+    <div>
+      <h2>Completed todos</h2>
+      <todo-per-member
+        class="todo-per-member chart"
+        :labels1="Object.keys(taskPerLabel)"
+        :data1="Object.values(taskPerLabel)"
+        :labels2="Object.keys(taskPerMember)"
+        :data2="Object.values(taskPerMember)"
+        :colors="labelColors"
+        :options="options"
+      />
+    </div>
   </section>
 </template>
 
@@ -54,6 +66,10 @@ export default {
     },
     labelColors() {
       return this.board.labels.map(({ color }) => color);
+    },
+    memberColors() {
+      this.labelColors.push("#4B6F6B");
+      return this.labelColors;
     },
     taskPerLabel() {
       const taskPerLabelMap = this.board.labels.reduce((map, label) => {

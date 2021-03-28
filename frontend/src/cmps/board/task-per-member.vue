@@ -7,7 +7,7 @@ export default {
     labels: Array,
     data: Array,
     colors: Array,
-    options:Object
+    // options:Object
   },
  
   mounted() {
@@ -17,10 +17,11 @@ export default {
 
         datasets: [
           {
-            label: "Cards by members",
+            label: "",
             backgroundColor: this.colors,
-            color: "#ffffff",
+            // color: "#ffffff",
             data: this.data,
+            borderColor: 'transparent',
             // borderColor: [
             //   "rgba(255, 99, 132, 1)",
             //   "rgba(54, 162, 235, 1)",
