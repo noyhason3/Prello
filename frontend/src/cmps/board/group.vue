@@ -6,7 +6,6 @@
         @input="saveGroup(group)"
       ></editableTitle>
 
-      <!-- <button @click="removeGroup" class="icon elipsis preview"></button> -->
       <button @click="toggleEditMenu" class="icon elipsis preview"></button>
     </div>
     <popUp
@@ -214,6 +213,7 @@ export default {
       if (ev.relatedTarget) {
         const classList = Array.from(ev.relatedTarget.classList);
         if (classList.includes("group-edit-btn")) {
+          ev.target.focus();
           if (classList.includes("add-card")) {
             this.isAddNewTask = true;
             cb();
@@ -222,17 +222,8 @@ export default {
       } else cb();
     },
     getEditColorClass(color) {
-      // console.log(
-      //   "file: group.vue - line 223 - getEditColorTask - color",
-      //   color
-      // );
-      // console.log(
-      //   "file: group.vue - line 228 - getEditColorClass - this.group.style.bgColor?.value",
-      //   this.group.style.bgColor?.value
-      // );
       var str = "color-box btn";
       if (color === this.group.style.bgColor?.value) {
-        console.log("colors match!");
         str += " active";
       }
       return str;
