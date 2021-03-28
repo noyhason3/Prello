@@ -10,7 +10,7 @@
       <button
         @click="
           menuOpen = !menuOpen;
-          this.$refs.groupEdit.focus();
+          refs.groupEdit.focus();
         "
         class="icon elipsis preview"
       ></button>
