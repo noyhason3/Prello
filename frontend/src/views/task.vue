@@ -57,7 +57,9 @@
             <member-list
               :members="task.members"
               :isTaskRelated="true"
+              :isInTask="true"
               @remove-task-member="removeTaskMember"
+              @open-member-popup="openMemberPopup"
             />
 
             <task-label
@@ -289,6 +291,9 @@ export default {
       if (memberIdx < 0) return;
       this.task.members.splice(memberIdx, 1);
       this.saveTask(this.task);
+    },
+    openMemberPopup(ev) {
+      this.$refs.taskControls.togglePopup("Member", ev);
     },
   },
   components: {

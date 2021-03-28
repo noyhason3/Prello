@@ -3,8 +3,8 @@
     <div slot="main">
       <button @click="closeMemberDetails" class="btn close icon x"></button>
       <div class="member-details-container">
-        <member-preview :member="member" />
-        <div>
+        <member-preview :member="member" class="member-initials"/>
+        <div class="member-name">
           <h2>{{ member.fullname }}</h2>
           <h3>@{{ member.username }}</h3>
         </div>
