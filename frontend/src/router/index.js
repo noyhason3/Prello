@@ -4,7 +4,7 @@ import home from '../views/home.vue';
 import about from '../views/about.vue';
 import loginSignup from '../views/login-signup.vue';
 import dashboard from '../views/dashboard.vue';
-import boardList from '../views/board-list.vue';
+import boardLists from '../views/board-lists.vue';
 import board from '../views/board.vue';
 import task from '../views/task.vue';
 
@@ -29,7 +29,7 @@ const routes = [
     {
         path: '/board',
         name: 'board-list',
-        component: boardList,
+        component: boardLists,
     },
     {
         path: '/board/:boardId',
