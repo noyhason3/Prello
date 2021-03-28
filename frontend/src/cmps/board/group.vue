@@ -6,52 +6,57 @@
         @input="saveGroup(group)"
       ></editableTitle>
 
-      <button @click="toggleEditMenu" class="icon elipsis preview"></button>
+      <button
+        @click="toggleEditMenu"
+        class="icon elipsis preview"
+        style="position: relative"
+      >
+        <popUp
+          class="group-edit-popup"
+          v-if="menuOpen"
+          tabindex="0"
+          ref="groupEdit"
+        >
+          <!-- @blur.native="editBlurHandler" -->
+          <template slot="main">
+            <button
+              @click="isEditing = !isEditing"
+              class="btn neutral left-align group-edit-btn edit-color"
+            >
+              <span class="icon cover" />
+              Edit Group Color
+            </button>
+            <div v-if="isEditing">
+              <ul class="colors-list clean-list" slot="main">
+                <li v-for="(color, idx) in colorsPalette" :key="idx">
+                  <div
+                    :class="getEditColorClass(color)"
+                    :style="`background-color: ${color}`"
+                    @click="saveGroupColor(color)"
+                  />
+                </li>
+              </ul>
+            </div>
+
+            <button
+              class="btn neutral left-align group-edit-btn add-card"
+              @click="isAddNewTask = true"
+            >
+              <span class="icon plus" />
+              Add another card
+            </button>
+
+            <button
+              @click="removeGroup"
+              class="btn neutral left-align group-edit-btn"
+            >
+              <span class="icon archive" />
+              Archive Group
+            </button>
+          </template>
+        </popUp>
+      </button>
     </div>
-    <popUp
-      class="group-edit-popup"
-      v-if="menuOpen"
-      tabindex="0"
-      ref="groupEdit"
-    >
-      <!-- @blur.native="editBlurHandler" -->
-      <template slot="main">
-        <button
-          @click="isEditing = !isEditing"
-          class="btn neutral left-align group-edit-btn edit-color"
-        >
-          <span class="icon cover" />
-          Edit Group Color
-        </button>
-        <div v-if="isEditing">
-          <ul class="colors-list clean-list" slot="main">
-            <li v-for="(color, idx) in colorsPalette" :key="idx">
-              <div
-                :class="getEditColorClass(color)"
-                :style="`background-color: ${color}`"
-                @click="saveGroupColor(color)"
-              />
-            </li>
-          </ul>
-        </div>
-
-        <button
-          class="btn neutral left-align group-edit-btn add-card"
-          @click="isAddNewTask = true"
-        >
-          <span class="icon plus" />
-          Add another card
-        </button>
-
-        <button
-          @click="removeGroup"
-          class="btn neutral left-align group-edit-btn"
-        >
-          <span class="icon archive" />
-          Archive Group
-        </button>
-      </template>
-    </popUp>
 
     <div class="tasks-wrapper">
       <draggable

@@ -30,15 +30,12 @@
     </button>
     <popup-member
       v-if="isMemberOpen"
-      @close-popup="isMemberOpen = false"
-      @assign-task-member="assignTaskMember"
-      @toggle-popup="togglePopup"
-      @remove-task-member="removeTaskMember"
       :task="task"
       tabindex="0"
       ref="Member"
-      @blur.native="togglePopup('Member')"
+      @toggle-popup="isMemberOpen = false"
     ></popup-member>
+    <!-- @blur.native="memberBlurHandler" -->
     <!-- <button>Labels</button> -->
     <button
       @click="togglePopup('Duedate', $event)"
@@ -52,8 +49,8 @@
       @save-date="saveDate"
       tabindex="0"
       ref="Duedate"
+      @blur.native="duedateBlurHandler"
     />
-    <!-- @blur.native="duedateBlurHandler" -->
 
     <button
       @click="togglePopup('Checklist', $event)"
@@ -170,7 +167,11 @@ export default {
             if (popupHeight + top > window.innerHeight) {
               console.log("Place popup above button");
               popup.style.bottom = window.innerHeight - targetRect.top + "px";
-              popup.style.maxHeight = targetRect.top - 15 + "px";
+              console.log(
+                "file: task-control.vue - line 171 - this.$nextTick - targetRect.top",
+                targetRect.top
+              );
+              popup.style.maxHeight = targetRect.top + "px";
             } else {
               popup.style.top = top + "px";
               popup.style.maxHeight = maxHeight + "px";
@@ -250,6 +251,15 @@ export default {
           this.togglePopup("Duedate");
         }
       } else this.togglePopup("Duedate");
+    },
+    memberBlurHandler(ev) {
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (classList.includes("search-member")) ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Member");
+        }
+      } else this.togglePopup("Member");
     },
     // setCoverColor(color) {
     //   this.$emit("set-cover-color", color);
