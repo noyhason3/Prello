@@ -5,8 +5,8 @@
     <div v-if="members && members.length">
       <ul class="clean-list flex member-list">
         <li
-          v-for="(member, idx) in members"
-          :key="'inits' + idx"
+          v-for="member in members"
+          :key="member._id"
           @click="toggleMemberDetails($event, member)"
         >
           <member-preview

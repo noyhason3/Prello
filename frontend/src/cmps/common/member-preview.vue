@@ -24,9 +24,14 @@ export default {
     memberInitials() {
       if (this.member.username === "Guest") return "GU";
       const nameSplit = this.member.fullname.split(" ");
-      const initials = (
-        nameSplit[0].charAt(0) + nameSplit[1].charAt(0)
-      ).toUpperCase();
+      var initials = nameSplit
+        .map((word) => {
+          return word.charAt(0).toUpperCase();
+        })
+        .join("");
+      // const initials = (
+      //   nameSplit[0].charAt(0) + nameSplit[1].charAt(0)
+      // ).toUpperCase();
       return initials;
     },
     colorClassByInitials() {

@@ -1,8 +1,12 @@
-.board-members{
+.board-header-members{
     display: flex;
+    position:relative;
     .user-list{
-        background:$offwhite;
+        border-radius: 5px;
+        background:lighten($clr5,48);
         position:absolute;
+        top:45px;
+        right:0;
         z-index: 3;
         overflow-y: auto;
         max-height: 50vh;
@@ -14,7 +18,7 @@
             padding:8px;
             cursor: pointer;
             &:hover{
-                background: darken($offwhite,8);
+                background: darken($offwhite,23);
             }
         }
     }

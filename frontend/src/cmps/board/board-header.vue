@@ -47,11 +47,13 @@ export default {
       this.$emit("toggle-board-menu");
     },
     removeMember(memberId) {
-      const idx = this.board.members.findIndex((member) => {
-        member._id === memberId;
-      });
-      this.board.members.splice(idx, 1);
-      this.$store.dispatch({ type: "saveBoard", board: this.board });
+      const idx = this.board.members.findIndex(
+        (member) => member._id === memberId
+      );
+      if (idx >= 0) {
+        this.board.members.splice(idx, 1);
+        this.$store.dispatch({ type: "saveBoard", board: this.board });
+      }
     },
   },
   computed: {

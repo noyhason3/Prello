@@ -20,8 +20,9 @@ function getById(boardId) {
   return httpService.get(BOARD_URL + boardId);
 }
 
-function query(filterBy) {
-  return httpService.get(BOARD_URL, { params: filterBy });
+async function query(filterBy) {
+  const ans = await httpService.get(BOARD_URL, { params: filterBy });
+  return ans
 }
 
 function remove(id) {
