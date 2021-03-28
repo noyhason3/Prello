@@ -76,12 +76,15 @@ export const boardStore = {
         const board = await boardService.getById(boardId);
         commit({ type: 'setBoard', board });
         // socketService.setup();//Not sure if needed, happens in the service anyway
-        socketService.off('board-update');
         socketService.emit('join-board', boardId);
-        socketService.on('board-update', ({ savedBoard, activity }) => {
-          console.log('hi');
-          commit({ type: 'setBoard', savedBoard });
-          showMsg(activity.txt);
+        socketService.off('board-update');
+        socketService.on('board-update', (savedBoard ) => {
+          console.log('board updated-socket');
+          commit({ type: 'setBoard', board:savedBoard });
+        // socketService.on('board-update', ({ savedBoard, activity }) => {
+        //   console.log('board updated-socket');
+        //   commit({ type: 'setBoard', board:savedBoard });
+        //   showMsg(activity.txt);
         });
         // socketService.on('task-update', (task) => {
         //   context.commit({ type: 'updateTask', task });
@@ -93,11 +96,11 @@ export const boardStore = {
     },
     async saveBoard({ commit }, { board, activity, task }) {
       try {
-        if (activity){
+        // if (activity){
           var currBoard = await boardService.save({ board, activity, task });
-        } else {
-          var currBoard = await boardService.save({ board, task });
-        }
+        // } else {
+          // var currBoard = await boardService.save({ board, task });
+        // }
         commit({ type: 'setBoard', board: currBoard });
         return board;
       } catch (err) {
@@ -148,6 +151,8 @@ export const boardStore = {
       //   currTask: task,
       //   txt: activityType,
       // });
+      // board.activities.push(activity);
+
       if (groupId)
         var group = board.groups.find(
           (savedGroup) => savedGroup.id === groupId
@@ -168,17 +173,20 @@ export const boardStore = {
         group.tasks.push(task);
       }
       try {
-        if(activityType){
+        // if(activityType){
+          console.log('task', task);
           const activity = boardService.getEmptyActivity({
             currTask: task,
             txt: activityType,
           });
           board.activities.push(activity);
-          console.log(activity);
+
+          console.log('activity',activity);
+          // await dispatch('saveBoard', { board, activity, task });
           await dispatch('saveBoard', { board, activity, task });
-        } else {
-          await dispatch('saveBoard', { board, task });
-        }
+        // } else {
+        //   await dispatch('saveBoard', { board, task });
+        // }
         // dispatch('saveBoard', { board, activity, task });
         commit({ type: 'setCurrTask', task });
       } catch (err) {

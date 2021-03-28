@@ -40,7 +40,7 @@ export const userStore = {
                 
                 socketService.emit('join-user', user._id);
                 socketService.off('activity-update');
-                socketService.on('activity-update', (activity) => {
+                socketService.on('activity-update', activity => {
                   console.log('socket emitted- Activity update', activity);
                   showMsg(activity.txt)
                 })
