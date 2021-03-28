@@ -1,5 +1,5 @@
 <template>
-  <section v-if="board" class="dashboard-screen" >
+  <section v-if="board" class="dashboard-screen" @click.stop="closeDashboard">
     <button class="close btn icon x-bright" @click.stop="closeDashboard"></button>
     <div>
       <h2>Tasks per label</h2>
