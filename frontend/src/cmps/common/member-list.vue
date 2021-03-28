@@ -1,53 +1,53 @@
 <template>
-  <!-- <section> -->
-    <div class="board-members">
-    <h3 v-if="isInTask">Members</h3>
-    <div v-if="members && members.length">
-      <ul class="clean-list flex member-list">
-        <li
-          v-for="member in members"
-          :key="member._id"
-          @click="toggleMemberDetails($event, member)"
-        >
-          <member-preview
-            :member="member"
-            @toggle-member-details="toggleMemberDetails"
-          />
-        </li>
-        <li
-          v-if="isInTask"
-          class="icon plus member-preview"
-          @click="openMemberPopup"
-        ></li>
-      </ul>
-      <popup-member-details
-        v-if="isShowMemberDetails"
-        @close-member-details="closeMemberDetails"
-        @remove-task-member="removeTaskMember"
-        :member="selectedMember"
-        :isTaskRelated="isTaskRelated"
-      />
-    </div>
-    <button
-      v-if="!isTaskRelated"
-      class="btn white-btn"
-      @click="addBoardMember = !addBoardMember"
-    >
-      <i class="icon plus" style="font-style: normal" />
-      Add member
-    </button>
-    <ul v-if="addBoardMember" class="clean-list user-list">
-      <li
-        v-for="member in filteredUsers"
-        :key="member._id"
-        @click="assignBoardMember(member)"
+  <section v-if="members && members.length">
+    <h4 v-if="isInTask" class="task-info-headline">Members</h4>
+    <div class="member-list-container">
+      <div v-if="members && members.length">
+        <ul class="clean-list flex member-list">
+          <li
+            v-for="member in members"
+            :key="member._id"
+            @click="toggleMemberDetails($event, member)"
+          >
+            <member-preview
+              :member="member"
+              @toggle-member-details="toggleMemberDetails"
+            />
+          </li>
+          <li
+            v-if="isInTask"
+            class="icon plus member-preview"
+            @click="openMemberPopup"
+          ></li>
+        </ul>
+        <popup-member-details
+          v-if="isShowMemberDetails"
+          @close-member-details="closeMemberDetails"
+          @remove-task-member="removeTaskMember"
+          :member="selectedMember"
+          :isTaskRelated="isTaskRelated"
+        />
+      </div>
+      <button
+        v-if="!isTaskRelated"
+        class="btn white-btn"
+        @click="addBoardMember = !addBoardMember"
       >
-        <member-preview :member="member" />
-        <p>{{ member.fullname }}</p>
-      </li>
-    </ul>
+        <i class="icon plus" style="font-style: normal" />
+        Add member
+      </button>
+      <ul v-if="addBoardMember" class="clean-list user-list">
+        <li
+          v-for="member in filteredUsers"
+          :key="member._id"
+          @click="assignBoardMember(member)"
+        >
+          <member-preview :member="member" />
+          <p>{{ member.fullname }}</p>
+        </li>
+      </ul>
     </div>
-  <!-- </section> -->
+  </section>
 </template>
 
 <script>

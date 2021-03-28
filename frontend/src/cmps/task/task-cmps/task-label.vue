@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <h4>Labels</h4>
+  <section v-if="taskLabels">
+    <h4 class="task-info-headline">Labels</h4>
     <div>
       <ul class="clean-list flex task-label">
         <li
