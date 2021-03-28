@@ -19,7 +19,7 @@
       <template slot="main">
         <button
           @click="isEditing = !isEditing"
-          class="btn neutral left-align group-edit-btn"
+          class="btn neutral left-align group-edit-btn edit-color"
         >
           <span class="icon cover" />
           Edit Group Color
@@ -28,7 +28,7 @@
           <ul class="colors-list clean-list" slot="main">
             <li v-for="(color, idx) in colorsPalette" :key="idx">
               <div
-                class="color-box btn"
+                :class="getEditColorClass(color)"
                 :style="`background-color: ${color}`"
                 @click="saveGroupColor(color)"
               />
@@ -37,8 +37,8 @@
         </div>
 
         <button
-          @click="isAddNewTask = true"
           class="btn neutral left-align group-edit-btn add-card"
+          @click="isAddNewTask = true"
         >
           <span class="icon plus" />
           Add another card
@@ -207,7 +207,6 @@ export default {
       }
     },
     editBlurHandler(ev) {
-      console.log("file: group.vue - line 201 - editBlurHandler - ev", ev);
       const cb = () => {
         this.menuOpen = false;
         this.isEditing = false;
@@ -216,10 +215,27 @@ export default {
         const classList = Array.from(ev.relatedTarget.classList);
         if (classList.includes("group-edit-btn")) {
           if (classList.includes("add-card")) {
-            this.$nextTick(cb);
-          } else cb();
+            this.isAddNewTask = true;
+            cb();
+          } else if (!classList.includes("edit-color")) cb();
         }
       } else cb();
+    },
+    getEditColorClass(color) {
+      // console.log(
+      //   "file: group.vue - line 223 - getEditColorTask - color",
+      //   color
+      // );
+      // console.log(
+      //   "file: group.vue - line 228 - getEditColorClass - this.group.style.bgColor?.value",
+      //   this.group.style.bgColor?.value
+      // );
+      var str = "color-box btn";
+      if (color === this.group.style.bgColor?.value) {
+        console.log("colors match!");
+        str += " active";
+      }
+      return str;
     },
     endDrag(ev) {
       this.$emit("save-board");
