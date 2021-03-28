@@ -41,6 +41,10 @@ export const boardStore = {
   mutations: {
     setBoard(state, { board }) {
       state.board = board;
+      if(board){
+      const boardIdx = state.boards.findIndex(({_id}) => board._id === _id)
+      state.boards.splice(boardIdx, 1, board)
+    }
     },
     setBoards(state, { boards }) {
       state.boards = boards;
