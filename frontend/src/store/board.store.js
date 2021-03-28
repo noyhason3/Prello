@@ -97,7 +97,7 @@ export const boardStore = {
     },
     async saveBoard({ commit }, { board, activity, task }) {
       try {
-        if (activity){
+        if (activity) {
           var currBoard = await boardService.save({ board, activity, task });
         } else {
           var currBoard = await boardService.save({ board, task });
@@ -146,7 +146,7 @@ export const boardStore = {
       await dispatch({ type: 'saveBoard', board })
       commit({ type: 'setBoard', board });
     },
-    async saveTask( { commit, state, dispatch },  { groupId, task, activityType }) {
+    async saveTask({ commit, state, dispatch }, { groupId, task, activityType }) {
       const board = JSON.parse(JSON.stringify(state.board));
       // const activity = boardService.getEmptyActivity({
       //   currTask: task,
@@ -172,7 +172,7 @@ export const boardStore = {
         group.tasks.push(task);
       }
       try {
-        if(activityType){
+        if (activityType) {
           const activity = boardService.getEmptyActivity({
             currTask: task,
             txt: activityType,

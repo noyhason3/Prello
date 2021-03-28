@@ -51,17 +51,11 @@
             padding: 5px;
         }
 
-        .editable-title-wrapper h2:focus {
-            color: $clr5;
-        }
-
         .icon.star {
             color: rgba($clr1, 0.6);
             font-size: 0.8rem;
             min-width: 30px;
-
         }
-
         .icon.star.is-starred {
             color: $clr1;
         }
@@ -73,17 +67,11 @@
         .menu-btn {
             font-size: 1rem;
             padding: 5px 12px;
-            border-radius: 3px;
-            background-color: rgba(rgb(235, 235, 235), 0.3);
+            
             right: 8px;
         }
         .menu-btn span.icon {
             margin-inline-end: 6px;
-        }
-
-        .menu-btn:hover {
-            background-color: rgba(235, 235, 235, 0.5);
-
         }
 
         .board-header-members {

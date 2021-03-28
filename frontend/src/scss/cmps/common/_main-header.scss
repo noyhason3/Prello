@@ -3,7 +3,7 @@
     padding: 4px 4px ;
     display: flex;
     justify-content: space-between;
-    box-shadow: 2px -2px 6px 0px #00000085;
+    //box-shadow: 2px -2px 6px 0px #00000085;
 
     background: $clr5;
 
@@ -99,7 +99,6 @@
         .search-container:hover,
         .nav-link:hover {
             background-color: rgba(235, 235, 235, 0.5);
-
         }
 
         .nav-link:active {

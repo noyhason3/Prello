@@ -1,8 +1,36 @@
+.board-members{
+    display: flex;
+    .user-list{
+        background:$offwhite;
+        position:absolute;
+        z-index: 3;
+        overflow-y: auto;
+        max-height: 50vh;
+        li{
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            padding:8px;
+            cursor: pointer;
+            &:hover{
+                background: darken($offwhite,8);
+            }
+        }
+    }
+}
+
 .member-list {
     width: fit-content;
     >*:not(:last-child) {
         margin-inline-end: 5px;
     }  
+    .white-btn{
+        margin-inline-start: 8px;
+    }
+    .popup-member{
+        z-index:3!important;
+    }
 }
 
 .member-preview {

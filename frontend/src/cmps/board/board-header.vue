@@ -12,8 +12,9 @@
       :members="board.members"
       :isTaskRelated="false"
       class="board-header-members"
+      @remove-task-member="removeMember"
     />
-    <button @click="toggleBoardMenu" class="menu-btn">
+    <button @click="toggleBoardMenu" class="menu-btn white-btn">
       <span class="icon elipsis"></span>
       Show Menu
     </button>
@@ -44,6 +45,13 @@ export default {
     },
     toggleBoardMenu() {
       this.$emit("toggle-board-menu");
+    },
+    removeMember(memberId) {
+      const idx = this.board.members.findIndex((member) => {
+        member._id === memberId;
+      });
+      this.board.members.splice(idx, 1);
+      this.$store.dispatch({ type: "saveBoard", board: this.board });
     },
   },
   computed: {

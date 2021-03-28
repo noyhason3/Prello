@@ -260,11 +260,15 @@ export default {
     //   this.task.duedate = timestamp;
     //   this.saveTask(this.task);
     // },
-    // saveAttachments(attachments) {
-    //   this.task.attachments = attachments;
-    //   console.log(attachments);
-    //   this.saveTask(this.task);
-    // },
+    saveAttachments(attachments) {
+      this.task.attachments = attachments;
+      console.log(attachments);
+      const user = this.$store.getters.loggedinUser;
+      this.saveTask({
+        task: this.task,
+        activityType: `Task '${this.task.title}'s' attachments were set by: ${user.fullname}`,
+      });
+    },
     dragOver(ev) {
       if (this.drag) return;
       this.isDragOver = true;
