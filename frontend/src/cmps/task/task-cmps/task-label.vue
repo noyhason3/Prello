@@ -1,15 +1,21 @@
 <template>
-  <ul class="clean-list flex task-label">
-    <li
-      v-for="label in taskLabels"
-      :key="label.id"
-      :style="{ 'background-color': label.color }"
-      class="label-color"
-      @click="openLabelPopup"
-    >
-      {{ label.title }}
-    </li>
-  </ul>
+  <section>
+    <h4>Labels</h4>
+    <div>
+      <ul class="clean-list flex task-label">
+        <li
+          v-for="label in taskLabels"
+          :key="label.id"
+          :style="{ 'background-color': label.color }"
+          class="label-color"
+          @click="openLabelPopup"
+        >
+          {{ label.title }}
+        </li>
+        <li class="icon plus label-color" @click="openLabelPopup"></li>
+      </ul>
+    </div>
+  </section>
 </template>
 
 <script>

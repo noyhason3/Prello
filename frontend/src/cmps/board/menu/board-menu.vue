@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     toggleBoardMenu() {
-      console.log("more toggling");
       this.$emit("toggle-board-menu");
       this.openBoardMenu();
     },

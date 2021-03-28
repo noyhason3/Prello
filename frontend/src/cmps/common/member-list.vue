@@ -1,5 +1,7 @@
 <template>
   <section>
+    <h3 v-if="isInTask">Members</h3>
+    <div class="board-members">
     <div v-if="members && members.length">
       <ul class="clean-list flex member-list">
         <li
@@ -12,6 +14,11 @@
             @toggle-member-details="toggleMemberDetails"
           />
         </li>
+        <li
+          v-if="isInTask"
+          class="icon plus member-preview"
+          @click="openMemberPopup"
+        ></li>
       </ul>
       <popup-member-details
         v-if="isShowMemberDetails"
@@ -39,6 +46,7 @@
         <p>{{ member.fullname }}</p>
       </li>
     </ul>
+    </div>
   </section>
 </template>
 
@@ -50,6 +58,7 @@ export default {
   props: {
     members: Array,
     isTaskRelated: Boolean,
+    isInTask: Boolean,
   },
   data() {
     return {
@@ -102,6 +111,9 @@ export default {
         "file: member-list.vue - line 79 - removeBoardMember - id",
         id
       );
+    },
+    openMemberPopup(ev) {
+      this.$emit("open-member-popup", ev);
     },
   },
 

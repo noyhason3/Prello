@@ -31,7 +31,7 @@
 
       <button
         @click.stop="openControls"
-        class="btn close icon elipsis preview"
+        class="btn edit icon pencil preview"
       ></button>
     </header>
 

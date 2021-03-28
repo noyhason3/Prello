@@ -1,28 +1,40 @@
 .member-details {
     padding: 10px;
-    z-index: 3!important;
+    z-index: 3 !important;
+
     .member-details-container {
+        padding-inline-start: 10px;
         display: flex;
         align-items: center;
         margin-bottom: 20px;
-        h2{
+
+        h2 {
             margin-bottom: 0.2rem;
         }
-        h3{
-            font-weight:400;
-            font-size:0.9rem;
+
+        h3 {
+            font-weight: 400;
+            font-size: 0.9rem;
         }
 
         .member-initials {
             transform: scale(1.6);
-            margin-inline-end: 20px;
-            margin-inline-start: 10px;
-            
         }
+
+        .member-name {
+            margin-inline-start: 20px;
+        }
+
+    }
+
+    .btn.close {
+        top: 5px;
+        right: 5px;
     }
 
     .btn.remove {
         background-color: transparent;
-        margin-bottom: 0;;
+        margin-bottom: 0;
+        ;
     }
 }
