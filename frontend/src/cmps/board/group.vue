@@ -109,6 +109,7 @@ export default {
         type: "saveTask",
         groupId: this.group.id,
         task: this.newTask,
+        activityType:`Task '${this.newTask.title}' was added`
       });
       this.newTask = JSON.parse(
         JSON.stringify(this.$store.getters.getEmptyTask)

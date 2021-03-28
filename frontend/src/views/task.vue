@@ -197,7 +197,8 @@ export default {
     saveCoverImg(img) {
       this.task.style.coverColor = "";
       this.task.style.coverImg = img.url;
-      this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:'Cover-image was set' });
+
     },
     assignTaskMember(member) {
       if (!this.task.members) this.task.members = [];

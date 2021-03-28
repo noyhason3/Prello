@@ -19,6 +19,7 @@ function connectSockets(http, session) {
       'New socket - socket.handshake.sessionID',
       socket.handshake.sessionID
     );
+    console.log(socket);
     gSocketBySessionIdMap[socket.handshake.sessionID] = socket;
     console.log('session user:', socket.handshake?.session?.user);
     socket.on('disconnect', (socket) => {
@@ -82,6 +83,8 @@ function broadcast({ type, data, room = null }) {
       'Shoudnt happen, no sessionId in asyncLocalStorage store'
     );
   const excludedSocket = gSocketBySessionIdMap[sessionId];
+  // console.log('-------------------------------------------------------------------');
+  // console.log(excludedSocket , '------------------------------------------------------------');
   if (!excludedSocket) return logger.debug('Shouldnt happen, No socket in map');
   if (room) excludedSocket.broadcast.to(room).emit(type, data);
   else excludedSocket.broadcast.emit(type, data);
