@@ -1,7 +1,7 @@
 <template>
-  <section>
-    <h3 v-if="isInTask">Members</h3>
+  <!-- <section> -->
     <div class="board-members">
+    <h3 v-if="isInTask">Members</h3>
     <div v-if="members && members.length">
       <ul class="clean-list flex member-list">
         <li
@@ -47,7 +47,7 @@
       </li>
     </ul>
     </div>
-  </section>
+  <!-- </section> -->
 </template>
 
 <script>
