@@ -52,8 +52,8 @@
       @save-date="saveDate"
       tabindex="0"
       ref="Duedate"
-      @blur.native="duedateBlurHandler"
     />
+    <!-- @blur.native="duedateBlurHandler" -->
 
     <button
       @click="togglePopup('Checklist', $event)"
@@ -147,10 +147,10 @@ export default {
       isDuedateOpen: false,
     };
   },
-  computed:{
-    user(){
+  computed: {
+    user() {
       return this.$store.getters.loggedinUser;
-    }
+    },
   },
   methods: {
     togglePopup(str, ev) {
@@ -286,7 +286,7 @@ export default {
     //   this.$emit("save-attachments", attachments);
     //   this.togglePopup("Attachment");
     // },
-    async saveTask({task, activityType}) {
+    async saveTask({ task, activityType }) {
       await this.$store.dispatch({ type: "saveTask", task, activityType });
     },
     // togglePopup({ str }) {
@@ -296,50 +296,76 @@ export default {
     setCoverColor(color) {
       this.task.style.coverImg = "";
       this.task.style.coverColor = color;
-      this.saveTask({task:this.task, activityType:`Cover-color was set on task: '${this.task.title}' by: ${this.user.fullname}` });
+      this.saveTask({
+        task: this.task,
+        activityType: `Cover-color was set on task: '${this.task.title}' by: ${this.user.fullname}`,
+      });
     },
     saveCoverImg(img) {
       this.task.style.coverColor = "";
       this.task.style.coverImg = img.url;
-            this.saveTask({task:this.task, activityType:`Cover-image was set on task: '${this.task.title}' by: ${this.user.fullname}` });
-
+      this.saveTask({
+        task: this.task,
+        activityType: `Cover-image was set on task: '${this.task.title}' by: ${this.user.fullname}`,
+      });
     },
     assignTaskMember(member) {
       if (!this.task.members) this.task.members = [];
       this.task.members.push(member);
-      this.saveTask({task:this.task, activityType:`${member.fullname} was assigned to task: '${this.task.title}' by: ${this.user.fullname}` });
-
+      this.saveTask({
+        task: this.task,
+        activityType: `${member.fullname} was assigned to task: '${this.task.title}' by: ${this.user.fullname}`,
+      });
     },
     removeTaskMember(id) {
       const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
       if (memberIdx < 0) return;
       const deletedMember = this.task.members.splice(memberIdx, 1);
-      this.saveTask({task:this.task, activityType:`${deletedMember[0].fullname} was removed from task: '${this.task.title}' by: ${this.user.fullname}` });
+      this.saveTask({
+        task: this.task,
+        activityType: `${deletedMember[0].fullname} was removed from task: '${this.task.title}' by: ${this.user.fullname}`,
+      });
     },
     saveChecklist(checklist) {
       const task = this.task;
       this.checklist.id = utilService.makeId();
       task.checklists.push(checklist);
-      this.saveTask({task:this.task, activityType:`Checklist was set on task: '${this.task.title}' by: ${this.user.fullname}` });
+      this.saveTask({
+        task: this.task,
+        activityType: `Checklist was set on task: '${this.task.title}' by: ${this.user.fullname}`,
+      });
     },
     setTaskLabels({ labelIds }) {
       this.task.labelIds = labelIds;
-      this.saveTask({task:this.task, activityType:`Task '${this.task.title}'s' labels were set by: ${this.user.fullname}` });
+      this.saveTask({
+        task: this.task,
+        activityType: `Task '${this.task.title}'s' labels were set by: ${this.user.fullname}`,
+      });
     },
     saveDate(timestamp) {
       this.task.duedate = timestamp;
       this.togglePopup("Duedate");
       this.saveTask(this.task);
-      this.saveTask({task:this.task, activityType:`Date was set on task: '${this.task.title}' by: ${this.user.fullname}` });
+      this.saveTask({
+        task: this.task,
+        activityType: `Date was set on task: '${this.task.title}' by: ${this.user.fullname}`,
+      });
     },
     saveAttachments(attachments) {
       this.task.attachments = attachments;
       console.log(attachments);
       this.saveTask(this.task);
-      this.saveTask({task:this.task, activityType:`Task '${this.task.title}'s' attachments were set by: ${this.user.fullname}` });
+      this.saveTask({
+        task: this.task,
+        activityType: `Task '${this.task.title}'s' attachments were set by: ${this.user.fullname}`,
+      });
     },
     async removeTask() {
-      await this.$store.dispatch({ type: "removeTask", taskId: this.task.id, activityType: `Task '${this.task.title} was deleted by: ${this.user.fullname}`  });
+      await this.$store.dispatch({
+        type: "removeTask",
+        taskId: this.task.id,
+        activityType: `Task '${this.task.title} was deleted by: ${this.user.fullname}`,
+      });
       const taskId = this.$route.params.taskId;
       const boardId = this.$route.params.boardId;
       console.log(

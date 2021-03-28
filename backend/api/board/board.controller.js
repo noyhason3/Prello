@@ -6,7 +6,7 @@ const boardService = require('./board.service');
 async function getBoards(req, res) {
   try {
     console.log('getting boards');
-    const userId = req.session.user._id;
+    const userId = req.session.user?._id || '';
     //TODO: const filterBy = req.body
     const boards = await boardService.query();
     let userBoards = boards;
@@ -15,6 +15,8 @@ async function getBoards(req, res) {
     }
     res.send(userBoards);
   } catch (err) {
+    if (err.message === 'Not logged in') res.status(401).send({ err: err.message })
+
     logger.error('Cannot get boards', err);
     res.status(500).send({ err: 'Failed to get boards' });
   }
@@ -74,9 +76,9 @@ async function updateBoard(req, res) {
   try {
     console.log('hi 1');
     console.log(req.body);
-    const {board} = req.body;
-    const {activity} = req.body;
-    const {task} = req.body;
+    const { board } = req.body;
+    const { activity } = req.body;
+    const { task } = req.body;
     const savedBoard = await boardService.update(board);
 
     // if (task?.members.length){

@@ -11,10 +11,11 @@ async function query(filterBy = {}) {
     console.log('getting boards');
     const store = asyncLocalStorage.getStore()
     const { userId } = store
+    if (!userId) throw new Error('Not logged in')
     const criteria = _buildCriteria(filterBy);
     const collection = await dbService.getCollection('board');
     const boards = await collection.find({}).toArray();
-    
+
     if (userId === 'demo') {
       //return await DEMO_BOARDS
       //TODO - Add a more sophisticated board population function - in case a board isn't found populate it with the data from the DEMO_BOARDS
@@ -23,7 +24,7 @@ async function query(filterBy = {}) {
       return demoBoards
     } else {
       const memberInBoards = await collection.find({ members: { $elemMatch: { _id: userId } } })
-      const memberCreatedBoards = await collection.find({ createdBy:  { _id: ObjectId(userId) } }).toArray();
+      const memberCreatedBoards = await collection.find({ createdBy: { _id: ObjectId(userId) } }).toArray();
       console.log('memberCreatedBoards:', memberCreatedBoards)
       console.log("file: board.service.js - line 22 - query - memberInBoards", memberInBoards.length)
       return memberInBoards
