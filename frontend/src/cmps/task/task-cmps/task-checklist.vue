@@ -4,10 +4,7 @@
       <!-- <div class="main-checklist-header task-main-layout headline"> -->
       <div class="task-main-layout headline">
         <div class="icon checklist"></div>
-        <h4
-          v-if="!isEditTitleOpen"
-          @click="openEditTitle"
-        >
+        <h4 v-if="!isEditTitleOpen" @click="openEditTitle">
           {{ checklist.title }}
         </h4>
         <editable-text
@@ -23,7 +20,11 @@
         />
       </div>
 
-      <button @click="deleteChecklist" v-if="!isEditTitleOpen" class="btn delete-checklist-btn">
+      <button
+        @click="deleteChecklist"
+        v-if="!isEditTitleOpen"
+        class="btn delete-checklist-btn"
+      >
         Delete
       </button>
     </div>
@@ -54,6 +55,7 @@
           v-for="todo in checklist.todos"
           :key="todo.id"
           class="task-main-layout todo-container"
+          :style="[todo.isDone ? { 'text-decoration': 'line-through' } : '']"
         >
           <input
             type="checkbox"
@@ -83,11 +85,16 @@
               class="editable-todo"
             >
             </editable-text>
+            <button @click.prevent="deleteTodo(todo)" class="btn close icon x delete-todo" />
           </div>
         </li>
       </draggable>
 
-      <button v-if="!isAddTodoOpen" @click="openAddTodo" class="btn task-secondary-layout">
+      <button
+        v-if="!isAddTodoOpen"
+        @click="openAddTodo"
+        class="btn task-secondary-layout"
+      >
         Add an item
       </button>
       <editable-text
@@ -154,6 +161,7 @@ export default {
       this.saveChecklist();
     },
     addTodo() {
+      if (!this.todo.txt) return
       if (!this.checklist.todos) this.checklist.todos = [];
       this.todo.id = utilService.makeId();
       this.checklist.todos.push({ ...this.todo });
@@ -167,6 +175,11 @@ export default {
     editTodo(todo) {
       const idx = this.checklist.todos.findIndex(({ id }) => id === todo.id);
       this.checklist.todos.splice(idx, 1, todo);
+      this.saveChecklist();
+    },
+    deleteTodo(todo) {
+      const idx = this.checklist.todos.findIndex(({ id }) => id === todo.id);
+      this.checklist.todos.splice(idx, 1);
       this.saveChecklist();
     },
     toggleChecked(todo) {

@@ -29,6 +29,13 @@
 
   .todo-container {
     cursor: pointer;
+
+    .delete-todo{
+      float: right;
+      // display: none;
+      visibility: hidden;
+    }
+
     // display: flex;
     padding: 6px 10px 6px 0;
     // align-items: center;
@@ -79,6 +86,12 @@
 
   .todo-container:hover {
     background-color: #eaecf0;
+    
+    .delete-todo{
+      float: right;
+      visibility: visible;
+      // display: block;
+    }
   }
 
   .btn {

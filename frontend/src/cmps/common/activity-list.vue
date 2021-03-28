@@ -1,24 +1,22 @@
 <template>
   <ul>
-    <!-- <div class="board-menu-layout">
-      <div class="icon list"></div>
-      <h3>Activity</h3>
-    </div> -->
-    <li v-for="activity in activities" :key="activity.id" class="clean-list board-menu-layout">
-     <member-preview/> <div>{{ activity.txt }} {{ activity.created }}</div>
+    <li v-for="activity in activities" :key="activity.id" class="clean-list">
+     <member-preview :member="activity.byMember" />
+      <div>{{ activity.txt }} {{ date(activity.createdAt).day }} at {{date(activity.createdAt).hour}}</div>
     </li>
   </ul>
 </template>
 
 <script>
-  import memberPreview from './member-preview'
+  import memberPreview from './member-preview.vue'
+  import moment from "moment";
+
 export default {
   props: {
     activities: Array,
   },
-  computed: {
-    date() {
-      const timestamp = this.task.duedate;
+  methods: {
+    date(timestamp) {
       const day = moment.unix(timestamp).format("MMM D");
       const hour = moment.unix(timestamp).format("hh:mm A");
       const date = {
@@ -28,7 +26,7 @@ export default {
       return date;
     },
   },
-  component:{
+  components:{
     memberPreview
   }
 };
