@@ -5,7 +5,7 @@
     <!-- <button @click="togglePopup('Cover')" class="control-btn cover"><span></span>Cover</button> -->
     <button
       @click="togglePopup('Cover', $event)"
-      class="btn neutral left-align"
+      class="btn neutral left-align cover"
     >
       <!-- @blur="togglePopup('Cover', $event)" -->
       <span class="icon cover"></span>Cover
