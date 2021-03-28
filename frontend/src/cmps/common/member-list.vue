@@ -1,51 +1,51 @@
 <template>
   <section>
     <h3 v-if="isInTask">Members</h3>
-    <div class="board-members">
-    <div v-if="members && members.length">
-      <ul class="clean-list flex member-list">
-        <li
-          v-for="member in members"
-          :key="member._id"
-          @click="toggleMemberDetails($event, member)"
-        >
-          <member-preview
-            :member="member"
-            @toggle-member-details="toggleMemberDetails"
-          />
-        </li>
-        <li
-          v-if="isInTask"
-          class="icon plus member-preview"
-          @click="openMemberPopup"
-        ></li>
-      </ul>
-      <popup-member-details
-        v-if="isShowMemberDetails"
-        @close-member-details="closeMemberDetails"
-        @remove-task-member="removeTaskMember"
-        :member="selectedMember"
-        :isTaskRelated="isTaskRelated"
-      />
-    </div>
-    <button
-      v-if="!isTaskRelated"
-      class="btn white-btn"
-      @click="addBoardMember = !addBoardMember"
-    >
-      <i class="icon plus" style="font-style: normal" />
-      Add member
-    </button>
-    <ul v-if="addBoardMember" class="clean-list user-list">
-      <li
-        v-for="member in filteredUsers"
-        :key="member._id"
-        @click="assignBoardMember(member)"
+    <div>
+      <div v-if="members && members.length">
+        <ul class="clean-list flex member-list">
+          <li
+            v-for="member in members"
+            :key="member._id"
+            @click="toggleMemberDetails($event, member)"
+          >
+            <member-preview
+              :member="member"
+              @toggle-member-details="toggleMemberDetails"
+            />
+          </li>
+          <li
+            v-if="isInTask"
+            class="icon plus member-preview"
+            @click="openMemberPopup"
+          ></li>
+        </ul>
+        <popup-member-details
+          v-if="isShowMemberDetails"
+          @close-member-details="closeMemberDetails"
+          @remove-task-member="removeTaskMember"
+          :member="selectedMember"
+          :isTaskRelated="isTaskRelated"
+        />
+      </div>
+      <button
+        v-if="!isTaskRelated"
+        class="btn white-btn"
+        @click="addBoardMember = !addBoardMember"
       >
-        <member-preview :member="member" />
-        <p>{{ member.fullname }}</p>
-      </li>
-    </ul>
+        <i class="icon plus" style="font-style: normal" />
+        Add member
+      </button>
+      <ul v-if="addBoardMember" class="clean-list user-list">
+        <li
+          v-for="member in filteredUsers"
+          :key="member._id"
+          @click="assignBoardMember(member)"
+        >
+          <member-preview :member="member" />
+          <p>{{ member.fullname }}</p>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
@@ -71,11 +71,7 @@ export default {
     filteredUsers() {
       const boardUsers = this.$store.getters.currBoard.members;
       const filteredUsers = this.$store.getters.users.filter((user) => {
-        return !boardUsers.some((boardUser) => {
-          console.log(boardUser, "boardUser");
-          console.log(filteredUsers, "filteredUsers");
-          return boardUser._id === user._id;
-        });
+        return !boardUsers.some((boardUser) => boardUser._id === user._id);
       });
       return filteredUsers;
     },

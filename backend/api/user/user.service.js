@@ -22,8 +22,7 @@ async function query(filterBy = {}) {
         // const { userId } = store
         const collection = await dbService.getCollection('user')
         var users = await collection.find({}).toArray()
-        console.log("file: user.service.js - line 20 - query - users", users)
-        users = users.map(user => {
+        users = users.filter(user => {
             if (user._id !== 'demo') {
                 delete user.password
                 //user.createdAt = ObjectId(user._id).getTimestamp()
