@@ -19,8 +19,8 @@
       <div slot="footer" class="board-menu-layout activity-list">
         <div class="icon list"></div>
         <h3>Activity</h3>
-        <activity-list />
       </div>
+        <activity-list />
     </board-menu-popup>
     <board-menu-style
       v-else
