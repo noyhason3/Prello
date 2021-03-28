@@ -141,6 +141,11 @@ export default {
   mounted() {
     this.setGroupColor();
   },
+  computed: {
+    user() {
+      return this.$store.getters.loggedinUser;
+    },
+  },
   methods: {
     openTask(task) {
       task = JSON.parse(JSON.stringify(task));
@@ -153,6 +158,7 @@ export default {
         type: "saveTask",
         groupId: this.group.id,
         task: this.newTask,
+        activityType: `A new task was added: '${this.newTask.title}' by ${this.user.fullname}`,
       });
       this.newTask = JSON.parse(
         JSON.stringify(this.$store.getters.getEmptyTask)
