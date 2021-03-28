@@ -123,6 +123,11 @@
               @toggle-drag="toggleDrag"
               @update-task="saveTask(task)"
             />
+            <div class="board-menu-layout" v-if="activities.length">
+              <div class="icon list"></div>
+              <h3>Activity</h3>
+            </div>
+            <activity-list :activities="activities" />
           </draggable>
         </div>
         <!-- <task-comment /> -->
@@ -146,6 +151,7 @@ import fileDragUploader from "@/cmps/common/file-drag-uploader.vue";
 import { boardService } from "../services/board.service";
 import moment from "moment";
 import utilService from "../services/util.service";
+import activityList from "../cmps/common/activity-list.vue";
 
 export default {
   data() {
@@ -181,6 +187,11 @@ export default {
         hour,
       };
       return date;
+    },
+    activities() {
+      return this.$store.getters.currBoard.activities.filter((activity) => {
+        return activity.task.id === this.task.id;
+      });
     },
   },
   methods: {
@@ -307,6 +318,7 @@ export default {
     taskAttachment,
     fileDragUploader,
     boardService,
+    activityList,
   },
 };
 </script>

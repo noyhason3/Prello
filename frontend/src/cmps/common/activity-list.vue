@@ -1,16 +1,31 @@
 <template>
-    <ul>
-        <li v-for="activity in activities" :key="activity.id"> 
-            {{activity.txt}}
-        </li>
-    </ul>
+  <ul>
+    <!-- <div class="board-menu-layout">
+      <div class="icon list"></div>
+      <h3>Activity</h3>
+    </div> -->
+    <li v-for="activity in activities" :key="activity.id" class="clean-list board-menu-layout">
+      {{ activity.txt }} {{ activity.created }}
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
-    props:{
-        activities: Array
-    }
-
-}
+  props: {
+    activities: Array,
+  },
+  computed: {
+    date() {
+      const timestamp = this.task.duedate;
+      const day = moment.unix(timestamp).format("MMM D");
+      const hour = moment.unix(timestamp).format("hh:mm A");
+      const date = {
+        day,
+        hour,
+      };
+      return date;
+    },
+  },
+};
 </script>

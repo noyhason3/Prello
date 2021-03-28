@@ -16,13 +16,13 @@
           </li>
         </ul>
       </div>
-      <div slot="footer" class="activity-list">
+      <div slot="footer" class="activity-list" v-if="activities.length">
         <div class="board-menu-layout">
           <div class="icon list"></div>
           <h3>Activity</h3>
         </div>
+        <activity-list :activities="activities" />
       </div>
-      <activity-list :activities="this.activites" />
       <!-- <activity-list /> -->
     </board-menu-popup>
     <board-menu-style
@@ -37,28 +37,17 @@
 <script>
 import boardMenuPopup from "@/cmps/board/menu/board-menu-popup.vue";
 import boardMenuStyle from "@/cmps/board/menu/board-menu-style.vue";
-import activityList from ".@/cmps/common/activity-list.vue";
+import activityList from "@/cmps/common/activity-list.vue";
 export default {
   props: {
     boardStyle: Object,
     board: Object,
-    taskId: String,
+    activities: Array,
   },
   data() {
     return {
       isMainMenu: true,
     };
-  },
-  conputed: {
-    activities() {
-      if (taskId) {
-        return this.board.activities.filter((activity) => {
-          return activity.task._id === this.taskId;
-        });
-      } else {
-        return this.board.activities;
-      }
-    },
   },
   methods: {
     toggleBoardMenu() {

@@ -6,10 +6,11 @@
       :src="require('@/assets/img/background/' + board.style.bgImg.value)"
       alt=""
     /> -->
-    <board-header 
-    :board="board" 
-    :boardStyle="boardStyle" 
-    @toggle-board-menu="toggleBoardMenu"/>
+    <board-header
+      :board="board"
+      :boardStyle="boardStyle"
+      @toggle-board-menu="toggleBoardMenu"
+    />
     <draggable
       v-model="board.groups"
       group="group"
@@ -55,7 +56,7 @@
     <board-menu
       :boardStyle="boardStyle"
       :board="board"
-      :taskId="this.task._id"
+      :activities="activities"
       :class="{ 'show-menu': isOpenMenu }"
       @toggle-board-menu="toggleBoardMenu"
     />
@@ -70,7 +71,7 @@ import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
 import editableText from "@/cmps/common/editable-text.vue";
 import draggable from "vuedraggable";
-import boardMenu from '@/cmps/board/menu/board-menu.vue'
+import boardMenu from "@/cmps/board/menu/board-menu.vue";
 
 export default {
   data() {
@@ -79,7 +80,6 @@ export default {
       isAddNewGroup: false,
       newGroup: JSON.parse(JSON.stringify(this.$store.getters.getEmptyGroup)),
       isOpenMenu: false,
-
     };
   },
   async created() {
@@ -161,9 +161,15 @@ export default {
       }
       return { backgroundColor: this.board.style.bgColor.value };
     },
-    task(){
-      return this.$store.getters.currTask;
-    }
+    activities() {
+      // if (this.taskId) {
+      //   return this.board.activities.filter((activity) => {
+      //     return activity.task._id === this.taskId;
+      //   });
+      // } else {
+        return this.board.activities;
+      // }
+    },
   },
   watch: {
     "$route.params.boardId"(boardId) {
