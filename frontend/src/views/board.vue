@@ -57,6 +57,7 @@
     <board-menu
       :boardStyle="boardStyle"
       :board="board"
+      :activities="activities"
       :class="{ 'show-menu': isOpenMenu }"
       @toggle-board-menu="toggleBoardMenu"
     />
@@ -160,6 +161,15 @@ export default {
         return { backgroundImage: `url(${img})` };
       }
       return { backgroundColor: this.board.style.bgColor.value };
+    },
+    activities() {
+      // if (this.taskId) {
+      //   return this.board.activities.filter((activity) => {
+      //     return activity.task._id === this.taskId;
+      //   });
+      // } else {
+        return this.board.activities;
+      // }
     },
   },
   watch: {
