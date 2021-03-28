@@ -32,7 +32,8 @@
       :styleList="imgStyles"
       :headline="'Photos'"
       @toggle-style-menu="toggleStyleMenu"
-      @set-board-style="setBoardStyleImg"
+      @set-board-style="setBoardStyle"
+      @toggle-board-menu="toggleBoardMenu"
     />
     <!-- </board-menu-popup> -->
     <!-- <board-menu-popup > -->
@@ -41,7 +42,8 @@
       :styleList="colorStyles"
       :headline="'Colors'"
       @toggle-style-menu="toggleStyleMenu"
-      @set-board-style="setBoardStyleColor"
+      @set-board-style="setBoardStyle"
+      @toggle-board-menu="toggleBoardMenu"
     />
     <!-- </board-menu-popup> -->
   </section>
@@ -53,13 +55,13 @@ import styleList from "@/cmps/board/menu/style-list.vue";
 import utilService from "../../../services/util.service";
 
 export default {
-  props:{
-    board:Object
+  props: {
+    board: Object,
   },
   data() {
     return {
       // selectedStyle: null,
-      boardToEdit: {...this.board},
+      boardToEdit: JSON.parse(JSON.stringify(this.board)),
       isStyleMenu: true,
       isImgMenu: false,
       imgs: [],
@@ -108,13 +110,19 @@ export default {
       this.toggleStyleMenu();
       this.isImgMenu = true;
     },
-    setBoardStyleImg(style) {
-      this.boardToEdit.style.bgImg = style;
-      console.log('board in imgs',this.boardToEdit);
-    },
-    setBoardStyleColor(style) {
-      this.boardToEdit.style.bgColor = style;
-      console.log('board in colors',this.boardToEdit);
+    setBoardStyle({ styleId, isImg }) {
+      // console.log('isImg:', isImg)
+      if (isImg) {
+        if (this.boardToEdit.style.bgImg?.id === styleId) return;
+        this.boardToEdit.style.bgImg = this.imgs.find(({ id }) => id === styleId);
+      } else {
+        this.boardToEdit.style.bgImg = {};
+        if (this.boardToEdit.style.bgColor?.id === styleId) return;
+        this.boardToEdit.style.bgColor = this.colors.find(({ id }) => id === styleId);
+      }
+      console.log("this.boardToEdit.style:", this.boardToEdit.style);
+      
+      this.$store.dispatch('saveBoard', {board:this.boardToEdit, activity:null, task:null})
     },
   },
   computed: {

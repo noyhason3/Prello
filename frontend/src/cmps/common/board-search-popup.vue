@@ -28,6 +28,7 @@ export default {
       return { backgroundColor: board.style.bgColor.value };
     },
     async openBoard(boardId) {
+      if(this.$route.params.boardId === boardId) return;
       await this.$router.push("/board/" + boardId);
       this.$emit("close-search");
     },

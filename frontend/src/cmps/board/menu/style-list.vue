@@ -1,5 +1,5 @@
 <template>
-  <board-menu-popup>
+  <board-menu-popup @toggle-board-menu="toggleBoardMenu">
     <div slot="header">
       <button @click="toggleStyleMenu" class="icon back"></button>
       <h2 class="headline">{{ headline }}</h2>
@@ -26,13 +26,15 @@ export default {
     headline: String,
   },
   methods: {
+      toggleBoardMenu() {
+      this.$emit("toggle-board-menu");
+    },
     toggleStyleMenu() {
       this.$emit("toggle-style-menu");
     },
     selectStyle(styleId) {
-      const selectedStyle = this.styleList.find(({id}) => id===styleId)
-      console.log('selectedStyle:', selectedStyle)
-      this.$emit('set-board-style', selectedStyle)
+      let isImg = this.headline==='Photos';
+      this.$emit('set-board-style', {styleId, isImg})
     },
   },
   components: {
