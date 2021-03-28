@@ -62,7 +62,11 @@ export default {
     filteredUsers() {
       const boardUsers = this.$store.getters.currBoard.members;
       const filteredUsers = this.$store.getters.users.filter((user) => {
-        return !boardUsers.some((boardUser) => boardUser._id === user._id);
+        return !boardUsers.some((boardUser) => {
+          console.log(boardUser, "boardUser");
+          console.log(filteredUsers, "filteredUsers");
+          return boardUser._id === user._id;
+        });
       });
       return filteredUsers;
     },

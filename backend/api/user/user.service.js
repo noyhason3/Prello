@@ -2,6 +2,8 @@
 const dbService = require('../../services/db.service')
 const logger = require('../../services/logger.service')
 const ObjectId = require('mongodb').ObjectId
+// const asyncLocalStorage = require('../../services/als.service');
+
 
 module.exports = {
     query,
@@ -15,14 +17,20 @@ module.exports = {
 async function query(filterBy = {}) {
     //const criteria = _buildCriteria(filterBy)
     try {
+
+        // const store = asyncLocalStorage.getStore()
+        // const { userId } = store
         const collection = await dbService.getCollection('user')
         var users = await collection.find({}).toArray()
+        console.log("file: user.service.js - line 20 - query - users", users)
         users = users.map(user => {
-            delete user.password
-            //user.createdAt = ObjectId(user._id).getTimestamp()
-            // Returning fake fresh data
-            // user.createdAt = Date.now() - (1000 * 60 * 60 * 24 * 3) // 3 days ago
-            return user
+            if (user._id !== 'demo') {
+                delete user.password
+                //user.createdAt = ObjectId(user._id).getTimestamp()
+                // Returning fake fresh data
+                // user.createdAt = Date.now() - (1000 * 60 * 60 * 24 * 3) // 3 days ago
+                return user
+            }
         })
         return users
     } catch (err) {
