@@ -127,7 +127,7 @@
               <div class="icon list"></div>
               <h3>Activity</h3>
             </div>
-            <activity-list :activities="activities" />
+              <activity-list :activities="activities" />
           </draggable>
         </div>
         <!-- <task-comment /> -->
@@ -151,7 +151,7 @@ import fileDragUploader from "@/cmps/common/file-drag-uploader.vue";
 import { boardService } from "../services/board.service";
 import moment from "moment";
 import utilService from "../services/util.service";
-import activityList from "../cmps/common/activity-list.vue";
+import activityList from "@/cmps/common/activity-list.vue";
 
 export default {
   data() {

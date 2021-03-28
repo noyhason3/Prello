@@ -15,6 +15,7 @@
       @toggle-popup="togglePopup"
       @set-cover-color="setCoverColor"
       @save-cover-img="saveCoverImg"
+      @delete-cover="deleteCover"
       tabindex="0"
       ref="Cover"
       @blur.native="coverBlurHandler"
@@ -317,6 +318,14 @@ export default {
       this.saveTask({
         task: this.task,
         activityType: `Cover-image was set on task: '${this.task.title}' by: ${this.user.fullname}`,
+      });
+    },
+    deleteCover() {
+      this.task.style.coverImg = "";
+      this.task.style.coverColor = "";
+       this.saveTask({
+        task: this.task,
+        activityType: `Cover on task: '${this.task.title}' was removed by: ${this.user.fullname}`,
       });
     },
     assignTaskMember(member) {
