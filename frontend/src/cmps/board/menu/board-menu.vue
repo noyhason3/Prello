@@ -1,6 +1,5 @@
 <template>
   <div class="board-menu">
-
     <board-menu-popup v-if="isMainMenu" @toggle-board-menu="toggleBoardMenu">
       <div slot="header">
         <h2 class="headline">Menu</h2>
@@ -17,9 +16,12 @@
           </li>
         </ul>
       </div>
-      <div slot="footer" class="board-menu-layout activity-list">
+      <div slot="footer" class=" activity-list">
+        <div class="board-menu-layout">
         <div class="icon list"></div>
         <h3>Activity</h3>
+        </div>
+        <activity-list />
       </div>
     </board-menu-popup>
     <board-menu-style
@@ -34,6 +36,7 @@
 <script>
 import boardMenuPopup from "@/cmps/board/menu/board-menu-popup.vue";
 import boardMenuStyle from "@/cmps/board/menu/board-menu-style.vue";
+import activityList from ".@/cmps/common/activity-list.vue";
 export default {
   props: {
     boardStyle: Object,
@@ -64,6 +67,7 @@ export default {
   components: {
     boardMenuPopup,
     boardMenuStyle,
+    activityList,
   },
 };
 </script>
