@@ -75,30 +75,35 @@ async function addBoard(req, res) {
 
 async function updateBoard(req, res) {
   try {
-    console.log('hi 1');
-    console.log(req.body);
     const { board } = req.body;
     const { activity } = req.body;
     const { task } = req.body;
     const savedBoard = await boardService.update(board);
 
     // if (task?.members.length){
-    if (activity) {
-      if (task?.members) {
+    if (activity){
+      console.log('if activity');
+
+      if (task?.members.length){
+        console.log('if task.members');
+
         task.members.forEach(member => {
           socketService.emitToUser({ type: 'activity-update', data: activity, userId: member._id })
         });
       }
       else {
-        console.log('hi 2');
-        console.log(req.body);
+        console.log('else');
         // socketService.broadcast({type:'board-update', data:{board, activity}, room:savedBoard._id })
-        socketService.broadcast({ type: 'board-update', data: { board, activity }, room: savedBoard._id })
+        board.members.forEach(member => {
+          socketService.emitToUser({type:'activity-update', data:activity, userId:member._id })
+      });
+        // socketService.broadcast({type:'activity-update', data:{savedBoard, activity}, room:savedBoard._id })
       }
     }
-    else {
-      socketService.broadcast({ type: 'task-update', data: board, room: savedBoard._id })
-    }
+    console.log('broadcast boardupdate');
+
+    socketService.broadcast({type:'board-update', data:savedBoard, room:savedBoard._id })
+    
     //   board.members.forEach(member => {
     //       socketService.emitToUser({type:'board-update', data:activity, userId:member._id })
     // }
