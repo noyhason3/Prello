@@ -76,7 +76,7 @@ function getEmptyTask() {
     //REMEMBER TO
     attachments: [],
     checklists: [],
-    members:[],
+    members: [],
     style: {
       coverColor: '',
       coverImg: '',

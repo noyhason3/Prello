@@ -6,10 +6,11 @@
       :src="require('@/assets/img/background/' + board.style.bgImg.value)"
       alt=""
     /> -->
-    <board-header 
-    :board="board" 
-    :boardStyle="boardStyle" 
-    @toggle-board-menu="toggleBoardMenu"/>
+    <board-header
+      :board="board"
+      :boardStyle="boardStyle"
+      @toggle-board-menu="toggleBoardMenu"
+    />
     <draggable
       v-model="board.groups"
       group="group"
@@ -69,7 +70,7 @@ import boardHeader from "../cmps/board/board-header.vue";
 import group from "../cmps/board/group.vue";
 import editableText from "@/cmps/common/editable-text.vue";
 import draggable from "vuedraggable";
-import boardMenu from '@/cmps/board/menu/board-menu.vue'
+import boardMenu from "@/cmps/board/menu/board-menu.vue";
 
 export default {
   data() {
@@ -78,7 +79,6 @@ export default {
       isAddNewGroup: false,
       newGroup: JSON.parse(JSON.stringify(this.$store.getters.getEmptyGroup)),
       isOpenMenu: false,
-
     };
   },
   async created() {
@@ -87,6 +87,7 @@ export default {
       await this.loadBoard(boardId);
       this.assignClasses();
     }
+    this.$store.dispatch({ type: "loadUsers" });
   },
   mounted() {
     const boardHeader = this.$refs.boardHeader;

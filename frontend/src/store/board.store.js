@@ -142,6 +142,7 @@ export const boardStore = {
       { commit, state, dispatch },
       { groupId, task, activityType }
     ) {
+      console.log("file: board.store.js - line 145 - task", task)
       const board = JSON.parse(JSON.stringify(state.board));
       const activity = boardService.getEmptyActivity({
         currTask: task,
