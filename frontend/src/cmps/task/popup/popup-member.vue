@@ -10,6 +10,7 @@
         v-model="searchStr"
         placeholder="Search for members..."
         class="search-member"
+        @blur="inputBlurHandler"
       />
       <ul class="clean-list" v-if="memberList">
         <li
@@ -68,6 +69,11 @@ export default {
         );
         this.taskMembers.splice(memberIdx, 1);
         this.$emit("remove-task-member", member._id);
+      }
+    },
+    inputBlurHandler(ev) {
+      if (!ev.relatedTarget) {
+        this.$emit("toggle-popup", "Member");
       }
     },
   },

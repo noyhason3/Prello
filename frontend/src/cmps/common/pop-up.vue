@@ -15,13 +15,27 @@
 <script>
 export default {
   mounted() {
-    const beforeHeight = this.$refs.container.getBoundingClientRect().height;
+    //const beforeHeight = this.$refs.container.getBoundingClientRect().height;
     this.$nextTick(() => {
       const containerHeight = this.$refs.container.getBoundingClientRect()
         .height;
-      const diff = beforeHeight - containerHeight;
+      console.log(
+        "file: pop-up.vue - line 21 - this.$nextTick - containerHeight",
+        containerHeight
+      );
+      // const diff = beforeHeight - containerHeight;
       const main = this.$refs.main;
-      main.style.maxHeight = containerHeight - diff + "px";
+      const footerHeight = this.$refs.footer.getBoundingClientRect().height;
+      const headerHeight =
+        this.$refs.header.getBoundingClientRect().height + 25;
+      main.style.maxHeight =
+        containerHeight - (footerHeight + headerHeight) + "px";
+      console.log(
+        "file: pop-up.vue - line 21 - this.$nextTick - containerHeight",
+        containerHeight
+      );
+      //console.log("file: pop-up.vue - line 24 - this.$nextTick - diff", diff);
+      //main.style.maxHeight = containerHeight - diff + "px";
     });
   },
   components: {},
