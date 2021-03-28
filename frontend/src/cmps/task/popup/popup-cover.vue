@@ -15,7 +15,7 @@
           />
         </li>
       </ul>
-        <button @click="removeCover" class="btn wide neutral">Remove cover</button>
+        <button @click="removeCover" class="btn wide neutral remove-cover">Remove cover</button>
       <h3>ATTACHMENTS</h3>
       <!-- <ul v-if="task.style.coverImg">
         <li v-for="img in ">
@@ -84,6 +84,7 @@ export default {
       this.isLoading = false;
     },
     removeCover() {
+      console.log('hi');
       this.$emit("remove-cover");
     },
   },

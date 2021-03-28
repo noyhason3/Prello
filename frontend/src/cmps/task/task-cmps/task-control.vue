@@ -15,7 +15,7 @@
       @toggle-popup="togglePopup"
       @set-cover-color="setCoverColor"
       @save-cover-img="saveCoverImg"
-      @delete-cover="deleteCover"
+      @remove-cover="removeCover"
       tabindex="0"
       ref="Cover"
       @blur.native="coverBlurHandler"
@@ -283,7 +283,7 @@ export default {
       const task = this.task;
       checklist.id = utilService.makeId();
       task.checklists.push(checklist);
-      this.saveTask(task);
+      this.saveTask({task});
       this.togglePopup("Checklist");
     },
     // setTaskLabels(labelIds) {
@@ -320,7 +320,7 @@ export default {
         activityType: `Cover-image was set on task: '${this.task.title}' by: ${this.user.fullname}`,
       });
     },
-    deleteCover() {
+    removeCover() {
       this.task.style.coverImg = "";
       this.task.style.coverColor = "";
        this.saveTask({

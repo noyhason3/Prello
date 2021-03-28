@@ -14,6 +14,7 @@
         }
         .member-name{
             flex-grow: 1;
+            margin-left: 8px;
         }
         &.member-selected::after{
             content: "✔";
