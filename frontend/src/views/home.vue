@@ -5,7 +5,7 @@
       <div class="hero-content">
         <h1>Manage your collaborative projects</h1>
         <h2>
-          A solution for stucturing and online co-ordination for oganizations
+          A solution for structuring and online co-ordination for organizations
           and individuals alike
         </h2>
         <button class="guest-btn" @click="enterAsGuest">Try it now!</button>
