@@ -19,7 +19,7 @@ function connectSockets(http, session) {
       'New socket - socket.handshake.sessionID',
       socket.handshake.sessionID
     );
-    console.log(socket);
+    //console.log(socket);
     gSocketBySessionIdMap[socket.handshake.sessionID] = socket;
     console.log('session user:', socket.handshake?.session?.user);
     if (socket.handshake?.session?.user) socket.join(socket.handshake.session.user._id)
@@ -38,8 +38,8 @@ function connectSockets(http, session) {
       socket.join(boardId);
       socket.currBoard = boardId;
     });
-    socket.on('activity-update', ({userId, activity})=>{
-      socket.to(userId).emit('update-user',activity)
+    socket.on('activity-update', ({ userId, activity }) => {
+      socket.to(userId).emit('update-user', activity)
     })
     // socket.on('save-board', ({ board, activity, task }) => {
     //   console.log('msg', activity);

@@ -1,5 +1,5 @@
 import { userService } from '../services/user.service.js'
-import {showMsg} from '../services/eventBus.service.js'
+import { showMsg } from '../services/eventBus.service.js'
 // import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from '../services/socket.service'
 
 // var localLoggedinUser = null;
@@ -37,7 +37,7 @@ export const userStore = {
         async login({ commit }, { userCred }) {
             try {
                 const user = await userService.login(userCred);
-                
+
                 socketService.emit('join-user', user._id);
                 socketService.off('activity-update');
                 socketService.on('activity-update', activity => {

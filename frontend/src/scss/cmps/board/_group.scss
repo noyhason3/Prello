@@ -10,9 +10,11 @@
   //Used as a variable to be defined through JS
   --bgColor:#ebecf0;
 
+  position:relative;
   display: flex;
   flex-flow: column;
   max-height: 100%;
+  width: 272px;
   min-width: 272px;
   border-radius: 3px;
   //ADD-TASK
@@ -50,6 +52,7 @@
   .group-edit-popup{
     transform: translate(240px,35px);
     background: #ebecf0!important ;
+    position:absolute!important;
     //outline: none;
     main{
       display: flex;

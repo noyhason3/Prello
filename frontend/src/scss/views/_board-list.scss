@@ -124,12 +124,12 @@
             border: none;
             background-color: transparent;
             position: absolute;
-            bottom: 5px;
-            right: 3px;
+            bottom: 10px;
+            right: 6px;
             margin: 0;
             background-color: transparent;
             transition: 0.2s;
-            color: rgba(255, 210, 86, 0.842);
+            color: rgba(255, 210, 86, 0.9);
         }
 
         .toggle-starred::before,
@@ -142,55 +142,59 @@
             right: -30px;
             opacity: 0;
             color: rgba(255, 255, 255, 0.6);
+            bottom:10px;
         }
 
         .toggle-starred.starred {
-            right: 0;
+            right: 6px;
             opacity: 1;
-            color: rgba(255, 210, 86, 0.842);
+            color: rgba(255, 210, 86, 0.9);
         }
 
         .starred:hover {
             transform: scale(1.2);
-
+            
         }
-
+        
         .toggle-starred:hover,
         .board-options:hover {
             transform: scale(1.2);
             color: rgba(255, 255, 255, 1);
         }
-
+        
         &:hover {
             filter: brightness(85%);
-
+            
             .toggle-starred {
-                right: 0;
+                right: 6px;
                 opacity: 1;
             }
-
+            
             .btn.options {
+                transform:scaleY(1);
                 opacity: 1;
-                top: 5px;
+                top: 10px;
             }
         }
     }
 }
 
 .create-board-screen.add-board {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.7);
+    z-index:1;
 }
 
 .popup-create-board {
-    width: 450px;
+    width: 600px;
     background-color: transparent;
     box-shadow: none;
     position: fixed;
+    z-index:2;
     top: 50px;
     left: 50%;
     transform: translate(-50%);
@@ -204,7 +208,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 10px;
-        height: 100px;
+        height: 150px;
 
         .title {
             height: 30px;
@@ -232,7 +236,7 @@
         }
 
         .title-container {
-            width: 290px;
+            flex-grow:1;
             padding: 10px 10px 10px 10px;
             border-radius: 3px;
             background-size: cover;
@@ -250,23 +254,23 @@
         }
 
         .bgStyle-list {
-            display: flex;
-            flex-wrap: wrap;
-            width: 130px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap:5px;
+            width: 150px;
         }
 
         .bgStyle {
-            width: 30px;
-            height: 30px;
-            // background-color: aqua;
+            width: 100%;
+            height: 100%;
             border-radius: 3px;
-            margin-inline-end: 5px;
-            margin-bottom: 5px;
             cursor: pointer;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
+            background-size:cover;
         }
 
         .bgStyle.selected::before {
@@ -275,7 +279,7 @@
         }
 
         .bgStyle:hover {
-            filter: brightness(95%)
+            filter: brightness(90%)
         }
     }
 }

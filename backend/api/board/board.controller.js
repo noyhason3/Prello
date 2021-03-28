@@ -9,11 +9,12 @@ async function getBoards(req, res) {
     const userId = req.session.user?._id || '';
     //TODO: const filterBy = req.body
     const boards = await boardService.query();
-    let userBoards = boards;
-    if (userId !== 'demo') {
-      userBoards = boards.filter(({ createdBy }) => createdBy._id === userId);
-    }
-    res.send(userBoards);
+    // let userBoards = boards;
+    // if (userId !== 'demo') {
+    //   userBoards = boards.filter(({ createdBy }) => createdBy._id === userId);
+    // }
+    // res.send(userBoards);
+    res.send(boards)
   } catch (err) {
     if (err.message === 'Not logged in') res.status(401).send({ err: err.message })
 
@@ -87,7 +88,7 @@ async function updateBoard(req, res) {
         console.log('if task.members');
 
         task.members.forEach(member => {
-            socketService.emitToUser({type:'activity-update', data:activity, userId:member._id })
+          socketService.emitToUser({ type: 'activity-update', data: activity, userId: member._id })
         });
       }
       else {

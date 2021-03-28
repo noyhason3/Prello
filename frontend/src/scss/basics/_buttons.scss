@@ -1,0 +1,12 @@
+.white-btn{
+    border-radius: 3px;
+    background-color: rgba(rgb(235, 235, 235), 0.3);
+    color:$clr1;
+    &:hover{
+        background-color: rgba(235, 235, 235, 0.5);
+    }
+    &:active{
+        background: transparentize($clr1, 0.85);
+        color: darken($clr1, 12);
+    }
+}

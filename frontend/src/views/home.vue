@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <about />
+    <!-- <about /> -->
   </div>
 </template>
 

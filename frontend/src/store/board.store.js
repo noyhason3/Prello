@@ -41,6 +41,10 @@ export const boardStore = {
   mutations: {
     setBoard(state, { board }) {
       state.board = board;
+      if (board) {
+        const boardIdx = state.boards.findIndex(({ _id }) => board._id === _id)
+        state.boards.splice(boardIdx, 1, board)
+      }
     },
     setBoards(state, { boards }) {
       state.boards = boards;
@@ -64,6 +68,7 @@ export const boardStore = {
     async loadBoards({ commit }) {
       try {
         const boards = await boardService.query();
+        console.log("file: board.store.js - line 71 - loadBoards - boards", boards)
         commit({ type: 'setBoards', boards });
         return boards;
       } catch (err) {
@@ -145,7 +150,7 @@ export const boardStore = {
       await dispatch({ type: 'saveBoard', board })
       commit({ type: 'setBoard', board });
     },
-    async saveTask( { commit, state, dispatch },  { groupId, task, activityType }) {
+    async saveTask({ commit, state, dispatch }, { groupId, task, activityType }) {
       const board = JSON.parse(JSON.stringify(state.board));
       // const activity = boardService.getEmptyActivity({
       //   currTask: task,

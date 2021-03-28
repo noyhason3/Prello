@@ -6,6 +6,8 @@ const logger = require('../../services/logger.service');
 const DEMO_BOARDS = require('../../data/demo_boards.json')
 const DEMO_BOARD = require('../../data/demo_board.json')
 
+generateDemoBoards()
+
 async function query(filterBy = {}) {
   try {
     console.log('getting boards');
@@ -16,20 +18,25 @@ async function query(filterBy = {}) {
     const collection = await dbService.getCollection('board');
     const boards = await collection.find({}).toArray();
 
+    var demoBoards = []
     if (userId === 'demo') {
       //return await DEMO_BOARDS
       //TODO - Add a more sophisticated board population function - in case a board isn't found populate it with the data from the DEMO_BOARDS
       // return await DEMO_BOARDS
-      const demoBoards = await collection.find({ _id: { $regex: "demo" } }).toArray()
-      return demoBoards
-    } else {
-      const memberInBoards = await collection.find({ members: { $elemMatch: { _id: userId } } })
-      const memberCreatedBoards = await collection.find({ createdBy: { _id: ObjectId(userId) } }).toArray();
-      console.log('memberCreatedBoards:', memberCreatedBoards)
-      console.log("file: board.service.js - line 22 - query - memberInBoards", memberInBoards.length)
-      return memberInBoards
-      return boards;
+      demoBoards = await collection.find({ _id: { $regex: "demo" } }).toArray()
+      //return demoBoards
     }
+
+    console.log("file: board.service.js - line 27 - query - demoBoards", demoBoards)
+    const memberInBoards = await collection.find({ members: { $elemMatch: { _id: userId } } }).toArray()
+    console.log("file: board.service.js - line 31 - query - memberInBoards", memberInBoards)
+    const memberCreatedBoards = await collection.find({ createdBy: { _id: userId } }).toArray();
+    console.log("file: board.service.js - line 33 - query - memberCreatedBoards", memberCreatedBoards)
+    const concatinated = memberInBoards.concat(memberCreatedBoards).concat(demoBoards)
+    const duplicateLess = concatinated.filter((v, i) => concatinated.indexOf(v) === i)
+    return duplicateLess
+    //return boards;
+
   } catch (err) {
     logger.error('cannot find boards', err);
     throw err;
@@ -42,11 +49,11 @@ async function getById(boardId) {
     if (boardId.startsWith('demo')) {
       var board = await collection.findOne({ _id: boardId });
       if (board.groups && !board.groups.length) {
-        populateDemoData(board)
+        generateBoardDemoData(board)
       }
       return board
-
     }
+
     return await collection.findOne({ _id: ObjectId(boardId) });
   } catch (err) {
     logger.error(`while finding board ${boardId}:`, err);
@@ -105,7 +112,17 @@ function _buildCriteria(filterBy) {
   return criteria;
 }
 
-function populateDemoData(board) {
+async function generateDemoBoards() { //Intended to be run when opening the site to make sure all the boards are present for guest mode
+  const collection = await dbService.getCollection('board');
+  DEMO_BOARDS.forEach(demoBoard => {
+    if (demoBoard._id !== 'demo101') {
+      console.log("file: board.service.js - line 115 - generateDemoBoards - demoBoard", demoBoard._id)
+      //collection.updateOne({ _id: demoBoard.id }, { $set: { ...demoBoard } }, { upsert: true })
+    }
+  })
+}
+
+function generateBoardDemoData(board) { //Intended to make sure there is information in guest boards even after deletion
   board.groups = DEMO_BOARD.groups
   board.members = DEMO_BOARD.members
   board.labels = DEMO_BOARD.labels

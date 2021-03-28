@@ -68,6 +68,7 @@ export default {
       }
     },
     saveAttachment(res) {
+      if(!this.url) return;
       this.setAttachmentDetails(res);
       const attachmentsToEdit = [...this.attachments];
       attachmentsToEdit.push(this.newAttachment);

@@ -1,6 +1,7 @@
 .task-label {
     //margin-bottom: 30px;
     margin: 0 8px 8px 0;
+
     >*:not(:last-child) {
         margin-inline-end: 6px;
     }
@@ -9,19 +10,28 @@
         // height: 20px;
         min-width: 30px;
         max-width: fit-content;
-        padding:5px 10px;
+        padding: 5px 10px;
         border-radius: 3px;
         font-size: 0.7em;
         text-align: center;
-        color:$clr1;
+        color: $clr1;
         white-space: nowrap;
         cursor: pointer;
-        
+
         &.is-selected::before {
             content: "✔";
         }
+
+        &:hover {
+            filter: brightness(110%)
+        }
+
+    }
+    .icon.plus {
+        background-color: rgb(230, 230, 230);
+        color: rgb(75, 74, 74);
         &:hover{
-            filter:brightness(110%)
+            background-color: rgb(200, 200, 200);
         }
     }
 }

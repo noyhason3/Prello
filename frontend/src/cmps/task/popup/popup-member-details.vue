@@ -3,18 +3,14 @@
     <div slot="main">
       <button @click="closeMemberDetails" class="btn close icon x"></button>
       <div class="member-details-container">
-        <member-preview :member="member" />
-        <div>
+        <member-preview :member="member" class="member-initials"/>
+        <div class="member-name">
           <h2>{{ member.fullname }}</h2>
           <h3>@{{ member.username }}</h3>
         </div>
       </div>
-      <button
-        v-if="isTaskRelated"
-        @click="removeTaskMember($event, member._id)"
-        class="btn remove"
-      >
-        Remove from task
+      <button @click="removeTaskMember($event, member._id)" class="btn remove">
+        {{ btnText }}
       </button>
     </div>
   </pop-up>
@@ -28,6 +24,11 @@ export default {
   props: {
     member: Object,
     isTaskRelated: Boolean,
+  },
+  computed: {
+    btnText() {
+      return this.isTaskRelated ? "Remove from task" : "Remove from group";
+    },
   },
   methods: {
     closeMemberDetails(ev) {

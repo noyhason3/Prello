@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <a class="flex center member-preview" :class="colorClassByInitials">
-      {{ memberInitials }}
-    </a>
-    <!--TODO: <img
+  <a class="flex center member-preview" :class="colorClassByInitials">
+    {{ memberInitials }}
+  </a>
+  <!--TODO: <img
         v-if="member.imgUrl"
         :src="member.imgUrl"
         height="120px"
         width="120px"
       /> -->
-  </div>
 </template>
 
 <script>
@@ -24,11 +22,16 @@ export default {
   },
   computed: {
     memberInitials() {
-      if(this.member.username === 'Guest') return 'GU';
+      if (this.member.username === "Guest") return "GU";
       const nameSplit = this.member.fullname.split(" ");
-      const initials = (
-        nameSplit[0].charAt(0) + nameSplit[1].charAt(0)
-      ).toUpperCase();
+      var initials = nameSplit
+        .map((word) => {
+          return word.charAt(0).toUpperCase();
+        })
+        .join("");
+      // const initials = (
+      //   nameSplit[0].charAt(0) + nameSplit[1].charAt(0)
+      // ).toUpperCase();
       return initials;
     },
     colorClassByInitials() {

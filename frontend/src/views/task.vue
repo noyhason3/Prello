@@ -57,7 +57,9 @@
             <member-list
               :members="task.members"
               :isTaskRelated="true"
+              :isInTask="true"
               @remove-task-member="removeTaskMember"
+              @open-member-popup="openMemberPopup"
             />
 
             <task-label
@@ -260,11 +262,15 @@ export default {
     //   this.task.duedate = timestamp;
     //   this.saveTask(this.task);
     // },
-    // saveAttachments(attachments) {
-    //   this.task.attachments = attachments;
-    //   console.log(attachments);
-    //   this.saveTask(this.task);
-    // },
+    saveAttachments(attachments) {
+      this.task.attachments = attachments;
+      console.log(attachments);
+      const user = this.$store.getters.loggedinUser;
+      this.saveTask({
+        task: this.task,
+        activityType: `Task '${this.task.title}'s' attachments were set by: ${user.fullname}`,
+      });
+    },
     dragOver(ev) {
       if (this.drag) return;
       this.isDragOver = true;
@@ -285,6 +291,9 @@ export default {
       if (memberIdx < 0) return;
       this.task.members.splice(memberIdx, 1);
       this.saveTask(this.task);
+    },
+    openMemberPopup(ev) {
+      this.$refs.taskControls.togglePopup("Member", ev);
     },
   },
   components: {
