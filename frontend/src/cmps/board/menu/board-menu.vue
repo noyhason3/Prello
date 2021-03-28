@@ -36,7 +36,7 @@
 <script>
 import boardMenuPopup from "@/cmps/board/menu/board-menu-popup.vue";
 import boardMenuStyle from "@/cmps/board/menu/board-menu-style.vue";
-import activityList from ".@/cmps/common/activity-list.vue";
+import activityList from "@/cmps/common/activity-list.vue";
 export default {
   props: {
     boardStyle: Object,
