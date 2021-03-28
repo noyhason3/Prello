@@ -16,13 +16,14 @@
           </li>
         </ul>
       </div>
-      <div slot="footer" class=" activity-list">
+      <div slot="footer" class="activity-list" v-if="activities.length">
         <div class="board-menu-layout">
-        <div class="icon list"></div>
-        <h3>Activity</h3>
+          <div class="icon list"></div>
+          <h3>Activity</h3>
         </div>
-        <activity-list />
+        <activity-list :activities="activities" />
       </div>
+      <!-- <activity-list /> -->
     </board-menu-popup>
     <board-menu-style
       v-else
@@ -41,6 +42,7 @@ export default {
   props: {
     boardStyle: Object,
     board: Object,
+    activities: Array,
   },
   data() {
     return {
