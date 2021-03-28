@@ -103,7 +103,10 @@
 
 .board-list-layout {
   display: grid;
-  grid-template-columns: repeat(4, 230px);
+  grid-template-columns: repeat(4, minmax(130px,230px));
+  @include for-mobile-layout{
+    grid-template-columns: minmax(130px,95%)
+  }
   grid-auto-rows: 160px;
   gap: 10px;
   justify-content: center;

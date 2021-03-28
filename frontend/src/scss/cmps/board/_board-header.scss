@@ -6,6 +6,13 @@
         justify-content: space-between;
         position: relative;
         //z-index: 2;
+        flex-flow: column;
+        &>*:not(:last-child){
+            margin-block-end: 5px;
+        }
+        @include for-normal-layout{
+            flex-flow: row;
+        }
 
         &>*:not(.board-header-members) {
             color: $clr1;
@@ -15,23 +22,25 @@
         // &>*:not(.board-header-members):hover {
         //     // background-color: rgba(235, 235, 235, 0.5);
         // }
+        
+        button{
+            white-space: nowrap;
+        }
 
         .board-title {
             display: flex;
             align-items: center;
+            &>*{
+                border-radius: 3px;
+                background-color: rgba(rgb(235, 235, 235), 0.3);
+                height: 100%;
+                &:hover{
+                    background-color: rgba(235, 235, 235, 0.5);
+                }
+            }
         }
+        
 
-        .board-title>* {
-            border-radius: 3px;
-            background-color: rgba(rgb(235, 235, 235), 0.3);
-            height: 100%;
-
-        }
-
-        .board-title>*:hover {
-            background-color: rgba(235, 235, 235, 0.5);
-
-        }
 
         .editable-title-wrapper {
             border: 0;
@@ -42,22 +51,21 @@
             padding: 0 12px;
             margin-inline-end: 4px;
 
-        }
-
-        .editable-title-wrapper h2 {
+            h2{
             color: $clr1;
             opacity: 0.9;
             font-size: 1.2rem;
             padding: 5px;
+            }
         }
 
         .icon.star {
             color: rgba($clr1, 0.6);
             font-size: 0.8rem;
             min-width: 30px;
-        }
-        .icon.star.is-starred {
-            color: $clr1;
+            &.is-starred{
+                color:$clr1;
+            }
         }
 
         span.icon {
@@ -67,11 +75,10 @@
         .menu-btn {
             font-size: 1rem;
             padding: 5px 12px;
-            
             right: 8px;
-        }
-        .menu-btn span.icon {
-            margin-inline-end: 6px;
+            &>span.icon{
+                margin-inline-end: 6px;
+            }
         }
 
         .board-header-members {
