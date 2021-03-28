@@ -15,7 +15,7 @@
         <input type="text" v-model="date.day" />
         <input type="text" v-model="date.hour" />
       </div>
-      <button class="btn" @click="saveDate">Save</button>
+      <button class="btn duedate-submit" @click="saveDate">Save</button>
     </div>
   </pop-up>
 </template>

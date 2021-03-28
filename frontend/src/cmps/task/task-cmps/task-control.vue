@@ -16,8 +16,8 @@
       @set-cover-color="setCoverColor"
       @save-cover-img="saveCoverImg"
       tabindex="0"
-      @blur.native="togglePopup('Cover')"
       ref="Cover"
+      @blur.native="coverBlurHandler"
     />
 
     <h6 class="add-to-card">ADD TO CARD</h6>
@@ -42,7 +42,6 @@
     <!-- <button>Labels</button> -->
     <button
       @click="togglePopup('Duedate', $event)"
-      @blur="togglePopup('Duedate', $event)"
       class="btn neutral left-align"
     >
       <span class="icon clock"></span>Due date
@@ -52,8 +51,8 @@
       @toggle-popup="togglePopup"
       @save-date="saveDate"
       tabindex="0"
-      @blur.native="togglePopup('Duedate')"
       ref="Duedate"
+      @blur.native="duedateBlurHandler"
     />
 
     <button
@@ -114,10 +113,13 @@
       :attachments="task.attachments"
       tabindex="0"
       ref="Attachment"
+      @blur.native="attachmentBlurHandler"
     />
-    <!-- @blur.native="attachmentBlurHandler" -->
 
-    <button class="btn neutral left-align" @click="removeTask">Archive</button>
+    <button class="btn neutral left-align" @click="removeTask">
+      <span class="icon archive" />
+      Archive
+    </button>
   </section>
 </template>
 
@@ -144,6 +146,11 @@ export default {
       isAttachmentOpen: false,
       isDuedateOpen: false,
     };
+  },
+  computed:{
+    user(){
+      return this.$store.getters.loggedinUser;
+    }
   },
   methods: {
     togglePopup(str, ev) {
@@ -187,7 +194,28 @@ export default {
         }
       } else this.togglePopup("Checklist");
     },
+    coverBlurHandler(ev) {
+      if (Array.from(document.activeElement.classList).includes("popup")) {
+        this.togglePopup("Cover");
+        ev.target.focus();
+      }
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (
+          classList.includes("cover-upload-input") ||
+          classList.includes("popup")
+        )
+          ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Cover");
+        }
+      } else this.togglePopup("Cover");
+    },
     attachmentBlurHandler(ev) {
+      if (Array.from(document.activeElement.classList).includes("popup")) {
+        this.togglePopup("Attachment");
+        ev.target.focus();
+      }
       if (ev.relatedTarget) {
         const classList = Array.from(ev.relatedTarget.classList);
         if (
@@ -213,6 +241,15 @@ export default {
           this.togglePopup("Label");
         }
       } else this.togglePopup("Label");
+    },
+    duedateBlurHandler(ev) {
+      if (ev.relatedTarget) {
+        const classList = Array.from(ev.relatedTarget.classList);
+        if (classList.includes("duedate-submit")) ev.relatedTarget.focus();
+        else {
+          this.togglePopup("Duedate");
+        }
+      } else this.togglePopup("Duedate");
     },
     // setCoverColor(color) {
     //   this.$emit("set-cover-color", color);
@@ -249,8 +286,8 @@ export default {
     //   this.$emit("save-attachments", attachments);
     //   this.togglePopup("Attachment");
     // },
-    async saveTask(task) {
-      await this.$store.dispatch({ type: "saveTask", task });
+    async saveTask({task, activityType}) {
+      await this.$store.dispatch({ type: "saveTask", task, activityType });
     },
     // togglePopup({ str }) {
     //   var dataStr = `is${str}Open`;
@@ -259,50 +296,50 @@ export default {
     setCoverColor(color) {
       this.task.style.coverImg = "";
       this.task.style.coverColor = color;
-      this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:`Cover-color was set on task: '${this.task.title}' by: ${this.user.fullname}` });
     },
     saveCoverImg(img) {
       this.task.style.coverColor = "";
       this.task.style.coverImg = img.url;
-      this.saveTask(this.task);
+            this.saveTask({task:this.task, activityType:`Cover-image was set on task: '${this.task.title}' by: ${this.user.fullname}` });
+
     },
     assignTaskMember(member) {
-      console.log(
-        "file: task-control.vue - line 232 - assignTaskMember - this.task",
-        this.task
-      );
       if (!this.task.members) this.task.members = [];
       this.task.members.push(member);
-      this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:`${member.fullname} was assigned to task: '${this.task.title}' by: ${this.user.fullname}` });
+
     },
     removeTaskMember(id) {
-      console.log("memberIdx:");
       const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
       if (memberIdx < 0) return;
-      this.task.members.splice(memberIdx, 1);
-      this.saveTask(this.task);
+      const deletedMember = this.task.members.splice(memberIdx, 1);
+      this.saveTask({task:this.task, activityType:`${deletedMember[0].fullname} was removed from task: '${this.task.title}' by: ${this.user.fullname}` });
     },
     saveChecklist(checklist) {
       const task = this.task;
       this.checklist.id = utilService.makeId();
       task.checklists.push(checklist);
-      this.saveTask(task);
+      this.saveTask({task:this.task, activityType:`Checklist was set on task: '${this.task.title}' by: ${this.user.fullname}` });
     },
     setTaskLabels({ labelIds }) {
       this.task.labelIds = labelIds;
-      this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:`Task '${this.task.title}'s' labels were set by: ${this.user.fullname}` });
     },
     saveDate(timestamp) {
       this.task.duedate = timestamp;
+      this.togglePopup("Duedate");
       this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:`Date was set on task: '${this.task.title}' by: ${this.user.fullname}` });
     },
     saveAttachments(attachments) {
       this.task.attachments = attachments;
       console.log(attachments);
       this.saveTask(this.task);
+      this.saveTask({task:this.task, activityType:`Task '${this.task.title}'s' attachments were set by: ${this.user.fullname}` });
     },
     async removeTask() {
-      await this.$store.dispatch({ type: "removeTask", taskId: this.task.id });
+      await this.$store.dispatch({ type: "removeTask", taskId: this.task.id, activityType: `Task '${this.task.title} was deleted by: ${this.user.fullname}`  });
       const taskId = this.$route.params.taskId;
       const boardId = this.$route.params.boardId;
       console.log(

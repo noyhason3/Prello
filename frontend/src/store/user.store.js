@@ -1,4 +1,5 @@
 import { userService } from '../services/user.service.js'
+import {showMsg} from '../services/eventBus.service.js'
 // import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from '../services/socket.service'
 
 // var localLoggedinUser = null;
@@ -41,6 +42,7 @@ export const userStore = {
                 socketService.off('activity-update');
                 socketService.on('activity-update', (activity) => {
                   console.log('socket emitted- Activity update', activity);
+                  showMsg(activity.txt)
                 })
                 commit({ type: 'setLoggedinUser', user })
                 return user;

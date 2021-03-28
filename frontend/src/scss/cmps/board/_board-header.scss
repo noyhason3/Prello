@@ -5,7 +5,7 @@
         align-items: center;
         justify-content: space-between;
         position: relative;
-        z-index: 2;
+        //z-index: 2;
 
         &>*:not(.board-header-members) {
             color: $clr1;
@@ -87,9 +87,9 @@
         }
 
         .board-header-members {
-            position: absolute;
+            //position: absolute;
             right: 50%;
-            transform: translateX(50%)
+            //transform: translateX(50%)
         }
     }
 }

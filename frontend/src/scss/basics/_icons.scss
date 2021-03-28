@@ -123,4 +123,8 @@
         font-size: 1.2rem;
     }
 
+    &.archive:before{
+        font-family: 'fa-solid';
+        content:'\f187';
+    }
 }

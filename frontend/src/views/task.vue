@@ -62,9 +62,9 @@
 
             <task-label
               :taskLabelIds="task.labelIds"
-              @set-task-labels="setTaskLabels"
               @open-label-popup="openLabelPopup"
             />
+            <!-- @set-task-labels="setTaskLabels" -->
             <!-- <task-duedate /> -->
             <div class="task-duedate" v-if="task.duedate">
               <input type="checkbox" />
@@ -187,34 +187,34 @@ export default {
       this.groupTitle = group.title;
     },
     setDescription() {
-      this.saveTask({task:this.task, activityType:'Description was set' });
+      this.saveTask({ task: this.task, activityType: "Description was set" });
     },
-    setCoverColor(color) {
-      this.task.style.coverImg = "";
-      this.task.style.coverColor = color;
-      this.saveTask({task:this.task, activityType:'Cover-color was set' });
-    },
-    saveCoverImg(img) {
-      this.task.style.coverColor = "";
-      this.task.style.coverImg = img.url;
-      this.saveTask(this.task);
-    },
-    assignTaskMember(member) {
-      if (!this.task.members) this.task.members = [];
-      this.task.members.push(member);
-      this.saveTask({task:this.task, activityType:'Member was assigned to task' });
-    },
-    removeTaskMember(id) {
-      const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
-      if (memberIdx < 0) return;
-      this.task.members.splice(memberIdx, 1);
-      this.saveTask({task:this.task, activityType:'Member was removed from task' });
+    // setCoverColor(color) {
+    //   this.task.style.coverImg = "";
+    //   this.task.style.coverColor = color;
+    //   this.saveTask({task:this.task, activityType:'Cover-color was set' });
+    // },
+    // saveCoverImg(img) {
+    //   this.task.style.coverColor = "";
+    //   this.task.style.coverImg = img.url;
+    //   this.saveTask(this.task);
+    // },
+    // assignTaskMember(member) {
+    //   if (!this.task.members) this.task.members = [];
+    //   this.task.members.push(member);
+    //   this.saveTask({task:this.task, activityType:'Member was assigned to task' });
+    // },
+    // removeTaskMember(id) {
+    //   const memberIdx = this.task.members.findIndex(({ _id }) => _id === id);
+    //   if (memberIdx < 0) return;
+    //   this.task.members.splice(memberIdx, 1);
+    //   this.saveTask({task:this.task, activityType:'Member was removed from task' });
 
-    },
-    setTaskLabels({ labelIds }) {
-      this.task.labelIds = labelIds;
-      this.saveTask({task:this.task, activityType:'Task labels were set' });
-    },
+    // },
+    // setTaskLabels({ labelIds }) {
+    //   this.task.labelIds = labelIds;
+    //   this.saveTask({task:this.task, activityType:'Task labels were set' });
+    // },
     // saveChecklist(checklist) {
     //   const task = this.task;
     //   this.checklist.id = utilService.makeId();
@@ -227,42 +227,44 @@ export default {
         ({ id }) => id === checklistId
       );
       this.task.checklists.splice(idx, 1);
-       this.saveTask({task:this.task, activityType:'Checklist was deleted' });
+      this.saveTask({ task: this.task, activityType: "Checklist was deleted" });
     },
     saveTodo(checklist) {
       const idx = this.task.checklists.findIndex(
         ({ id }) => id === checklist.id
       );
       this.task.checklists.splice(idx, 1, checklist);
-       this.saveTask({task:this.task, activityType:'Checklist-todo was saved' });
+      this.saveTask({
+        task: this.task,
+        activityType: "Checklist-todo was saved",
+      });
     },
-    async saveTask({task, activityType}) {
+    async saveTask({ task, activityType }) {
       await this.$store.dispatch({ type: "saveTask", task, activityType });
     },
     closeTask() {
       const boardId = this.$route.params.boardId;
       this.$router.push("/board/" + boardId);
     },
-    togglePopup({ str }) {
-      var dataStr = `is${str}Open`;
-      this[dataStr] = !this[dataStr];
-    },
+    // togglePopup({ str }) {
+    //   var dataStr = `is${str}Open`;
+    //   this[dataStr] = !this[dataStr];
+    // },
     openLabelPopup(ev) {
       //this.popupLeftPos = buttonLeftPos;
       //this.isLabelOpen = true;
       this.$refs.taskControls.togglePopup("Label", ev);
     },
-    saveDate(timestamp) {
-      // const timestamp = moment(date, "M/D/YYYY hh:mm a").format("X");
-      this.task.duedate = timestamp;
-      this.saveTask(this.task);
-    },
-
-    saveAttachments(attachments) {
-      this.task.attachments = attachments;
-      console.log(attachments);
-      this.saveTask(this.task);
-    },
+    // saveDate(timestamp) {
+    //   // const timestamp = moment(date, "M/D/YYYY hh:mm a").format("X");
+    //   this.task.duedate = timestamp;
+    //   this.saveTask(this.task);
+    // },
+    // saveAttachments(attachments) {
+    //   this.task.attachments = attachments;
+    //   console.log(attachments);
+    //   this.saveTask(this.task);
+    // },
     dragOver(ev) {
       if (this.drag) return;
       this.isDragOver = true;
