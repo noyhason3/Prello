@@ -193,9 +193,14 @@ export default {
       return date;
     },
     activities() {
-      return this.$store.getters.currBoard.activities.filter((activity) => {
-        return activity.task.id === this.task.id;
-      });
+      const activities = this.$store.getters.currBoard.activities.filter(
+        (activity) => {
+          if (activity === null) return;
+          return activity.task.id === this.$store.getters.currTask.id;
+        }
+      );
+      if (!activities) return [];
+      return activities;
     },
   },
   methods: {

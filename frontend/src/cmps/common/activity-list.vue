@@ -1,14 +1,16 @@
 <template>
-  <ul>
+  <ul v-if="activities">
     <li
       v-for="activity in activities"
       :key="activity.id"
       class="clean-list"
       :class="layoutClass"
     >
-      <member-preview :member="activity.byMember" />
+      <!-- <member-preview :member="activity.byMember" /> -->
       <div>
-        <p><span>{{activity.byMember.fullname}}</span> {{ activity.txt}}</p>
+        <p>
+          <span>{{ activity.byMember.fullname }}</span> {{ activity.txt }}
+        </p>
         <p>
           {{ date(activity.createdAt).day }} at
           {{ date(activity.createdAt).hour }}
@@ -37,11 +39,11 @@ export default {
       };
       return date;
     },
-    activityDescription(txt){
-      console.log('txt:', txt)
-      if(txt) return txt.split('by')[0];
-      return ''
-    }
+    activityDescription(txt) {
+      console.log("txt:", txt);
+      if (txt) return txt.split("by")[0];
+      return "";
+    },
   },
   components: {
     memberPreview,
