@@ -1,15 +1,54 @@
 <script>
-import { Pie } from "vue-chartjs";
+import { Bar } from "vue-chartjs";
 
 export default {
-  extends: Pie,
+  extends: Bar,
   props: {
     labels: Array,
     data: Array,
     colors: Array,
-    // options:Object
   },
- 
+  data() {
+    return {
+      options: {
+        legend: {
+          display: false,
+        },
+        scales: {
+          xAxes: [
+            {
+              display: true,
+              gridLines: {
+                display: true,
+                color: "rgba(250, 250, 250, 0.0)",
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Members",
+                fontSize:14
+              },
+            },
+          ],
+          yAxes: [
+            {
+              display: true,
+              gridLines: {
+                display: true,
+                color: "rgba(250, 250, 250, 0.5)",
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Tasks Count",
+                fontSize:14
+
+              },
+            },
+          ],
+        },
+      },
+    };
+  },
+
   mounted() {
     this.renderChart(
       {
@@ -18,10 +57,17 @@ export default {
         datasets: [
           {
             label: "",
-            backgroundColor: this.colors,
-            // color: "#ffffff",
+            backgroundColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+            ],
             data: this.data,
-            borderColor: 'transparent',
+            fontColor: "#2C4068",
+            // borderColor: 'transparent',
             // borderColor: [
             //   "rgba(255, 99, 132, 1)",
             //   "rgba(54, 162, 235, 1)",
@@ -38,3 +84,45 @@ export default {
   },
 };
 </script>
+
+
+
+// import { Pie } from "vue-chartjs";
+
+// export default {
+//   extends: Pie,
+//   props: {
+//     labels: Array,
+//     data: Array,
+//     colors: Array,
+//     // options:Object
+//   },
+ 
+//   mounted() {
+//     this.renderChart(
+//       {
+//         labels: this.labels,
+
+//         datasets: [
+//           {
+//             label: "",
+//             backgroundColor: this.colors,
+//             // color: "#ffffff",
+//             data: this.data,
+//             borderColor: 'transparent',
+//             // borderColor: [
+//             //   "rgba(255, 99, 132, 1)",
+//             //   "rgba(54, 162, 235, 1)",
+//             //   "rgba(255, 206, 86, 1)",
+//             //   "rgba(75, 192, 192, 1)",
+//             //   "rgba(153, 102, 255, 1)",
+//             //   "rgba(255, 159, 64, 1)",
+//             // ],
+//           },
+//         ],
+//       },
+//       this.options
+//     );
+//   },
+// };
+// </script>

@@ -5,7 +5,7 @@
     @dragover.prevent="dragOver"
     @click.stop="closeTask"
   >
-    <div class="task" :style="`top:${initialHeight}px;`" @click.stop>
+    <div class="task" @click.stop>
       <div class="task-cover">
         <div
           v-if="task.style.coverColor"
@@ -55,6 +55,7 @@
         <div class="task-main">
           <div v-if="task" class="task-info task-secondary-layout">
             <member-list
+              v-if="task.members&&task.members.length"
               :members="task.members"
               :isTaskRelated="true"
               :isInTask="true"
@@ -63,6 +64,7 @@
             />
 
             <task-label
+              v-if="task.labelIds&&task.labelIds.length"
               :taskLabelIds="task.labelIds"
               @open-label-popup="openLabelPopup"
             />

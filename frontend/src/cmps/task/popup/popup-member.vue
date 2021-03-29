@@ -60,7 +60,7 @@ export default {
       return taskMembers.some(({ _id }) => _id === id);
     },
     toggleAddMember(member) {
-      console.log(member._id);
+      if(!this.taskMembers) this.taskMembers=[];
       if (!this.isSelected(member._id)) {
         this.taskMembers.push(member);
         this.$emit("assign-task-member", member);

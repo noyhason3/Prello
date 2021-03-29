@@ -13,18 +13,28 @@ export default {
   data() {
     return {
       options: {
+        legend: {
+          position:'top',
+          fullWidth: false,
+          labels:{
+            boxWidth:30,
+            padding:10,
+          },
+        },
+       
         responsive: true,
         scales: {
           xAxes: [
             {
               display: true,
               gridLines: {
-                display: false,
-                // color:'#fff'
+                display: true,
+                color: "rgba(250, 250, 250, 0.0)",
               },
               scaleLabel: {
                 display: true,
                 labelString: "Labels",
+                fontSize:14
               },
             },
           ],
@@ -32,11 +42,14 @@ export default {
             {
               display: true,
               gridLines: {
-                display: false,
+                display: true,
+                color: "rgba(250, 250, 250, 0.6)",
               },
               scaleLabel: {
                 display: true,
                 labelString: "Tasks Count",
+                fontSize:14
+
               },
             },
           ],
@@ -51,18 +64,32 @@ export default {
 
         datasets: [
           {
-            label: "john",
+            label: "Gabi",
             backgroundColor: "transparent",
-            borderColor: this.colors[0],
+            borderColor: 'rgba(255, 99, 132, 1)',
             data: this.data1,
             fontColor: "#2C4068",
           },
 
           {
-            label: "dean",
+            label: "Efi",
             backgroundColor: "transparent",
-            borderColor: this.colors[1],
+            borderColor: 'rgba(54, 162, 235, 1)',
             data: this.data2,
+            fontColor: "#2C4068",
+          },
+          {
+            label: "Dov",
+            backgroundColor: "transparent",
+            borderColor: 'rgba(255, 206, 86, 1)',
+            data: [3, 5, 2, 7, 2, 1],
+            fontColor: "#2C4068",
+          },
+          {
+            label: "Noam",
+            backgroundColor: "transparent",
+            borderColor: 'rgba(75, 192, 192, 1)',
+            data: [8, 3, 4, 1, 3, 5],
             fontColor: "#2C4068",
           },
         ],
