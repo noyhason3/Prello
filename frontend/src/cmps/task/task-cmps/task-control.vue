@@ -35,6 +35,8 @@
       tabindex="0"
       ref="Member"
       @toggle-popup="isMemberOpen = false"
+      @remove-task-member="removeTaskMember"
+      @assign-task-member="assignTaskMember"
     ></popup-member>
     <!-- @blur.native="memberBlurHandler" -->
     <!-- <button>Labels</button> -->

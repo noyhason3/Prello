@@ -5,7 +5,7 @@
     @dragover.prevent="dragOver"
     @click.stop="closeTask"
   >
-    <div class="task" :style="`top:${initialHeight}px;`" @click.stop>
+    <div class="task" @click.stop>
       <div class="task-cover">
         <div
           v-if="task.style.coverColor"

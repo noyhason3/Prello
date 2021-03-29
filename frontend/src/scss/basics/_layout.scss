@@ -98,7 +98,11 @@
 }
 
 .task-secondary-layout {
-  margin-inline-start: 40px;
+  @include for-normal-layout {
+    margin-inline-start: 40px;
+    margin-inline-start: 40px;
+  
+  }
 }
 
 .board-list-layout {
