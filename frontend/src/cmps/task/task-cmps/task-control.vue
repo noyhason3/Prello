@@ -37,8 +37,8 @@
       @toggle-popup="isMemberOpen = false"
       @remove-task-member="removeTaskMember"
       @assign-task-member="assignTaskMember"
+      @blur.native="memberBlurHandler"
     ></popup-member>
-    <!-- @blur.native="memberBlurHandler" -->
     <!-- <button>Labels</button> -->
     <button
       @click="togglePopup('Duedate', $event)"

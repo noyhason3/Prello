@@ -20,7 +20,7 @@
         >
           <template slot="main">
             <button
-              @click="isEditing = !isEditing"
+              @click.stop="isEditing = !isEditing"
               class="btn neutral left-align group-edit-btn edit-color"
             >
               <span class="icon cover" />
