@@ -84,7 +84,7 @@ async function updateBoard(req, res) {
     if (activity){
       console.log('if activity');
 
-      if (task?.members.length){
+      if (task?.members?.length){
         console.log('if task.members');
 
         task.members.forEach(member => {
