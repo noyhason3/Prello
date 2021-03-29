@@ -1,5 +1,5 @@
 .board-menu-popup {
-    
+    height: 100%;
     ul {
         padding-inline-start: 0;
     }
@@ -7,7 +7,6 @@
     >* {
         padding: 14px 0;
         margin: 0px 12px;
-
     }
 
     header {
@@ -31,8 +30,9 @@
     }
 
     main {
+        border-bottom: 1px solid rgb(223, 222, 222);
+        max-height: 100%;
         overflow-y: auto;
-        height: 100%;
     }
 
     li {
@@ -109,11 +109,11 @@
     bottom: 0;
     transition: 0.2s ease-in-out;
     z-index: 10;
-    overflow-y: auto;
-
-    main {
+    
+    .board-menu-options{
         border-bottom: 1px solid rgb(223, 222, 222);
-
+        padding-bottom:12px;
+        margin-bottom:12px;
     }
 
     &.show-menu {

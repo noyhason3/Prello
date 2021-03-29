@@ -3,7 +3,7 @@
     <li
       v-for="activity in activities"
       :key="activity.id"
-      class="clean-list activity-list"
+      class="clean-list"
       :class="layoutClass"
     >
       <member-preview :member="activity.byMember" />

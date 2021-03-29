@@ -51,7 +51,8 @@
       & h2 {
         font-size: 1.1rem;
       }
-       .group-title {
+
+      .group-title {
         font-size: 13px;
       }
 
@@ -170,15 +171,18 @@
       cursor: pointer;
       border-radius: 3px;
     }
-    .activity-list{
-      margin-top:15px;
+
+    .activity-list {
+      margin-top: 15px;
     }
+
     .activity-list li {
-      
+
       grid-template-rows: 65px;
       align-items: flex-start;
-      a{
-        margin-top:0;
+
+      a {
+        margin-top: 0;
       }
     }
 
@@ -190,6 +194,9 @@
     .activity-list span {
       font-weight: bold;
     }
+    .activity-list{
+      padding-inline-start: 0;
+  }
 
     @include for-mobile-layout {
 

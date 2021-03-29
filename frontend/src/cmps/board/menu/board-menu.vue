@@ -5,7 +5,7 @@
         <h2 class="headline">Menu</h2>
       </div>
       <div slot="main" class="main-part">
-        <ul class="clean-list">
+        <ul class="clean-list board-menu-options">
           <li class="board-menu-layout" @click="toggleDashboard">
             <div class="icon dashboard"></div>
             <button>Dashboard</button>
@@ -15,8 +15,8 @@
             <button>Change background</button>
           </li>
         </ul>
-      </div>
-      <div slot="footer" class="activity-list" v-if="activities.length">
+      <!-- </div>
+      <div slot="footer" class="activity-list" v-if="activities.length"> -->
         <div class="board-menu-layout">
           <div class="icon list"></div>
           <h3>Activity</h3>
