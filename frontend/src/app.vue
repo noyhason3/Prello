@@ -25,6 +25,7 @@ export default {
       type: "setMainHeader",
       mainHeader: this.$refs.mainHeader.$el,
     });
+    this.$store.dispatch({ type: "loadUsers" });
   },
 };
 </script>
