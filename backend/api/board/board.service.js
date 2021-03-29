@@ -64,7 +64,8 @@ async function remove(boardId) {
     // const { userId, isAdmin } = store
     const collection = await dbService.getCollection('board');
     // remove only if user is owner/admin
-    const query = { _id: ObjectId(boardId) };
+    const query = { _id: boardId };
+    if (!boardId.includes('demo')) query._id = ObjectId(boardId)
     console.log('query:', query)
     // if (!isAdmin) query.byUserId = ObjectId(userId)
     await collection.deleteOne(query);

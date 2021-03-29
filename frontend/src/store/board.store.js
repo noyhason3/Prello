@@ -97,6 +97,7 @@ export const boardStore = {
     async saveBoard({ commit }, { board, activity, task }) {
       try {
         // if (activity){
+        console.log("file: board.store.js - line 98 - saveBoard - board", board)
         var currBoard = await boardService.save({ board, activity, task });
         // } else {
         // var currBoard = await boardService.save({ board, task });

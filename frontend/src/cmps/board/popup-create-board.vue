@@ -90,6 +90,10 @@ export default {
 
       if (this.isUseTemplate)
         this.boardToEdit.groups = { ...boardService.getEmptyTemplate() };
+      console.log(
+        "file: popup-create-board.vue - line 97 - createNewBoard - this.boardToEdit",
+        this.boardToEdit
+      );
       const board = await this.$store.dispatch({
         type: "saveBoard",
         board: this.boardToEdit,
