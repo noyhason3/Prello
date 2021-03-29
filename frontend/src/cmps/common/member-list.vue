@@ -1,5 +1,5 @@
 <template>
-  <section v-if="members && members.length">
+  <section>
     <h4 v-if="isInTask" class="task-info-headline">Members</h4>
     <div class="member-list-container">
       <div v-if="members && members.length">
