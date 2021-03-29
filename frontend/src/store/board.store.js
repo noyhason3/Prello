@@ -97,6 +97,7 @@ export const boardStore = {
     async saveBoard({ commit }, { board, activity, task }) {
       try {
         // if (activity){
+        console.log("file: board.store.js - line 98 - saveBoard - board", board)
         var currBoard = await boardService.save({ board, activity, task });
         // } else {
         // var currBoard = await boardService.save({ board, task });
@@ -124,14 +125,15 @@ export const boardStore = {
     },
     async saveGroup({ state, commit, dispatch }, { group }) {
       const board = JSON.parse(JSON.stringify(state.board));
-      const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
       if (group.id) {
+        const groupIdx = board.groups.findIndex(({ id }) => id === group.id);
         board.groups.splice(groupIdx, 1, group);
       } else {
         group.id = utilService.makeId();
         board.groups.push(group);
       }
       //await boardService.save(board);
+      console.log('board', board)
       await dispatch({ type: 'saveBoard', board });
       commit({ type: 'setBoard', board });
     },
@@ -155,6 +157,7 @@ export const boardStore = {
       //   txt: activityType,
       // });
       // board.activities.push(activity);
+      console.log("file: board.store.js - line 152 - getBoard - task", task)
       console.log(groupId);
       if (groupId) {
         var group = board.groups.find((savedGroup) => {
@@ -189,6 +192,7 @@ export const boardStore = {
         });
         board.activities.push(activity);
 
+        console.log("file: board.store.js - line 192 - getBoard - board", board)
         console.log('activity', activity);
         // await dispatch('saveBoard', { board, activity, task });
         await dispatch('saveBoard', { board, activity, task });
@@ -203,11 +207,7 @@ export const boardStore = {
     },
     async removeTask({ state, commit, dispatch }, { taskId, activityType }) {
       const board = JSON.parse(JSON.stringify(state.board));
-      const task = state.task;
-      const activity = boardService.getEmptyActivity({
-        currTask: task,
-        txt: activityType,
-      });
+
       board.activities.push(activity);
 
       const group = board.groups.find((savedGroup) =>
@@ -217,7 +217,14 @@ export const boardStore = {
         (savedTask) => savedTask.id === taskId
       );
       if (taskIdx < 0) return;
-      group.tasks.splice(taskIdx, 1);
+
+      const task = group.tasks.splice(taskIdx, 1);
+      const activity = boardService.getEmptyActivity({
+        currTask: task,
+        txt: activityType,
+      });
+
+
       try {
         await dispatch('saveBoard', { board, activity });
       } catch (err) {

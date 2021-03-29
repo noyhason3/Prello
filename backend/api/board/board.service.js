@@ -27,11 +27,8 @@ async function query(filterBy = {}) {
       //return demoBoards
     }
 
-    console.log("file: board.service.js - line 27 - query - demoBoards", demoBoards)
     const memberInBoards = await collection.find({ members: { $elemMatch: { _id: userId } } }).toArray()
-    console.log("file: board.service.js - line 31 - query - memberInBoards", memberInBoards)
     const memberCreatedBoards = await collection.find({ createdBy: { _id: userId } }).toArray();
-    console.log("file: board.service.js - line 33 - query - memberCreatedBoards", memberCreatedBoards)
     const concatinated = memberInBoards.concat(memberCreatedBoards).concat(demoBoards)
     const duplicateLess = concatinated.filter((v, i) => concatinated.indexOf(v) === i)
     return duplicateLess
@@ -67,7 +64,8 @@ async function remove(boardId) {
     // const { userId, isAdmin } = store
     const collection = await dbService.getCollection('board');
     // remove only if user is owner/admin
-    const query = { _id: ObjectId(boardId) };
+    const query = { _id: boardId };
+    if (!boardId.includes('demo')) query._id = ObjectId(boardId)
     console.log('query:', query)
     // if (!isAdmin) query.byUserId = ObjectId(userId)
     await collection.deleteOne(query);
@@ -80,9 +78,13 @@ async function remove(boardId) {
 
 async function update(board) {
   try {
-    // board._id = ObjectId(board._id);                      **************************** NEED TO BE UN-COMMENT AFTER CHANGING DEMO-ID
     const collection = await dbService.getCollection('board');
+    if (!board._id.includes('demo')) {
+      console.log('non demo board - line 83 - board.service')
+      board._id = ObjectId(board._id);
+    }
     await collection.updateOne({ _id: board._id }, { $set: board });
+    //await collection.insert({ ...board })
     return board;
   } catch (err) {
     logger.error(`cannot update board ${board._id}`, err);

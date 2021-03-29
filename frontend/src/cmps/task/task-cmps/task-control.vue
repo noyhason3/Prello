@@ -276,14 +276,10 @@ export default {
     //   this.$emit("remove-task-member", id);
     // },
     setChecklist(checklist) {
-      console.log(
-        "file: task-control.vue - line 200 - setChecklist - checklist",
-        checklist
-      );
       const task = this.task;
       checklist.id = utilService.makeId();
       task.checklists.push(checklist);
-      this.saveTask({task});
+      this.saveTask({ task });
       this.togglePopup("Checklist");
     },
     // setTaskLabels(labelIds) {
@@ -323,7 +319,7 @@ export default {
     removeCover() {
       this.task.style.coverImg = "";
       this.task.style.coverColor = "";
-       this.saveTask({
+      this.saveTask({
         task: this.task,
         activityType: `Cover on task: '${this.task.title}' was removed by: ${this.user.fullname}`,
       });
@@ -387,10 +383,6 @@ export default {
       });
       const taskId = this.$route.params.taskId;
       const boardId = this.$route.params.boardId;
-      console.log(
-        "file: task-control.vue - line 307 - removeTask - taskId",
-        this.task
-      );
       if (taskId) {
         this.$router.push("/board/" + boardId);
       }

@@ -168,7 +168,7 @@ export default {
       //     return activity.task._id === this.taskId;
       //   });
       // } else {
-        return this.board.activities;
+      return this.board.activities;
       // }
     },
   },
