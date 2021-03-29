@@ -6,7 +6,7 @@
       class="clean-list"
       :class="layoutClass"
     >
-      <!-- <member-preview :member="activity.byMember" /> -->
+      <member-preview :member="activity.byMember" />
       <div>
         <p>
           <span>{{ activity.byMember.fullname }}</span> {{ activity.txt }}
