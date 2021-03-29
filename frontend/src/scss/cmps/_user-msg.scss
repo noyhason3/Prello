@@ -20,6 +20,27 @@
   height: 90px;
   animation-duration: 0.3s;
   animation-name: slidein;
+
+  @include for-mobile-layout {
+    right: 0;
+    left: 0;
+    top: 0;
+    height: 90px;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 1);
+    animation-duration: 0.3s;
+    animation-name: slideinMobile;
+    @keyframes slideinMobile {
+      from {
+        top: -100px;
+      }
+
+      to {
+        top: 100%;
+        top: 0;
+      }
+    }
+  }
 }
 
 .alert-success {

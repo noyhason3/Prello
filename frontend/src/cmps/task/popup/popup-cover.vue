@@ -15,6 +15,7 @@
           />
         </li>
       </ul>
+        <button @click="removeCover" class="btn wide neutral remove-cover">Remove cover</button>
       <h3>ATTACHMENTS</h3>
       <!-- <ul v-if="task.style.coverImg">
         <li v-for="img in ">
@@ -26,6 +27,7 @@
       </ul> -->
       <button class="btn neutral wide upload-cover-btn">
         Upload a cover image
+
         <img
           class="loading"
           v-if="isLoading"
@@ -80,6 +82,10 @@ export default {
       this.$emit("save-cover-img", res);
       console.log("onUploadImg -> res", res);
       this.isLoading = false;
+    },
+    removeCover() {
+      console.log('hi');
+      this.$emit("remove-cover");
     },
   },
 

@@ -76,11 +76,13 @@ async function remove(boardId) {
 }
 
 async function update(board) {
-  console.log("file: board.service.js - line 79 - update - board", board)
   try {
-    // board._id = ObjectId(board._id);                      **************************** NEED TO BE UN-COMMENT AFTER CHANGING DEMO-ID
     const collection = await dbService.getCollection('board');
-    await collection.updateOne({ _id: board._id }, { $set: { board } });
+    if (!board._id.includes('demo')) {
+      console.log('non demo board - line 83 - board.service')
+      board._id = ObjectId(board._id);
+    }
+    await collection.updateOne({ _id: board._id }, { $set: board });
     //await collection.insert({ ...board })
     return board;
   } catch (err) {

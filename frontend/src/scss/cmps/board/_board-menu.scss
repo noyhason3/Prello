@@ -1,4 +1,8 @@
 .board-menu-popup {
+    
+    ul {
+        padding-inline-start: 0;
+    }
 
     >* {
         padding: 14px 0;
@@ -8,9 +12,10 @@
 
     header {
         border-bottom: 1px solid rgb(223, 222, 222);
-        display:flex;
+        display: flex;
         align-items: center;
         justify-content: center;
+
         .icon.x {
             float: unset;
             position: absolute;
@@ -18,7 +23,8 @@
             width: 12px;
             height: 12px;
         }
-        .icon.back{
+
+        .icon.back {
             position: absolute;
             left: 8px;
         }
@@ -26,6 +32,7 @@
 
     main {
         overflow-y: auto;
+        height: 100%;
     }
 
     li {
@@ -38,45 +45,56 @@
         font-size: 1rem;
         margin: 0 auto;
     }
+
     .thumbnail,
-        .icon {
-            color: $clr5;
-            width: 20px;
-            height: 20px;
-            background-size: cover;
-            border-radius: 3px;
-            text-align: center;
-            margin: auto;
+    .icon {
+        color: $clr5;
+        width: 20px;
+        height: 20px;
+        background-size: cover;
+        border-radius: 3px;
+        text-align: center;
+        margin: auto;
 
-        }
+    }
 
-        .thumbnail,
-        .dashboard.icon {
-            margin-top: 8px;
-        }
+    .thumbnail,
+    .dashboard.icon {
+        margin-top: 8px;
+    }
 
-        button,
-        h3 {
-            font-weight: bold;
-            padding: 0;
-            flex-direction: row;
-            margin: 0;
-            text-align: start;
-            color: $clr5;
+    button,
+    h3 {
+        font-weight: bold;
+        padding: 0;
+        flex-direction: row;
+        margin: 0;
+        text-align: start;
+        color: $clr5;
 
-        }
+    }
 
-        button {
-            font-size: 0.87rem;
+    button {
+        font-size: 0.87rem;
 
-        }
+    }
 
-        .activity-list {
-            margin-top: 13px;
-            // padding-left:12px;
+    .activity-list li {
+        // margin-top: 13px;
+        // // padding-left:12px;
+        grid-template-rows: 70px;
+        ;
+        align-items: flex-start;
+    }
 
-            font-size: 0.92rem;
-        }
+    .activity-list p {
+        font-size: 0.8rem;
+        margin-bottom: 0;
+    }
+
+    .activity-list span {
+        font-weight: bold;
+    }
 
 }
 
@@ -91,9 +109,11 @@
     bottom: 0;
     transition: 0.2s ease-in-out;
     z-index: 10;
+    overflow-y: auto;
+
     main {
         border-bottom: 1px solid rgb(223, 222, 222);
-        
+
     }
 
     &.show-menu {
@@ -101,7 +121,7 @@
     }
 }
 
-.choose-style-menu{
+.choose-style-menu {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -114,20 +134,10 @@
         border-radius: 5px;
         background-size: cover;
         cursor: pointer;
-        margin-bottom:10px;
-        &:hover{
+        margin-bottom: 10px;
+
+        &:hover {
             opacity: 0.85;
         }
     }
-    
-    // .bgStyle{
-    //     width: 153px;
-    //     height: 96px;
-    //     border-radius: 5px;
-    //     background-size: cover;
-    //     cursor: pointer;
-    //     &:hover{
-    //         opacity: 0.85;
-    //     }
-    // }
 }

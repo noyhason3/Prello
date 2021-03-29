@@ -206,11 +206,7 @@ export const boardStore = {
     },
     async removeTask({ state, commit, dispatch }, { taskId, activityType }) {
       const board = JSON.parse(JSON.stringify(state.board));
-      const task = state.task;
-      const activity = boardService.getEmptyActivity({
-        currTask: task,
-        txt: activityType,
-      });
+
       board.activities.push(activity);
 
       const group = board.groups.find((savedGroup) =>
@@ -220,7 +216,14 @@ export const boardStore = {
         (savedTask) => savedTask.id === taskId
       );
       if (taskIdx < 0) return;
-      group.tasks.splice(taskIdx, 1);
+
+      const task = group.tasks.splice(taskIdx, 1);
+      const activity = boardService.getEmptyActivity({
+        currTask: task,
+        txt: activityType,
+      });
+
+
       try {
         await dispatch('saveBoard', { board, activity });
       } catch (err) {

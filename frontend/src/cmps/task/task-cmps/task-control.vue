@@ -5,7 +5,7 @@
     <!-- <button @click="togglePopup('Cover')" class="control-btn cover"><span></span>Cover</button> -->
     <button
       @click="togglePopup('Cover', $event)"
-      class="btn neutral left-align"
+      class="btn neutral left-align cover"
     >
       <!-- @blur="togglePopup('Cover', $event)" -->
       <span class="icon cover"></span>Cover
@@ -15,6 +15,7 @@
       @toggle-popup="togglePopup"
       @set-cover-color="setCoverColor"
       @save-cover-img="saveCoverImg"
+      @remove-cover="removeCover"
       tabindex="0"
       ref="Cover"
       @blur.native="coverBlurHandler"
@@ -315,6 +316,14 @@ export default {
         activityType: `Cover-image was set on task: '${this.task.title}' by: ${this.user.fullname}`,
       });
     },
+    removeCover() {
+      this.task.style.coverImg = "";
+      this.task.style.coverColor = "";
+      this.saveTask({
+        task: this.task,
+        activityType: `Cover on task: '${this.task.title}' was removed by: ${this.user.fullname}`,
+      });
+    },
     assignTaskMember(member) {
       if (!this.task.members) this.task.members = [];
       this.task.members.push(member);
@@ -374,10 +383,6 @@ export default {
       });
       const taskId = this.$route.params.taskId;
       const boardId = this.$route.params.boardId;
-      console.log(
-        "file: task-control.vue - line 307 - removeTask - taskId",
-        this.task
-      );
       if (taskId) {
         this.$router.push("/board/" + boardId);
       }
