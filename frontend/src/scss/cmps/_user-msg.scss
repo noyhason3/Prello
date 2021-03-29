@@ -20,13 +20,13 @@
   height: 90px;
   animation-duration: 0.3s;
   animation-name: slidein;
+  z-index: 100;
 
   @include for-mobile-layout {
     right: 0;
     left: 0;
     top: 0;
     height: 90px;
-    z-index: 100;
     background-color: rgba(255, 255, 255, 1);
     animation-duration: 0.3s;
     animation-name: slideinMobile;

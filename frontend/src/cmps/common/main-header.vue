@@ -1,8 +1,8 @@
 <template>
   <header class="main-header" :class="{'img-bg': isBoardOpen}">
     <main-nav />
-    <img src="@/assets/img/logo.png" class="logo" />
     <member-preview v-if="memberFullname" :member="member" />
+    <img src="@/assets/img/logo.png" class="logo" />
   </header>
 </template>
 

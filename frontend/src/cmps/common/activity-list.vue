@@ -1,7 +1,7 @@
 <template>
-  <ul v-if="activities">
+  <ul v-if="filteredActivities">
     <li
-      v-for="activity in activities"
+      v-for="activity in filteredActivities"
       :key="activity.id"
       class="clean-list"
       :class="layoutClass"
@@ -44,6 +44,11 @@ export default {
       if (txt) return txt.split("by")[0];
       return "";
     },
+  },
+  computed:{
+    filteredActivities(){
+      return this.activities.filter(activity => !!activity)
+    }
   },
   components: {
     memberPreview,
