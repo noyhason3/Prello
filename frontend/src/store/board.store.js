@@ -167,9 +167,8 @@ export const boardStore = {
         console.log('group', group);
       } else {
         console.log(board.groups);
-        group = board.groups.find((savedGroup) =>
-          savedGroup.tasks.some((savedTask) => savedTask.id === task.id)
-        );
+        console.log(task);
+        group = board.groups.find((savedGroup) => savedGroup.tasks.some((savedTask) => savedTask.id === task.id));
       }
       if (task.id) {
         //update
