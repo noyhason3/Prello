@@ -7,11 +7,18 @@
         position: relative;
         //z-index: 2;
         flex-flow: column;
-        &>*:not(:last-child){
+
+        &>*:not(:last-child) {
             margin-block-end: 5px;
         }
-        @include for-normal-layout{
+
+        @include for-normal-layout {
+            padding: 10px 8px;
             flex-flow: row;
+
+            .board-header-members {
+                transform: scale(1);
+            }
         }
 
         &>*:not(.board-header-members) {
@@ -19,27 +26,33 @@
             height: 100%;
         }
 
+        .board-header-members {
+            transform: scale(0.9);
+        }
+
         // &>*:not(.board-header-members):hover {
         //     // background-color: rgba(235, 235, 235, 0.5);
         // }
-        
-        button{
+
+        button {
             white-space: nowrap;
         }
 
         .board-title {
             display: flex;
             align-items: center;
-            &>*{
+
+            &>* {
                 border-radius: 3px;
                 background-color: rgba(rgb(235, 235, 235), 0.3);
                 height: 100%;
-                &:hover{
+
+                &:hover {
                     background-color: rgba(235, 235, 235, 0.5);
                 }
             }
         }
-        
+
 
 
         .editable-title-wrapper {
@@ -51,11 +64,11 @@
             padding: 0 12px;
             margin-inline-end: 4px;
 
-            h2{
-            color: $clr1;
-            opacity: 0.9;
-            font-size: 1.2rem;
-            padding: 5px;
+            h2 {
+                color: $clr1;
+                opacity: 0.9;
+                font-size: 1.2rem;
+                padding: 5px;
             }
         }
 
@@ -63,8 +76,9 @@
             color: rgba($clr1, 0.6);
             font-size: 0.8rem;
             min-width: 30px;
-            &.is-starred{
-                color:$clr1;
+
+            &.is-starred {
+                color: $clr1;
             }
         }
 
@@ -76,7 +90,8 @@
             font-size: 1rem;
             padding: 5px 12px;
             right: 8px;
-            &>span.icon{
+
+            &>span.icon {
                 margin-inline-end: 6px;
             }
         }
