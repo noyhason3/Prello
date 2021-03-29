@@ -2,7 +2,7 @@
   <section v-if="board" class="dashboard-screen" @click.stop="closeDashboard">
     <button class="close btn icon x-bright" @click.stop="closeDashboard"></button>
     <div>
-      <h2>Tasks per label</h2>
+      <h2>Tasks by subject</h2>
       <task-per-label
         class="task-per-label chart"
         :labels="Object.keys(taskPerLabel)"
