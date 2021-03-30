@@ -21,7 +21,7 @@
       "
       animation="150"
       empty-insert-threshold="5"
-      filter=".group-tasks-preview,textarea"
+      filter=".group-tasks-preview,textarea,.editable-title"
       :prevent-on-filter="false"
       draggable=".group"
       class="clean-list main"
