@@ -1,0 +1,36 @@
+<svg id="Group_1_copy" data-name="Group 1 copy" xmlns="http://www.w3.org/2000/svg" width="45.722" height="47.329" viewBox="0 0 256 265">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #3c4b68;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        stroke: #3c4b68;
+        stroke-linejoin: round;
+        fill-rule: evenodd;
+      }
+
+      .cls-1, .cls-4 {
+        stroke-width: 7px;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke-width: 21px;
+      }
+
+      .cls-3, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        stroke-width: 8px;
+      }
+    </style>
+  </defs>
+  <path id="Color_Fill_2" data-name="Color Fill 2" class="cls-1" d="M236,43s10.25,46.25,3,108-32,114-32,114l-42-27s49.25-73.75,55-105S236,43,236,43Z"/>
+  <path id="Color_Fill_1" data-name="Color Fill 1" class="cls-2" d="M85,43s-8,60-15,78S1,213,1,213s13.25,15.25,68,28,81,18,81,18a200.117,200.117,0,0,0,19.746-19.887C184.322,222.51,203.4,196.372,214,164c18.75-57.25,22-125,22-125s-65,5-102,7S85,43,85,43Z"/>
+  <path id="Color_Fill_3" data-name="Color Fill 3" class="cls-3" d="M139,65L110,33l9-7,26,34S144,65,139,65Z"/>
+  <path class="cls-4" d="M105.5,10c9.113,0,16.5,5.82,16.5,13s-7.387,13-16.5,13S89,30.18,89,23,96.387,10,105.5,10Z"/>
+</svg>
