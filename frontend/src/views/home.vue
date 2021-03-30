@@ -30,12 +30,20 @@ export default {
   methods: {
     async enterAsGuest() {
       const userCred = {
-        username: "Guest",
-        password: "guest",
+        username: "Noy",
+        password: "1234",
       };
       const user = await this.$store.dispatch({ type: "login", userCred });
       this.$router.push("/board");
     },
+    // async enterAsGuest() {
+    //   const userCred = {
+    //     username: "Guest",
+    //     password: "guest",
+    //   };
+    //   const user = await this.$store.dispatch({ type: "login", userCred });
+    //   this.$router.push("/board");
+    // },
   },
   mounted() {
     //getImgColors(".hero-img");
