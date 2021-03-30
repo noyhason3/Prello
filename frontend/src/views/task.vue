@@ -55,7 +55,7 @@
         <div class="task-main">
           <div v-if="task" class="task-info task-secondary-layout">
             <member-list
-              v-if="task.members&&task.members.length"
+              v-if="task.members && task.members.length"
               :members="task.members"
               :isTaskRelated="true"
               :isInTask="true"
@@ -64,7 +64,7 @@
             />
 
             <task-label
-              v-if="task.labelIds&&task.labelIds.length"
+              v-if="task.labelIds && task.labelIds.length"
               :taskLabelIds="task.labelIds"
               @open-label-popup="openLabelPopup"
             />
@@ -129,13 +129,12 @@
               <div class="icon list"></div>
               <h4>Activity</h4>
             </div>
-            <activity-list
-              :activities="activities"
-              :layoutClass="'task-main-layout'"
-              :isTaskList="true"
-              class="activity-list"
-            />
           </draggable>
+          <activity-list
+            :activities="activities"
+            :layoutClass="'task-main-layout'"
+            class="activity-list"
+          />
         </div>
         <!-- <task-comment /> -->
         <!-- <activity-list /> -->
@@ -267,8 +266,7 @@ export default {
         activityType: `${this.user.fullname}, modified a checklist-todo on card: '${this.task.title}'`,
       });
     },
-    async saveTask({ task, activityType }) {
-      console.log('task:', task)
+    async saveTask({ task = this.task, activityType }) {
       await this.$store.dispatch({ type: "saveTask", task, activityType });
     },
     closeTask() {
