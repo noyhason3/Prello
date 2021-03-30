@@ -9,8 +9,13 @@
     display: flex;
     flex-direction: column;
     .chart{
-        width:400px;
+        width:350px;
+        height:100%;
+        &.task-per-label{
+            transform:scale(0.9);
+        }
     }
+
     &>*{
         margin-block-start: 15px;
     }
@@ -31,9 +36,8 @@
         text-align: center;
         font-size: 1.5rem;;
     }
-    // .chart{
-    //     width: 600px;
-    //     height: 300px;
-    //     margin-bottom:60px;
-    // }
+    .chart{
+
+        margin-bottom:60px;
+    }
 }

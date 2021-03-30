@@ -21,7 +21,7 @@
       "
       animation="150"
       empty-insert-threshold="5"
-      filter=".group-tasks-preview,textarea"
+      filter=".group-tasks-preview,textarea,.editable-title"
       :prevent-on-filter="false"
       draggable=".group"
       class="clean-list main"
@@ -140,7 +140,8 @@ export default {
     },
     background() {
       const style = this.$store.getters.currBoard.style;
-      if (style.bgImg) {
+      console.log('style:', style)
+      if (style.bgImg?.value) {
         return {
           "background-image":
             "url(" +
@@ -155,7 +156,7 @@ export default {
       }
     },
     boardStyle() {
-      if (this.board.style.bgImg) {
+      if (this.board.style.bgImg?.value) {
         const img = require("@/assets/img/background/" +
           this.board.style.bgImg.value);
         return { backgroundImage: `url(${img})` };

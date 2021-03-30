@@ -37,8 +37,8 @@
       @toggle-popup="isMemberOpen = false"
       @remove-task-member="removeTaskMember"
       @assign-task-member="assignTaskMember"
+      @blur.native="memberBlurHandler"
     ></popup-member>
-    <!-- @blur.native="memberBlurHandler" -->
     <!-- <button>Labels</button> -->
     <button
       @click="togglePopup('Duedate', $event)"
@@ -164,21 +164,23 @@ export default {
         this.$nextTick(() => {
           const popup = this.$refs[str]?.$el;
           if (popup) {
-            const popupHeight = popup.getBoundingClientRect().height;
-            popup.style.left = left + "px";
+            const popupRect = popup.getBoundingClientRect();
+            const popupHeight = popupRect.height;
+            const popupWidth = popupRect.width;
+
+            if (left + popupWidth > window.innerWidth) {
+              popup.style.left = left - targetRect.width + "px";
+            } else popup.style.left = left + "px";
 
             if (popupHeight + top > window.innerHeight) {
               console.log("Place popup above button");
               popup.style.bottom = window.innerHeight - targetRect.top + "px";
-              console.log(
-                "file: task-control.vue - line 171 - this.$nextTick - targetRect.top",
-                targetRect.top
-              );
               popup.style.maxHeight = targetRect.top + "px";
             } else {
               popup.style.top = top + "px";
               popup.style.maxHeight = maxHeight + "px";
             }
+
             popup.focus();
           }
         });
@@ -264,50 +266,22 @@ export default {
         }
       } else this.togglePopup("Member");
     },
-    // setCoverColor(color) {
-    //   this.$emit("set-cover-color", color);
-    // },
-    // saveCoverImg(img) {
-    //   this.$emit("save-cover-img", img);
-    //   this.togglePopup("Cover");
-    // },
-    // assignTaskMember(member) {
-    //   this.$emit("assign-task-member", member);
-    // },
-    // removeTaskMember(id) {
-    //   this.$emit("remove-task-member", id);
-    // },
     setChecklist(checklist) {
       const task = this.task;
       checklist.id = utilService.makeId();
       task.checklists.push(checklist);
-      this.saveTask({ task });
+      this.saveTask({ task, activityType: `${this.user.fullname}, added a checklist to card: '${this.task.title}'` });
       this.togglePopup("Checklist");
     },
-    // setTaskLabels(labelIds) {
-    //   this.$emit("set-task-labels", labelIds);
-    // },
-    // saveDate(timestamp) {
-    //   this.$emit("save-date", timestamp);
-    //   this.togglePopup("Duedate");
-    // },
-    // saveAttachments(attachments) {
-    //   this.$emit("save-attachments", attachments);
-    //   this.togglePopup("Attachment");
-    // },
     async saveTask({ task, activityType }) {
       await this.$store.dispatch({ type: "saveTask", task, activityType });
     },
-    // togglePopup({ str }) {
-    //   var dataStr = `is${str}Open`;
-    //   this[dataStr] = !this[dataStr];
-    // },
     setCoverColor(color) {
       this.task.style.coverImg = "";
       this.task.style.coverColor = color;
       this.saveTask({
         task: this.task,
-        activityType: `Cover-color was set on task: '${this.task.title}' by: ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, changed the cover-color on card: '${this.task.title}' `,
       });
     },
     saveCoverImg(img) {
@@ -315,7 +289,7 @@ export default {
       this.task.style.coverImg = img.url;
       this.saveTask({
         task: this.task,
-        activityType: `Cover-image was set on task: '${this.task.title}' by: ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, changed the cover-image on card: '${this.task.title}' `,
       });
     },
     removeCover() {
@@ -323,7 +297,7 @@ export default {
       this.task.style.coverColor = "";
       this.saveTask({
         task: this.task,
-        activityType: `Cover on task: '${this.task.title}' was removed by: ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, removed the cover on card: '${this.task.title}' `,
       });
     },
     assignTaskMember(member) {
@@ -331,7 +305,7 @@ export default {
       this.task.members.push(member);
       this.saveTask({
         task: this.task,
-        activityType: `${member.fullname} was assigned to task: '${this.task.title}' by: ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, assigned ${member.fullname} to card: '${this.task.title}' `,
       });
     },
     removeTaskMember(id) {
@@ -340,7 +314,7 @@ export default {
       const deletedMember = this.task.members.splice(memberIdx, 1);
       this.saveTask({
         task: this.task,
-        activityType: `${deletedMember[0].fullname} was removed from task: '${this.task.title}' by: ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, removed ${deletedMember[0].fullname} from card: '${this.task.title}'`,
       });
     },
     saveChecklist(checklist) {
@@ -349,14 +323,14 @@ export default {
       task.checklists.push(checklist);
       this.saveTask({
         task: this.task,
-        activityType: `Checklist was set on task: '${this.task.title}' by: ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, added a checklist on card: '${this.task.title}'`,
       });
     },
     setTaskLabels({ labelIds }) {
       this.task.labelIds = labelIds;
       this.saveTask({
         task: this.task,
-        activityType: `Task '${this.task.title}'s' labels were set by: ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, modified labels on card: '${this.task.title}'`,
       });
     },
     saveDate(timestamp) {
@@ -365,7 +339,7 @@ export default {
       this.saveTask(this.task);
       this.saveTask({
         task: this.task,
-        activityType: `Date was set on task: '${this.task.title}' by: ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, modified the date to card: '${this.task.title}'`,
       });
     },
     saveAttachments(attachments) {
@@ -374,14 +348,14 @@ export default {
       this.saveTask(this.task);
       this.saveTask({
         task: this.task,
-        activityType: `Task '${this.task.title}'s' attachments were set by: ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, modified the attachments on card: '${this.task.title}`,
       });
     },
     async removeTask() {
       await this.$store.dispatch({
         type: "removeTask",
         taskId: this.task.id,
-        activityType: `Task '${this.task.title} was deleted by: ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, deleted the card: '${this.task.title}`,
       });
       const taskId = this.$route.params.taskId;
       const boardId = this.$route.params.boardId;

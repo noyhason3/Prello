@@ -204,6 +204,9 @@ export default {
       if (!activities) return [];
       return activities;
     },
+    user(){
+      return this.$store.getters.loggedinUser;
+    }
   },
   methods: {
     async group() {
@@ -211,7 +214,7 @@ export default {
       this.groupTitle = group.title;
     },
     setDescription() {
-      this.saveTask({ task: this.task, activityType: "Description was set" });
+      this.saveTask({ task: this.task, activityType: `${this.user.fullname}, modified a description on card: '${this.task.title}'` });
     },
     // setCoverColor(color) {
     //   this.task.style.coverImg = "";
@@ -251,7 +254,7 @@ export default {
         ({ id }) => id === checklistId
       );
       this.task.checklists.splice(idx, 1);
-      this.saveTask({ task: this.task, activityType: "Checklist was deleted" });
+      this.saveTask({ task: this.task, activityType: `${this.user.fullname}, deleted a checklist on card: '${this.task.title}'` });
     },
     saveTodo(checklist) {
       const idx = this.task.checklists.findIndex(
@@ -260,7 +263,7 @@ export default {
       this.task.checklists.splice(idx, 1, checklist);
       this.saveTask({
         task: this.task,
-        activityType: "Checklist-todo was saved",
+        activityType: `${this.user.fullname}, modified a checklist-todo on card: '${this.task.title}'`,
       });
     },
     async saveTask({ task = this.task, activityType }) {
@@ -290,7 +293,7 @@ export default {
       const user = this.$store.getters.loggedinUser;
       this.saveTask({
         task: this.task,
-        activityType: `Task '${this.task.title}'s' attachments were set by: ${user.fullname}`,
+        activityType: `${user.fullname} modified the attachments of task: '${this.task.title}'`,
       });
     },
     dragOver(ev) {

@@ -50,7 +50,8 @@
     
 
     .starred,
-    .recent {
+    .recent,
+    .board {
         margin-inline-end: 10px;
     }
 
@@ -62,6 +63,10 @@
     .recent::before {
         font-family: 'fa-reg';
         content: "\f017"
+    }
+    .board::before {
+        font-family: "fa-solid";
+        content: "\f0db"; 
     }
 
     .btn.create-board {

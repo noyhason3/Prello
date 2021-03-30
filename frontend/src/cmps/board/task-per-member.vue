@@ -12,21 +12,26 @@ export default {
     return {
       options: {
         legend: {
-          display: false,
+          display: true,
         },
-        scales: {
+         scales: {
           xAxes: [
             {
               display: true,
               gridLines: {
                 display: true,
                 color: "rgba(250, 250, 250, 0.0)",
+  
               },
               scaleLabel: {
                 display: true,
                 labelString: "Members",
                 fontSize:14
               },
+               ticks: {
+                    // autoSkip: true,
+                    padding:10
+                }
             },
           ],
           yAxes: [
@@ -57,6 +62,7 @@ export default {
         datasets: [
           {
             label: "",
+            // backgroundColor: 'transparent',
             backgroundColor: [
               "rgba(255, 99, 132, 1)",
               "rgba(54, 162, 235, 1)",
@@ -67,15 +73,15 @@ export default {
             ],
             data: this.data,
             fontColor: "#2C4068",
-            // borderColor: 'transparent',
-            // borderColor: [
-            //   "rgba(255, 99, 132, 1)",
-            //   "rgba(54, 162, 235, 1)",
-            //   "rgba(255, 206, 86, 1)",
-            //   "rgba(75, 192, 192, 1)",
-            //   "rgba(153, 102, 255, 1)",
-            //   "rgba(255, 159, 64, 1)",
-            // ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+            ],
+            
           },
         ],
       },

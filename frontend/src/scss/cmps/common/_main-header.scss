@@ -14,11 +14,9 @@
         opacity: .65;
         object-fit: contain;
         margin: auto;
-    }
-    .member-preview,
-    .logo {
         transform: scale(0.9);
     }
+    .member-preview,
 
     // &:last-child{
     //     margin-block-start: 5px;
@@ -143,17 +141,17 @@
 
     @include for-normal-layout {
         flex-flow: row;
-    justify-content: space-between;
-    padding: 4px 4px;
-    .member-preview,
-    .logo {
-        transform: scale(1);
-    }
+        justify-content: space-between;
+        padding: 4px 4px;
+        .member-preview,
+        .logo {
+            transform: scale(1);
+        }
         .logo {
             position: absolute;
             left: 50%;
             top: 5px;
-            transform: translate(-50%);           
+            transform: translate(-50%);        
         }
 
         nav {

@@ -20,7 +20,7 @@
         >
           <template slot="main">
             <button
-              @click="isEditing = !isEditing"
+              @click.stop="isEditing = !isEditing"
               class="btn neutral left-align group-edit-btn edit-color"
             >
               <span class="icon cover" />
@@ -166,7 +166,7 @@ export default {
         type: "saveTask",
         groupId: this.group.id,
         task: this.newTask,
-        activityType: `A new task was added: '${this.newTask.title}' by ${this.user.fullname}`,
+        activityType: `${this.user.fullname}, added the card: '${this.newTask.title}'`,
       });
       this.newTask = JSON.parse(
         JSON.stringify(this.$store.getters.getEmptyTask)

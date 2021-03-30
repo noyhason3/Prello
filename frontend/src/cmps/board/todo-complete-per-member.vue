@@ -19,6 +19,7 @@ export default {
           labels:{
             boxWidth:30,
             padding:10,
+            
           },
         },
        
@@ -43,11 +44,11 @@ export default {
               display: true,
               gridLines: {
                 display: true,
-                color: "rgba(250, 250, 250, 0.6)",
+                color: "rgba(250, 250, 250, 0.3)",
               },
               scaleLabel: {
                 display: true,
-                labelString: "Tasks Count",
+                labelString: "Todos Count",
                 fontSize:14
 
               },

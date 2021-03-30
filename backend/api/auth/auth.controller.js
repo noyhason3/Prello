@@ -4,7 +4,6 @@ const socketService = require('../../services/socket.service')
 
 async function login(req, res) {
     const { username, password } = req.body
-    console.log("file: auth.controller.js - line 6 - login - req.body", req.body)
     try {
         const user = await authService.login(username, password)
         req.session.user = user

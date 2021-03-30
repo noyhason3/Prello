@@ -49,7 +49,7 @@ export default {
     return {
       selectedStyle: null,
       boardToEdit: null,
-      isUseTemplate: false,
+      // isUseTemplate: false,
       imgs: [
         { id: "i101", value: "1.jpg" },
         { id: "i102", value: "2.jpg" },
@@ -80,6 +80,7 @@ export default {
       return style;
     },
     async createNewBoard() {
+      console.log('this.boardToEdit.title:', this.boardToEdit.title)
       if (!this.boardToEdit.title) return;
       const style = this.getSelectedStyle(this.selectedStyle.id);
       if (style.value.startsWith("#")) {
@@ -88,16 +89,13 @@ export default {
         this.boardToEdit.style.bgImg = style;
       }
 
-      if (this.isUseTemplate)
-        this.boardToEdit.groups = { ...boardService.getEmptyTemplate() };
-      console.log(
-        "file: popup-create-board.vue - line 97 - createNewBoard - this.boardToEdit",
-        this.boardToEdit
-      );
+      // if (this.isUseTemplate)
+      //   this.boardToEdit.groups = { ...boardService.getEmptyTemplate() };
       const board = await this.$store.dispatch({
         type: "saveBoard",
         board: this.boardToEdit,
       });
+      console.log('board',board);
       this.$emit("open-board", board._id);
     },
     boardStyle(board) {
