@@ -164,21 +164,23 @@ export default {
         this.$nextTick(() => {
           const popup = this.$refs[str]?.$el;
           if (popup) {
-            const popupHeight = popup.getBoundingClientRect().height;
-            popup.style.left = left + "px";
+            const popupRect = popup.getBoundingClientRect();
+            const popupHeight = popupRect.height;
+            const popupWidth = popupRect.width;
+
+            if (left + popupWidth > window.innerWidth) {
+              popup.style.left = left - targetRect.width + "px";
+            } else popup.style.left = left + "px";
 
             if (popupHeight + top > window.innerHeight) {
               console.log("Place popup above button");
               popup.style.bottom = window.innerHeight - targetRect.top + "px";
-              console.log(
-                "file: task-control.vue - line 171 - this.$nextTick - targetRect.top",
-                targetRect.top
-              );
               popup.style.maxHeight = targetRect.top + "px";
             } else {
               popup.style.top = top + "px";
               popup.style.maxHeight = maxHeight + "px";
             }
+
             popup.focus();
           }
         });
@@ -264,19 +266,6 @@ export default {
         }
       } else this.togglePopup("Member");
     },
-    // setCoverColor(color) {
-    //   this.$emit("set-cover-color", color);
-    // },
-    // saveCoverImg(img) {
-    //   this.$emit("save-cover-img", img);
-    //   this.togglePopup("Cover");
-    // },
-    // assignTaskMember(member) {
-    //   this.$emit("assign-task-member", member);
-    // },
-    // removeTaskMember(id) {
-    //   this.$emit("remove-task-member", id);
-    // },
     setChecklist(checklist) {
       const task = this.task;
       checklist.id = utilService.makeId();
@@ -284,24 +273,9 @@ export default {
       this.saveTask({ task });
       this.togglePopup("Checklist");
     },
-    // setTaskLabels(labelIds) {
-    //   this.$emit("set-task-labels", labelIds);
-    // },
-    // saveDate(timestamp) {
-    //   this.$emit("save-date", timestamp);
-    //   this.togglePopup("Duedate");
-    // },
-    // saveAttachments(attachments) {
-    //   this.$emit("save-attachments", attachments);
-    //   this.togglePopup("Attachment");
-    // },
     async saveTask({ task, activityType }) {
       await this.$store.dispatch({ type: "saveTask", task, activityType });
     },
-    // togglePopup({ str }) {
-    //   var dataStr = `is${str}Open`;
-    //   this[dataStr] = !this[dataStr];
-    // },
     setCoverColor(color) {
       this.task.style.coverImg = "";
       this.task.style.coverColor = color;

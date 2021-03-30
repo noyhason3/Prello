@@ -19,10 +19,6 @@ export default {
     this.$nextTick(() => {
       const containerHeight = this.$refs.container.getBoundingClientRect()
         .height;
-      console.log(
-        "file: pop-up.vue - line 21 - this.$nextTick - containerHeight",
-        containerHeight
-      );
       // const diff = beforeHeight - containerHeight;
       const main = this.$refs.main;
       const footerHeight = this.$refs.footer.getBoundingClientRect().height;
@@ -30,10 +26,6 @@ export default {
         this.$refs.header.getBoundingClientRect().height + 25;
       main.style.maxHeight =
         containerHeight - (footerHeight + headerHeight) + "px";
-      console.log(
-        "file: pop-up.vue - line 21 - this.$nextTick - containerHeight",
-        containerHeight
-      );
       //console.log("file: pop-up.vue - line 24 - this.$nextTick - diff", diff);
       //main.style.maxHeight = containerHeight - diff + "px";
     });
