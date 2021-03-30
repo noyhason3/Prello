@@ -37,7 +37,7 @@
             h1{
                 font-family: 'Pacifico', cursive;
                 font-size: rem(32px);
-                margin-block-end: 10px;
+                margin-block-end: 5px;
                 color:rgb(46, 46, 46);
                 align-self: center;
                 line-height: 1.4;
@@ -81,6 +81,7 @@
             @include for-narrow-layout{
                 h1{
                     font-size: rem(64px);
+                    margin-block-end: 10px;
                 }
                 h2{
                     font-size: rem(26px);
@@ -97,10 +98,16 @@ span.hover-underline{
     $currentColor: transparentize(lighten($clr5,15),0.33);
     background-image: linear-gradient($currentColor, $currentColor);
     background-position: 0% 100%;
-    background-size: 0% 15px;
+    background-size: 0% 8px;
     background-repeat: no-repeat;
     transition: background-size .75s cubic-bezier(0.445, 0.05, 0.55, 0.95);
     &:hover{
-        background-size:100% 15px;
+        background-size:100% 8px;
+    }
+    @include for-narrow-layout{
+        background-size: 0% 25px;
+        &:hover{
+            background-size:100% 25px;
+        }
     }
 }
