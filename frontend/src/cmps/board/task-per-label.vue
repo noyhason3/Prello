@@ -1,8 +1,8 @@
 <script>
-import { Bar } from "vue-chartjs";
+import { Doughnut } from "vue-chartjs";
 
 export default {
-  extends: Bar,
+  extends: Doughnut,
   props: {
     labels: Array,
     data: Array,
@@ -12,12 +12,13 @@ export default {
     return {
       options: {
         legend: {
-          display: false,
+          display:true,
+  
         },
         scales: {
           xAxes: [
             {
-              display: true,
+              display: false,
               gridLines: {
                 display: true,
                 color: "rgba(250, 250, 250, 0.0)",
@@ -31,7 +32,7 @@ export default {
           ],
           yAxes: [
             {
-              display: true,
+              display: false,
               gridLines: {
                 display: true,
                 color: "rgba(250, 250, 250, 0.5)",
@@ -56,6 +57,14 @@ export default {
           {
             label: "",
             backgroundColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+              "rgba(255, 159, 64, 1)",
+            ],
+            borderColor: [
               "rgba(255, 99, 132, 1)",
               "rgba(54, 162, 235, 1)",
               "rgba(255, 206, 86, 1)",
