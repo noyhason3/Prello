@@ -1,6 +1,7 @@
 <template>
   <section v-if="board" class="dashboard-screen" @click.stop="closeDashboard">
     <button class="close btn icon x-bright" @click.stop="closeDashboard"></button>
+      <!-- <h2>Tasks by subject</h2> -->
     <div>
       <h2>Tasks by subject</h2>
       <task-per-label
