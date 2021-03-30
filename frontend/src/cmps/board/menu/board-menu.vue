@@ -21,7 +21,11 @@
           <div class="icon list"></div>
           <h3>Activity</h3>
         </div>
-        <activity-list :activities="activities" :layoutClass="'board-menu-layout'" class="activity-list"/>
+        <activity-list 
+        :activities="activities" 
+        :layoutClass="'board-menu-layout'" 
+        :isTaskList="false"
+        class="activity-list"/>
       </div>
       <!-- <activity-list /> -->
     </board-menu-popup>

@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     boardStyle(board) {
-      if (board.style.bgImg) {
+      if (board.style.bgImg?.value) {
         const img = require("@/assets/img/background/" +
           board.style.bgImg.value);
         return { backgroundImage: `url(${img})` };

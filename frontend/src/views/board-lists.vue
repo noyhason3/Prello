@@ -28,7 +28,7 @@
         @save-board="saveBoard"
       />
       <div class="board-list-layout headline">
-        <h2><span class="recent"></span>My boards</h2>
+        <h2><span class="board"></span>My boards</h2>
       </div>
       <board-list
         :boards="myBoards"
@@ -57,15 +57,14 @@ export default {
   data() {
     return {
       isAddBoard: false,
-      // isOpenOptions: false,
       boardList: null,
       selectedStyle: null,
       filterBy: { txt: "" },
     };
   },
   async created() {
-    // this.boardList = this.$store.getters.boards;
-    // if (!this.boardList)
+    this.boardList = this.$store.getters.boards;
+    if (!this.boardList)
     this.boardList = await this.$store.dispatch({ type: "loadBoards" });
     this.$store.commit("setBoard", { currBoard: null });
   },
@@ -101,7 +100,7 @@ export default {
     },
 
     saveBoard(board) {
-      console.log("board:", board);
+      console.log("new board:", board);
       this.$store.dispatch("saveBoard", { board });
     },
   },
