@@ -112,17 +112,16 @@ export default {
       const boardsToShow = this.boardList.filter(({ title }) => {
         return title.toLowerCase().includes(this.filterBy.txt.toLowerCase());
       });
+      
       return boardsToShow.sort(
-        (board1, board2) => board1.lastViewedAt - board2.lastViewedAt
+        (board1, board2) => board2.lastViewedAt - board1.lastViewedAt
       );
     },
     myBoards() {
       const boardsToShow = this.boardList.filter(({ createdBy }) => {
         return createdBy._id === this.user._id;
       });
-      return boardsToShow.sort(
-        (board1, board2) => board1.lastViewedAt - board2.lastViewedAt
-      );
+      return boardsToShow;
     },
     user() {
       return this.$store.getters.loggedinUser;

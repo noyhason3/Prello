@@ -88,6 +88,8 @@ export default {
       const boardId = this.$route.params.boardId;
       await this.loadBoard(boardId);
       this.assignClasses();
+      this.board.lastViewedAt = Date.now();
+      this.saveBoard();
     }
   },
   mounted() {
