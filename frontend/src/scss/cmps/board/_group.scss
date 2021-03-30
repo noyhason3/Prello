@@ -60,10 +60,6 @@
       max-height: unset!important;
       height: fit-content;
     }
-    .color-box.active{
-      filter:brightness(1.2);
-      box-shadow:$subtle-shadow;
-    }
   }
 
   //HEADER

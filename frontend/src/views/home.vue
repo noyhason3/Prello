@@ -3,7 +3,11 @@
     <div class="hero">
       <img class="hero-img" src="../assets/hero.jpg" />
       <div class="hero-content">
-        <h1>Manage your collaborative projects</h1>
+        <h1>
+          <span class="hover-underline">
+            Manage your collaborative projects</span
+          >
+        </h1>
         <h2>
           A solution for structuring and online co-ordination for organizations
           and individuals alike

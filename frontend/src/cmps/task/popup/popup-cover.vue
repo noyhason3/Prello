@@ -9,13 +9,15 @@
       <ul class="colors-list clean-list">
         <li v-for="(color, idx) in colorsPalette" :key="idx">
           <div
-            class="color-box btn"
+            :class="getColorBoxClass(color)"
             :style="`background-color: ${color}`"
             @click="setCover(color)"
           />
         </li>
       </ul>
-        <button @click="removeCover" class="btn wide neutral remove-cover">Remove cover</button>
+      <button @click="removeCover" class="btn wide neutral remove-cover">
+        Remove cover
+      </button>
       <h3>ATTACHMENTS</h3>
       <!-- <ul v-if="task.style.coverImg">
         <li v-for="img in ">
@@ -84,8 +86,19 @@ export default {
       this.isLoading = false;
     },
     removeCover() {
-      console.log('hi');
+      console.log("hi");
       this.$emit("remove-cover");
+    },
+    getColorBoxClass(color) {
+      var str = "color-box btn";
+      console.log(
+        "file: popup-cover.vue - line 95 - getColorBoxClass - this.$store.currTask",
+        this.$store.getters.currTask?.style.coverColor
+      );
+      if (color === this.$store.getters.currTask?.style.coverColor) {
+        str += " active";
+      }
+      return str;
     },
   },
 

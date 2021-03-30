@@ -81,10 +81,10 @@ async function updateBoard(req, res) {
     const savedBoard = await boardService.update(board);
 
     // if (task?.members.length){
-    if (activity){
+    if (activity) {
       console.log('if activity');
 
-      if (task?.members?.length){
+      if (task?.members?.length) {
         console.log('if task.members');
 
         task.members.forEach(member => {
@@ -95,15 +95,15 @@ async function updateBoard(req, res) {
         console.log('else');
         // socketService.broadcast({type:'board-update', data:{board, activity}, room:savedBoard._id })
         board.members.forEach(member => {
-          socketService.emitToUser({type:'activity-update', data:activity, userId:member._id })
-      });
+          socketService.emitToUser({ type: 'activity-update', data: activity, userId: member._id })
+        });
         // socketService.broadcast({type:'activity-update', data:{savedBoard, activity}, room:savedBoard._id })
       }
     }
     console.log('broadcast boardupdate');
 
-    socketService.broadcast({type:'board-update', data:savedBoard, room:savedBoard._id })
-    
+    socketService.broadcast({ type: 'board-update', data: savedBoard, room: savedBoard._id })
+
     //   board.members.forEach(member => {
     //       socketService.emitToUser({type:'board-update', data:activity, userId:member._id })
     // }

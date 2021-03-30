@@ -36,22 +36,24 @@
             //position:absolute;
             h1{
                 font-family: 'Pacifico', cursive;
-                font-size: rem(64px);
-                margin-block-end: 2px;
+                font-size: rem(32px);
+                margin-block-end: 10px;
                 color:rgb(46, 46, 46);
                 align-self: center;
                 line-height: 1.4;
+                transition: font-size .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             }
             h2{
                 align-self: flex-end;
-                font-size: rem(26px);
+                font-size: rem(14px);
                 line-height: 1.2;
                 max-width:65%;
                 padding-inline-start: 8px;
                 border-left: 5px solid $clr5;
                 color:$clr5;
-                padding-block:15px;
+                padding-block:10px;
                 margin-block-end:0;
+                transition: font-size .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             }
             .guest-btn{
                 width:fit-content;
@@ -62,8 +64,9 @@
                 background: lighten($clr5,18);
                 border-radius: 3px;
                 box-shadow:$subtle-shadow;
-                font-size: rem(18px);
+                font-size: rem(14px);
                 padding: 5px;
+                transition: font-size .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                 &:hover{
                     background:lighten($clr5,26);
                 }
@@ -74,7 +77,30 @@
                     border-color:lighten( $clr5,5);
                 }
             }
+
+            @include for-narrow-layout{
+                h1{
+                    font-size: rem(64px);
+                }
+                h2{
+                    font-size: rem(26px);
+                }
+                .guest-btn{
+                    font-size: rem(18px);
+                }
+            }
         }
     }
+}
 
+span.hover-underline{
+    $currentColor: transparentize(lighten($clr5,15),0.33);
+    background-image: linear-gradient($currentColor, $currentColor);
+    background-position: 0% 100%;
+    background-size: 0% 15px;
+    background-repeat: no-repeat;
+    transition: background-size .75s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    &:hover{
+        background-size:100% 15px;
+    }
 }
