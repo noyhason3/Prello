@@ -62,6 +62,8 @@
       @toggle-board-menu="toggleBoardMenu"
     />
     <router-view />
+
+    <div class="dragged-container" style="position: absolute"></div>
   </section>
 </template>
 
@@ -140,7 +142,7 @@ export default {
     },
     background() {
       const style = this.$store.getters.currBoard.style;
-      console.log('style:', style)
+      console.log("style:", style);
       if (style.bgImg?.value) {
         return {
           "background-image":

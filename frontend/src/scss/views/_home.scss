@@ -42,6 +42,7 @@
                 align-self: center;
                 line-height: 1.4;
                 transition: font-size .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                animation:1s cubic-bezier(0.6, -0.28, 0.735, 0.045) 0s 1 normal forwards slide-in-left;
             }
             h2{
                 align-self: flex-end;
@@ -54,6 +55,8 @@
                 padding-block:10px;
                 margin-block-end:0;
                 transition: font-size .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                opacity: 0;
+                animation:.6s cubic-bezier(0.39, 0.575, 0.565, 1) 1s 1 normal forwards slide-in-left;
             }
             .guest-btn{
                 width:fit-content;
@@ -67,6 +70,8 @@
                 font-size: rem(14px);
                 padding: 5px;
                 transition: font-size .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                opacity: 0;
+                animation:.5s cubic-bezier(0.39, 0.575, 0.565, 1) 1.6s 1 normal forwards slide-in-left;
                 &:hover{
                     background:lighten($clr5,26);
                 }
@@ -111,3 +116,4 @@ span.hover-underline{
         }
     }
 }
+

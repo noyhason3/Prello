@@ -62,6 +62,7 @@
       <draggable
         v-model="group.tasks"
         :group="`tasks`"
+        :set-data="setData"
         @end="endDrag"
         :move="updateBoard"
         :empty-insert-threshold="50"
@@ -245,6 +246,15 @@ export default {
     },
     endDrag(ev) {
       this.$emit("save-board");
+    },
+    startDrag(ev) {
+      console.log("file: group.vue - line 251 - startDrag - ev", ev);
+      ev.dataTransfer.setDragImage(new Image(), 0, 0);
+    },
+    setData(dataTransfer, dragEl) {
+      //dataTransfer.setDragImage(new Image(), 0, 0);
+      //const container = document.querySelector(".dragged-container");
+      //container.appendChild(dragEl.cloneNode(true));
     },
   },
   components: {

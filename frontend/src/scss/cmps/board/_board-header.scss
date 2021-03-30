@@ -5,7 +5,7 @@
         align-items: center;
         justify-content: space-between;
         position: relative;
-        //z-index: 2;
+        z-index: 10;
         flex-flow: column;
 
         &>*:not(:last-child) {
