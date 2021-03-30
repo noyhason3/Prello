@@ -73,9 +73,9 @@ function emitToAll({ type, data, room = null }) {
 }
 
 function emitToUser({ type, data, userId }) {
-  console.log('type',type);
-  console.log('data',data);
-  console.log('userId',userId);
+  // console.log('type',type);
+  // console.log('data',data);
+  // console.log('userId',userId);
   gIo.to(userId).emit(type, data);
 }
 
