@@ -12,7 +12,7 @@ export default {
     return {
       options: {
         legend: {
-          display: true,
+          display: false,
         },
          scales: {
           xAxes: [
@@ -26,7 +26,7 @@ export default {
               scaleLabel: {
                 display: true,
                 labelString: "Members",
-                fontSize:14
+                fontSize:16
               },
                ticks: {
                     // autoSkip: true,
@@ -44,7 +44,7 @@ export default {
               scaleLabel: {
                 display: true,
                 labelString: "Tasks Count",
-                fontSize:14
+                fontSize:16
 
               },
             },
@@ -70,6 +70,10 @@ export default {
               "rgba(75, 192, 192, 1)",
               "rgba(153, 102, 255, 1)",
               "rgba(255, 159, 64, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "#B7D75A",
+              "rgba(255, 170, 75, 1)",
             ],
             data: this.data,
             fontColor: "#2C4068",

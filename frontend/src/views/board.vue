@@ -1,11 +1,6 @@
 <template>
   <section class="board-container" v-if="board" ref="board">
     <div :style="boardStyle" class="board-bg"></div>
-    <!-- <img
-      class="board-bg"
-      :src="require('@/assets/img/background/' + board.style.bgImg.value)"
-      alt=""
-    /> -->
     <board-header
       :board="board"
       :boardStyle="boardStyle"

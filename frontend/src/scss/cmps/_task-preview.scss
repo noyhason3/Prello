@@ -10,7 +10,7 @@
   cursor: pointer;
   border-radius: 3px;
   // box-shadow: $subtle-shadow;
-  box-shadow: 0 1px 0 rgba(9 ,30 ,66 , .25);
+  box-shadow: 0 1px 0 rgba(9, 30, 66, .25);
   text-align: start;
 
   .task-cover-preview {
@@ -46,8 +46,10 @@
 
   &:hover {
     background-color: rgb(248, 248, 248);
+
     .btn.edit {
       opacity: 1;
+
       &:hover {
         border-radius: 3px;
         background-color: #e4e4e365;
@@ -60,8 +62,8 @@
     //align-self: flex-end;
     opacity: 0;
     position: absolute;
-    right:0;
-    top:0;
+    right: 0;
+    top: 0;
   }
 
   .task-info-preview {
@@ -69,6 +71,7 @@
     // flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+
     // padding: 6px 8px 2px;
     .main-info-task-preview {
       display: flex;
@@ -77,7 +80,8 @@
       // min-width: 30%;
       margin-left: -2px;
       float: left;
-      > * {
+
+      >* {
         // float: left;
         // margin-inline-end: 10px;
         margin: 0 10px 4px 0;
@@ -86,7 +90,8 @@
     }
 
     .members-task-preview {
-      float:right;
+      float: right;
+
       .member-preview {
         margin: 0 0 4px 0px;
         height: 27px;
@@ -110,7 +115,7 @@
     //margin-bottom: 1.1rem;
 
     // &.label-preview {
-    > *:not(:last-child) {
+    >*:not(:last-child) {
       margin-inline-end: 5px;
     }
 
@@ -149,36 +154,40 @@
     }
   }
 
-  .task-control-screen{
+  .task-control-screen {
     background: rgba(0, 0, 0, 0);
-    cursor:default;
+    cursor: default;
     position: absolute;
     height: 100vh;
     width: 100vw;
     top: 0;
     left: 0;
     z-index: 2;
+
     .task-control {
       position: absolute;
-      z-index:3;
-      padding:5px;
+      z-index: 3;
+      padding: 5px;
       border-radius: 3px;
       width: 100px;
       height: auto;
       background-color: #0000003b;
-      outline:none;
-      gap:unset;
-      &>*{
-        background:rgb(46, 46, 46);
-        color:$clr1;
-        width:100%;
+      outline: none;
+      gap: unset;
+
+      &>*:not(.popup) {
+        background: rgb(46, 46, 46);
+        color: $clr1;
+        width: 100%;
         margin-block-end: 5px;
       }
-      &>:last-child{
+
+      &>:last-child {
         margin-block-end: 0;
       }
-      &>.add-to-card{
-        display:none;
+
+      &>.add-to-card {
+        display: none;
       }
     }
   }

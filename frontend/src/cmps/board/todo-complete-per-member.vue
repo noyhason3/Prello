@@ -35,7 +35,7 @@ export default {
               scaleLabel: {
                 display: true,
                 labelString: "Labels",
-                fontSize:14
+                fontSize:16
               },
             },
           ],
@@ -49,7 +49,7 @@ export default {
               scaleLabel: {
                 display: true,
                 labelString: "Todos Count",
-                fontSize:14
+                fontSize:16
 
               },
             },
@@ -61,26 +61,26 @@ export default {
   mounted() {
     this.renderChart(
       {
-        labels: this.labels1,
+        labels: ['Jan','Fab','Mar','Apr','May','Jun'],
 
         datasets: [
           {
-            label: "Gabi",
+            label: "Noy",
             backgroundColor: "transparent",
             borderColor: 'rgba(255, 99, 132, 1)',
-            data: this.data1,
+            data: [8, 4, 6, 14, 2, 4],
             fontColor: "#2C4068",
           },
 
           {
-            label: "Efi",
+            label: "Ifat",
             backgroundColor: "transparent",
             borderColor: 'rgba(54, 162, 235, 1)',
-            data: this.data2,
+            data: [5,1, 2, 4, 7, 16],
             fontColor: "#2C4068",
           },
           {
-            label: "Dov",
+            label: "Anton",
             backgroundColor: "transparent",
             borderColor: 'rgba(255, 206, 86, 1)',
             data: [3, 5, 2, 7, 2, 1],
@@ -90,9 +90,10 @@ export default {
             label: "Noam",
             backgroundColor: "transparent",
             borderColor: 'rgba(75, 192, 192, 1)',
-            data: [8, 3, 4, 1, 3, 5],
+            data: [11, 3, 4, 1, 3, 5],
             fontColor: "#2C4068",
           },
+
         ],
       },
       this.options

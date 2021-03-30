@@ -29,7 +29,7 @@
           <task-title
             v-model="task.title"
             @click.prevent
-            @input="saveTask(task)"
+            @input="saveTask({task, activityType: `${user.fullname}, modified the title of card: '${task.title}'`})"
           />
         </div>
         <p v-if="groupTitle" class="task-secondary-layout group-title">
@@ -107,7 +107,7 @@
             @start="drag = true"
             @end="
               drag = false;
-              saveTask(task);
+              saveTask({task, activityType: `${user.fullname}, modified a checklist in card: '${task.title}'`});
             "
             animation="150"
             empty-insert-threshold="50"
@@ -123,7 +123,7 @@
               @save-todo="saveTodo"
               @delete-checklist="deleteChecklist"
               @toggle-drag="toggleDrag"
-              @update-task="saveTask(task)"
+              @update-task="saveTask({task, activityType: `${user.fullname}, modified a todo in card: '${task.title}'`})"
             />
             <div class="task-main-layout headline" v-if="activities.length">
               <div class="icon list"></div>

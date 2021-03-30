@@ -1,9 +1,10 @@
 <template>
-  <section v-if="board" class="dashboard-screen" @click.stop="closeDashboard">
+  <section v-if="board" class="dashboard-screen">
     <button class="close btn icon x-bright" @click.stop="closeDashboard"></button>
       <!-- <h2>Tasks by subject</h2> -->
     <div>
       <h2>Tasks by labels</h2>
+      <div class="chart-container">
       <task-per-label
         class="task-per-label chart"
         :labels="Object.keys(taskPerLabel)"
@@ -11,9 +12,11 @@
         :colors="labelColors"
         :options="options"
       />
+      </div>
     </div>
     <div>
       <h2>Tasks per member</h2>
+      <div class="chart-container">
       <task-per-member
         class="task-per-member chart"
         :labels="Object.keys(taskPerMember)"
@@ -22,8 +25,10 @@
         :options="options"
       />
     </div>
+    </div>
     <div>
       <h2>Completed todos</h2>
+      <div class="chart-container">
       <todo-per-member
         class="todo-per-member chart"
         :labels1="Object.keys(taskPerLabel)"
@@ -33,6 +38,7 @@
         :colors="labelColors"
         :options="options"
       />
+    </div>
     </div>
   </section>
 </template>

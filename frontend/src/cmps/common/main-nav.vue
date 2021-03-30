@@ -58,13 +58,8 @@ export default {
       boards: null,
     };
   },
-  // async created() {
-  //   //this.boards = await this.$store.dispatch({ type: "loadBoards" });
-  // },
-  computed: {
-    boards() {
-      return this.$store.getters.boards;
-    },
+  async created() {
+    this.boards = await this.$store.dispatch({ type: "loadBoards" });
   },
   methods: {
     async openSearch() {

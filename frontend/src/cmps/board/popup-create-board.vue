@@ -99,7 +99,7 @@ export default {
       this.$emit("open-board", board._id);
     },
     boardStyle(board) {
-      if (board.style.bgImg) {
+      if (board.style.bgImg?.value) {
         const img = require("@/assets/img/background/" +
           board.style.bgImg.value);
         return { backgroundImage: `url(${img})` };
