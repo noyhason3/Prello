@@ -1,44 +1,49 @@
 <template>
   <section v-if="board" class="dashboard-screen">
-    <button class="close btn icon x-bright" @click.stop="closeDashboard"></button>
-      <!-- <h2>Tasks by subject</h2> -->
-    <div>
-      <h2>Tasks by labels</h2>
-      <div class="chart-container">
-      <task-per-label
-        class="task-per-label chart"
-        :labels="Object.keys(taskPerLabel)"
-        :data="Object.values(taskPerLabel)"
-        :colors="labelColors"
-        :options="options"
-      />
+    <button
+      class="close btn icon x-bright"
+      @click.stop="closeDashboard"
+    ></button>
+    <!-- <h2>Tasks by subject</h2> -->
+    <div class="dashboard-container">
+      <div>
+        <h2>Tasks by labels</h2>
+        <div class="chart-container task-per-label">
+          <task-per-label
+            class="task-per-label chart"
+            :labels="Object.keys(taskPerLabel)"
+            :data="Object.values(taskPerLabel)"
+            :colors="labelColors"
+            :options="options"
+          />
+        </div>
       </div>
-    </div>
-    <div>
-      <h2>Tasks per member</h2>
-      <div class="chart-container">
-      <task-per-member
-        class="task-per-member chart"
-        :labels="Object.keys(taskPerMember)"
-        :data="Object.values(taskPerMember)"
-        :colors="memberColors"
-        :options="options"
-      />
-    </div>
-    </div>
-    <div>
-      <h2>Completed todos</h2>
-      <div class="chart-container">
-      <todo-per-member
-        class="todo-per-member chart"
-        :labels1="Object.keys(taskPerLabel)"
-        :data1="Object.values(taskPerLabel)"
-        :labels2="Object.keys(taskPerMember)"
-        :data2="Object.values(taskPerMember)"
-        :colors="labelColors"
-        :options="options"
-      />
-    </div>
+      <div>
+        <h2>Tasks per member</h2>
+        <div class="chart-container task-per-member">
+          <task-per-member
+            class="task-per-member chart"
+            :labels="Object.keys(taskPerMember)"
+            :data="Object.values(taskPerMember)"
+            :colors="memberColors"
+            :options="options"
+          />
+        </div>
+      </div>
+      <div>
+        <h2>Completed todos</h2>
+        <div class="chart-container">
+          <todo-per-member
+            class="todo-per-member chart"
+            :labels1="Object.keys(taskPerLabel)"
+            :data1="Object.values(taskPerLabel)"
+            :labels2="Object.keys(taskPerMember)"
+            :data2="Object.values(taskPerMember)"
+            :colors="labelColors"
+            :options="options"
+          />
+        </div>
+      </div>
     </div>
   </section>
 </template>

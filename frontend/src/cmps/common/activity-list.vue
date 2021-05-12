@@ -42,11 +42,11 @@ export default {
       return date;
     },
     activityDescription(txt) {
-      console.log('txt:', txt)
+      // console.log('txt:', txt)
       if (!txt) return "";
       let description = txt.split(",")[1];
       if(this.isTaskList) return description.split('card')[0] +' this card'
-      console.log('description:', description)
+      // console.log('description:', description)
       return description;
     },
     // memberName(userName){

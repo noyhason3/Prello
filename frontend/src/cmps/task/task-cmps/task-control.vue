@@ -50,6 +50,7 @@
       v-if="isDuedateOpen"
       @toggle-popup="togglePopup"
       @save-date="saveDate"
+      :taskDuedate="task.duedate"
       tabindex="0"
       ref="Duedate"
       @blur.native="duedateBlurHandler"
@@ -240,7 +241,8 @@ export default {
         if (
           classList.includes("edit-label") ||
           classList.includes("search-label") ||
-          classList.includes("label-color")
+          classList.includes("label-color") ||
+          classList.includes("create-label")
         )
           ev.relatedTarget.focus();
         else {
@@ -251,7 +253,8 @@ export default {
     duedateBlurHandler(ev) {
       if (ev.relatedTarget) {
         const classList = Array.from(ev.relatedTarget.classList);
-        if (classList.includes("duedate-submit")) ev.relatedTarget.focus();
+        if (classList.includes("duedate-submit") || classList.includes("date"))
+          ev.relatedTarget.focus();
         else {
           this.togglePopup("Duedate");
         }
@@ -270,7 +273,10 @@ export default {
       const task = this.task;
       checklist.id = utilService.makeId();
       task.checklists.push(checklist);
-      this.saveTask({ task, activityType: `${this.user.fullname}, added a checklist to card: '${this.task.title}'` });
+      this.saveTask({
+        task,
+        activityType: `${this.user.fullname}, added a checklist to card: '${this.task.title}'`,
+      });
       this.togglePopup("Checklist");
     },
     async saveTask({ task, activityType }) {
@@ -333,10 +339,11 @@ export default {
         activityType: `${this.user.fullname}, modified labels on card: '${this.task.title}'`,
       });
     },
-    saveDate(timestamp) {
-      this.task.duedate = timestamp;
+    // saveDate(timestamp) {
+    saveDate(duedate) {
+      // this.task.duedate = timestamp;
+      this.task.duedate = duedate;
       this.togglePopup("Duedate");
-      this.saveTask(this.task);
       this.saveTask({
         task: this.task,
         activityType: `${this.user.fullname}, modified the date to card: '${this.task.title}'`,

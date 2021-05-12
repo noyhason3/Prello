@@ -106,7 +106,6 @@ export default {
     },
     openImgMenu() {
       this.selectedStyle = this.imgStyles[0];
-      console.log("img");
       this.toggleStyleMenu();
       this.isImgMenu = true;
     },
@@ -119,9 +118,7 @@ export default {
         this.boardToEdit.style.bgImg = {};
         if (this.boardToEdit.style.bgColor?.id === styleId) return;
         this.boardToEdit.style.bgColor = this.colors.find(({ id }) => id === styleId);
-      }
-      console.log("this.boardToEdit.style:", this.boardToEdit.style);
-      
+      }      
       this.$store.dispatch('saveBoard', {board:this.boardToEdit, activity:null, task:null})
     },
   },
@@ -131,7 +128,6 @@ export default {
         const img = require("@/assets/img/background/" + currImg.value);
         return { id: currImg.id, style: { backgroundImage: `url(${img})` } };
       });
-      console.log(imgs);
       return imgs;
     },
     colorStyles() {

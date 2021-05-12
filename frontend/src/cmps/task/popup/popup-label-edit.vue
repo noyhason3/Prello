@@ -1,6 +1,6 @@
 <template>
   <section class="label-edit">
-    <pop-up v-if="!isDelete" :style="{ left: leftPos }">
+    <pop-up v-if="!isDelete" :style="{ left: leftPos, top:topPos }">
       <div slot="header" class="task-popup-header">
         <h2>{{ action }} label</h2>
         <button @click="closeLabelEdit" class="btn close icon x"></button>
@@ -30,7 +30,7 @@
         </div>
       </div>
     </pop-up>
-    <pop-up v-else :style="{ left: leftPos }">
+    <pop-up v-else :style="{ left: leftPos, top:topPos }">
       <div slot="header" class="task-popup-header">
         <h2>Delete Label?</h2>
         <button @click="toggleIsDelete" class="btn close icon x"></button>
@@ -56,12 +56,13 @@ export default {
     label: Object,
     action: String,
     leftPos: String,
+    topPos: String
   },
   data() {
     return {
       colors: [
         { color: "#61bd4f", selected: false },
-        { color: "#f2d600", selected: false },
+        { color: "#f5dd29", selected: false },
         { color: "#ff9f1a", selected: false },
         { color: "#eb5a46", selected: false },
         { color: "#c377e0", selected: false },
@@ -112,6 +113,7 @@ export default {
       this.closeLabelEdit();
     },
   },
+  
   computed: {},
   components: {
     popUp,

@@ -41,18 +41,17 @@
     justify-content: flex-start;
     margin: auto;
     padding: 16px;
+    input:first-child {
+      height: 0.9rem;
+      width: 0.9rem;
+    }
     input:not(:first-child) {
       text-align: center;
       font-size: 14px;
       width: 95px;
       padding: 10px;
       margin-inline-start: 8px;
-      box-shadow: inset 0 0 0 2px $clr5;
-    }
-
-    input:first-child {
-      height: unset;
-      width: unset;
+      box-shadow: inset 0 0 0 2px rgb(58, 126, 228);
     }
   }
 }

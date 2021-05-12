@@ -84,7 +84,7 @@ export const boardStore = {
                 socketService.emit('join-board', boardId);
                 socketService.off('board-update');
                 socketService.on('board-update', (savedBoard) => {
-                    console.log('board updated-socket');
+                    // console.log('board updated-socket');
                     commit({ type: 'setBoard', board: savedBoard });
                     // socketService.on('board-update', ({ savedBoard, activity }) => {
                     //   console.log('board updated-socket');
@@ -103,7 +103,7 @@ export const boardStore = {
             try {
                 // if (activity){
                 var currBoard = await boardService.save({ board, activity, task });
-                console.log('currBoard:', currBoard)
+                // console.log('currBoard:', currBoard)
                 // } else {
                 // var currBoard = await boardService.save({ board, task });
                 // }
@@ -116,7 +116,7 @@ export const boardStore = {
         async removeBoard({ commit }, { boardId }) {
             try {
                 await boardService.remove(boardId);
-                console.log('board deleted:', boardId);
+                // console.log('board deleted:', boardId);
                 commit({ type: 'removeBoard', boardId });
             } catch (err) {
                 console.log('err:', err);
@@ -138,7 +138,7 @@ export const boardStore = {
                 board.groups.push(group);
             }
             //await boardService.save(board);
-            console.log('board', board);
+            // console.log('board', board);
             await dispatch({ type: 'saveBoard', board });
             commit({ type: 'setBoard', board });
         },
@@ -147,7 +147,7 @@ export const boardStore = {
             const groupIdx = board.groups.findIndex(({ id }) => id === groupId);
             if (groupIdx < 0) return;
             board.groups.splice(groupIdx, 1);
-            console.log('Remove group - line 134 - board store - board', board);
+            // console.log('Remove group - line 134 - board store - board', board);
             //await boardService.save(board);
             await dispatch({ type: 'saveBoard', board });
             commit({ type: 'setBoard', board });
@@ -159,42 +159,40 @@ export const boardStore = {
             //   txt: activityType,
             // });
             // board.activities.push(activity);
-            console.log('file: board.store.js - line 152 - getBoard - task', task);
-            console.log(groupId);
+            // console.log('file: board.store.js - line 152 - getBoard - task', task);
+            // console.log(groupId);
             if (groupId) {
                 var group = board.groups.find((savedGroup) => {
-                    console.log(savedGroup);
                     return savedGroup.id === groupId;
                 });
-                console.log('group', group);
+                // console.log('group', group);
             } else {
-                console.log(board.groups);
-                console.log(task);
-                group = board.groups.find((savedGroup) => savedGroup.tasks.some((savedTask) => savedTask.id === task.id));
+                // console.log(board.groups);
+                // console.log(task);
+                group = board.groups.find((savedGroup) => savedGroup.tasks.some((groupTask) => groupTask.id === task.id));
             }
             if (task.id) {
                 //update
-                console.log('Updating task', task);
+                // console.log('Updating task', task);
                 const taskIdx = group.tasks.findIndex(({ id }) => id === task.id);
                 group.tasks.splice(taskIdx, 1, task);
             } else {
                 //add
-                console.log('group', group);
-                console.log('Adding task', task);
+                // console.log('group', group);
+                // console.log('Adding task', task);
                 task.id = utilService.makeId();
                 group.tasks.push(task);
             }
             try {
                 // if(activityType){
-                console.log('task', task);
                 const activity = boardService.getEmptyActivity({
                     currTask: task,
                     txt: activityType,
                 });
                 board.activities.push(activity);
 
-                console.log('file: board.store.js - line 192 - getBoard - board', board);
-                console.log('activity', activity);
+                // console.log('file: board.store.js - line 192 - getBoard - board', board);
+                // console.log('activity', activity);
                 // await dispatch('saveBoard', { board, activity, task });
                 await dispatch('saveBoard', { board, activity, task });
                 // } else {
@@ -228,7 +226,7 @@ export const boardStore = {
             }
         },
 
-        async saveBoardLabels({ state, commit }, { labels }) {
+        async saveBoardLabels({ state, commit, dispatch }, { labels }) {
             const board = JSON.parse(JSON.stringify(state.board));
 
             const activity = boardService.getEmptyActivity({
@@ -237,8 +235,13 @@ export const boardStore = {
             });
             board.labels = labels;
             board.activities.push(activity);
-            await dispatch('saveBoard', { board });
-            commit({ type: 'setBoard', board });
+           
+            try {
+                await dispatch('saveBoard', { board });
+                commit({ type: 'setBoard', board });
+            } catch (err) {
+                console.log('err:', err);
+            }
         },
 
         // FOR ADVANCED STEPS- WITH WEB SOCKETS *****************************************
@@ -293,4 +296,4 @@ export const boardStore = {
 
 // ********** Activity
 
-const activity = {};
+// const activity = {};

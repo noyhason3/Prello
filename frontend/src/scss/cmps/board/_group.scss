@@ -23,8 +23,11 @@
     border-radius: 0 0 3px 3px;
     padding: 8px;
     padding-block-start: 0;
+    textarea:focus{
+      outline-color: rgb(55, 127, 194);
+    }
     button {
-      color: #5e6c84;
+      // color: #5e6c84;
       border-radius: 0 0 3px 3px;
       text-align: start;
       font-size: 13.5px;
@@ -33,7 +36,7 @@
       width: 100%;
       &:hover {
         background: #e4e4e3;
-      }
+      }      
     }
     span {
       margin-inline-end: 5px;

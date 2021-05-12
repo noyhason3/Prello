@@ -69,11 +69,15 @@
               @open-label-popup="openLabelPopup"
             />
             <!-- @set-task-labels="setTaskLabels" -->
-            <!-- <task-duedate /> -->
-            <div class="task-duedate" v-if="task.duedate">
+            <task-duedate 
+            v-if="task.duedate"
+             :duedate="task.duedate" 
+             @set-completion="setCompletion"/>
+            <!-- <div class="task-duedate" v-if="task.duedate">
+
               <input type="checkbox" />
               {{ date.day }} at {{ date.hour }}
-            </div>
+            </div> -->
           </div>
           <div class="task-main-layout headline">
             <div class="icon description"></div>
@@ -158,7 +162,7 @@ import { boardService } from "../services/board.service";
 import moment from "moment";
 import utilService from "../services/util.service";
 import activityList from "@/cmps/common/activity-list.vue";
-
+import taskDuedate from "@/cmps/task/task-cmps/task-duedate.vue";
 export default {
   data() {
     return {
@@ -320,6 +324,10 @@ export default {
     openMemberPopup(ev) {
       this.$refs.taskControls.togglePopup("Member", ev);
     },
+    setCompletion(isComplete){
+      this.task.duedate.isComplete = isComplete;
+      this.saveTask(this.task);
+    }
   },
   components: {
     draggable,
@@ -333,6 +341,7 @@ export default {
     fileDragUploader,
     boardService,
     activityList,
+    taskDuedate
   },
 };
 </script>

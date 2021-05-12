@@ -28,10 +28,41 @@
 
   .task-duedate-preview {
     display: flex;
-    background-color: $clr2;
-    color: $clr1;
+    color: $clr5;
     border-radius: 3px;
+
+    span.icon {
+      width: 0.8rem;
+    }
+
+    &:hover {
+      span.icon::before {
+        content: '\f0c8'
+      }
+    }
+    
+    &.overdue{
+      background-color: $clr4;
+      color:$clr1;
+    }
+   
+    &.complete {
+      background-color: $clr7;
+      color:$clr1;
+    }
+    &.complete:hover{
+      span.icon::before {
+        content: '\f14a'
+      }
+    }
+
+    &.overdue:hover,
+    &.complete:hover{
+      filter: (saturate(130%) brightness(90%));
+    }
+
   }
+
 
   .task-preview-main {
     padding: 6px 8px 2px;
@@ -188,6 +219,10 @@
 
       &>.add-to-card {
         display: none;
+      }
+      >.btn:hover{
+        transform: translateX(4px);
+        filter:brightness(80%)
       }
     }
   }

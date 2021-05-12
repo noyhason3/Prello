@@ -49,7 +49,12 @@
       </div>
       <div class="task-info-preview">
         <div class="main-info-task-preview">
-          <div v-if="task.duedate" class="task-duedate-preview">
+          <div
+            v-if="task.duedate && task.duedate.date"
+            @click.stop="markDateComplete"
+            class="task-duedate-preview"
+            :class="status"
+          >
             <span class="icon clock preview" />
             {{ date.day }}
           </div>
@@ -118,10 +123,6 @@ export default {
             elControl.style.top = targetRect.bottom + "px";
           } else {
             elControl.style.top = targetRect.top - elHeight + "px";
-            console.log(
-              "file: task-preview.vue - line 120 - this.$nextTick - elControl.style.bottom",
-              elControl.style.bottom
-            );
           }
           elControl.style.left = targetRect.right + "px";
           elControl.focus();
@@ -132,6 +133,11 @@ export default {
       if (Array.from(ev.target.classList).includes("task-control")) {
         ev.target.focus();
       } else this.menuOpen = false;
+    },
+    async markDateComplete() {
+      const task = JSON.parse(JSON.stringify(this.task));
+      task.duedate.isComplete = !task.duedate.isComplete;
+      await this.$store.dispatch({ type: "saveTask", task });
     },
   },
   computed: {
@@ -145,14 +151,21 @@ export default {
       return this.task.attachment?.length;
     },
     date() {
-      const timestamp = this.task.duedate;
-      const day = moment.unix(timestamp).format("MMM D");
+      // const timestamp = this.task.duedate;
+      const duedate = new Date(parseInt(this.task.duedate.date));
+      const day = moment(duedate).format("MMM D");
+      // const day = moment.unix(timestamp).format("MMM D");
       // const hour = moment.unix(timestamp).format("hh:mm A");
       const date = {
         day,
         // hour,
       };
       return date;
+    },
+    status(){
+       if(this.task.duedate.isComplete) return 'complete';
+      if(parseInt(this.task.duedate.date) - Date.now() < 0) return 'overdue';
+      return null;
     },
     // isTaskDuedate() {
     //   return this.task.duedate;

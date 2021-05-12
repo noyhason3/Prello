@@ -12,17 +12,21 @@
           min-height: 150px;
           max-height: 95%;
           width: calc(100% - 8px);
-          background: #ebecf0;
+          background: $clr1;
           border-radius: 3px;
           font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
             sans-serif;
           box-shadow: $subtle-shadow;
         }
-        textarea:hover {
-          background: #e4e4e3;
-        }
+        // textarea:hover {
+        //   background: #e4e4e3;
+        // }
         textarea:active {
-          background: #cfcfcc;
+          background: $clr1;
+          
+        }
+        textarea:focus{
+          outline-color: rgb(55, 127, 194);
         }
       }
     }

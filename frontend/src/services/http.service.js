@@ -41,7 +41,7 @@ async function ajax(endpoint, method = 'GET', data = null) {
             // Depends on routing startegy - hash or history
             // window.location.assign('/#/login')
             // window.location.assign('/login')
-            router.push('/login')
+            router.push('/')//**********//used to be  "/login"***********
         }
         throw err
     }

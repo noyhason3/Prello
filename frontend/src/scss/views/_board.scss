@@ -34,6 +34,7 @@
         &>*{
             .preview-label{
                 background: $clr5!important;
+                color: $clr5!important;
             }
             img{
                 visibility:hidden;
@@ -41,6 +42,7 @@
             .member-preview{
                 background: $clr5!important;
                 color:$clr5!important;
+                border:$clr5 !important;
             }
             background: $clr5;
             .task-title{

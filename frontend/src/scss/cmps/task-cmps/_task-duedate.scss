@@ -1,5 +1,36 @@
 .task-duedate{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    font-size:0.9rem;
+    .duedate-date{
+        display: flex;
+        align-items: center;
+        input{
+            width: 0.9rem;
+            height: 0.9rem;
+            margin:0 5px 0 0;
+        }
+        p{
+            margin-bottom:0;
+            border-radius: 3px;
+        }
+        p:not(:last-of-type){
+            margin-inline-end:8px;
+        }
+        div.date{
+            height: 30px;
+            padding: 5px 10px;
+            background-color: $offwhite;
+            color: grey;
+        }
+        p.status{
+            color:$clr1;
+            padding:0 3px;
+            font-size:0.85rem;
+        }
+        p.complete{
+            background-color:$clr7;
+        }
+        p.overdue{
+            background-color:$clr4;
+        }
+    }
 }

@@ -60,7 +60,7 @@ button {
       // background-color: #A1FD9D;
       background-color: $clr1;
       border: 2px solid $clr-ok-btns;
-      color: $clr7;
+      color: $clr-ok-btns;
       font-weight: 600;
     }
   
@@ -68,7 +68,7 @@ button {
       // background-color: $clr4;
       background-color: $clr1;
       border: 2px solid $clr-alarm-btns;
-      color: $clr4;
+      color: $clr-alarm-btns;
       font-weight: 600;
     }
   

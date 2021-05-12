@@ -1,9 +1,8 @@
 <template>
   <pop-up
     v-if="!isPopupEdit"
-    :style="{ left: leftPos }"
     class="popup-label"
-    @blur="console.log('wtf')"
+    ref="popupLabel"
   >
     <div slot="header" class="task-popup-header">
       <h2>Labels</h2>
@@ -13,7 +12,6 @@
       <input
         type="search"
         v-model="searchStr"
-        @input="searchLabel"
         placeholder="Search labels..."
         class="search-label"
       />
@@ -33,12 +31,15 @@
             <span v-if="isUsed(label.id)" class="icon v"></span>
           </button>
           <button
-            @click="openLabelEdit('Change', label)"
+            @click="openLabelEdit($event, 'Change', label)"
             class="btn edit-label icon pencil"
           ></button>
         </li>
       </ul>
-      <button @click="openLabelEdit('Create')" class="btn neutral wide">
+      <button
+        @click="openLabelEdit($event, 'Create')"
+        class="btn neutral wide create-label"
+      >
         Create a new label
       </button>
     </div>
@@ -48,6 +49,7 @@
     :action="action"
     :label="selectedLabel"
     :leftPos="leftPos"
+    :topPos="topPos"
     @save-label="saveLabel"
     @closeLabelEdit="closeLabelEdit"
     @remove-board-label="removeBoardLabel"
@@ -67,12 +69,11 @@ export default {
       action: "",
       selectedLabel: null,
       searchStr: "",
+      leftPos: null,
+      topPos: null,
     };
   },
   methods: {
-    searchLabel() {
-      console.log("FINISH ME!!! (search label)");
-    },
     toggleSelectLabel(labelId) {
       if (this.taskLabelIdEdit.includes(labelId)) {
         const labelIdx = this.taskLabelIdEdit.findIndex((id) => id === labelId);
@@ -87,7 +88,7 @@ export default {
       });
       return !!label;
     },
-    openLabelEdit(editAction, label) {
+    openLabelEdit(ev, editAction, label) {
       this.selectedLabel = label;
       this.action = editAction;
       this.isPopupEdit = true;
@@ -123,6 +124,11 @@ export default {
       });
     },
   },
+  mounted() {
+    const boundingRect = this.$refs.popupLabel.$el.getBoundingClientRect();
+    this.leftPos = boundingRect.left + "px";
+    this.topPos = boundingRect.top + "px";
+  },
   computed: {
     boardLabels() {
       const boardLabels = this.$store.getters.currBoard.labels;
@@ -137,9 +143,10 @@ export default {
       if (!taskLabels) return [];
       return [...taskLabels];
     },
-    leftPos() {
-      return `${this.popupLeftPos}px`;
-    },
+    // leftPos() {
+
+    //   return `${this.popupLeftPos}px`;
+    // },
   },
   components: {
     popUp,

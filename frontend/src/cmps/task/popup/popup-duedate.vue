@@ -5,17 +5,19 @@
       <button @click="togglePopup" class="btn close">X</button>
     </div>
     <div slot="main">
-      <datepicker :inline="true" @selected="setDate" @opened="setTodayValue">
+      <datepicker :inline="true" :value="this.date" @selected="setDate">
         <!-- <div slot="beforeCalendarHeader" class="calender-header">
           Choose a Date
         </div> -->
       </datepicker>
       <div class="date-input-container">
-        <input type="checkbox" />
-        <input type="text" v-model="date.day" />
-        <input type="text" v-model="date.hour" />
+        <input class="date" type="checkbox" v-model="isDuedate" />
+        <input class="date" type="text" v-model="day" />
+        <input class="date" type="text" v-model="hour" />
       </div>
-      <button class="btn duedate-submit" @click="saveDate">Save</button>
+      <button class="btn action wide duedate-submit" @click="saveDate">
+        Save
+      </button>
     </div>
   </pop-up>
 </template>
@@ -26,30 +28,50 @@ import Datepicker from "vuejs-datepicker";
 import moment from "moment";
 
 export default {
+  props: {
+    taskDuedate: Object,
+  },
   data() {
     return {
-      date: {
-        timestamp: "",
-        day: "",
-        hour: "",
-      },
-      //   highlighted:{date:new Date(Date.now())}
+      date:null,
+      duedate: { date: null, isComplete: false },
+      isDuedate: false,
     };
+  },
+  created() {
+    if (this.taskDuedate?.date) this.duedate = this.taskDuedate;
+    else this.duedate.date = Date.now();
+    this.date = new Date(parseInt(this.duedate.date))
+    this.isDuedate = true;
   },
   methods: {
     setDate(date) {
-      this.date.timestamp = moment(date, "M/D/YYYY hh:mm a").format("X");
-      this.date.day = moment(date).format("M/D/YYYY ");
-      this.date.hour = moment(date).format("h:mm:ss A");
+      this.date = date
+      this.duedate.date = moment(date).format('x');
+      this.isDuedate = true;
     },
     togglePopup() {
       this.$emit("toggle-popup", "Duedate");
     },
-    setTodayValue() {
-      this.date = moment(Date.now()).format("M-D-YYYY h:mm:ss A");
-    },
     saveDate() {
-      this.$emit("save-date", this.date.timestamp);
+      // console.log('date:', this.duedate.date)
+      if (this.isDuedate)
+        this.$emit("save-date", { date:this.duedate.date, isComplete: this.duedate.isComplete })
+      else this.$emit("save-date", {date:'', isComplete:false});
+    },
+  },
+  computed: {
+    day() {
+      if (this.isDuedate) {
+        return moment(this.date).format("D/M/YYYY");
+      }
+      return "";
+    },
+    hour() {
+      if (this.isDuedate) {
+        return moment(this.date).format("h:mm:ss A");
+      }
+      return "";
     },
   },
   components: {
